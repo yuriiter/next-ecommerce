@@ -1,0 +1,275 @@
+@mixin text-style-regular-type-12() {
+    font-size: 0.75rem;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+}
+
+@mixin text-style-regular-type-14() {
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 150%;
+    letter-spacing: -0.02em;
+}
+
+@mixin text-style-regular-type-16() {
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 150%;
+    letter-spacing: -0.02em;
+}
+
+@mixin text-style-regular-type-18() {
+    font-size: 1.125rem;
+    font-weight: 400;
+    line-height: 150%;
+    letter-spacing: -0.02em;
+}
+
+@mixin text-style-regular-type-20() {
+    font-size: 1.25rem;
+    font-weight: 400;
+    line-height: 150%;
+    letter-spacing: -0.02em;
+}
+
+@mixin text-style-regular-type-24() {
+    font-size: 1.5rem;
+    font-weight: 400;
+    line-height: 150%;
+    letter-spacing: -0.02em;
+}
+
+@mixin text-style-regular-type-32() {
+    font-size: 2rem;
+    font-weight: 400;
+    line-height: 150%;
+    letter-spacing: -0.02em;
+}
+
+@mixin text-style-regular-type-36() {
+    font-size: 2.25rem;
+    font-weight: 400;
+    line-height: 150%;
+    letter-spacing: -0.03em;
+}
+
+@mixin text-style-regular-type-40() {
+    font-size: 2.5rem;
+    font-weight: 400;
+    line-height: 150%;
+    letter-spacing: -0.03em;
+}
+
+@mixin text-style-regular-type-72() {
+    font-size: 4.5rem;
+    font-weight: 400;
+    line-height: 150%;
+    letter-spacing: -0.04em;
+}
+
+@mixin text-style-medium-type-12() {
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+}
+
+@mixin text-style-medium-type-14() {
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 150%;
+    letter-spacing: -0.02em;
+}
+
+@mixin text-style-medium-type-16() {
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 150%;
+    letter-spacing: -0.02em;
+}
+
+@mixin text-style-medium-type-18() {
+    font-size: 1.125rem;
+    font-weight: 500;
+    line-height: 150%;
+    letter-spacing: -0.02em;
+}
+
+@mixin text-style-medium-type-20() {
+    font-size: 1.25rem;
+    font-weight: 500;
+    line-height: 150%;
+    letter-spacing: -0.02em;
+}
+
+@mixin text-style-medium-type-24() {
+    font-size: 1.5rem;
+    font-weight: 500;
+    line-height: 150%;
+    letter-spacing: -0.02em;
+}
+
+@mixin text-style-medium-type-32() {
+    font-size: 2rem;
+    font-weight: 500;
+    line-height: 150%;
+    letter-spacing: -0.02em;
+}
+
+@mixin text-style-medium-type-36() {
+    font-size: 2.25rem;
+    font-weight: 500;
+    line-height: 150%;
+    letter-spacing: -0.03em;
+}
+
+@mixin text-style-medium-type-40() {
+    font-size: 2.5rem;
+    font-weight: 500;
+    line-height: 150%;
+    letter-spacing: -0.03em;
+}
+
+@mixin text-style-medium-type-72() {
+    font-size: 4.5rem;
+    font-weight: 500;
+    line-height: 150%;
+    letter-spacing: -0.03em;
+}
+
+@mixin text-style-semibold-type-12() {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+}
+
+@mixin text-style-semibold-type-14() {
+    font-size: 0.875rem;
+    font-weight: 600;
+    line-height: 150%;
+    letter-spacing: -0.02em;
+}
+
+@mixin text-style-semibold-type-16() {
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 150%;
+    letter-spacing: -0.02em;
+}
+
+@mixin text-style-semibold-type-18() {
+    font-size: 1.125rem;
+    font-weight: 600;
+    line-height: 150%;
+    letter-spacing: -0.02em;
+}
+
+@mixin text-style-semibold-type-20() {
+    font-size: 1.25rem;
+    font-weight: 600;
+    line-height: 150%;
+    letter-spacing: -0.02em;
+}
+
+@mixin text-style-semibold-type-24() {
+    font-size: 1.5rem;
+    font-weight: 600;
+    line-height: 150%;
+    letter-spacing: -0.03em;
+}
+
+@mixin text-style-semibold-type-32() {
+    font-size: 2rem;
+    font-weight: 600;
+    line-height: 150%;
+    letter-spacing: -0.03em;
+}
+
+@mixin text-style-semibold-type-36() {
+    font-size: 2.25rem;
+    font-weight: 600;
+    line-height: 150%;
+    letter-spacing: -0.03em;
+}
+
+@mixin text-style-semibold-type-40() {
+    font-size: 2.5rem;
+    font-weight: 600;
+    line-height: 150%;
+    letter-spacing: -0.03em;
+}
+
+@mixin text-style-semibold-type-72() {
+    font-size: 4.5rem;
+    font-weight: 600;
+    line-height: 150%;
+    letter-spacing: -0.03em;
+}
+
+@mixin text-style-bold-type-12() {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+}
+
+@mixin text-style-bold-type-14() {
+    font-size: 0.875rem;
+    font-weight: 700;
+    line-height: 150%;
+    letter-spacing: -0.02em;
+}
+
+@mixin text-style-bold-type-16() {
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 150%;
+    letter-spacing: -0.02em;
+}
+
+@mixin text-style-bold-type-18() {
+    font-size: 1.125rem;
+    font-weight: 700;
+    line-height: 150%;
+    letter-spacing: -0.03em;
+}
+
+@mixin text-style-bold-type-20() {
+    font-size: 1.25rem;
+    font-weight: 700;
+    line-height: 150%;
+    letter-spacing: -0.03em;
+}
+
+@mixin text-style-bold-type-24() {
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 150%;
+    letter-spacing: -0.03em;
+}
+
+@mixin text-style-bold-type-32() {
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 150%;
+    letter-spacing: -0.03em;
+}
+
+@mixin text-style-bold-type-36() {
+    font-size: 2.25rem;
+    font-weight: 700;
+    line-height: 150%;
+    letter-spacing: -0.03em;
+}
+
+@mixin text-style-bold-type-40() {
+    font-size: 2.5rem;
+    font-weight: 700;
+    line-height: 150%;
+    letter-spacing: -0.03em;
+}
+
+@mixin text-style-bold-type-72() {
+    font-size: 4.5rem;
+    font-weight: 700;
+    line-height: 150%;
+    letter-spacing: -0.03em;
+}
