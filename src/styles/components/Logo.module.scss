@@ -1,0 +1,12 @@
+@import "../variables";
+@import "../mixins";
+
+.logo {
+    @include text-style-bold-type-32;
+    color: $color-primary-500;
+    text-transform: uppercase;
+
+    @media (max-width: 375px) {
+        @include text-style-bold-type-24;
+    }
+}
