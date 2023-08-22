@@ -8,11 +8,14 @@
   font-size: 100%;
   vertical-align: baseline;
   font: inherit;
+  text-transform: none;
+  text-decoration: none;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  transition: color .1s, background-color .1s, border-width .1s, border-color .1s, opacity .1s;
 }
 
 body {
   line-height: 1;
-  font-family: 'Plus Jakarta Sans', sans-serif;
 }
 
 ol,
