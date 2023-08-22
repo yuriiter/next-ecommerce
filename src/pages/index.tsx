@@ -1,6 +1,9 @@
 import Head from "next/head";
 import Image from "next/image";
 import styles from "@/styles/components/Home.module.scss";
+import { Button, ButtonWIcon, IconButton } from "@/components/Button";
+
+import { TurnOnWifiIcon } from "@/components/icons";
 
 export default function Home() {
   return (
@@ -12,6 +15,14 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <p className={styles.home__content}>Content</p>
+      <ButtonWIcon
+        icon={<TurnOnWifiIcon />}
+        size="lg"
+        variant="minimal"
+        style={{ margin: "50px" }}
+      >
+        Button
+      </ButtonWIcon>
     </>
   );
 }
