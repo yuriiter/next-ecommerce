@@ -1,17 +1,3 @@
-import React, { ReactNode } from "react";
-import { Navigation } from "./Navigation";
-import { Footer } from "./Footer";
-
-type Props = {
-  children: ReactNode;
-};
-
-export const Layout = ({ children }: Props) => {
-  return (
-    <div>
-      <Navigation />
-      {children}
-      <Footer />
-    </div>
-  );
-};
+export { Footer } from "./Footer";
+export { Layout } from "./Layout";
+export { Navigation } from "./Navigation";
