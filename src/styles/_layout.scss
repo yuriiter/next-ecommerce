@@ -1,7 +1,19 @@
-$sm: 375px;
+@import 'variables';
 
-$container_mx_sm: 64px;
-$container_mx_xs: 24px;
+.container {
+    padding: 0 $container-mx-lg;
+    display: flex;
+    flex-wrap: wrap;
+    gap: $grid-spacing;
+    margin: 0 auto;
+}
 
-$nav_mx_sm: 60px;
-$nav_mx_xs: $container_mx_xs;
+.col {
+    padding: 0 $grid-spacing / 2;
+}
+
+@for $i from 1 through 12 {
+    .col-1\/#{$i} {
+        width: 100% / $i;
+    }
+}
