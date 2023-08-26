@@ -1,2 +1,8 @@
 @import "../variables";
 @import "../mixins";
+
+.navigation {
+    padding: $nav-py 0;
+    border: 1px solid rgba(#C3D4E9, 0.4);
+    background-color: $color-primary-0;
+}
