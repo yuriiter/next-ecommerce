@@ -55,8 +55,9 @@ $color-secondary-200: rgba(195, 212, 233, 1);
 $color-secondary-100: rgba(224, 233, 244, 1);
 $color-section-bg: #F6F7F9;
 
-$container-mx-lg: 64px;
-$container-mx-sm: 25px;
+$container-px-lg: 32px;
+$container-px-sm: 25px;
+$container-max-w: 1312px;
 
 $section-outer-my: 32px;
 $section-outer-big-my: 64px;
@@ -64,3 +65,5 @@ $section-outer-big-my-sm: 48px;
 
 $grid-spacing: 32px;
 $grid-spacing-sm: 20px;
+
+$nav-py: 40px;
