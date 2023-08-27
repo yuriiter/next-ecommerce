@@ -5,7 +5,7 @@ import React, {
   useState,
 } from "react";
 import styles from "@/styles/components/Search.module.scss";
-import { SearchFilterIcon, SearchIcon } from "../icons";
+import { SearchFilterIcon, SearchIcon } from "../../../icons";
 
 export const Search = () => {
   const [searchValue, setSearchValue] = useState("");
