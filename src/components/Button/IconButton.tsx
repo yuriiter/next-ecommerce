@@ -9,11 +9,7 @@ export const IconButton = ({
   ...rest
 }: IconButtonProps) => {
   return (
-    <Button
-      {...rest}
-      size={size}
-      className={` "button--icon-only" ${className}`}
-    >
+    <Button {...rest} size={size} className={`button--icon-only ${className}`}>
       <div className="button__icon">{children}</div>
     </Button>
   );
