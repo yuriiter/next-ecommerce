@@ -145,10 +145,13 @@
         &:is(.button--lg) {
             padding: 16px;
         }
+
+        &:is(.button--navigation) {
+            padding: 10px;
+        }
     }
 
     &--navigation {
-        padding: 10px;
         border-radius: 100000px;
         border-color: rgba(#C3D4E9, 0.4);
 

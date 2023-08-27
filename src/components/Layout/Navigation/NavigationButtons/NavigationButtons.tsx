@@ -3,6 +3,7 @@ import styles from "@/styles/components/Navigation.module.scss";
 import { IconButton } from "@/components/Button";
 import { HeartIcon, NotificationIcon, SettingIcon } from "@/components/icons";
 import buttonStyles from "@/styles/components/Button.module.scss";
+import { Avatar } from "./Avatar";
 
 export const NavigationButtons = () => (
   <div className={styles.navigation__buttons}>
@@ -27,5 +28,6 @@ export const NavigationButtons = () => (
     >
       <SettingIcon />
     </IconButton>
+    <Avatar />
   </div>
 );

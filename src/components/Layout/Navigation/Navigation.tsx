@@ -7,7 +7,7 @@ import { NavigationButtons } from "./NavigationButtons/NavigationButtons";
 export const Navigation = () => {
   return (
     <div className={styles.navigation}>
-      <div className="container">
+      <div className={`container ${styles.navigation__container}`}>
         <Logo />
         <Search />
         <NavigationButtons />

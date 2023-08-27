@@ -4,6 +4,8 @@
 .search {
     @include text-style-medium-type-14;
 
+    flex-grow: 1;
+    max-width: 490px;
     border: 1px solid rgba(#C3D4E9, 0.4);
     border-radius: 70px;
     padding: 10px 20px;
