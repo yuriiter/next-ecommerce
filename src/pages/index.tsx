@@ -1,9 +1,10 @@
 import Head from "next/head";
 import Image from "next/image";
-import styles from "@/styles/components/Home.module.scss";
 import { Button, ButtonWIcon, IconButton } from "@/components/Button";
-
-import { TurnOnWifiIcon } from "@/components/icons";
+import { TurnOnWifiIcon } from "@/components/svg/icons";
+import { Banner } from "@/components/Banner";
+import bannerCar1 from "@/assets/img/banner_car_1.png";
+import bannerCar2 from "@/assets/img/banner_car_2.png";
 
 export default function Home() {
   return (
@@ -14,15 +15,25 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <p className={styles.home__content}>Content</p>
-      <ButtonWIcon
-        icon={<TurnOnWifiIcon />}
-        size="lg"
-        variant="minimal"
-        style={{ margin: "50px" }}
-      >
-        Button
-      </ButtonWIcon>
+
+      <section className="container banner__section">
+        <Banner
+          variant="light"
+          title="The Best Platform for Car Rental"
+          description="Ease of doing a car rental safely and reliably. Of course at a low price."
+          buttonText="Rental car"
+          href="/rental"
+          carPicture={bannerCar1}
+        />
+        <Banner
+          variant="dark"
+          title="Easy way to rent a car at a low price"
+          description="Providing cheap car rental services and safe and comfortable facilities."
+          buttonText="Rental car"
+          href="/rental"
+          carPicture={bannerCar2}
+        />
+      </section>
     </>
   );
 }
