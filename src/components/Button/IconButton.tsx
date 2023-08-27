@@ -9,8 +9,7 @@ export const IconButton = ({
   size = "sm",
   ...rest
 }: IconButtonProps) => {
-  const iconSizeModifier = styles[`button__icon--${size}`];
-  const iconClass = `${styles.button__icon} ${iconSizeModifier}`;
+  const iconClass = `${styles.button__icon}`;
   const buttonIconOnlyModifier = "button--icon-only";
 
   return (

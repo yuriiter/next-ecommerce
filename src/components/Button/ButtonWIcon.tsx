@@ -10,8 +10,7 @@ export const ButtonWIcon = ({
   size = "sm",
   ...rest
 }: ButtonWIconProps) => {
-  const iconSizeModifier = `button__icon--${size}`;
-  const iconClass = `${styles.button__icon} ${styles[iconSizeModifier]}`;
+  const iconClass = `${styles.button__icon}`;
 
   return (
     <Button {...rest} size={size}>
