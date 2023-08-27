@@ -1,6 +1,5 @@
 import { SVGProps } from "react";
-
-type IconProps = SVGProps<SVGSVGElement>;
+import { IconProps } from "./types";
 
 export const TurnOnWifiIcon = (props: IconProps) => {
   return (
