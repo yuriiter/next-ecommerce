@@ -1,0 +1,36 @@
+.banner {
+    min-width: 330px;
+    padding: 24px;
+    color: $color-primary-0;
+    border-radius: 10px;
+
+    &__button {
+        @include text-style-semibold-type-16;
+
+        padding: 10px 20px;
+    }
+
+    &__text {
+        margin-bottom: 20px;
+    }
+
+    &__title {
+        @include text-style-semibold-type-32;
+    }
+
+    &__description {
+        @include text-style-medium-type-16;
+    }
+
+    &--dark {
+        background-color: $color-primary-500;
+
+        .banner__button {
+            background-color: $color-secondary-100;
+        }
+    }
+
+    &--light {
+        background-color: $color-information-500;
+    }
+}

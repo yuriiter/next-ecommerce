@@ -4,8 +4,7 @@ import React, {
   useRef,
   useState,
 } from "react";
-import styles from "@/styles/components/Search.module.scss";
-import { SearchFilterIcon, SearchIcon } from "../../../icons";
+import { SearchFilterIcon, SearchIcon } from "../../../svg/icons";
 
 export const Search = () => {
   const [searchValue, setSearchValue] = useState("");
@@ -31,21 +30,21 @@ export const Search = () => {
     setSearchValue(e.currentTarget.value);
 
   return (
-    <div className={styles.search} onClick={handleClickOnWrapper}>
+    <div className="search" onClick={handleClickOnWrapper}>
       <SearchIcon
-        className={styles["search__magnifier-icon"]}
+        className="search__icon"
         // ref={searchIconRef}
         onClick={stopPropagation}
       />
       <input
         placeholder="Search something here"
         ref={inputRef}
-        className={styles.search__input}
+        className="search__input"
         value={searchValue}
         onChange={handleInputChange}
       />
       <SearchFilterIcon
-        className={styles["search__filter-icon"]}
+        className="search__icon"
         // ref={filterIconRef}
         onClick={stopPropagation}
       />

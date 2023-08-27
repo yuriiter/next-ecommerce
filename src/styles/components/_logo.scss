@@ -1,6 +1,3 @@
-@import "../variables";
-@import "../mixins";
-
 .logo {
     @include text-style-bold-type-32;
     color: $color-primary-500;

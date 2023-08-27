@@ -1,6 +1,5 @@
 import React, { cloneElement } from "react";
 import { ButtonWIconProps } from "./types";
-import styles from "@/styles/components/Button.module.scss";
 import { Button } from ".";
 
 export const ButtonWIcon = ({
@@ -10,13 +9,11 @@ export const ButtonWIcon = ({
   size = "sm",
   ...rest
 }: ButtonWIconProps) => {
-  const iconClass = `${styles.button__icon}`;
-
   return (
     <Button {...rest} size={size}>
-      {iconBefore && <div className={iconClass}>{icon}</div>}
+      {iconBefore && <div className="button__icon">{icon}</div>}
       {children}
-      {!iconBefore && <div className={iconClass}>{icon}</div>}
+      {!iconBefore && <div className="button__icon">{icon}</div>}
     </Button>
   );
 };

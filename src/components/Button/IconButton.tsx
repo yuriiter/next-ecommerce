@@ -1,7 +1,6 @@
 import React, { cloneElement } from "react";
 import { Button } from ".";
 import { IconButtonProps } from "./types";
-import styles from "@/styles/components/Button.module.scss";
 
 export const IconButton = ({
   className = "",
@@ -9,16 +8,13 @@ export const IconButton = ({
   size = "sm",
   ...rest
 }: IconButtonProps) => {
-  const iconClass = `${styles.button__icon}`;
-  const buttonIconOnlyModifier = "button--icon-only";
-
   return (
     <Button
       {...rest}
       size={size}
-      className={`${styles[buttonIconOnlyModifier]} ${className}`}
+      className={` "button--icon-only" ${className}`}
     >
-      <div className={iconClass}>{children}</div>
+      <div className="button__icon">{children}</div>
     </Button>
   );
 };

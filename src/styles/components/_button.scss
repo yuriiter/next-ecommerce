@@ -1,6 +1,3 @@
-@import '../variables';
-@import '../mixins';
-
 .button {
     @include text-style-semibold-type-12;
 
@@ -134,32 +131,20 @@
     }
 
     &--icon-only {
-        &:is(.button--sm) {
+        &.button--sm {
             padding: 8px;
         }
 
-        &:is(.button--md) {
+        &.button--md {
             padding: 12px;
         }
 
-        &:is(.button--lg) {
+        &.button--lg {
             padding: 16px;
         }
 
-        &:is(.button--navigation) {
+        &.button--navigation {
             padding: 10px;
         }
     }
-
-    &--navigation {
-        border-radius: 100000px;
-        border-color: rgba(#C3D4E9, 0.4);
-
-        .button__icon,
-        .button__icon>* {
-            width: 24px;
-            height: 24px;
-        }
-    }
-
 }

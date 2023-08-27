@@ -2,8 +2,6 @@ import React from "react";
 import { ButtonProps } from "./types";
 import Link from "next/link";
 
-import styles from "@/styles/components/Button.module.scss";
-
 export const Button = ({
   variant = "primary",
   size = "sm",
@@ -14,7 +12,7 @@ export const Button = ({
   const variantModifier = `button--${variant}`;
   const sizeModifier = `button--${size}`;
 
-  const componentClassName = `${styles[variantModifier]} ${styles[sizeModifier]} ${styles.button} ${className}`;
+  const componentClassName = `button ${variantModifier} ${sizeModifier} ${className}`;
 
   if ("href" in rest) {
     return (
