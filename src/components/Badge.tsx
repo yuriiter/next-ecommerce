@@ -4,6 +4,7 @@ type BadgeProps = {
   className?: string;
   children: ReactNode;
   overRoundIcon?: boolean;
+  animated?: boolean;
 } & ({ value: number; max: number } | { value?: never; max?: never });
 
 export const Badge = ({
@@ -11,10 +12,11 @@ export const Badge = ({
   children,
   value,
   max,
+  animated = true,
   overRoundIcon = true,
 }: BadgeProps) => {
   return (
-    <div className="badge">
+    <div className={`badge  ${animated ? "badge--animated" : ""}`}>
       <div
         className={`badge__content ${
           overRoundIcon ? "badge__content--over-round" : ""
