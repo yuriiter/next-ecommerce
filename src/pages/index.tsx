@@ -1,10 +1,11 @@
 import Head from "next/head";
 import Image from "next/image";
 import { Button, ButtonWIcon, IconButton } from "@/components/Button";
-import { TurnOnWifiIcon } from "@/components/svg/icons";
+import { SwapIcon, TurnOnWifiIcon } from "@/components/svg/icons";
 import { Banner } from "@/components/Banner";
 import bannerCar1 from "@/assets/img/banner_car_1.png";
 import bannerCar2 from "@/assets/img/banner_car_2.png";
+import { Picker } from "@/components/Picker";
 
 export default function Home() {
   return (
@@ -33,6 +34,13 @@ export default function Home() {
           href="/rental"
           carPicture={bannerCar2}
         />
+      </section>
+      <section className="container pickers__section">
+        <Picker />
+        <IconButton size="lg" className="picker__swap-button">
+          <SwapIcon />
+        </IconButton>
+        <Picker />
       </section>
     </>
   );

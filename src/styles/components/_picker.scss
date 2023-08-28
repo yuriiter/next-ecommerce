@@ -1,0 +1,24 @@
+.pickers {
+    &__section {
+        display: flex;
+        gap: 44px;
+    }
+}
+
+.picker {
+    flex-grow: 1;
+    background-color: $color-primary-0;
+    padding: 24px 48px;
+    border-radius: 10px;
+
+    &__swap-button {
+        flex-shrink: 0;
+        align-self: center;
+        padding: 18px;
+
+        .button__icon {
+            width: 24px;
+            height: 24px;
+        }
+    }
+}
