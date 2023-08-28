@@ -6,15 +6,22 @@ import {
   SettingIcon,
 } from "@/components/svg/icons";
 import { Avatar } from "./Avatar";
+import { Badge } from "@/components/Badge";
 
 export const NavigationButtons = () => (
   <div className="navigation__buttons">
     <IconButton variant="secondary" size="md" className={`navigation__button`}>
       <HeartIcon />
     </IconButton>
-    <IconButton variant="secondary" size="md" className={`navigation__button`}>
-      <NotificationIcon />
-    </IconButton>
+    <Badge>
+      <IconButton
+        variant="secondary"
+        size="md"
+        className={`navigation__button`}
+      >
+        <NotificationIcon />
+      </IconButton>
+    </Badge>
     <IconButton variant="secondary" size="md" className={`navigation__button`}>
       <SettingIcon />
     </IconButton>
