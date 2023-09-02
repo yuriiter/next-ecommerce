@@ -1,6 +1,7 @@
 .pickers {
     &__section {
-        display: flex;
+        display: grid;
+        grid-template-columns: 1fr 58px 1fr;
         gap: 44px;
     }
 }
@@ -15,10 +16,86 @@
         flex-shrink: 0;
         align-self: center;
         padding: 18px;
+        border-radius: 10px;
+        box-shadow: 0px 9px 26px 6px rgba(13, 37, 109, 0.22);
 
         .button__icon {
             width: 24px;
             height: 24px;
         }
+    }
+
+    &__header {
+        @include text-style-semibold-type-16;
+
+        color: $color-secondary-500;
+        display: flex;
+        gap: 8px;
+        align-items: center;
+        margin-bottom: 16px;
+    }
+
+    &__header-text {
+        text-transform: capitalize;
+    }
+
+    &__point-mark {
+        position: relative;
+        padding: 4px;
+        background-color: rgba($color-primary-500, 0.3);
+        border-radius: 100000px;
+        width: 16px;
+        height: 16px;
+
+        &:before {
+            content: '';
+            position: absolute;
+            border-radius: 100000px;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 8px;
+            height: 8px;
+            background-color: $color-primary-500;
+        }
+
+        &--drop-off {
+            background-color: rgba(#54A6FF, 0.3);
+
+            &:before {
+                background-color: #54A6FF;
+            }
+        }
+    }
+
+    &__selects {
+        margin-top: 16px;
+        display: flex;
+        gap: 24px;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    &__divide-x {
+        border-radius: 10000px;
+        width: 1px;
+        background-color: rgba(#C3D4E9, 0.4);
+        align-self: stretch;
+    }
+
+    &__select {
+        flex-grow: 1;
+        width: 100%;
+    }
+
+    &__select-title {
+        @include text-style-bold-type-16;
+
+        color: $color-secondary-500;
+        margin-bottom: 8px;
+    }
+
+    &__select-input {
+        margin-top: 8px;
     }
 }

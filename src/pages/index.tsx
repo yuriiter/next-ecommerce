@@ -36,11 +36,11 @@ export default function Home() {
         />
       </section>
       <section className="container pickers__section">
-        <Picker />
+        <Picker variant="pick-up" />
         <IconButton size="lg" className="picker__swap-button">
           <SwapIcon />
         </IconButton>
-        <Picker />
+        <Picker variant="drop-off" />
       </section>
     </>
   );

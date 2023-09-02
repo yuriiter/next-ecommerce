@@ -2,13 +2,15 @@
 @import "variables";
 @import "mixins";
 @import "layout";
+@import "animations";
 
 @import "components/button";
 @import "components/banner";
 @import "components/home";
-@import "components/input";
 @import "components/logo";
 @import "components/navigation";
 @import "components/search";
 @import "components/badge";
 @import "components/picker";
+
+@import "components/date_input"
