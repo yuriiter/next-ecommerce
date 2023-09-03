@@ -34,24 +34,24 @@ export const DateInput = ({
   const valueAsString = value ? dateToString(value) : value;
 
   return (
-    <div ref={calendarRef} className="date-input">
-      <div className="date-input__data" onClick={toggleIsCalendarOpen}>
+    <div ref={calendarRef} className="select">
+      <div className="select__data" onClick={toggleIsCalendarOpen}>
         {valueAsString && (
-          <span className="date-input__value">{valueAsString}</span>
+          <span className="select__value">{valueAsString}</span>
         )}
         {!valueAsString && placeholder && (
-          <span className="date-input__placeholder">{placeholder}</span>
+          <span className="select__placeholder">{placeholder}</span>
         )}
         <ArrowDownIcon
-          className={`date-input__arrow-down ${
-            isCalendarOpen ? "date-input__arrow-down--rotate" : ""
+          className={`select__arrow-down ${
+            isCalendarOpen ? "select__arrow-down--rotate" : ""
           }`}
         />
       </div>
       <div
         tabIndex={isCalendarOpen ? 0 : -1}
-        className={`calendar date-input__calendar ${
-          isCalendarOpen ? "date-input__calendar--open" : ""
+        className={`calendar select__dropdown ${
+          isCalendarOpen ? "select__dropdown--open" : ""
         }`}
       >
         <div className="calendar__selected-date">

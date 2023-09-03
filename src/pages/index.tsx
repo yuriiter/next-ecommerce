@@ -6,8 +6,17 @@ import { Banner } from "@/components/Banner";
 import bannerCar1 from "@/assets/img/banner_car_1.png";
 import bannerCar2 from "@/assets/img/banner_car_2.png";
 import { Picker } from "@/components/Picker";
+import { useState } from "react";
 
 export default function Home() {
+  const [pickUpLocation, setPickUpLocation] = useState<string>();
+  const [pickUpDate, setPickUpDate] = useState<Date>();
+  const [pickUpTime, setPickUpTime] = useState<Date>();
+
+  const [dropOffLocation, setDropOffLocation] = useState<string>();
+  const [dropOffDate, setDropOffDate] = useState<Date>();
+  const [dropOffTime, setDropOffTime] = useState<Date>();
+
   return (
     <>
       <Head>
@@ -36,11 +45,28 @@ export default function Home() {
         />
       </section>
       <section className="container pickers__section">
-        <Picker variant="pick-up" />
+        <Picker
+          date={pickUpDate}
+          setDate={setPickUpDate}
+          location={pickUpLocation}
+          setLocation={setPickUpLocation}
+          time={pickUpTime}
+          setTime={setPickUpTime}
+          headerTitle="Pick - up"
+        />
         <IconButton size="lg" className="picker__swap-button">
           <SwapIcon />
         </IconButton>
-        <Picker variant="drop-off" />
+        <Picker
+          date={dropOffDate}
+          setDate={setDropOffDate}
+          location={dropOffLocation}
+          setLocation={setDropOffLocation}
+          time={dropOffTime}
+          setTime={setDropOffTime}
+          headerTitle="drop - off"
+          className="picker--drop-off"
+        />
       </section>
     </>
   );

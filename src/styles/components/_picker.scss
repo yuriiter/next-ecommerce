@@ -12,6 +12,16 @@
     padding: 24px 48px;
     border-radius: 10px;
 
+    &--drop-off {
+        .picker__point-mark {
+            background-color: rgba(#54A6FF, 0.3);
+
+            &:before {
+                background-color: #54A6FF;
+            }
+        }
+    }
+
     &__swap-button {
         flex-shrink: 0;
         align-self: center;
@@ -57,14 +67,6 @@
             width: 8px;
             height: 8px;
             background-color: $color-primary-500;
-        }
-
-        &--drop-off {
-            background-color: rgba(#54A6FF, 0.3);
-
-            &:before {
-                background-color: #54A6FF;
-            }
         }
     }
 
