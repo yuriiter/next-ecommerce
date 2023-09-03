@@ -1,9 +1,10 @@
-import React, { ReactNode, useEffect, useMemo } from "react";
+import React, { ReactNode, useEffect, useMemo, useRef } from "react";
 import { ArrowDownIcon } from "../svg/icons";
 import { useCalendar } from "./useCalendar";
 import { generateMonthDays, monthDaysGaps } from "./utils";
 import { mod } from "@/utils";
 import { assert } from "console";
+import { useClickOutside } from "@/hooks/useClickOutside";
 
 const daysOfWeek = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"] as const;
 const engDaysOfWeek = [
@@ -66,6 +67,9 @@ export const DateInput = ({
     yearPage,
     setYearPage,
   } = useCalendar(value);
+
+  const calendarRef = useRef<HTMLDivElement>(null);
+  useClickOutside(calendarRef, () => setIsCalendarOpen(false));
 
   const toggleIsCalendarOpen = () => setIsCalendarOpen((prev) => !prev);
 
@@ -162,6 +166,7 @@ export const DateInput = ({
         />
       </div>
       <div
+        ref={calendarRef}
         className={`calendar date-input__calendar ${
           isCalendarOpen ? "date-input__calendar--open" : ""
         }`}
