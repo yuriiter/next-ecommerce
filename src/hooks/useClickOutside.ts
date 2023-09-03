@@ -1,4 +1,4 @@
-import { MouseEventHandler, RefObject, useEffect } from "react";
+import { RefObject, useEffect } from "react";
 
 export const useClickOutside = (
   elementRef: RefObject<HTMLElement>,
@@ -16,9 +16,9 @@ export const useClickOutside = (
     };
 
     if (elementRef?.current)
-      document.addEventListener("mousedown", handleClickOutside);
+      document.addEventListener("click", handleClickOutside);
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("click", handleClickOutside);
     };
   }, [elementRef, callback]);
 };
