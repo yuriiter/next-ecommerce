@@ -1,43 +1,9 @@
-import React, { ReactNode, useEffect, useMemo, useRef } from "react";
+import React from "react";
 import { ArrowDownIcon } from "../svg/icons";
 import { useCalendar } from "./useCalendar";
-import { generateMonthDays, monthDaysGaps } from "./utils";
 import { mod } from "@/utils";
-import { assert } from "console";
-import { useClickOutside } from "@/hooks/useClickOutside";
-
-const daysOfWeek = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"] as const;
-const engDaysOfWeek = [
-  "sun",
-  "mon",
-  "tue",
-  "wed",
-  "thu",
-  "fri",
-  "sat",
-] as const;
-
-const months = [
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December",
-] as const;
-
-const dateToString = (date: Date) =>
-  date.toLocaleDateString("en-US", {
-    month: "short",
-    day: "numeric",
-    year: "numeric",
-  });
+import { dateToString } from "./utils";
+import { daysOfWeek, months } from "./constants";
 
 type DateInputProps = {
   placeholder?: string;
@@ -54,101 +20,18 @@ export const DateInput = ({
   value,
   onChange,
 }: DateInputProps) => {
-  const valueAsString = useMemo(
-    () => (value ? dateToString(value) : value),
-    [value]
-  );
   const {
-    startAndEndOfMonth,
     isCalendarOpen,
-    setIsCalendarOpen,
+    toggleIsCalendarOpen,
     monthPage,
-    setMonthPage,
     yearPage,
-    setYearPage,
-  } = useCalendar(value);
+    incrementMonth,
+    decrementMonth,
+    calendarCells,
+    calendarRef,
+  } = useCalendar(value, onChange, min, max);
 
-  const calendarRef = useRef<HTMLDivElement>(null);
-  useClickOutside(calendarRef, () => setIsCalendarOpen(false));
-
-  const toggleIsCalendarOpen = () => setIsCalendarOpen((prev) => !prev);
-
-  const calendarCells = useMemo(() => {
-    const [startDate, endDate] = startAndEndOfMonth;
-    const dayOfWeekStart = startDate.getDay();
-
-    const cells: ReactNode[] = [];
-
-    for (let i = 0; i < mod(dayOfWeekStart - 1, 7); i++) {
-      cells.push(
-        <div key={`startGap-${i}`} className="calendar__day-container"></div>
-      );
-    }
-    for (let i = startDate.getDate(); i <= endDate.getDate(); i++) {
-      const handleSelect = () => {
-        const copyCurrentMonthDate = new Date(startDate);
-        copyCurrentMonthDate.setDate(i);
-        onChange(copyCurrentMonthDate);
-      };
-
-      const isSelected =
-        value?.getDate() === i &&
-        value?.getFullYear() === yearPage &&
-        value?.getMonth() === monthPage;
-
-      const isDisabled =
-        min.getTime() >
-          new Date(
-            yearPage,
-            monthPage,
-            i,
-            min.getHours(),
-            min.getMinutes(),
-            min.getSeconds(),
-            min.getMilliseconds()
-          ).getTime() ||
-        (max &&
-          max.getTime() <
-            new Date(
-              yearPage,
-              monthPage,
-              i,
-              max.getHours(),
-              max.getMinutes(),
-              max.getSeconds(),
-              max.getMilliseconds()
-            ).getTime());
-
-      cells.push(
-        <button
-          disabled={isDisabled}
-          key={`day-${i}`}
-          className={`calendar__day-container calendar__days-of-month ${
-            isSelected ? "calendar__days-of-month--selected" : ""
-          }`}
-          onClick={handleSelect}
-        >
-          <span className="calendar__day">{i}</span>
-        </button>
-      );
-    }
-
-    return cells;
-  }, [startAndEndOfMonth, value]);
-
-  const incrementMonth = () => {
-    if (monthPage === 11) {
-      setMonthPage(0);
-      setYearPage((prevYearPage) => prevYearPage + 1);
-    } else setMonthPage((prevMonthPage) => prevMonthPage + 1);
-  };
-
-  const decrementMonth = () => {
-    if (monthPage === 0) {
-      setMonthPage(11);
-      setYearPage((prevYearPage) => prevYearPage - 1);
-    } else setMonthPage((prevMonthPage) => prevMonthPage - 1);
-  };
+  const valueAsString = value ? dateToString(value) : value;
 
   return (
     <div className="date-input">
