@@ -20,7 +20,7 @@ export const useCalendar = (
   }, [monthPage, yearPage]);
 
   useEffect(() => {
-    if (!isCalendarOpen) {
+    if (isCalendarOpen) {
       const currentPageDate = value || new Date();
       setMonthPage(currentPageDate.getMonth());
       setYearPage(currentPageDate.getFullYear());
