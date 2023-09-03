@@ -34,7 +34,7 @@ export const DateInput = ({
   const valueAsString = value ? dateToString(value) : value;
 
   return (
-    <div className="date-input">
+    <div ref={calendarRef} className="date-input">
       <div className="date-input__data" onClick={toggleIsCalendarOpen}>
         {valueAsString && (
           <span className="date-input__value">{valueAsString}</span>
@@ -49,7 +49,6 @@ export const DateInput = ({
         />
       </div>
       <div
-        ref={calendarRef}
         className={`calendar date-input__calendar ${
           isCalendarOpen ? "date-input__calendar--open" : ""
         }`}
