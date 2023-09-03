@@ -30,7 +30,7 @@
     }
 
     &__calendar {
-        display: none;
+        pointer-events: none;
         position: absolute;
         top: calc(100% + 10px);
         left: 0;
@@ -40,9 +40,12 @@
         border-radius: 5px;
         background-color: $color-primary-0;
         width: 280px;
+        animation: disappear .1s ease-out forwards;
 
         &--open {
+            pointer-events: all;
             display: block;
+            animation: appear .1s ease-out forwards;
         }
     }
 

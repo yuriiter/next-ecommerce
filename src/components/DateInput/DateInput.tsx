@@ -49,6 +49,7 @@ export const DateInput = ({
         />
       </div>
       <div
+        tabIndex={isCalendarOpen ? 0 : -1}
         className={`calendar date-input__calendar ${
           isCalendarOpen ? "date-input__calendar--open" : ""
         }`}
