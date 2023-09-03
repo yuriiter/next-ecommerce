@@ -3,7 +3,7 @@
     cursor: pointer;
 
     &__placeholder {
-        @include text-style-medium-type-12;
+        @include text-style-medium-type-14;
 
         color: $color-secondary-300;
         flex-grow: 1;
@@ -47,7 +47,7 @@
     }
 
     &__value {
-        @include text-style-bold-type-12;
+        @include text-style-bold-type-14;
     }
 }
 
@@ -92,14 +92,21 @@
     }
 
     &__arrow {
+        background-color: transparent;
         cursor: pointer;
         padding: 8px;
         width: 30px;
         height: 30px;
         flex-shrink: 0;
 
-        &:hover {
-            color: $color-information-800;
+        &:disabled {
+            opacity: 0.6;
+        }
+
+        &:not(:disabled) {
+            &:hover {
+                color: $color-information-800;
+            }
         }
 
         &--left {
@@ -149,18 +156,26 @@
 
     &__days-of-month {
         border-radius: 2px;
+        background-color: transparent;
 
-        &:hover {
-            background-color: $color-secondary-200;
+        &:not(:disabled) {
+            &:hover {
+                background-color: $color-secondary-200;
+            }
+
+            &:active {
+                background-color: $color-information-400;
+                color: $color-primary-0;
+            }
+        }
+
+        &:disabled {
+            opacity: 0.4;
+            cursor: default;
         }
 
         &--selected {
             background-color: $color-information-600;
-            color: $color-primary-0;
-        }
-
-        &:active {
-            background-color: $color-information-400;
             color: $color-primary-0;
         }
     }

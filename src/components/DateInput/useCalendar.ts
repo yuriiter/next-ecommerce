@@ -1,6 +1,6 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
-export const useCalendar = () => {
+export const useCalendar = (value: Date | undefined) => {
   const [isCalendarOpen, setIsCalendarOpen] = useState(false);
   const [monthPage, setMonthPage] = useState(new Date().getMonth());
   const [yearPage, setYearPage] = useState(new Date().getFullYear());
@@ -11,6 +11,14 @@ export const useCalendar = () => {
 
     return [startDate, endDate];
   }, [monthPage, yearPage]);
+
+  useEffect(() => {
+    if (!isCalendarOpen) {
+      const currentPageDate = value || new Date();
+      setMonthPage(currentPageDate.getMonth());
+      setYearPage(currentPageDate.getFullYear());
+    }
+  }, [isCalendarOpen, value]);
 
   return {
     startAndEndOfMonth,

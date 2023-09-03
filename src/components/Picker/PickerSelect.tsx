@@ -34,7 +34,7 @@ export const PickerSelect = ({
       {Select && (
         <Select
           className="picker__select-input"
-          placeholder="Select your date"
+          placeholder="Select date"
           value={date}
           onChange={handleDateChange}
         />

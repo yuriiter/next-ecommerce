@@ -1,17 +1,9 @@
-import React, { ReactNode, useMemo } from "react";
+import React, { ReactNode, useEffect, useMemo } from "react";
 import { ArrowDownIcon } from "../svg/icons";
 import { useCalendar } from "./useCalendar";
 import { generateMonthDays, monthDaysGaps } from "./utils";
 import { mod } from "@/utils";
 import { assert } from "console";
-
-type DateInputProps = {
-  placeholder?: string;
-  min?: Date;
-  max?: Date;
-  value: Date | undefined;
-  onChange: (newValue: Date) => void;
-};
 
 const daysOfWeek = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"] as const;
 const engDaysOfWeek = [
@@ -46,9 +38,17 @@ const dateToString = (date: Date) =>
     year: "numeric",
   });
 
+type DateInputProps = {
+  placeholder?: string;
+  min?: Date;
+  max?: Date;
+  value: Date | undefined;
+  onChange: (newValue: Date) => void;
+};
+
 export const DateInput = ({
   placeholder,
-  min,
+  min = new Date(),
   max,
   value,
   onChange,
@@ -65,7 +65,7 @@ export const DateInput = ({
     setMonthPage,
     yearPage,
     setYearPage,
-  } = useCalendar();
+  } = useCalendar(value);
 
   const toggleIsCalendarOpen = () => setIsCalendarOpen((prev) => !prev);
 
@@ -92,8 +92,32 @@ export const DateInput = ({
         value?.getFullYear() === yearPage &&
         value?.getMonth() === monthPage;
 
+      const isDisabled =
+        min.getTime() >
+          new Date(
+            yearPage,
+            monthPage,
+            i,
+            min.getHours(),
+            min.getMinutes(),
+            min.getSeconds(),
+            min.getMilliseconds()
+          ).getTime() ||
+        (max &&
+          max.getTime() <
+            new Date(
+              yearPage,
+              monthPage,
+              i,
+              max.getHours(),
+              max.getMinutes(),
+              max.getSeconds(),
+              max.getMilliseconds()
+            ).getTime());
+
       cells.push(
-        <div
+        <button
+          disabled={isDisabled}
           key={`day-${i}`}
           className={`calendar__day-container calendar__days-of-month ${
             isSelected ? "calendar__days-of-month--selected" : ""
@@ -101,7 +125,7 @@ export const DateInput = ({
           onClick={handleSelect}
         >
           <span className="calendar__day">{i}</span>
-        </div>
+        </button>
       );
     }
 
@@ -158,17 +182,29 @@ export const DateInput = ({
           )}
         </div>
         <div className="calendar__controllers">
-          <ArrowDownIcon
+          <button
             className="calendar__arrow calendar__arrow--left"
             onClick={decrementMonth}
-          />
+            disabled={
+              monthPage - 1 < min.getMonth() && yearPage <= min.getFullYear()
+            }
+          >
+            <ArrowDownIcon />
+          </button>
           <div className="calendar__date-page">
             {months[monthPage]} {yearPage}
           </div>
-          <ArrowDownIcon
+          <button
             className="calendar__arrow calendar__arrow--right"
             onClick={incrementMonth}
-          />
+            disabled={
+              max &&
+              monthPage + 1 > max.getMonth() &&
+              yearPage >= max.getFullYear()
+            }
+          >
+            <ArrowDownIcon />
+          </button>
         </div>
         <div className="calendar__days">
           {daysOfWeek.map((dayOfWeek) => (
