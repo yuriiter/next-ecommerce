@@ -1,6 +1,6 @@
 import React, { Dispatch, SetStateAction } from "react";
 import { PickerSelect } from "./PickerSelect";
-import { DateInput } from "../DateInput/DateInput";
+import { DateInput } from "../Select/DateInput/DateInput";
 import { Select } from "../Select/Select";
 
 type PickerProps = {

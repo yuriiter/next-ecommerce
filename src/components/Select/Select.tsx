@@ -1,36 +1,21 @@
-import React, { useState } from "react";
-import { ArrowDownIcon } from "../svg/icons";
+import React from "react";
+import { SelectWrapper } from "./SelectWrapper";
 
-type SelectProps = {
-  value: string | undefined;
-  onChange: (value: string | undefined) => void;
-  placeholder?: string;
+type SelectOption = {
+  value: string;
+  label: string;
 };
 
-export const Select = ({ value, placeholder, onChange }: SelectProps) => {
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+type SelectProps = {
+  placeholder?: string;
+  value: SelectOption | undefined;
+  onChange: (newValue: SelectOption | undefined) => void;
+};
 
-  const toggleDropdownOpen = () => setIsDropdownOpen((prev) => !prev);
-
+export const Select = ({ placeholder, value, onChange }: SelectProps) => {
   return (
-    <div className="select">
-      <div className="select__data" onClick={toggleDropdownOpen}>
-        {value && <span className="select__value">{value}</span>}
-        {!value && placeholder && (
-          <span className="select__placeholder">{placeholder}</span>
-        )}
-        <ArrowDownIcon
-          className={`select__arrow-down ${
-            isDropdownOpen ? "select__arrow-down--rotate" : ""
-          }`}
-        />
-      </div>
-      <div
-        tabIndex={isDropdownOpen ? 0 : -1}
-        className={`calendar select__dropdown ${
-          isDropdownOpen ? "select__dropdown--open" : ""
-        }`}
-      ></div>
-    </div>
+    <SelectWrapper value={value?.value} placeholder={placeholder}>
+      {null}
+    </SelectWrapper>
   );
 };

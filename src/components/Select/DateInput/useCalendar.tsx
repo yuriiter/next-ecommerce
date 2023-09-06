@@ -1,6 +1,7 @@
 import { useClickOutside } from "@/hooks/useClickOutside";
 import { mod } from "@/utils";
 import { ReactNode, useEffect, useMemo, useRef, useState } from "react";
+import { useDropdownContext } from "../useDropdownContext";
 
 export const useCalendar = (
   value: Date | undefined,
@@ -8,7 +9,8 @@ export const useCalendar = (
   min: Date,
   max: Date | undefined
 ) => {
-  const [isCalendarOpen, setIsCalendarOpen] = useState(false);
+  const { dropdownOpen: isCalendarOpen } = useDropdownContext();
+
   const [monthPage, setMonthPage] = useState(new Date().getMonth());
   const [yearPage, setYearPage] = useState(new Date().getFullYear());
 
@@ -26,9 +28,6 @@ export const useCalendar = (
       setYearPage(currentPageDate.getFullYear());
     }
   }, [isCalendarOpen, value]);
-
-  const calendarRef = useRef<HTMLDivElement>(null);
-  useClickOutside(calendarRef, () => setIsCalendarOpen(false));
 
   const calendarCells = useMemo(() => {
     const [startDate, endDate] = startAndEndOfMonth;
@@ -93,8 +92,6 @@ export const useCalendar = (
     return cells;
   }, [startAndEndOfMonth, value]);
 
-  const toggleIsCalendarOpen = () => setIsCalendarOpen((prev) => !prev);
-
   const incrementMonth = () => {
     if (monthPage === 11) {
       setMonthPage(0);
@@ -111,12 +108,10 @@ export const useCalendar = (
 
   return {
     isCalendarOpen,
-    toggleIsCalendarOpen,
     monthPage,
     yearPage,
     incrementMonth,
     decrementMonth,
     calendarCells,
-    calendarRef,
   };
 };
