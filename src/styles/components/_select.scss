@@ -30,6 +30,7 @@
     }
 
     &__dropdown {
+        transform-origin: 0 0;
         pointer-events: none;
         position: absolute;
         top: calc(100% + 10px);
@@ -45,11 +46,50 @@
         &--open {
             pointer-events: all;
             display: block;
-            animation: appear .1s ease-out forwards;
+            animation: appear .08s ease-out forwards;
         }
     }
 
     &__value {
         @include text-style-bold-type-14;
+    }
+
+    &__option-wrapper {
+        padding: 10px 14px;
+        width: 100%;
+
+        &:hover {
+            background-color: rgba($color-secondary-200, 0.3);
+        }
+
+        &:active {
+            background-color: rgba($color-secondary-200, 0.5);
+        }
+
+        &--selected {
+            background-color: rgba($color-secondary-200, 0.5);
+        }
+    }
+
+    &__option {
+        @include text-style-regular-type-14;
+
+        user-select: none;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        width: 100%;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+
+    &__options-wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        max-height: 300px;
+        overflow-y: scroll;
     }
 }

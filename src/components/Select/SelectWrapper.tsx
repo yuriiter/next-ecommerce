@@ -7,12 +7,14 @@ type SelectWrapperProps = {
   value: string | undefined;
   placeholder?: string;
   children: ReactNode;
+  className?: string;
 };
 
 export const SelectWrapper = ({
   value,
   placeholder,
   children,
+  className = "",
 }: SelectWrapperProps) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const selectWrapperRef = useRef<HTMLDivElement>(null);
@@ -21,7 +23,7 @@ export const SelectWrapper = ({
   const toggleDropdownOpen = () => setIsDropdownOpen((prev) => !prev);
 
   return (
-    <div ref={selectWrapperRef} className="select">
+    <div ref={selectWrapperRef} className={`select ${className}`}>
       <div className="select__data" onClick={toggleDropdownOpen}>
         {value && <span className="select__value">{value}</span>}
         {!value && placeholder && (
@@ -33,7 +35,9 @@ export const SelectWrapper = ({
           }`}
         />
       </div>
-      <Dropdown open={isDropdownOpen}>{children}</Dropdown>
+      <Dropdown open={isDropdownOpen} setOpen={setIsDropdownOpen}>
+        {children}
+      </Dropdown>
     </div>
   );
 };

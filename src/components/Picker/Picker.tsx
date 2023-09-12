@@ -2,17 +2,33 @@ import React, { Dispatch, SetStateAction } from "react";
 import { PickerSelect } from "./PickerSelect";
 import { DateInput } from "../Select/DateInput/DateInput";
 import { Select } from "../Select/Select";
+import { SelectOption } from "../Select/types";
+import TimeInput from "../Select/TimeInput";
+import { Time } from "../Select/TimeInput/types";
 
 type PickerProps = {
   headerTitle: string;
   className?: string;
-  location: string | undefined;
-  setLocation: Dispatch<SetStateAction<string | undefined>>;
+  location: SelectOption | undefined;
+  setLocation: Dispatch<SetStateAction<SelectOption | undefined>>;
   date: Date | undefined;
   setDate: Dispatch<SetStateAction<Date | undefined>>;
-  time: Date | undefined;
-  setTime: Dispatch<SetStateAction<Date | undefined>>;
+  time: SelectOption | undefined;
+  setTime: Dispatch<SetStateAction<SelectOption | undefined>>;
 };
+
+const locationOptions: SelectOption[] = [
+  "New York",
+  "Los Angeles",
+  "Chicago",
+  "Houston",
+  "Philadelphia",
+  "Phoenix",
+  "San Antonio",
+  "San Diego",
+  "Dallas",
+  "San Jose",
+].map((city) => ({ value: city, label: city } as SelectOption));
 
 export const Picker = ({
   headerTitle,
@@ -24,10 +40,11 @@ export const Picker = ({
   setTime,
   className = "",
 }: PickerProps) => {
-  const onLocationChange = (newValue: string | undefined) =>
+  const onLocationChange = (newValue: SelectOption | undefined) =>
     setLocation(newValue);
   const onDateChange = (newValue: Date | undefined) => setDate(newValue);
-  const onTimeChange = (newValue: Date | undefined) => setTime(newValue);
+  const onTimeChange = (newValue: SelectOption | undefined) =>
+    setTime(newValue);
 
   return (
     <div className={`picker ${className}`}>
@@ -41,6 +58,7 @@ export const Picker = ({
             placeholder="Select city"
             value={location}
             onChange={onLocationChange}
+            options={locationOptions}
           />
         </PickerSelect>
         <div className="picker__divide-x"></div>
@@ -53,7 +71,7 @@ export const Picker = ({
         </PickerSelect>
         <div className="picker__divide-x"></div>
         <PickerSelect title="Time">
-          <DateInput
+          <TimeInput
             placeholder="Select time"
             value={time}
             onChange={onTimeChange}

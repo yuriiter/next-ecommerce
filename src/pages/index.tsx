@@ -7,13 +7,14 @@ import bannerCar1 from "@/assets/img/banner_car_1.png";
 import bannerCar2 from "@/assets/img/banner_car_2.png";
 import { Picker } from "@/components/Picker";
 import { useState } from "react";
+import { SelectOption } from "@/components/Select/types";
 
 export default function Home() {
-  const [pickUpLocation, setPickUpLocation] = useState<string>();
+  const [pickUpLocation, setPickUpLocation] = useState<SelectOption>();
   const [pickUpDate, setPickUpDate] = useState<Date>();
   const [pickUpTime, setPickUpTime] = useState<Date>();
 
-  const [dropOffLocation, setDropOffLocation] = useState<string>();
+  const [dropOffLocation, setDropOffLocation] = useState<SelectOption>();
   const [dropOffDate, setDropOffDate] = useState<Date>();
   const [dropOffTime, setDropOffTime] = useState<Date>();
 
