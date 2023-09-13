@@ -8,15 +8,73 @@ import bannerCar2 from "@/assets/img/banner_car_2.png";
 import { Picker } from "@/components/Picker";
 import { useState } from "react";
 import { SelectOption } from "@/components/Select/types";
+import { CardsContainer } from "@/components/Cards";
+import { CarData } from "@/types";
+
+const popularCarsMockup: CarData[] = [
+  {
+    id: "1",
+    name: "Koenigsegg",
+    carType: "sport",
+    fuelCapacity: 90,
+    peopleCapacity: 2,
+    isManual: true,
+    price: 99,
+    previousPrice: undefined,
+    isInFavorites: true,
+  },
+  {
+    id: "2",
+    name: "Nissan GT - R",
+    carType: "sport",
+    fuelCapacity: 80,
+    peopleCapacity: 2,
+    isManual: true,
+    price: 80,
+    previousPrice: 100,
+    isInFavorites: false,
+  },
+  {
+    id: "3",
+    name: "Rolls - Royce",
+    carType: "sedan",
+    fuelCapacity: 70,
+    peopleCapacity: 2,
+    isManual: true,
+    price: 96,
+    previousPrice: undefined,
+    isInFavorites: true,
+  },
+  {
+    id: "4",
+    name: "Nissan GT - R",
+    carType: "sport",
+    fuelCapacity: 80,
+    peopleCapacity: 2,
+    isManual: true,
+    price: 80,
+    previousPrice: 100,
+    isInFavorites: false,
+  },
+];
 
 export default function Home() {
   const [pickUpLocation, setPickUpLocation] = useState<SelectOption>();
   const [pickUpDate, setPickUpDate] = useState<Date>();
-  const [pickUpTime, setPickUpTime] = useState<Date>();
+  const [pickUpTime, setPickUpTime] = useState<SelectOption>();
 
   const [dropOffLocation, setDropOffLocation] = useState<SelectOption>();
   const [dropOffDate, setDropOffDate] = useState<Date>();
-  const [dropOffTime, setDropOffTime] = useState<Date>();
+  const [dropOffTime, setDropOffTime] = useState<SelectOption>();
+
+  const onSwapButtonClick = () => {
+    setPickUpLocation(dropOffLocation);
+    setPickUpDate(dropOffDate);
+    setPickUpTime(dropOffTime);
+    setDropOffLocation(pickUpLocation);
+    setDropOffDate(pickUpDate);
+    setDropOffTime(pickUpTime);
+  };
 
   return (
     <>
@@ -55,7 +113,11 @@ export default function Home() {
           setTime={setPickUpTime}
           headerTitle="Pick - up"
         />
-        <IconButton size="lg" className="picker__swap-button">
+        <IconButton
+          size="lg"
+          className="picker__swap-button"
+          onClick={onSwapButtonClick}
+        >
           <SwapIcon />
         </IconButton>
         <Picker
@@ -67,6 +129,13 @@ export default function Home() {
           setTime={setDropOffTime}
           headerTitle="drop - off"
           className="picker--drop-off"
+        />
+      </section>
+      <section className="container cards__section">
+        <CardsContainer
+          cards={popularCarsMockup}
+          title="Popular cars"
+          rightLink={{ href: "/popular", content: "view all" }}
         />
       </section>
     </>
