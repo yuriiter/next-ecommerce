@@ -1,6 +1,7 @@
 @import 'variables';
 
 .container {
+    box-sizing: content-box;
     padding: 0 $container-px-lg;
     width: 100%;
     max-width: $container-max-w;
