@@ -12,6 +12,7 @@ export type CarData = {
   price: number;
   previousPrice?: number;
   isInFavorites: boolean;
+  thumbnailURL: string;
 };
 
 export type LinkData = {

@@ -10,6 +10,7 @@ import { useState } from "react";
 import { SelectOption } from "@/components/Select/types";
 import { CardsContainer } from "@/components/Cards";
 import { CarData } from "@/types";
+import carCardMockup from "@/assets/img/card_car_mockup.png";
 
 const popularCarsMockup: CarData[] = [
   {
@@ -22,6 +23,7 @@ const popularCarsMockup: CarData[] = [
     price: 99,
     previousPrice: undefined,
     isInFavorites: true,
+    thumbnailURL: carCardMockup,
   },
   {
     id: "2",
@@ -33,6 +35,7 @@ const popularCarsMockup: CarData[] = [
     price: 80,
     previousPrice: 100,
     isInFavorites: false,
+    thumbnailURL: carCardMockup,
   },
   {
     id: "3",
@@ -44,6 +47,7 @@ const popularCarsMockup: CarData[] = [
     price: 96,
     previousPrice: undefined,
     isInFavorites: true,
+    thumbnailURL: carCardMockup,
   },
   {
     id: "4",
@@ -55,6 +59,7 @@ const popularCarsMockup: CarData[] = [
     price: 80,
     previousPrice: 100,
     isInFavorites: false,
+    thumbnailURL: carCardMockup,
   },
 ];
 
