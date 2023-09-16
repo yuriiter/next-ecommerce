@@ -8,6 +8,8 @@ type CardsContainerProps = {
   rightLink?: LinkData;
   horizontalScrolling?: boolean;
   cards: CarData[];
+  loading?: boolean;
+  className?: string;
 };
 
 export const CardsContainer = ({
@@ -15,9 +17,11 @@ export const CardsContainer = ({
   rightLink,
   horizontalScrolling = false,
   cards,
+  loading = false,
+  className = "",
 }: CardsContainerProps) => {
   return (
-    <div className="cards">
+    <div className={`cards ${className} ${loading ? "cards--loading" : ""}`}>
       {(title || rightLink) && (
         <div className="cards__header">
           {title && <div className="cards__header-title">{title}</div>}
