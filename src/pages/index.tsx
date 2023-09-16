@@ -159,7 +159,7 @@ export default function Home() {
           horizontalScrolling
         />
       </section>
-      <section className="container cards__section">
+      <section className="container cards__section cards__section--recommended">
         <CardsContainer
           cards={recommendationCarsToDisplay}
           title="Recomendation cars"

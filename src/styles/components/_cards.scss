@@ -1,6 +1,17 @@
 .cards {
+    transition: opacity .3s;
+
+    &--loading {
+        opacity: 0.6;
+    }
+
     &__section {
         margin-top: 36px;
+        margin-bottom: 36px;
+
+        &--recommended {
+            margin-bottom: 64px;
+        }
     }
 
     &__header {
@@ -144,5 +155,26 @@
     &--liked {
         color: #ED3F3F;
         fill: #ED3F3F;
+    }
+}
+
+.show-more {
+    margin-bottom: 64px;
+    margin-top: 64px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+
+    &__button {
+        grid-column-start: 2;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    &__total-count {
+        @include text-style-medium-type-14;
+
+        align-self: center;
+        color: $color-secondary-300;
+        text-align: right;
     }
 }
