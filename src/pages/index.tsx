@@ -6,11 +6,13 @@ import { Banner } from "@/components/Banner";
 import bannerCar1 from "@/assets/img/banner_car_1.png";
 import bannerCar2 from "@/assets/img/banner_car_2.png";
 import { Picker } from "@/components/Picker";
-import { useState } from "react";
+import { SetStateAction, useDeferredValue, useMemo, useState } from "react";
 import { SelectOption } from "@/components/Select/types";
 import { CardsContainer } from "@/components/Cards";
 import { CarData } from "@/types";
 import carCardMockup from "@/assets/img/card_car_mockup.png";
+import { ShowMore } from "@/components/Cards/ShowMore";
+import { Footer } from "@/components/Layout/Footer";
 
 const popularCarsMockup: CarData[] = [
   {
@@ -63,7 +65,20 @@ const popularCarsMockup: CarData[] = [
   },
 ];
 
+const recommendationCars = [
+  ...popularCarsMockup,
+  ...popularCarsMockup,
+  ...popularCarsMockup,
+].map((carData, index) => ({ ...carData, id: String(index + 1) }));
+
 export default function Home() {
+  const [recommendationCarsDisplayLimit, setRecommendationCarsDisplayLimit] =
+    useState(8);
+
+  const recommendationCarsToDisplay = useMemo(() => {
+    return recommendationCars.slice(0, recommendationCarsDisplayLimit);
+  }, [recommendationCarsDisplayLimit]);
+
   const [pickUpLocation, setPickUpLocation] = useState<SelectOption>();
   const [pickUpDate, setPickUpDate] = useState<Date>();
   const [pickUpTime, setPickUpTime] = useState<SelectOption>();
@@ -141,6 +156,22 @@ export default function Home() {
           cards={popularCarsMockup}
           title="Popular cars"
           rightLink={{ href: "/popular", content: "view all" }}
+          horizontalScrolling
+        />
+      </section>
+      <section className="container cards__section">
+        <CardsContainer
+          cards={recommendationCarsToDisplay}
+          title="Recomendation cars"
+          horizontalScrolling
+        />
+        <ShowMore
+          step={8}
+          totalItemsCount={recommendationCars.length}
+          itemsToShowLimit={recommendationCarsDisplayLimit}
+          setItemsToShowLimit={setRecommendationCarsDisplayLimit}
+          itemNamePlural="cars"
+          itemNameSingular="car"
         />
       </section>
     </>
