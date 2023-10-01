@@ -133,6 +133,7 @@ export default function Home() {
           setTime={setPickUpTime}
           headerTitle="Pick - up"
         />
+        <div className="pickers__placeholder"></div>
         <IconButton
           size="lg"
           className="picker__swap-button"

@@ -1,8 +1,8 @@
 .pickers {
     &__section {
+        position: relative;
         display: grid;
-        grid-template-columns: 1fr 58px 1fr;
-        gap: 44px;
+        grid-template-columns: minmax(485px, 1fr) minmax(32px, 10%) minmax(485px, 1fr);
     }
 }
 
@@ -23,6 +23,10 @@
     }
 
     &__swap-button {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
         flex-shrink: 0;
         align-self: center;
         padding: 18px;
