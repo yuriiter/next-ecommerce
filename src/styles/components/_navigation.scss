@@ -1,7 +1,22 @@
 .navigation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
     padding: $nav-py 0;
     border: 1px solid rgba(#C3D4E9, 0.4);
     background-color: $color-primary-0;
+    z-index: 20;
+    transition: transform .5s;
+    transform: translateY(0);
+
+    &--hidden {
+        transform: translateY(-100%);
+    }
+
+    &__placeholder {
+        margin-bottom: 124px;
+    }
 
     &__container {
         display: flex;
