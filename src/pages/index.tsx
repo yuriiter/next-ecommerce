@@ -1,75 +1,15 @@
 import Head from "next/head";
-import Image from "next/image";
-import { Button, ButtonWIcon, IconButton } from "@/components/Button";
-import { SwapIcon, TurnOnWifiIcon } from "@/components/svg/icons";
+import { IconButton } from "@/components/Button";
+import { SwapIcon } from "@/components/svg/icons";
 import { Banner } from "@/components/Banner";
 import bannerCar1 from "@/assets/img/banner_car_1.png";
 import bannerCar2 from "@/assets/img/banner_car_2.png";
 import { Picker } from "@/components/Picker";
-import { SetStateAction, useDeferredValue, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { SelectOption } from "@/components/Select/types";
 import { CardsContainer } from "@/components/Cards";
-import { CarData } from "@/types";
-import carCardMockup from "@/assets/img/card_car_mockup.png";
 import { ShowMore } from "@/components/Cards/ShowMore";
-import { Footer } from "@/components/Layout/Footer";
-
-const popularCarsMockup: CarData[] = [
-  {
-    id: "1",
-    name: "Koenigsegg",
-    carType: "sport",
-    fuelCapacity: 90,
-    peopleCapacity: 2,
-    isManual: true,
-    price: 99,
-    previousPrice: undefined,
-    isInFavorites: true,
-    thumbnailURL: carCardMockup,
-  },
-  {
-    id: "2",
-    name: "Nissan GT - R",
-    carType: "sport",
-    fuelCapacity: 80,
-    peopleCapacity: 2,
-    isManual: true,
-    price: 80,
-    previousPrice: 100,
-    isInFavorites: false,
-    thumbnailURL: carCardMockup,
-  },
-  {
-    id: "3",
-    name: "Rolls - Royce",
-    carType: "sedan",
-    fuelCapacity: 70,
-    peopleCapacity: 2,
-    isManual: true,
-    price: 96,
-    previousPrice: undefined,
-    isInFavorites: true,
-    thumbnailURL: carCardMockup,
-  },
-  {
-    id: "4",
-    name: "Nissan GT - R",
-    carType: "sport",
-    fuelCapacity: 80,
-    peopleCapacity: 2,
-    isManual: true,
-    price: 80,
-    previousPrice: 100,
-    isInFavorites: false,
-    thumbnailURL: carCardMockup,
-  },
-];
-
-const recommendationCars = [
-  ...popularCarsMockup,
-  ...popularCarsMockup,
-  ...popularCarsMockup,
-].map((carData, index) => ({ ...carData, id: String(index + 1) }));
+import { popularCarsMockup, recommendationCars } from "@/constants/mockupData";
 
 export default function Home() {
   const [recommendationCarsDisplayLimit, setRecommendationCarsDisplayLimit] =
