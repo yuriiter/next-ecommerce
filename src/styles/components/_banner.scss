@@ -66,6 +66,8 @@
     }
 
     &__section {
+        margin-top: 132px;
+        padding-top: 32px;
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: $grid-spacing;
