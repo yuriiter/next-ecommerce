@@ -5,11 +5,32 @@ import { Picker } from "@/components/Picker";
 import { SelectOption } from "@/components/Select/types";
 import { Sidebar } from "@/components/Sidebar";
 import { SwapIcon } from "@/components/svg/icons";
-import { recommendationCars } from "@/constants/mockupData";
+import { recommendationCars, sidebarInputs } from "@/constants/mockupData";
 import Head from "next/head";
-import React, { useMemo, useState } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 
 export default function SpecificCategory() {
+  const [filters, setFilters] = useState(sidebarInputs);
+
+  const onChangeFilters = useCallback(
+    (inputGroupName: string, inputName: string, newValue: boolean | number) => {
+      setFilters((prevFilters) => {
+        const groupInputs = prevFilters[inputGroupName];
+        const input = groupInputs.find(({ name }) => name === inputName);
+
+        if (!input) return prevFilters;
+
+        input.value = newValue;
+
+        return {
+          ...prevFilters,
+          [inputGroupName]: [...groupInputs],
+        };
+      });
+    },
+    []
+  );
+
   const [recommendationCarsDisplayLimit, setRecommendationCarsDisplayLimit] =
     useState(8);
 
@@ -43,8 +64,13 @@ export default function SpecificCategory() {
       </Head>
 
       <div className="category">
-        <Sidebar className="category__sidebar" />
-        inputs={}
+        <Sidebar
+          inputs={filters}
+          onChangeFilters={onChangeFilters}
+          className="category__sidebar"
+          hidden
+        />
+
         <div className="category__content">
           <section className="container pickers__section">
             <Picker
