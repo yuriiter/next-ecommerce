@@ -1,29 +1,18 @@
 import React, { ChangeEvent } from "react";
+import RangeSlider from "../RangeSlider";
 
 type SidebarRangeProps = {
   label: string;
   value: number;
-  numOfItemsOfType?: number;
-  onChange: (newValue: boolean) => void;
+  onChange: (newValue: number) => void;
 };
 
-export const SidebarRange = ({
-  label,
-  value,
-  numOfItemsOfType,
-  onChange,
-}: SidebarRangeProps) => {
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    onChange(Boolean(e.currentTarget.value));
-  };
-
+export const SidebarRange = ({ label, value, onChange }: SidebarRangeProps) => {
   return (
-    <label className="sidebar__checkbox">
-      <input type="checkbox" onChange={handleChange} />
+    <label className="">
+      <RangeSlider min={0} max={100} value={value} onChange={onChange} />
       {label}
-      {numOfItemsOfType !== undefined && (
-        <span> ({numOfItemsOfType} items)</span>
-      )}
+      <span className="sidebar__range-value">Max. ${value.toFixed(2)}</span>
     </label>
   );
 };
