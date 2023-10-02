@@ -1,0 +1,18 @@
+.car-detail {
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+    width: 100%;
+
+    &__gallery {
+        flex: 1 0 100px;
+    }
+
+    &__description {
+        flex: 1 0 100px;
+    }
+
+    &__reviews {
+        flex: 1 0 100%;
+    }
+}

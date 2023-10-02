@@ -1,5 +1,6 @@
 import { CarData } from "@/types";
 import carCardMockup from "@/assets/img/card_car_mockup.png";
+import { SidebarInputs } from "@/components/Sidebar/types";
 
 export const popularCarsMockup: CarData[] = [
   {
@@ -57,3 +58,79 @@ export const recommendationCars = [
   ...popularCarsMockup,
   ...popularCarsMockup,
 ].map((carData, index) => ({ ...carData, id: String(index + 1) }));
+
+export const sidebarInputs: SidebarInputs = {
+  type: [
+    {
+      name: "Sport",
+      numOfItemsOfType: 10,
+      value: true,
+      inputType: "switch",
+    },
+    {
+      name: "SUV",
+      numOfItemsOfType: 12,
+      value: false,
+      inputType: "switch",
+    },
+    {
+      name: "MPV",
+      numOfItemsOfType: 16,
+      value: false,
+      inputType: "switch",
+    },
+    {
+      name: "Sedan",
+      numOfItemsOfType: 20,
+      value: true,
+      inputType: "switch",
+    },
+    {
+      name: "Coupe",
+      numOfItemsOfType: 14,
+      value: false,
+      inputType: "switch",
+    },
+    {
+      name: "Hatchback",
+      numOfItemsOfType: 14,
+      value: true,
+      inputType: "switch",
+    },
+  ],
+  capacity: [
+    {
+      name: "2 Person",
+      numOfItemsOfType: 16,
+      value: false,
+      inputType: "switch",
+    },
+    {
+      name: "4 Person",
+      numOfItemsOfType: 20,
+      value: false,
+      inputType: "switch",
+    },
+    {
+      name: "6 Person",
+      numOfItemsOfType: 14,
+      value: false,
+      inputType: "switch",
+    },
+    {
+      name: "8 Person",
+      numOfItemsOfType: 14,
+      value: false,
+      inputType: "switch",
+    },
+  ],
+  price: [
+    {
+      name: "",
+      value: 1000,
+      inputType: "range",
+    },
+  ],
+};
+
+export const carMockup = popularCarsMockup[0];
