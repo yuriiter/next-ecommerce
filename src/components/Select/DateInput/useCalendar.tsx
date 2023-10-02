@@ -9,7 +9,8 @@ export const useCalendar = (
   min: Date,
   max: Date | undefined
 ) => {
-  const { dropdownOpen: isCalendarOpen } = useDropdownContext();
+  const { dropdownOpen: isCalendarOpen, setDropdownOpen: setIsCalendarOpen } =
+    useDropdownContext();
 
   const [monthPage, setMonthPage] = useState(new Date().getMonth());
   const [yearPage, setYearPage] = useState(new Date().getFullYear());
@@ -45,6 +46,7 @@ export const useCalendar = (
         const copyCurrentMonthDate = new Date(startDate);
         copyCurrentMonthDate.setDate(i);
         onChange(copyCurrentMonthDate);
+        setIsCalendarOpen(false);
       };
 
       const isSelected =
