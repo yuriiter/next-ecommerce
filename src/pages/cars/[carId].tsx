@@ -12,6 +12,7 @@ import {
   sidebarInputs,
 } from "@/constants/mockupData";
 import Head from "next/head";
+import { useRouter } from "next/router";
 import React, { useCallback, useMemo, useState } from "react";
 
 export default function SpecificCategory() {
@@ -59,6 +60,11 @@ export default function SpecificCategory() {
     setDropOffDate(pickUpDate);
     setDropOffTime(pickUpTime);
   };
+  const router = useRouter();
+  const { carId } = router.query;
+
+  console.log(carId, carMockup(carId));
+
   return (
     <>
       <Head>
@@ -78,7 +84,7 @@ export default function SpecificCategory() {
 
         <div className="category__content">
           <section className="container car-detail">
-            <CarDetail data={carMockup} />
+            <CarDetail data={carMockup(carId)} />
           </section>
           <section className="container cards__section cards__section--recommended">
             <CardsContainer
