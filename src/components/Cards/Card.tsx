@@ -4,6 +4,8 @@ import { Button } from "../Button";
 import Image from "next/image";
 import { Like } from "../Like";
 import { FuelIcon, PeopleIcon, TransmissionIcon } from "../svg/icons";
+import { makeCapacityString } from "@/utils";
+import { PriceInfo } from "../PriceInfo";
 
 type CardProps = {
   carData: CarData;
@@ -20,7 +22,7 @@ export const Card = ({ carData }: CardProps) => {
     price,
     previousPrice,
     isInFavorites,
-    thumbnailURL,
+    thumbnail,
   } = carData;
 
   return (
@@ -42,7 +44,7 @@ export const Card = ({ carData }: CardProps) => {
       <Image
         className="card__thumbnail"
         alt={`Rent car | ${name} - ${carType}`}
-        src={thumbnailURL}
+        src={thumbnail}
       />
       <div className="card__footer">
         <div className="card__info">
@@ -56,22 +58,14 @@ export const Card = ({ carData }: CardProps) => {
           </div>
           <div className="card__info-item">
             <PeopleIcon className="card__info-icon" />
-            <span>
-              {peopleCapacity === 1 ? "1 person" : `${peopleCapacity} people`}
-            </span>
+            <span>{makeCapacityString(peopleCapacity)}</span>
           </div>
         </div>
-        <div className="card__price-info">
-          <div className="card__price">
-            <span className="card__price-number">${price.toFixed(2)}/ </span>
-            <sub className="card__price-day">day</sub>
-          </div>
-          {previousPrice !== undefined && (
-            <span className="card__previous-price">
-              ${previousPrice.toFixed(2)}
-            </span>
-          )}
-        </div>
+        <PriceInfo
+          className="card__price"
+          price={price}
+          previousPrice={previousPrice}
+        />
         <Button
           size="lg"
           className="card__link"

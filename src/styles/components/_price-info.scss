@@ -1,0 +1,22 @@
+.price {
+
+    &__number {
+        @include text-style-bold-type-20;
+
+        color: $color-secondary-500;
+    }
+
+    &__day {
+        @include text-style-bold-type-14;
+
+        color: $color-secondary-300;
+    }
+
+    &__previous {
+        @include text-style-bold-type-14;
+
+        margin-top: 4px;
+        color: $color-secondary-300;
+        text-decoration: line-through;
+    }
+}
