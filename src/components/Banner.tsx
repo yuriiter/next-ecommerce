@@ -5,12 +5,16 @@ import Image from "next/image";
 import { StaticImport } from "next/dist/shared/lib/get-img-props";
 
 type BannerProps = {
-  title: string;
-  description: string;
+  title?: string;
+  description?: string;
   variant: "light" | "dark";
-  buttonText: string;
+  className?: string;
   carPicture: string | StaticImport;
-} & ({ href?: never; onClick: () => void } | { href: string; onClick?: never });
+} & (
+  | { buttonText: string; href?: never; onClick: () => void }
+  | { buttonText: string; href: string; onClick?: never }
+  | { buttonText?: never; href?: never; onClick?: never }
+);
 
 export const Banner = ({
   title,
@@ -18,11 +22,12 @@ export const Banner = ({
   variant,
   buttonText,
   carPicture,
+  className = "",
   ...rest
 }: BannerProps) => {
   const bannerVariantClassName = `banner--${variant}`;
   return (
-    <div className={`banner ${bannerVariantClassName}`}>
+    <div className={`banner ${bannerVariantClassName} ${className}`}>
       <div className="banner__bg">
         {variant === "light" ? (
           <BannerEllipseBg
@@ -45,11 +50,11 @@ export const Banner = ({
         <Button size="lg" href={rest.href} className="banner__button">
           {buttonText}
         </Button>
-      ) : (
+      ) : "onClick" in rest ? (
         <Button size="lg" onClick={rest.onClick} className="banner__button">
           {buttonText}
         </Button>
-      )}
+      ) : null}
 
       <Image
         className="banner__car-img"
