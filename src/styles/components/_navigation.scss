@@ -6,7 +6,7 @@
     padding: $nav-py 0;
     border: 1px solid rgba(#C3D4E9, 0.4);
     background-color: $color-primary-0;
-    z-index: 20;
+    z-index: 30;
     transition: transform .5s;
     transform: translateY(0);
 
@@ -15,7 +15,7 @@
     }
 
     &__placeholder {
-        margin-bottom: 124px;
+        margin-bottom: 132px;
     }
 
     &__container {
