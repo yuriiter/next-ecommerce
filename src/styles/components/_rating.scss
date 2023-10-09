@@ -1,0 +1,22 @@
+.rating {
+    display: flex;
+    gap: 4px;
+
+    &>svg {
+        width: 20px;
+        height: 20px;
+    }
+
+    &__wrapper {
+        display: flex;
+        gap: 8px;
+    }
+
+    &__num-of-votes {
+        @include text-style-medium-type-14;
+
+        color: $color-secondary-400;
+        letter-spacing: 0.28px;
+        align-self: baseline;
+    }
+}
