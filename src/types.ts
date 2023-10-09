@@ -14,21 +14,21 @@ export type Review = {
 export type CarData = {
   id: string;
   name: string;
-  title?: string;
-  subTitle?: string;
+  title: string;
+  subtitle: string;
   carType: CarType;
   fuelCapacity: number;
   peopleCapacity: number;
   isManual: boolean;
   price: number;
   previousPrice?: number;
-  isInFavorites?: boolean;
-  thumbnailURL: string;
-  photosURLs?: string[];
+  isInFavorites: boolean;
+  thumbnail: string;
+  photos: string[];
   description: string;
-  rating?: number;
-  numOfVotes?: number;
-  reviews?: Review[];
+  rating: number;
+  numOfVotes: number;
+  reviews: Review[];
 };
 
 export type LinkData = {
