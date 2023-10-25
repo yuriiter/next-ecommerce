@@ -1,0 +1,97 @@
+.car-reviews {
+    background-color: $color-primary-0;
+    border-radius: 10px;
+    padding: 24px;
+    flex: 1 0 100%;
+
+    &__title {
+        @include text-style-semibold-type-20;
+
+        letter-spacing: -0.4px;
+        color: $color-secondary-500;
+        margin-bottom: 32px;
+    }
+
+    &__count {
+        @include text-style-bold-type-14;
+
+        color: $color-primary-0;
+        background-color: $color-primary-500;
+        border-radius: 4px;
+        padding: 6px 14px;
+        text-align: center;
+        margin-left: 12px;
+    }
+
+    &__container {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+    }
+}
+
+.car-review {
+
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    &__profile {
+        display: flex;
+        gap: 16px;
+        align-items: center;
+    }
+
+    &__profile-img {
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+    }
+
+    &__profile-text {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-self: stretch;
+    }
+
+    &__full-name {
+        @include text-style-bold-type-20;
+
+        color: $color-secondary-500;
+    }
+
+    &__caption {
+        @include text-style-medium-type-14;
+
+        color: $color-secondary-300;
+    }
+
+    &__date-rating {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-self: stretch;
+        align-items: flex-end;
+    }
+
+    &__date {
+        @include text-style-medium-type-14;
+
+        color: $color-secondary-400;
+    }
+
+    &__comment {
+        @include text-style-regular-type-14;
+
+        line-height: 200%;
+        letter-spacing: -0.28px;
+        margin-top: 12px;
+        margin-left: 56px;
+        padding-left: 16px;
+        color: $color-secondary-400;
+
+    }
+}
