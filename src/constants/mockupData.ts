@@ -26,6 +26,7 @@ export const popularCarsMockup: CarData[] = [
     numOfVotes: 120,
     reviews: [
       {
+        id: "1",
         avatar: avatarPhoto,
         fullName: "John Doe",
         caption: "Awesome Car!",
@@ -35,6 +36,7 @@ export const popularCarsMockup: CarData[] = [
           "I love the Koenigsegg. It's incredibly fast and handles like a dream.",
       },
       {
+        id: "2",
         avatar: avatarPhoto,
         fullName: "Jane Smith",
         caption: "Impressive Performance",
@@ -65,6 +67,7 @@ export const popularCarsMockup: CarData[] = [
     numOfVotes: 95,
     reviews: [
       {
+        id: "3",
         avatar: avatarPhoto,
         fullName: "Michael Johnson",
         caption: "Great Performance",
@@ -74,6 +77,7 @@ export const popularCarsMockup: CarData[] = [
           "The GT-R's acceleration is mind-blowing. A true sports car experience.",
       },
       {
+        id: "4",
         avatar: avatarPhoto,
         fullName: "Sarah Adams",
         caption: "Good but Expensive",
@@ -104,6 +108,7 @@ export const popularCarsMockup: CarData[] = [
     numOfVotes: 150,
     reviews: [
       {
+        id: "5",
         avatar: avatarPhoto,
         fullName: "Emily Parker",
         caption: "Absolute Luxury",
@@ -113,6 +118,7 @@ export const popularCarsMockup: CarData[] = [
           "The Rolls-Royce is the most luxurious car I've ever driven. A true masterpiece.",
       },
       {
+        id: "6",
         avatar: avatarPhoto,
         fullName: "David Brown",
         caption: "Class and Elegance",
@@ -143,6 +149,7 @@ export const popularCarsMockup: CarData[] = [
     numOfVotes: 95,
     reviews: [
       {
+        id: "7",
         avatar: avatarPhoto,
         fullName: "Chris Johnson",
         caption: "Incredible Speed",
@@ -152,6 +159,7 @@ export const popularCarsMockup: CarData[] = [
           "The GT-R's speed and handling are outstanding. A true sports car experience.",
       },
       {
+        id: "8",
         avatar: avatarPhoto,
         fullName: "Megan Lewis",
         caption: "Pricey, but Worth It",
