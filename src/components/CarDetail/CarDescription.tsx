@@ -1,5 +1,5 @@
 import { CarData } from "@/types";
-import React from "react";
+import React, { Fragment } from "react";
 import { Like } from "../Like";
 import { Rating } from "./Rating";
 import { makeCapacityString } from "@/utils";
@@ -26,8 +26,6 @@ export const CarDescription = ({ carData }: CarDescriptionProps) => {
     numOfVotes,
   } = carData;
 
-  console.log(previousPrice);
-
   const attributes = {
     "car type": carType,
     capacity: makeCapacityString(peopleCapacity),
@@ -53,12 +51,12 @@ export const CarDescription = ({ carData }: CarDescriptionProps) => {
       <div className="car-detail__description-attributes">
         {Object.entries(attributes).map(([name, value]) => {
           return (
-            <>
+            <Fragment key={name}>
               <span className="car-detail__description-attribute car-detail__description-attribute--name">
                 {name}
               </span>
               <span className="car-detail__description-attribute">{value}</span>
-            </>
+            </Fragment>
           );
         })}
       </div>
