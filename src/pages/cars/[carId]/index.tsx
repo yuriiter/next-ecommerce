@@ -11,7 +11,7 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import React, { useCallback, useMemo, useState } from "react";
 
-export default function SpecificCategory() {
+export default function CarPage() {
   const [filters, setFilters] = useState(sidebarInputs);
 
   const onChangeFilters = useCallback(
