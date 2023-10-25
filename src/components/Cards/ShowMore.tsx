@@ -43,8 +43,6 @@ export const ShowMore = ({
     return null;
   }
 
-  console.log(renderButton);
-
   return (
     <div className={`show-more ${className}`}>
       {renderButton ? (

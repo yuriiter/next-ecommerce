@@ -28,10 +28,15 @@
         flex-direction: column;
         gap: 24px;
     }
+
+    &__show-more {
+        display: flex;
+        justify-content: center;
+        margin: 24px 0 0;
+    }
 }
 
 .car-review {
-
     &__header {
         display: flex;
         justify-content: space-between;

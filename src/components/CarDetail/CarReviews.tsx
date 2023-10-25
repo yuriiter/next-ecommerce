@@ -10,7 +10,6 @@ type CarReviewProps = {
 };
 
 const ReviewShowAll: RenderShowMoreButton = ({ onClick }) => {
-  console.log("YES");
   return (
     <ButtonWIcon
       variant="minimal"
@@ -32,7 +31,7 @@ export const CarReviews = ({ reviews }: CarReviewProps) => {
         Reviews <span className="car-reviews__count">{reviews.length}</span>
       </h4>
       <div className="car-reviews__container">
-        {reviews.map((review) => (
+        {reviews.slice(0, commentsToShowLimit).map((review) => (
           <CarReview key={review.id} review={review} />
         ))}
       </div>
@@ -44,6 +43,8 @@ export const CarReviews = ({ reviews }: CarReviewProps) => {
         itemNamePlural={""}
         itemNameSingular={""}
         renderButton={ReviewShowAll}
+        renderTotalCount={() => null}
+        className="car-reviews__show-more"
       />
     </div>
   );

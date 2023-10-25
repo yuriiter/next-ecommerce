@@ -45,6 +45,27 @@ export const popularCarsMockup: CarData[] = [
         comment:
           "The Koenigsegg is a beast on the road. However, it's not very fuel-efficient.",
       },
+      // Additional Reviews
+      {
+        id: "9",
+        avatar: avatarPhoto,
+        fullName: "Samuel Johnson",
+        caption: "Unbelievable Speed!",
+        date: new Date("2023-10-15"),
+        rating: 5,
+        comment:
+          "The Koenigsegg is a true masterpiece of engineering. It feels like you're flying on the road.",
+      },
+      {
+        id: "10",
+        avatar: avatarPhoto,
+        fullName: "Olivia White",
+        caption: "Jaw-Dropping Design",
+        date: new Date("2023-10-12"),
+        rating: 4.7,
+        comment:
+          "The design of the Koenigsegg is stunning, and the performance matches the looks. A real head-turner.",
+      },
     ],
   },
   {
@@ -85,6 +106,27 @@ export const popularCarsMockup: CarData[] = [
         rating: 4,
         comment:
           "The Nissan GT-R is a great car, but the price is on the higher side.",
+      },
+      // Additional Reviews
+      {
+        id: "11",
+        avatar: avatarPhoto,
+        fullName: "Jason Turner",
+        caption: "A Thrill to Drive",
+        date: new Date("2023-10-10"),
+        rating: 4.6,
+        comment:
+          "The Nissan GT-R provides an adrenaline rush every time you step on the gas. It's addictive!",
+      },
+      {
+        id: "12",
+        avatar: avatarPhoto,
+        fullName: "Sophia Davis",
+        caption: "Exhilarating Experience",
+        date: new Date("2023-10-08"),
+        rating: 4.5,
+        comment:
+          "Driving the GT-R is like being in a racing game. It's fast, responsive, and incredibly fun.",
       },
     ],
   },
@@ -127,6 +169,27 @@ export const popularCarsMockup: CarData[] = [
         comment:
           "The Rolls-Royce defines class and elegance. It's a status symbol.",
       },
+      // Additional Reviews
+      {
+        id: "13",
+        avatar: avatarPhoto,
+        fullName: "William Carter",
+        caption: "Unmatched Luxury",
+        date: new Date("2023-10-05"),
+        rating: 5,
+        comment:
+          "The Rolls-Royce is not just a car; it's a lifestyle statement. The level of luxury is beyond words.",
+      },
+      {
+        id: "14",
+        avatar: avatarPhoto,
+        fullName: "Emma Johnson",
+        caption: "Status and Comfort",
+        date: new Date("2023-10-02"),
+        rating: 4.9,
+        comment:
+          "Owning a Rolls-Royce makes you feel like royalty. It's the pinnacle of comfort and elegance.",
+      },
     ],
   },
   {
@@ -167,6 +230,27 @@ export const popularCarsMockup: CarData[] = [
         rating: 4.2,
         comment:
           "The Nissan GT-R is on the expensive side, but the performance justifies the cost.",
+      },
+      // Additional Reviews
+      {
+        id: "15",
+        avatar: avatarPhoto,
+        fullName: "Daniel Smith",
+        caption: "Unmatched Performance",
+        date: new Date("2023-09-28"),
+        rating: 4.6,
+        comment:
+          "The second Nissan GT-R is just as impressive as the first one. It's a legend for a reason.",
+      },
+      {
+        id: "16",
+        avatar: avatarPhoto,
+        fullName: "Lily Adams",
+        caption: "Affordable Exhilaration",
+        date: new Date("2023-09-25"),
+        rating: 4.4,
+        comment:
+          "You get a lot of performance for the price with the GT-R. It's a bargain for a sports car.",
       },
     ],
   },
