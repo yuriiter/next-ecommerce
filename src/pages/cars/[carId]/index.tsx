@@ -1,11 +1,7 @@
-import { IconButton } from "@/components/Button";
 import { CarDetail } from "@/components/CarDetail";
 import { CardsContainer } from "@/components/Cards";
 import { ShowMore } from "@/components/Cards/ShowMore";
-import { Picker } from "@/components/Picker";
-import { SelectOption } from "@/components/Select/types";
 import { Sidebar } from "@/components/Sidebar";
-import { SwapIcon } from "@/components/svg/icons";
 import {
   carMockup,
   recommendationCars,
@@ -44,22 +40,6 @@ export default function SpecificCategory() {
     return recommendationCars.slice(0, recommendationCarsDisplayLimit);
   }, [recommendationCarsDisplayLimit]);
 
-  const [pickUpLocation, setPickUpLocation] = useState<SelectOption>();
-  const [pickUpDate, setPickUpDate] = useState<Date>();
-  const [pickUpTime, setPickUpTime] = useState<SelectOption>();
-
-  const [dropOffLocation, setDropOffLocation] = useState<SelectOption>();
-  const [dropOffDate, setDropOffDate] = useState<Date>();
-  const [dropOffTime, setDropOffTime] = useState<SelectOption>();
-
-  const onSwapButtonClick = () => {
-    setPickUpLocation(dropOffLocation);
-    setPickUpDate(dropOffDate);
-    setPickUpTime(dropOffTime);
-    setDropOffLocation(pickUpLocation);
-    setDropOffDate(pickUpDate);
-    setDropOffTime(pickUpTime);
-  };
   const router = useRouter();
   const { carId } = router.query;
 
