@@ -3,7 +3,7 @@ import { StarEmpty, StarYellow } from "../svg/icons";
 
 type RatingProps = {
   rating: number;
-  numOfVotes: number;
+  numOfVotes?: number;
   className?: string;
   onVote?: (rating: number) => void | Promise<void>;
 };
@@ -33,7 +33,9 @@ export const Rating = ({
         {yellowStars}
         {emptyStars}
       </div>
-      <span className="rating__num-of-votes">{numOfVotes}+ reviews</span>
+      {numOfVotes !== undefined && (
+        <span className="rating__num-of-votes">{numOfVotes}+ reviews</span>
+      )}
     </div>
   );
 };
