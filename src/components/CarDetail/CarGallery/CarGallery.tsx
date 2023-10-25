@@ -27,7 +27,7 @@ export const CarGallery = ({
         title={title}
         subtitle={subtitle}
       />
-      {galleryItems.map((galleryItemSrc) => {
+      {galleryItems.map((galleryItemSrc, idx) => {
         const onChoose = () => setPickedImg(galleryItemSrc);
         const isPicked = pickedImg === galleryItemSrc;
         const isThumbnail = galleryItemSrc === thumbnail;
@@ -38,7 +38,7 @@ export const CarGallery = ({
             ${isPicked ? "car-detail__gallery-item--picked" : ""}
             ${isThumbnail ? "car-detail__gallery-item--thumbnail" : ""}
             `}
-            key={galleryItemSrc}
+            key={idx}
           >
             <div className="car-detail__item-wrapper">
               {isThumbnail && (
