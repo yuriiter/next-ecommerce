@@ -9,7 +9,7 @@ type CarDetailProps = {
 
 export const CarDetail = ({ data }: CarDetailProps) => {
   if (!data) return "Loading...";
-  const { title, subtitle, thumbnail, photos } = data;
+  const { title, subtitle, thumbnail, photos, reviews } = data;
 
   return (
     <div className="car-detail">
@@ -20,7 +20,7 @@ export const CarDetail = ({ data }: CarDetailProps) => {
         photos={photos}
       />
       <CarDescription carData={data} />
-      <CarReviews />
+      <CarReviews reviews={reviews} />
     </div>
   );
 };
