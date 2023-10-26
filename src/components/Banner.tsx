@@ -3,6 +3,7 @@ import { Button } from "./Button";
 import { BannerArrowBg, BannerEllipseBg } from "./svg/images";
 import Image from "next/image";
 import { StaticImport } from "next/dist/shared/lib/get-img-props";
+import { cn } from "@/utils";
 
 type BannerProps = {
   title?: string;
@@ -22,12 +23,12 @@ export const Banner = ({
   variant,
   buttonText,
   carPicture,
-  className = "",
+  className,
   ...rest
 }: BannerProps) => {
   const bannerVariantClassName = `banner--${variant}`;
   return (
-    <div className={`banner ${bannerVariantClassName} ${className}`}>
+    <div className={cn(["banner", bannerVariantClassName, className])}>
       <div className="banner__bg">
         {variant === "light" ? (
           <BannerEllipseBg

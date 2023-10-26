@@ -1,3 +1,4 @@
+import { cn } from "@/utils";
 import React from "react";
 
 type PriceInfoProps = {
@@ -9,10 +10,10 @@ type PriceInfoProps = {
 export const PriceInfo = ({
   previousPrice,
   price,
-  className = "",
+  className,
 }: PriceInfoProps) => {
   return (
-    <div className={`price__info ${className}`}>
+    <div className={cn(["price__info", className])}>
       <div className="price">
         <span className="price__number">${price.toFixed(2)}/ </span>
         <sub className="price__day">day</sub>

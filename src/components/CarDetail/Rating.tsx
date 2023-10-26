@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { StarEmpty, StarYellow } from "../svg/icons";
+import { cn } from "@/utils";
 
 type RatingProps = {
   rating: number;
@@ -11,7 +12,7 @@ type RatingProps = {
 export const Rating = ({
   rating,
   numOfVotes,
-  className = "",
+  className,
   onVote,
 }: RatingProps) => {
   const yellowStarsLen = Math.round(rating);
@@ -29,7 +30,7 @@ export const Rating = ({
 
   return (
     <div className="rating__wrapper">
-      <div className={`rating ${className}`}>
+      <div className={cn(["rating", className])}>
         {yellowStars}
         {emptyStars}
       </div>

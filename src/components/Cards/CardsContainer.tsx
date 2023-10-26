@@ -2,6 +2,7 @@ import { CarData, LinkData } from "@/types";
 import React from "react";
 import { Card } from "./Card";
 import Link from "next/link";
+import { cn } from "@/utils";
 
 type CardsContainerProps = {
   title?: string;
@@ -18,10 +19,10 @@ export const CardsContainer = ({
   horizontalScrolling = false,
   cards,
   loading = false,
-  className = "",
+  className,
 }: CardsContainerProps) => {
   return (
-    <div className={`cards ${className} ${loading ? "cards--loading" : ""}`}>
+    <div className={cn(["cards", className, loading && "cards--loading"])}>
       {(title || rightLink) && (
         <div className="cards__header">
           {title && <div className="cards__header-title">{title}</div>}

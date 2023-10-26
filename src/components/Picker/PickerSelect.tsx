@@ -1,3 +1,4 @@
+import { cn } from "@/utils";
 import React, { ReactNode } from "react";
 
 type PickerSelectProps = {
@@ -9,10 +10,10 @@ type PickerSelectProps = {
 export const PickerSelect = ({
   title,
   children,
-  className = "",
+  className,
 }: PickerSelectProps) => {
   return (
-    <div className={`picker__select ${className}`}>
+    <div className={cn(["picker__select", className])}>
       <div className="picker__select-title">{title}</div>
       {children}
     </div>

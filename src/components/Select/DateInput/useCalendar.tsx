@@ -1,5 +1,5 @@
 import { useClickOutside } from "@/hooks/useClickOutside";
-import { mod } from "@/utils";
+import { cn, mod } from "@/utils";
 import { ReactNode, useEffect, useMemo, useRef, useState } from "react";
 import { useDropdownContext } from "../useDropdownContext";
 
@@ -81,9 +81,11 @@ export const useCalendar = (
         <button
           disabled={isDisabled}
           key={`day-${i}`}
-          className={`calendar__day-container calendar__days-of-month ${
-            isSelected ? "calendar__days-of-month--selected" : ""
-          }`}
+          className={cn([
+            "calendar__day-container",
+            "calendar__days-of-month",
+            isSelected && "calendar__days-of-month--selected",
+          ])}
           onClick={handleSelect}
         >
           <span className="calendar__day">{i}</span>

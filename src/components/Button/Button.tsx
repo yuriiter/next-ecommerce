@@ -1,18 +1,24 @@
 import React from "react";
 import { ButtonProps } from "./types";
 import Link from "next/link";
+import { cn } from "@/utils";
 
 export const Button = ({
   variant = "primary",
   size = "sm",
   children,
-  className = "",
+  className,
   ...rest
 }: ButtonProps) => {
   const variantModifier = `button--${variant}`;
   const sizeModifier = `button--${size}`;
 
-  const componentClassName = `button ${variantModifier} ${sizeModifier} ${className}`;
+  const componentClassName = cn([
+    "button",
+    variantModifier,
+    sizeModifier,
+    className,
+  ]);
 
   if ("href" in rest) {
     return (

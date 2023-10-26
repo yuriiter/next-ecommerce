@@ -1,5 +1,6 @@
 import React, { Dispatch, ReactNode, SetStateAction } from "react";
 import { Button } from "../Button";
+import { cn } from "@/utils";
 
 export type RenderShowMoreButton = (props: {
   onClick: () => void;
@@ -33,7 +34,7 @@ export const ShowMore = ({
   itemNameSingular,
   renderButton,
   renderTotalCount,
-  className = "",
+  className,
 }: ShowMoreProps) => {
   const onShowMoreButtonClick = () => {
     setItemsToShowLimit((prevItemsToShowCount) => prevItemsToShowCount + step);
@@ -44,7 +45,7 @@ export const ShowMore = ({
   }
 
   return (
-    <div className={`show-more ${className}`}>
+    <div className={cn(["show-more", className])}>
       {renderButton ? (
         renderButton({ onClick: onShowMoreButtonClick, itemNamePlural })
       ) : (

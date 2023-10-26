@@ -7,3 +7,10 @@ export const clamp = (min: number, max: number, value: number) =>
 
 export const makeCapacityString = (peopleCapacity: number) =>
   peopleCapacity === 1 ? "1 person" : `${peopleCapacity} people`;
+
+export const cn = (classNames: (string | undefined | boolean)[]) =>
+  classNames
+    .filter(
+      (className) => typeof className === "string" && className.length > 0
+    )
+    .join(" ");

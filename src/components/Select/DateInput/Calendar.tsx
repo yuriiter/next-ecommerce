@@ -1,7 +1,7 @@
 import React from "react";
 import { useCalendar } from "./useCalendar";
 import { daysOfWeek, months } from "./constants";
-import { mod } from "@/utils";
+import { cn, mod } from "@/utils";
 import { ArrowDownIcon } from "@/components/svg/icons";
 
 type CalendarProps = {
@@ -19,9 +19,10 @@ export const Calendar = ({ min, max, value, onChange }: CalendarProps) => {
     <>
       <div className="calendar__selected-date">
         <div
-          className={`calendar__selected-year ${
-            !value ? "calendar__selected-year--not-selected" : ""
-          }`}
+          className={cn([
+            "calendar__selected-year",
+            !value && "calendar__selected-year--not-selected",
+          ])}
         >
           {value ? value.getFullYear() : yearPage}
         </div>

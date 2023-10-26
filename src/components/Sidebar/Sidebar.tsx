@@ -3,6 +3,7 @@ import { SidebarCheckbox } from "./SidebarCheckbox";
 import { SidebarRange } from "./SidebarRange";
 import { SidebarInputs } from "./types";
 import { SidebarInputGroup } from "./SidebarInputGroup";
+import { cn } from "@/utils";
 
 type SidebarProps = {
   className?: string;
@@ -17,19 +18,20 @@ type SidebarProps = {
 
 export const Sidebar = ({
   inputs,
-  className = "",
+  className,
   onChangeFilters,
   hidden = false,
 }: SidebarProps) => {
   return (
     <>
       <div
-        className={`sidebar__placeholder ${
-          hidden ? "sidebar__placeholder--hidden" : ""
-        }`}
+        className={cn([
+          "sidebar__placeholder",
+          hidden && "sidebar__placeholder--hidden",
+        ])}
       ></div>
       <aside
-        className={`sidebar ${className} ${hidden ? "sidebar--hidden" : ""}`}
+        className={cn(["sidebar", hidden && "sidebar--hidden", className])}
       >
         <div className="sidebar__input-groups">
           {Object.entries(inputs || {}).map(([inputGroupName, groupInputs]) => (

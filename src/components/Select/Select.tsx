@@ -16,7 +16,7 @@ export const Select = ({
   value,
   onChange,
   options,
-  className = "",
+  className,
 }: SelectProps) => {
   return (
     <SelectWrapper

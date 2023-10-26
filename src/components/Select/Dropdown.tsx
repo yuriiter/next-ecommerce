@@ -1,3 +1,4 @@
+import { cn } from "@/utils";
 import React, {
   Dispatch,
   ReactNode,
@@ -26,7 +27,7 @@ export const Dropdown = ({
   children,
   open,
   setOpen,
-  className = "",
+  className,
 }: DropdownProps) => {
   return (
     <DropdownContext.Provider
@@ -34,9 +35,11 @@ export const Dropdown = ({
     >
       <div
         tabIndex={open ? 0 : -1}
-        className={`${className} select__dropdown ${
-          open ? "select__dropdown--open" : ""
-        }`}
+        className={cn([
+          "select__dropdown",
+          open && "select__dropdown--open",
+          className,
+        ])}
       >
         {children}
       </div>

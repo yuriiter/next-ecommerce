@@ -1,4 +1,4 @@
-import { clamp } from "@/utils";
+import { clamp, cn } from "@/utils";
 import React, { useState, useRef, useEffect, DragEvent } from "react";
 
 type RangeSliderProps = {
@@ -47,7 +47,7 @@ const RangeSlider: React.FC<RangeSliderProps> = ({
 
   return (
     <div
-      className={`range-slider ${isDragging ? "range-slider--dragging" : ""}`}
+      className={cn(["range-slider", isDragging && "range-slider--dragging"])}
       ref={sliderRef}
     >
       <div

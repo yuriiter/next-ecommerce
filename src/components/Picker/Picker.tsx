@@ -5,6 +5,7 @@ import { Select } from "../Select/Select";
 import { SelectOption } from "../Select/types";
 import TimeInput from "../Select/TimeInput";
 import { Time } from "../Select/TimeInput/types";
+import { cn } from "@/utils";
 
 type PickerProps = {
   headerTitle: string;
@@ -38,7 +39,7 @@ export const Picker = ({
   setDate,
   time,
   setTime,
-  className = "",
+  className,
 }: PickerProps) => {
   const onLocationChange = (newValue: SelectOption | undefined) =>
     setLocation(newValue);
@@ -47,7 +48,7 @@ export const Picker = ({
     setTime(newValue);
 
   return (
-    <div className={`picker ${className}`}>
+    <div className={cn(["picker", className])}>
       <div className="picker__header">
         <div className={`picker__point-mark`}></div>
         <span className="picker__header-text">{headerTitle}</span>
