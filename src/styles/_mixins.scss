@@ -274,3 +274,17 @@
     line-height: 150%;
     letter-spacing: -0.03em;
 }
+
+@mixin placeholder {
+  &::placeholder {
+    @content;
+
+    opacity: 1; // For FireFox (by default, the opacity is decreased there)
+  }
+
+  &::-ms-input-placeholder,
+  &.placeholder {
+    @content;
+  }
+}
+
