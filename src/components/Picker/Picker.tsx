@@ -4,8 +4,9 @@ import { DateInput } from "../Select/DateInput/DateInput";
 import { Select } from "../Select/Select";
 import { SelectOption } from "../Select/types";
 import TimeInput from "../Select/TimeInput";
-import { Time } from "../Select/TimeInput/types";
 import { cn } from "@/utils";
+import { PointMark } from "../PointMark";
+import { locationOptions } from "@/constants/mockupData";
 
 type PickerProps = {
   headerTitle: string;
@@ -16,20 +17,8 @@ type PickerProps = {
   setDate: Dispatch<SetStateAction<Date | undefined>>;
   time: SelectOption | undefined;
   setTime: Dispatch<SetStateAction<SelectOption | undefined>>;
+  pointMarkVariant: "dark" | "light";
 };
-
-const locationOptions: SelectOption[] = [
-  "New York",
-  "Los Angeles",
-  "Chicago",
-  "Houston",
-  "Philadelphia",
-  "Phoenix",
-  "San Antonio",
-  "San Diego",
-  "Dallas",
-  "San Jose",
-].map((city) => ({ value: city, label: city } as SelectOption));
 
 export const Picker = ({
   headerTitle,
@@ -40,6 +29,7 @@ export const Picker = ({
   time,
   setTime,
   className,
+  pointMarkVariant,
 }: PickerProps) => {
   const onLocationChange = (newValue: SelectOption | undefined) =>
     setLocation(newValue);
@@ -50,7 +40,7 @@ export const Picker = ({
   return (
     <div className={cn(["picker", className])}>
       <div className="picker__header">
-        <div className={`picker__point-mark`}></div>
+        <PointMark variant={pointMarkVariant} />
         <span className="picker__header-text">{headerTitle}</span>
       </div>
       <div className="picker__selects">

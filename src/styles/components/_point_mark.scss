@@ -1,0 +1,40 @@
+.point-mark {
+  position: relative;
+  padding: 4px;
+  background-color: rgba($color-primary-500, 0.3);
+  border-radius: 100000px;
+  width: 16px;
+  height: 16px;
+
+  &--light {
+    background-color: rgba(#54a6ff, 0.3);
+
+    &:before {
+      background-color: #54a6ff;
+    }
+  }
+
+  &--empty {
+    width: 20px;
+    height: 20px;
+    background-color: transparent;
+    border: 1.5px solid $color-secondary-300;
+
+    &:before {
+      display: none;
+    }
+  }
+
+  &:before {
+    content: "";
+    position: absolute;
+    border-radius: 100000px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 8px;
+    height: 8px;
+    background-color: $color-primary-500;
+  }
+}
+

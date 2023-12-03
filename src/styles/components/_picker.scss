@@ -12,16 +12,6 @@
     padding: 24px 48px;
     border-radius: 10px;
 
-    &--drop-off {
-        .picker__point-mark {
-            background-color: rgba(#54A6FF, 0.3);
-
-            &:before {
-                background-color: #54A6FF;
-            }
-        }
-    }
-
     &__swap-button {
         position: absolute;
         top: 50%;
@@ -51,27 +41,6 @@
 
     &__header-text {
         text-transform: capitalize;
-    }
-
-    &__point-mark {
-        position: relative;
-        padding: 4px;
-        background-color: rgba($color-primary-500, 0.3);
-        border-radius: 100000px;
-        width: 16px;
-        height: 16px;
-
-        &:before {
-            content: '';
-            position: absolute;
-            border-radius: 100000px;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-            width: 8px;
-            height: 8px;
-            background-color: $color-primary-500;
-        }
     }
 
     &__selects {
