@@ -6,11 +6,18 @@ import React, {
   createContext,
 } from "react";
 
+type DropdownPlacement =
+  | "left-top"
+  | "right-top"
+  | "right-bottom"
+  | "left-bottom";
+
 type DropdownProps = {
   children: ReactNode;
   open: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;
   className?: string;
+  placement?: DropdownPlacement;
 };
 
 type DropDownContextType = {
@@ -28,6 +35,7 @@ export const Dropdown = ({
   open,
   setOpen,
   className,
+  placement = "right-bottom",
 }: DropdownProps) => {
   return (
     <DropdownContext.Provider
@@ -38,6 +46,7 @@ export const Dropdown = ({
         className={cn([
           "select__dropdown",
           open && "select__dropdown--open",
+          `select__dropdown--${placement}`,
           className,
         ])}
       >

@@ -31,11 +31,33 @@
   }
 
   &__dropdown {
-    transform-origin: 0 0;
-    pointer-events: none;
-    position: absolute;
+    transform-origin: left top;
     top: calc(100% + 10px);
     left: 0;
+
+    &--left-top {
+      transform-origin: left bottom;
+      bottom: calc(100% + 10px);
+      left: auto;
+      top: auto;
+    }
+
+    &--right-top {
+      transform-origin: right bottom;
+      bottom: calc(100% + 10px);
+      right: 0;
+      left: auto;
+      top: auto;
+    }
+
+    &--right-bottom {
+      transform-origin: right top;
+      right: 0;
+      left: auto;
+    }
+
+    pointer-events: none;
+    position: absolute;
     z-index: 1;
     -webkit-box-shadow: -1px 4px 4px 1px rgba(0, 0, 0, 0.33);
     -moz-box-shadow: -1px 4px 4px 1px rgba(0, 0, 0, 0.33);
