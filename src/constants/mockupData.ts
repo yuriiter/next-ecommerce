@@ -4,6 +4,7 @@ import avatarPhoto from "@/assets/img/avatar.jpg";
 import carGallery1 from "@/assets/img/car_gallery_1.jpeg";
 import carGallery2 from "@/assets/img/car_gallery_2.jpeg";
 import carCardMockup from "@/assets/img/card_car_mockup.png";
+import { SelectOption } from "@/components/Select/types";
 
 export const popularCarsMockup: CarData[] = [
   {
@@ -338,3 +339,16 @@ export const sidebarInputs: SidebarInputs = {
 
 export const carMockup = (id: string) =>
   popularCarsMockup.find(({ id: carId }) => carId === id);
+
+export const locationOptions: SelectOption[] = [
+  "New York",
+  "Los Angeles",
+  "Chicago",
+  "Houston",
+  "Philadelphia",
+  "Phoenix",
+  "San Antonio",
+  "San Diego",
+  "Dallas",
+  "San Jose",
+];

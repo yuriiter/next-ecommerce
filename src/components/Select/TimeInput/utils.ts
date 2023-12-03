@@ -26,11 +26,11 @@ export const stringAsTime = (str: string) => {
 
 export const timeAsSelectOption = (time: Time) => {
   const timeString = timeAsString(time);
-  const timeAmPM = timeString.split(" ");
+  const timeAmPm = timeString.split(" ");
   return {
     value: timeString,
-    label: timeAmPM[0],
-    icon: timeAmPM[1],
+    label: timeAmPm[0],
+    icon: timeAmPm[1],
   } as SelectOption;
 };
 
@@ -38,7 +38,7 @@ export const generateTimeOptions = () => {
   const amTimes: Time[] = [];
   const pmTimes: Time[] = [];
 
-  for (let hr = 1; hr <= 12; hr++) {
+  for (let hr = 0; hr < 12; hr++) {
     for (let min = 0; min < 60; min += 30) {
       const amTime: Time = {
         hr,

@@ -4,6 +4,7 @@ import { CarPickedImg } from "./CarPickedImg";
 import { CarData } from "@/types";
 import { Banner } from "@/components/Banner";
 import { BannerArrowBg } from "@/components/svg/images";
+import { CarGalleryItem } from "./CarGalleryItem";
 
 type CarGalleryProps = Pick<
   CarData,
@@ -32,29 +33,13 @@ export const CarGallery = ({
         const isPicked = pickedImg === galleryItemSrc;
         const isThumbnail = galleryItemSrc === thumbnail;
         return (
-          <div
-            onClick={onChoose}
-            className={`car-detail__gallery-item
-            ${isPicked ? "car-detail__gallery-item--picked" : ""}
-            ${isThumbnail ? "car-detail__gallery-item--thumbnail" : ""}
-            `}
+          <CarGalleryItem
             key={idx}
-          >
-            <div className="car-detail__item-wrapper">
-              {isThumbnail && (
-                <BannerArrowBg
-                  className="car-detail__gallery-item-bg"
-                  viewBox="0 0 1920 1080"
-                  preserveAspectRatio="xMinYMin slice"
-                />
-              )}
-              <Image
-                className="car-detail__item-img"
-                src={galleryItemSrc}
-                alt={`Rent car - ${title}`}
-              />
-            </div>
-          </div>
+            isThumbnail={isThumbnail}
+            isPicked={isPicked}
+            src={galleryItemSrc}
+            title={title}
+          />
         );
       })}
     </div>

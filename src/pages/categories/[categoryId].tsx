@@ -81,6 +81,7 @@ export default function SpecificCategory() {
               time={pickUpTime}
               setTime={setPickUpTime}
               headerTitle="Pick - up"
+              pointMarkVariant="dark"
             />
             <IconButton
               size="lg"
@@ -99,6 +100,7 @@ export default function SpecificCategory() {
               setTime={setDropOffTime}
               headerTitle="drop - off"
               className="picker--drop-off"
+              pointMarkVariant="light"
             />
           </section>
           <section className="container cards__section cards__section--recommended">

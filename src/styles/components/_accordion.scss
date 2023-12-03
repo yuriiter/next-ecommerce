@@ -1,0 +1,46 @@
+.accordion {
+  border-radius: 10px;
+  background-color: #f6f7f9;
+  overflow-y: hidden;
+  transition:
+    padding 0.3s,
+    max-height 0.3s;
+  padding: 16px;
+
+  &__summary,
+  &__detail {
+    transition:
+      padding 0.3s,
+      max-height 0.3s;
+  }
+
+  &__summary {
+    cursor: pointer;
+    width: 100%;
+    padding: 16px;
+    display: flex;
+    gap: 15px;
+    align-items: center;
+  }
+
+  &__detail {
+    max-height: 0;
+    overflow-y: hidden;
+    padding: 0 16px;
+  }
+
+  .point-mark--empty {
+    margin-right: -4px;
+  }
+
+  &--expanded {
+    .accordion__summary,
+    .accordion__detail {
+      padding: 16px;
+    }
+
+    .accordion__detail {
+      max-height: 400px;
+    }
+  }
+}

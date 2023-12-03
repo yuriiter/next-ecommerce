@@ -4,3 +4,5 @@ export const dateToString = (date: Date) =>
     day: "numeric",
     year: "numeric",
   });
+
+export const stringToDate = (dateAsString: string) => new Date(dateAsString);

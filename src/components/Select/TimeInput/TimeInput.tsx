@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import { generateTimeOptions, timeAsSelectOption } from "./utils";
+import { generateTimeOptions, timeAsSelectOption, timeAsString } from "./utils";
 import { Select } from "../Select";
 import { SelectOption } from "../types";
 
@@ -7,12 +7,18 @@ type TimeInputProps = {
   placeholder?: string;
   value: SelectOption | undefined;
   onChange: (newValue: SelectOption) => void;
+  className?: string;
 };
 
-export const TimeInput = ({ placeholder, value, onChange }: TimeInputProps) => {
+export const TimeInput = ({
+  placeholder,
+  value,
+  onChange,
+  className,
+}: TimeInputProps) => {
   const timeOptions: SelectOption[] = useMemo(
-    () => generateTimeOptions().map((value) => timeAsSelectOption(value)),
-    []
+    () => generateTimeOptions().map((value) => timeAsString(value)),
+    [],
   );
 
   const handleChange = (selectedOption: SelectOption | undefined) => {
@@ -22,6 +28,7 @@ export const TimeInput = ({ placeholder, value, onChange }: TimeInputProps) => {
 
   return (
     <Select
+      className={className}
       options={timeOptions}
       onChange={handleChange}
       value={value}

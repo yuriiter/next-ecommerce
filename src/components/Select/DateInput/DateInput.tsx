@@ -9,6 +9,7 @@ type DateInputProps = {
   max?: Date;
   value: Date | undefined;
   onChange: (newValue: Date) => void;
+  className?: string;
 };
 
 export const DateInput = ({
@@ -17,11 +18,16 @@ export const DateInput = ({
   max,
   value,
   onChange,
+  className,
 }: DateInputProps) => {
   const valueAsString = value ? dateToString(value) : value;
 
   return (
-    <SelectWrapper value={valueAsString} placeholder={placeholder}>
+    <SelectWrapper
+      className={className}
+      value={valueAsString}
+      placeholder={placeholder}
+    >
       <Calendar min={min} max={max} value={value} onChange={onChange} />
     </SelectWrapper>
   );

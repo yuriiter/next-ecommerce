@@ -72,6 +72,7 @@ export default function Home() {
           time={pickUpTime}
           setTime={setPickUpTime}
           headerTitle="Pick - up"
+          pointMarkVariant="dark"
         />
         <div className="pickers__placeholder"></div>
         <IconButton
@@ -90,6 +91,7 @@ export default function Home() {
           setTime={setDropOffTime}
           headerTitle="drop - off"
           className="picker--drop-off"
+          pointMarkVariant="light"
         />
       </section>
       <section className="container cards__section">

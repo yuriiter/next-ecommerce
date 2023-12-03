@@ -1,8 +1,9 @@
-import React, { ReactNode, useRef, useState } from "react";
+import React, { ReactNode, useCallback, useRef, useState } from "react";
 import { ArrowDownIcon } from "../svg/icons";
 import { Dropdown } from "./Dropdown";
 import { useClickOutside } from "@/hooks/useClickOutside";
 import { cn } from "@/utils";
+import { useKeyEvent } from "@/hooks/useKeyEvent";
 
 type SelectWrapperProps = {
   value: string | undefined;
@@ -20,11 +21,18 @@ export const SelectWrapper = ({
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const selectWrapperRef = useRef<HTMLDivElement>(null);
   useClickOutside(selectWrapperRef, () => setIsDropdownOpen(false));
-
   const toggleDropdownOpen = () => setIsDropdownOpen((prev) => !prev);
+  const closeDropdown = useCallback(() => {
+    setIsDropdownOpen(false);
+  }, []);
+
+  useKeyEvent("Escape", closeDropdown);
 
   return (
-    <div ref={selectWrapperRef} className={cn(["select", className])}>
+    <div
+      ref={selectWrapperRef}
+      className={cn(["select", isDropdownOpen && "select--open", className])}
+    >
       <div className="select__data" onClick={toggleDropdownOpen}>
         {value && <span className="select__value">{value}</span>}
         {!value && placeholder && (

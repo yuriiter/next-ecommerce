@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 
-type CarType = "SUV" | "sport" | "hatchback" | "sedan";
+export type CarType = "SUV" | "sport" | "hatchback" | "sedan";
 
 export type Review = {
   id: string;

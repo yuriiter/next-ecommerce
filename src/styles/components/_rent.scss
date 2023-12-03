@@ -1,0 +1,320 @@
+.rent {
+  padding: 32px 0;
+  display: flex;
+  gap: 32px;
+
+  &__steps {
+    flex-grow: 71;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+}
+
+.summary {
+  padding: 24px;
+  background-color: $color-primary-0;
+  border-radius: 10px;
+  position: sticky;
+  top: 164px;
+  transition: top 0.5s;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  width: 492px;
+
+  &__wrapper {
+    flex-grow: 3;
+    position: relative;
+
+    &--to-top .summary {
+      top: 32px;
+    }
+  }
+
+  &__title {
+    @include text-style-bold-type-20;
+
+    color: $color-secondary-500;
+    margin-bottom: 4px;
+  }
+
+  &__subtitle {
+    @include text-style-medium-type-14;
+
+    color: $color-secondary-300;
+  }
+
+  &__car-info {
+    display: flex;
+    gap: 24px;
+    align-items: center;
+  }
+
+  &__car-img {
+    width: 132px;
+    height: 108px;
+    flex: 0 1 auto;
+  }
+
+  &__car-title {
+    @include text-style-bold-type-32;
+
+    overflow: hidden;
+    white-space: nowrap;
+    max-width: 290px;
+    color: $color-secondary-500;
+    text-overflow: ellipsis;
+    margin-bottom: 8px;
+  }
+
+  &__car-divider {
+    width: 100%;
+    height: 1px;
+  }
+
+  &__car-price {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  &__footer {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__footer-price {
+    @include text-style-bold-type-32;
+
+    color: $color-secondary-500;
+  }
+}
+
+.car-price {
+  &__item {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__name {
+    @include text-style-medium-type-16;
+
+    color: $color-secondary-300;
+  }
+
+  &__value {
+    @include text-style-semibold-type-16;
+
+    color: $color-secondary-500;
+  }
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  padding: 24px;
+  background-color: $color-primary-0;
+  border-radius: 10px;
+  width: 100%;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  &__title {
+    @include text-style-bold-type-20;
+
+    color: $color-secondary-500;
+  }
+
+  &__subtitle,
+  &__index {
+    @include text-style-medium-type-14;
+
+    color: $color-secondary-300;
+  }
+}
+
+.billing-info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px 32px;
+  width: 100%;
+
+  .step-input {
+    flex: 1 0 40%;
+  }
+}
+
+.rental-info {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+
+  &__part {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  &__part-inputs {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px 32px;
+  }
+
+  &__part-header {
+    @include text-style-semibold-type-16;
+
+    color: $color-secondary-500;
+    letter-spacing: -0.32px;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+}
+
+.step-input {
+  &__error {
+    @include text-style-medium-type-14;
+
+    position: relative;
+    top: 15px;
+    color: $color-error-600;
+    line-height: 0;
+    margin-bottom: 5px;
+    max-width: 100%;
+    word-break: break-all;
+  }
+
+  &__label {
+    @include text-style-bold-type-16;
+
+    color: $color-secondary-500;
+    margin-bottom: 16px;
+    display: block;
+  }
+
+  &__input-wrapper {
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+    background-color: #f6f7f9;
+
+    &:has(.step-input__input:focus) {
+      outline: 2px solid #000;
+    }
+  }
+
+  &__self-submit {
+    @include text-style-semibold-type-16;
+
+    color: $color-secondary-500;
+    flex-shrink: 0;
+    align-self: stretch;
+    border-radius: 10px;
+  }
+
+  &__input {
+    @include text-style-medium-type-14;
+
+    @include placeholder {
+      color: $color-secondary-300;
+    }
+
+    &:focus {
+      outline: none;
+    }
+
+    &:is(.accordion .step-input__input) {
+      background-color: $color-primary-0;
+    }
+
+    .select__data {
+      background-color: #f6f7f9;
+      padding: 16px 32px;
+      border-radius: 10px;
+    }
+
+    &.select--open .select__data {
+      outline: 2px solid #000;
+    }
+
+    &:not(:has(.select__data)) {
+      background-color: #f6f7f9;
+      padding: 16px 32px;
+      border-radius: 10px;
+    }
+
+    display: block;
+    width: 100%;
+  }
+}
+
+.payment-method {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+
+  &__summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-grow: 1;
+  }
+
+  &__summary-title {
+    @include text-style-semibold-type-16;
+
+    letter-spacing: -0.32px;
+    color: $color-secondary-500;
+  }
+
+  &__summary-logo {
+    width: 100px;
+    height: 24px;
+  }
+}
+
+.confirmation {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+
+  &__submit {
+    padding: 16px 32px;
+    border-radius: 10px;
+    margin: 32px 0;
+  }
+
+  &__switch-wrapper {
+    border-radius: 10px;
+    background-color: #f6f7f9;
+    padding: 0 32px;
+  }
+}
+
+.safety-caption {
+  &__icon {
+    width: 32px;
+    height: 32px;
+  }
+
+  &__title {
+    @include text-style-semibold-type-16;
+
+    color: $color-secondary-500;
+    margin: 16px 0 8px;
+  }
+
+  &__subtitle {
+    @include text-style-medium-type-14;
+
+    color: $color-secondary-300;
+    margin: 8px 0 0;
+  }
+}

@@ -1,95 +1,103 @@
 .select {
+  position: relative;
+  cursor: pointer;
+
+  &__placeholder {
+    @include text-style-medium-type-14;
+
+    color: $color-secondary-300;
+    flex-grow: 1;
+    user-select: none;
     position: relative;
-    cursor: pointer;
+  }
 
-    &__placeholder {
-        @include text-style-medium-type-14;
+  &__data {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
 
-        color: $color-secondary-300;
-        flex-grow: 1;
-        user-select: none;
+  &__arrow-down {
+    width: 14px;
+    height: 14px;
+    color: $color-secondary-500;
+    transition: transform 0.2s;
+    transform: rotateZ(0);
+    margin-left: auto;
+
+    &--rotate {
+      transform: rotateZ(-180deg);
+    }
+  }
+
+  &__dropdown {
+    transform-origin: 0 0;
+    pointer-events: none;
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 0;
+    z-index: 1;
+    -webkit-box-shadow: -1px 4px 4px 1px rgba(0, 0, 0, 0.33);
+    -moz-box-shadow: -1px 4px 4px 1px rgba(0, 0, 0, 0.33);
+    box-shadow: -1px 4px 4px 1px rgba(0, 0, 0, 0.33);
+    border-radius: 5px;
+    background-color: $color-primary-0;
+    width: 280px;
+    animation: disappear 0.1s ease-out forwards;
+
+    &--open {
+      pointer-events: all;
+      display: block;
+      animation: appear 0.08s ease-out forwards;
+    }
+  }
+
+  &__value {
+    @include text-style-bold-type-14;
+  }
+
+  &__option-wrapper {
+    padding: 10px 14px;
+    width: 100%;
+
+    &:hover {
+      background-color: rgba($color-secondary-200, 0.3);
     }
 
-    &__data {
-        display: flex;
-        align-items: center;
-        gap: 8px;
+    &:active {
+      background-color: rgba($color-secondary-200, 0.5);
     }
 
-    &__arrow-down {
-        width: 14px;
-        height: 14px;
-        color: $color-secondary-500;
-        transition: transform .2s;
-        transform: rotateZ(0);
-        margin-left: auto;
-
-        &--rotate {
-            transform: rotateZ(-180deg);
-        }
+    &--selected {
+      background-color: rgba($color-secondary-200, 0.5);
     }
 
-    &__dropdown {
-        transform-origin: 0 0;
-        pointer-events: none;
-        position: absolute;
-        top: calc(100% + 10px);
-        left: 0;
-        -webkit-box-shadow: -1px 4px 4px 1px rgba(0, 0, 0, 0.33);
-        -moz-box-shadow: -1px 4px 4px 1px rgba(0, 0, 0, 0.33);
-        box-shadow: -1px 4px 4px 1px rgba(0, 0, 0, 0.33);
-        border-radius: 5px;
-        background-color: $color-primary-0;
-        width: 280px;
-        animation: disappear .1s ease-out forwards;
-
-        &--open {
-            pointer-events: all;
-            display: block;
-            animation: appear .08s ease-out forwards;
-        }
+    &--disabled {
+      cursor: default;
+      color: $color-secondary-300;
     }
+  }
 
-    &__value {
-        @include text-style-bold-type-14;
-    }
+  &__option {
+    @include text-style-regular-type-14;
 
-    &__option-wrapper {
-        padding: 10px 14px;
-        width: 100%;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
 
-        &:hover {
-            background-color: rgba($color-secondary-200, 0.3);
-        }
-
-        &:active {
-            background-color: rgba($color-secondary-200, 0.5);
-        }
-
-        &--selected {
-            background-color: rgba($color-secondary-200, 0.5);
-        }
-    }
-
-    &__option {
-        @include text-style-regular-type-14;
-
-        user-select: none;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 10px;
-        width: 100%;
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-    }
-
-    &__options-wrapper {
-        display: flex;
-        flex-direction: column;
-        gap: 2px;
-        max-height: 300px;
-        overflow-y: scroll;
-    }
+  &__options-wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    max-height: 300px;
+    overflow-y: scroll;
+  }
 }

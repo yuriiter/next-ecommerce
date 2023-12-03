@@ -20,7 +20,7 @@ export const Select = ({
 }: SelectProps) => {
   return (
     <SelectWrapper
-      value={value?.value}
+      value={typeof value === "string" ? value : value?.value}
       placeholder={placeholder}
       className={className}
     >
@@ -29,7 +29,7 @@ export const Select = ({
           const selectOption = () => onChange(option);
           return (
             <Option
-              key={option.value}
+              key={typeof option === "string" ? option : option.value}
               isSelected={option === value}
               option={option}
               onClick={selectOption}

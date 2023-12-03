@@ -1,0 +1,42 @@
+.switch {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  margin: 8px 0;
+  padding: 8px 0;
+
+  &--checked {
+    .switch__checkbox:before {
+      background-color: $color-primary-500;
+    }
+  }
+
+  &__checkbox {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    border-radius: 2px;
+    border: 2px solid $color-secondary-300;
+
+    &:before {
+      $checkmark-size: calc(100% - 4px);
+      content: "";
+      border-radius: 1px;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: $checkmark-size;
+      height: $checkmark-size;
+      transition: 0.1s background-color;
+    }
+  }
+
+  &__label {
+    @include text-style-semibold-type-16;
+
+    user-select: none;
+    color: #1f2544;
+  }
+}
