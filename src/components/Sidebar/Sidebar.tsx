@@ -26,7 +26,7 @@ export const Sidebar = ({
           className,
         ])}
       >
-        <div className="sidebar__input-groups">{children}</div>
+        <div className="sidebar__inner-wrapper">{children}</div>
       </aside>
     </>
   );

@@ -1,9 +1,15 @@
 import Head from "next/head";
 import { Sidebar } from "../Sidebar";
 import { Navigation } from "./Navigation";
-import { PropsWithChildren } from "react";
+import { PropsWithChildren, ReactNode } from "react";
+import { cn } from "@/utils";
 
-export const AccountLayout = ({ children }: PropsWithChildren) => {
+type AccountLayoutProps = {
+  className?: string;
+  children?: ReactNode;
+};
+
+export const AccountLayout = ({ children, className }: AccountLayoutProps) => {
   return (
     <>
       <Head>
@@ -13,7 +19,7 @@ export const AccountLayout = ({ children }: PropsWithChildren) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className="with-sidebar">
+      <div className={cn(["with-sidebar", "account", className])}>
         <Sidebar>
           <Navigation />
         </Sidebar>

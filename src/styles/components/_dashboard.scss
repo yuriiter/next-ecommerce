@@ -1,4 +1,6 @@
 .dashboard {
+  height: 100%;
+
   &__navigation {
     display: flex;
     flex-direction: column;
@@ -46,4 +48,3 @@
     }
   }
 }
-

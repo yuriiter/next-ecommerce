@@ -280,55 +280,53 @@
     regular: 400,
     medium: 500,
     semibold: 600,
-    bold: 700
+    bold: 700,
   );
 
-$fontSize: (
-  12: 0.75rem,
-  14: 0.875rem,
-  16: 1rem,
-  18: 1.125rem,
-  20: 1.25rem,
-  24: 1.5rem,
-  32: 2rem,
-  36: 2.25rem,
-  40: 2.5rem,
-  72: 4.5rem
-);
+  $fontSize: (
+    12: 0.75rem,
+    14: 0.875rem,
+    16: 1rem,
+    18: 1.125rem,
+    20: 1.25rem,
+    24: 1.5rem,
+    32: 2rem,
+    36: 2.25rem,
+    40: 2.5rem,
+    72: 4.5rem,
+  );
 
-$lineHeight: 150%;
-$letterSpacing: -0.02em;
+  $lineHeight: 150%;
+  $letterSpacing: -0.02em;
 
-@if map-has-key($fontWeight, $weight) and map-has-key($fontSize, $size) {
-  font-size: map-get($fontSize, $size);
-  font-weight: map-get($fontWeight, $weight);
-  line-height: $lineHeight;
-  letter-spacing: $letterSpacing;
-
-  @if $weight =='bold' {
-    $letterSpacing: -0.03em;
-    letter-spacing: $letterSpacing;
-  }
-
-  @if $size ==12 {
-    $letterSpacing: -0.01em;
-    letter-spacing: $letterSpacing;
-  }
-
-  @if $size >24 {
-    $lineHeight: 150%;
+  @if map-has-key($fontWeight, $weight) and map-has-key($fontSize, $size) {
+    font-size: map-get($fontSize, $size);
+    font-weight: map-get($fontWeight, $weight);
     line-height: $lineHeight;
-  }
-
-  @if $size >32 {
-    $letterSpacing: -0.03em;
     letter-spacing: $letterSpacing;
-  }
-}
 
-@else {
-  @error "Invalid weight or size specified for text style.";
-}
+    @if $weight == "bold" {
+      $letterSpacing: -0.03em;
+      letter-spacing: $letterSpacing;
+    }
+
+    @if $size ==12 {
+      $letterSpacing: -0.01em;
+      letter-spacing: $letterSpacing;
+    }
+
+    @if $size >24 {
+      $lineHeight: 150%;
+      line-height: $lineHeight;
+    }
+
+    @if $size >32 {
+      $letterSpacing: -0.03em;
+      letter-spacing: $letterSpacing;
+    }
+  } @else {
+    @error "Invalid weight or size specified for text style.";
+  }
 }
 
 @mixin placeholder {
@@ -343,3 +341,36 @@ $letterSpacing: -0.02em;
     @content;
   }
 }
+
+@mixin scrollbar(
+  $width: 8px,
+  $background-color: #f0f0f0,
+  $thumb-color: #c0c0c0,
+  $hover-thumb-color: #a0a0a0
+) {
+  &::-webkit-scrollbar {
+    width: $width;
+    background-color: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: transparent;
+    border-radius: 10px;
+    transition: background-color 0.3s ease;
+  }
+
+  &:hover {
+    &::-webkit-scrollbar {
+      background-color: $background-color;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: $thumb-color;
+
+      &:hover {
+        background-color: $hover-thumb-color;
+      }
+    }
+  }
+}
+

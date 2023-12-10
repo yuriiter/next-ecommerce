@@ -3,19 +3,29 @@ body:has(.dashboard) {
 }
 
 .sidebar {
-  height: calc(100vh - $nav-height);
   width: 360px;
   background-color: $color-primary-0;
   align-self: stretch;
   position: sticky;
   top: $nav-height;
+  height: calc(100vh - $nav-height);
+  max-height: 100%;
   transition:
-    transform 0.5s,
+    top 0.5s,
     width 0.5s,
-    height 0.5s;
+    padding-top 0.5s,
+    transform 0.5s;
 
+  &:after {
+    content: "";
+    width: 100%;
+    height: $nav-height;
+    background-color: inherit;
+    position: absolute;
+    top: 100%;
+  }
   &.to-top--active {
-    height: 100vh;
+    // transform: translateY(0);
   }
 
   &--hidden {
@@ -46,8 +56,12 @@ body:has(.dashboard) {
     }
   }
 
-  &__input-groups {
+  &__inner-wrapper {
+    @include scrollbar;
+
     display: flex;
+    width: 360px;
+    height: 100%;
     padding: 32px;
     flex-direction: column;
     gap: 56px;
@@ -92,7 +106,7 @@ body:has(.dashboard) {
     display: none;
 
     &:checked {
-      &~.sidebar__checkmark {
+      & ~ .sidebar__checkmark {
         display: none;
 
         &--checked {
@@ -115,16 +129,10 @@ body:has(.dashboard) {
 
 .with-sidebar {
   display: flex;
+  max-height: 100%;
 
   &__content {
     flex-grow: 1;
   }
 }
 
-.with-sidebar {
-  display: flex;
-
-  &__content {
-    flex-grow: 1;
-  }
-}
