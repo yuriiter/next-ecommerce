@@ -1,5 +1,5 @@
+import RangeSlider from "@/components/RangeSlider";
 import React, { ChangeEvent } from "react";
-import RangeSlider from "../RangeSlider";
 
 type SidebarRangeProps = {
   label: string;

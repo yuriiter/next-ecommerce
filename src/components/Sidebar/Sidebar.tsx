@@ -1,48 +1,32 @@
-import React from "react";
-import { SidebarCheckbox } from "./SidebarCheckbox";
-import { SidebarRange } from "./SidebarRange";
-import { SidebarInputs } from "./types";
-import { SidebarInputGroup } from "./SidebarInputGroup";
 import { cn } from "@/utils";
+import { ReactNode } from "react";
+import { useHideNavigation } from "../Layout/Navigation/useHideNavigation";
 
 type SidebarProps = {
-  className?: string;
-  inputs: SidebarInputs;
-  onChangeFilters: (
-    inputGroupName: string,
-    inputName: string,
-    newValue: boolean | number
-  ) => void;
+  children: ReactNode;
   hidden?: boolean;
+  className?: string;
 };
 
 export const Sidebar = ({
-  inputs,
-  className,
-  onChangeFilters,
+  children,
   hidden = false,
+  className,
 }: SidebarProps) => {
+  const translateToTop = useHideNavigation();
+  console.log("2", hidden);
+
   return (
     <>
-      <div
-        className={cn([
-          "sidebar__placeholder",
-          hidden && "sidebar__placeholder--hidden",
-        ])}
-      ></div>
       <aside
-        className={cn(["sidebar", hidden && "sidebar--hidden", className])}
+        className={cn([
+          "sidebar",
+          hidden && "sidebar--hidden",
+          translateToTop && "to-top--active",
+          className,
+        ])}
       >
-        <div className="sidebar__input-groups">
-          {Object.entries(inputs || {}).map(([inputGroupName, groupInputs]) => (
-            <SidebarInputGroup
-              key={inputGroupName}
-              inputGroupName={inputGroupName}
-              groupInputs={groupInputs}
-              onChangeFilters={onChangeFilters}
-            />
-          ))}
-        </div>
+        <div className="sidebar__input-groups">{children}</div>
       </aside>
     </>
   );

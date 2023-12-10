@@ -1,5 +1,5 @@
 import React, { useCallback } from "react";
-import { SidebarInput } from "./types";
+import { SidebarInput } from "../types";
 import { SidebarCheckbox } from "./SidebarCheckbox";
 import { SidebarRange } from "./SidebarRange";
 
@@ -9,7 +9,7 @@ type SidebarInputGroupProps = {
   onChangeFilters: (
     inputGroupName: string,
     inputName: string,
-    newValue: boolean | number
+    newValue: boolean | number,
   ) => void;
 };
 
