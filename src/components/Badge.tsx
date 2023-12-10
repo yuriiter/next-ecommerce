@@ -1,3 +1,4 @@
+import { cn } from "@/utils";
 import React, { ReactNode } from "react";
 
 type BadgeProps = {
@@ -16,11 +17,12 @@ export const Badge = ({
   overRoundIcon = true,
 }: BadgeProps) => {
   return (
-    <div className={`badge  ${animated ? "badge--animated" : ""}`}>
+    <div className={cn(["badge", animated && "badge--animated"])}>
       <div
-        className={`badge__content ${
-          overRoundIcon ? "badge__content--over-round" : ""
-        }`}
+        className={cn([
+          "badge__content",
+          overRoundIcon && "badge__content--over-round",
+        ])}
       >
         {value ? (value > max ? `${max - 1}+` : value) : null}
       </div>
