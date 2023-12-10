@@ -1,8 +1,12 @@
 import React from "react";
 import { Logo } from "../Logo";
 import Link from "next/link";
+import { useIsOnRoute } from "@/hooks/useIsOnRoute";
 
 export const Footer = () => {
+  const hide = useIsOnRoute(["/account"]);
+
+  if (hide) return <></>;
   return (
     <footer className="footer">
       <div className="container">
