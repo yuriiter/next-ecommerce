@@ -1,7 +1,7 @@
 import { CarDetail } from "@/components/CarDetail";
 import { CardsContainer } from "@/components/Cards";
 import { ShowMore } from "@/components/Cards/ShowMore";
-import { Sidebar } from "@/components/Sidebar";
+import { SidebarFilters } from "@/components/Sidebar";
 import {
   carMockup,
   recommendationCars,
@@ -30,7 +30,7 @@ export default function CarPage() {
         };
       });
     },
-    []
+    [],
   );
 
   const [recommendationCarsDisplayLimit, setRecommendationCarsDisplayLimit] =
@@ -54,15 +54,14 @@ export default function CarPage() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className="category">
-        <Sidebar
+      <div className="with-sidebar">
+        <SidebarFilters
           inputs={filters}
           onChangeFilters={onChangeFilters}
-          className="category__sidebar"
           hidden
         />
 
-        <div className="category__content">
+        <div className="with-sidebar__content">
           <section className="container car-detail">
             <CarDetail data={carMockup(carId)} />
           </section>

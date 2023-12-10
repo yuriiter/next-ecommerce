@@ -3,7 +3,7 @@ import { CardsContainer } from "@/components/Cards";
 import { ShowMore } from "@/components/Cards/ShowMore";
 import { Picker } from "@/components/Picker";
 import { SelectOption } from "@/components/Select/types";
-import { Sidebar } from "@/components/Sidebar";
+import { SidebarFilters } from "@/components/Sidebar";
 import { SwapIcon } from "@/components/svg/icons";
 import { recommendationCars, sidebarInputs } from "@/constants/mockupData";
 import Head from "next/head";
@@ -28,7 +28,7 @@ export default function SpecificCategory() {
         };
       });
     },
-    []
+    [],
   );
 
   const [recommendationCarsDisplayLimit, setRecommendationCarsDisplayLimit] =
@@ -63,15 +63,14 @@ export default function SpecificCategory() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className="category">
-        <Sidebar
+      <div className="with-sidebar">
+        <SidebarFilters
           inputs={filters}
           onChangeFilters={onChangeFilters}
-          className="category__sidebar"
-          hidden
+          hidden={false}
         />
 
-        <div className="category__content">
+        <div className="with-sidebar__content">
           <section className="container pickers__section">
             <Picker
               date={pickUpDate}
