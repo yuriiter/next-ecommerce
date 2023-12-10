@@ -47,14 +47,16 @@ export const Banner = ({
         <p className="banner__description">{description}</p>
       </div>
 
-      <Button
-        size="lg"
-        onClick={rest.onClick}
-        href={rest.href}
-        className="banner__button"
-      >
-        {buttonText}
-      </Button>
+      {buttonText && (
+        <Button
+          size="lg"
+          onClick={rest.onClick}
+          href={rest.href}
+          className="banner__button"
+        >
+          {buttonText}
+        </Button>
+      )}
 
       <Image
         className="banner__car-img"
