@@ -1,0 +1,9 @@
+@each $weight in $typographyWeights {
+  @each $size in $typographySizes {
+    $className: "typography--text-style-#{$weight}-type-#{$size}";
+
+    .#{$className} {
+      @include text-style($weight, $size);
+    }
+  }
+}
