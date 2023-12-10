@@ -53,7 +53,7 @@ $color-secondary-400: rgba(89, 103, 128, 1);
 $color-secondary-300: rgba(144, 163, 191, 1);
 $color-secondary-200: rgba(195, 212, 233, 1);
 $color-secondary-100: rgba(224, 233, 244, 1);
-$color-section-bg: #F6F7F9;
+$color-section-bg: #f6f7f9;
 
 $container-px-lg: 32px;
 $container-px-sm: 25px;
@@ -66,4 +66,8 @@ $section-outer-big-my-sm: 48px;
 $grid-spacing: 32px;
 $grid-spacing-sm: 20px;
 
-$nav-py: 40px;
+$nav-py: 20px;
+$nav-height: 92px;
+
+$typographyWeights: regular, medium, semibold, bold;
+$typographySizes: 12, 14, 16, 18, 20, 24, 32, 36, 40, 72;
