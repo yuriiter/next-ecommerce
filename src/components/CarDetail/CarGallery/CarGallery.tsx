@@ -1,9 +1,6 @@
 import React, { useState } from "react";
-import Image from "next/image";
 import { CarPickedImg } from "./CarPickedImg";
 import { CarData } from "@/types";
-import { Banner } from "@/components/Banner";
-import { BannerArrowBg } from "@/components/svg/images";
 import { CarGalleryItem } from "./CarGalleryItem";
 
 type CarGalleryProps = Pick<
