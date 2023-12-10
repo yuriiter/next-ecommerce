@@ -3,19 +3,22 @@ import { Logo } from "../../Logo";
 import { Search } from "./Search";
 import { NavigationButtons } from "./NavigationButtons/NavigationButtons";
 import { useHideNavigation } from "./useHideNavigation";
-import { useRouter } from "next/router";
 import { cn } from "@/utils";
+import { useIsOnRoute } from "@/hooks/useIsOnRoute";
 
 export const Navigation = () => {
-  const hide = useHideNavigation();
-  const router = useRouter();
-  const hideSearch =
-    router.pathname === "/cars/[carId]/rent" ||
-    router.asPath === "/cars/[carId]/rent";
+  const translateToTop = useHideNavigation();
+  const hideSearch = useIsOnRoute(["/cars/[carId]/rent", "/account"]);
 
   return (
     <>
-      <div className={cn(["navigation", hide && "navigation--hidden"])}>
+      <div
+        className={cn([
+          "navigation",
+          "to-top",
+          translateToTop && "to-top--active",
+        ])}
+      >
         <div className={`container navigation__container`}>
           <Logo />
           {!hideSearch && <Search />}
