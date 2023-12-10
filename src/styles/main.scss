@@ -3,7 +3,10 @@
 @import "variables";
 @import "mixins";
 @import "animations";
+@import "utils";
 
+@import "components/grid";
+@import "components/typography";
 @import "components/button";
 @import "components/banner";
 @import "components/home";
@@ -16,7 +19,6 @@
 @import "components/date_input";
 @import "components/cards";
 @import "components/sidebar";
-@import "components/category";
 @import "components/range_slider";
 @import "components/car_detail";
 @import "components/rating";
@@ -26,4 +28,5 @@
 @import "components/point_mark";
 @import "components/accordion";
 @import "components/switch";
+@import "components/dashboard";
 @import "components/footer";
