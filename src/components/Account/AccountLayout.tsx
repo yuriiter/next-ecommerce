@@ -25,7 +25,7 @@ export const AccountLayout = ({ children, className }: AccountLayoutProps) => {
         </Sidebar>
 
         <div className="with-sidebar__content">
-          <section className="container">{children}</section>
+          <div className="container account__container">{children}</div>
         </div>
       </div>
     </>

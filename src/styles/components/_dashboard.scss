@@ -1,11 +1,16 @@
 .dashboard {
   height: 100%;
 
+  &__grid {
+    height: 100%;
+  }
+
   &__navigation {
     display: flex;
     flex-direction: column;
     gap: 60px;
     height: 100%;
+    padding: 36px 16px;
   }
 
   &__cell {
@@ -15,7 +20,6 @@
 }
 
 .navigation-group {
-
   &__name {
     @include text-style-semibold-type-12;
 
@@ -27,6 +31,7 @@
   &__item {
     @include text-style-medium-type-16;
 
+    width: 254px;
     transition:
       0.1s color,
       0.3s background-color;
@@ -47,3 +52,4 @@
     }
   }
 }
+
