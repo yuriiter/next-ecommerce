@@ -3,29 +3,45 @@ body:has(.dashboard) {
 }
 
 .sidebar {
+  position: relative;
   width: 360px;
   background-color: $color-primary-0;
   align-self: stretch;
-  position: sticky;
-  top: $nav-height;
-  height: calc(100vh - $nav-height);
-  max-height: 100%;
   transition:
     top 0.5s,
     width 0.5s,
     padding-top 0.5s,
     transform 0.5s;
 
-  &:after {
+  &:before {
     content: "";
+    position: absolute;
     width: 100%;
     height: $nav-height;
-    background-color: inherit;
-    position: absolute;
-    top: 100%;
+    left: 0;
+    bottom: 100%;
+    background-color: $color-primary-0;
   }
+
+  &__inner-wrapper {
+    @include scrollbar;
+
+    position: sticky;
+    top: $nav-height;
+    bottom: $nav-height;
+    height: calc(100vh - $nav-height);
+    display: flex;
+    width: 360px;
+    padding: 32px;
+    flex-direction: column;
+    gap: 56px;
+    overflow-y: scroll;
+    position: sticky;
+    bottom: 32px;
+  }
+
   &.to-top--active {
-    // transform: translateY(0);
+    transform: translateY(0);
   }
 
   &--hidden {
@@ -54,21 +70,6 @@ body:has(.dashboard) {
     &--hidden {
       width: 0;
     }
-  }
-
-  &__inner-wrapper {
-    @include scrollbar;
-
-    display: flex;
-    width: 360px;
-    height: 100%;
-    padding: 32px;
-    flex-direction: column;
-    gap: 56px;
-    overflow-y: scroll;
-    position: sticky;
-    top: 0;
-    bottom: 32px;
   }
 
   &__input-group-name {

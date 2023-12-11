@@ -14,7 +14,6 @@ export const Sidebar = ({
   className,
 }: SidebarProps) => {
   const translateToTop = useHideNavigation();
-  console.log("2", hidden);
 
   return (
     <>
