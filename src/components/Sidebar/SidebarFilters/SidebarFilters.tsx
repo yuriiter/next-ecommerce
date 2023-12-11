@@ -27,14 +27,16 @@ export const SidebarFilters = ({
   return (
     <>
       <Sidebar hidden={hidden} className={className}>
-        {Object.entries(inputs || {}).map(([inputGroupName, groupInputs]) => (
-          <SidebarInputGroup
-            key={inputGroupName}
-            inputGroupName={inputGroupName}
-            groupInputs={groupInputs}
-            onChangeFilters={onChangeFilters}
-          />
-        ))}
+        <div className="sidebar__filters">
+          {Object.entries(inputs || {}).map(([inputGroupName, groupInputs]) => (
+            <SidebarInputGroup
+              key={inputGroupName}
+              inputGroupName={inputGroupName}
+              groupInputs={groupInputs}
+              onChangeFilters={onChangeFilters}
+            />
+          ))}
+        </div>
       </Sidebar>
     </>
   );

@@ -19,7 +19,7 @@ export const SidebarInputGroup = ({
   onChangeFilters,
 }: SidebarInputGroupProps) => {
   return (
-    <div key={inputGroupName} className="sidebar__input-group">
+    <div className="sidebar__input-group">
       <p className="sidebar__input-group-name">{inputGroupName}</p>
       <div className="sidebar__inputs">
         {groupInputs.map(({ name, inputType, numOfItemsOfType, value }) => {

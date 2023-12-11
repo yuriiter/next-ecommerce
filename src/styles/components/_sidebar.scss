@@ -4,7 +4,6 @@ body:has(.dashboard) {
 
 .sidebar {
   position: relative;
-  width: 360px;
   background-color: $color-primary-0;
   align-self: stretch;
   transition:
@@ -23,21 +22,22 @@ body:has(.dashboard) {
     background-color: $color-primary-0;
   }
 
+  &__filters {
+    padding: 32px;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 56px;
+  }
+
   &__inner-wrapper {
     @include scrollbar;
 
     position: sticky;
     top: $nav-height;
-    bottom: $nav-height;
     height: calc(100vh - $nav-height);
-    display: flex;
-    width: 360px;
-    padding: 32px;
-    flex-direction: column;
-    gap: 56px;
     overflow-y: scroll;
     position: sticky;
-    bottom: 32px;
   }
 
   &.to-top--active {
