@@ -12,7 +12,7 @@ export const NavigationGroup = ({
   navigationItems,
 }: NavigationGroupProps) => {
   return (
-    <div className="dashboard__navigation-group">
+    <div className="navigation-group">
       <p className="navigation-group__name">{name}</p>
       <div className="navigation-group__items">
         {navigationItems.map((navigationItem) => (

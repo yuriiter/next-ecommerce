@@ -1,6 +1,8 @@
 import React from "react";
 import { dashboardNavigation } from "./constants";
 import { NavigationGroup } from "./NavigationGroup";
+import { NavigationItem } from "./NavigationItem";
+import { Logout } from "@/components/svg/icons";
 
 export const Navigation = () => {
   return (
@@ -14,6 +16,12 @@ export const Navigation = () => {
           />
         ),
       )}
+      <NavigationItem
+        className="mt-auto"
+        icon={<Logout />}
+        label={"Logout"}
+        path={"/logout"}
+      />
     </div>
   );
 };

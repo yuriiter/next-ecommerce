@@ -19,7 +19,6 @@ import { InfoCircle } from "@/components/svg/icons";
 import { Logout } from "@/components/svg/icons";
 import { Message } from "@/components/svg/icons";
 import { Setting } from "@/components/svg/icons";
-import { NavigationItem } from "./NavigationItem";
 
 export const dashboardNavigation: NavigationMap = {
   "main menu": [
@@ -69,19 +68,6 @@ export const dashboardNavigation: NavigationMap = {
       icon: <Briefcase />,
       label: "Dark mode",
       path: "/account/",
-    },
-    {
-      icon: <Logout />,
-      label: "Logout",
-      path: "/logout",
-      // component: (
-      //   <NavigationItem
-      //     icon={<Logout />}
-      //     label="Logout"
-      //     path="/logout"
-      //     className="mt-auto"
-      //   />
-      // ),
     },
   ],
 };
