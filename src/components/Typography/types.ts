@@ -1,16 +1,22 @@
-import { SingleTrueKey } from "@/types/utils";
+import { StringUnionToBooleanKeys } from "@/types/utils";
 import {
+  typographyColorWeights,
+  typographyColorVariants,
   typographyComponents,
   typographySizes,
   typographyWeights,
 } from "./constants";
-import { ReactNode } from "react";
+import { CSSProperties, ReactNode } from "react";
 
 export type TypographyComponent = (typeof typographyComponents)[number];
 
 export type TypographyWeight = (typeof typographyWeights)[number];
 
 export type TypographySize = (typeof typographySizes)[number];
+
+export type TypographyColorVariant = (typeof typographyColorVariants)[number];
+
+export type TypographyColorWeight = (typeof typographyColorWeights)[number];
 
 type TypographyComponentProp =
   | {
@@ -19,7 +25,7 @@ type TypographyComponentProp =
   | {
       component?: TypographyComponent;
     }
-  | SingleTrueKey<TypographyComponent>;
+  | StringUnionToBooleanKeys<TypographyComponent>;
 
 type TypographyWeightProp =
   | {
@@ -28,7 +34,7 @@ type TypographyWeightProp =
   | {
       weight?: TypographyWeight;
     }
-  | SingleTrueKey<TypographyWeight>;
+  | StringUnionToBooleanKeys<TypographyWeight>;
 
 type TypographySizeProps =
   | {
@@ -38,6 +44,12 @@ type TypographySizeProps =
       size?: TypographySize;
     };
 
+export type ColorMap = {
+  [Variant in TypographyColorVariant as `${Variant}${TypographyColorWeight}`]?: boolean;
+};
+
+type TypographyColorProps = { color: CSSProperties["color"] } | ColorMap;
+
 type TypographyGeneralProps = {
   className?: string;
   children?: ReactNode;
@@ -46,4 +58,5 @@ type TypographyGeneralProps = {
 export type TypographyProps = TypographyComponentProp &
   TypographyWeightProp &
   TypographySizeProps &
-  TypographyGeneralProps;
+  TypographyGeneralProps &
+  TypographyColorProps;

@@ -11,6 +11,7 @@ import {
   defaultTypographyWeight,
   typographyComponents,
   typographyWeights,
+  typographyColors,
 } from "./constants";
 import { cn } from "@/utils";
 
@@ -19,13 +20,15 @@ export const Typography = ({
   children,
   ...rest
 }: TypographyProps) => {
+  const restKeys = Object.keys(rest);
+
   const Component: TypographyComponent =
     ("c" in rest
       ? rest.c
       : "component" in rest
         ? rest.component
         : typographyComponents.find((typographyComponentVariant) =>
-            Object.keys(rest).includes(typographyComponentVariant),
+            restKeys.includes(typographyComponentVariant),
           )) || defaultTypographyComponent;
 
   const weight: TypographyWeight =
@@ -34,7 +37,7 @@ export const Typography = ({
       : "weight" in rest
         ? rest.weight
         : typographyWeights.find((typographyWeightVariant) =>
-            Object.keys(rest).includes(typographyWeightVariant),
+            restKeys.includes(typographyWeightVariant),
           )) || defaultTypographyWeight;
 
   const size: TypographySize =
@@ -44,11 +47,25 @@ export const Typography = ({
         ? rest.size
         : defaultTypographySize) || defaultTypographySize;
 
+  const cssColor = "color" in rest ? rest.color : undefined;
+
+  const [customColor] = Object.entries(rest).find(
+    ([restKey, restValue]) =>
+      restValue === true && typographyColors.includes(restKey),
+  ) || [undefined];
+
   const typographyVariantClassName = `typography--text-style-${weight}-type-${size}`;
+  const typographyColorClassName = customColor && `typography--${customColor}`;
 
   return (
     <Component
-      className={cn(["typography", typographyVariantClassName, className])}
+      style={{ color: cssColor }}
+      className={cn([
+        "typography",
+        typographyVariantClassName,
+        typographyColorClassName,
+        className,
+      ])}
     >
       {children}
     </Component>
