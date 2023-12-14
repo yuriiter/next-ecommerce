@@ -14,8 +14,10 @@
   }
 
   &__cell {
-    background-color: black;
-    color: white;
+    @include scrollbar;
+
+    background-color: $color-primary-0;
+    border-radius: 10px;
   }
 }
 

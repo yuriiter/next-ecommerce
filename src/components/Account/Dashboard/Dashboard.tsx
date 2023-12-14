@@ -2,6 +2,8 @@ import { Grid } from "@/components/Grid/Grid";
 import { AccountLayout } from "../AccountLayout";
 import { Typography } from "@/components/Typography/Typography";
 import { GridCell } from "@/components/Grid/GridCell";
+import { RentalDetails } from "./RentalDetails";
+import { popularCarsMockup } from "@/constants/mockupData";
 
 export const Dashboard = () => {
   return (
@@ -14,7 +16,19 @@ export const Dashboard = () => {
         className="dashboard__grid"
       >
         <GridCell className="dashboard__cell" gridRow="span 2">
-          Cell 1
+          <RentalDetails
+            rentalData={{
+              id: "9741",
+              car: popularCarsMockup[0],
+              pickUpDate: new Date(),
+              pickUpLocation: "Los Angeles",
+              pickUpTime: "10:10",
+              dropOffDate: new Date(),
+              dropOffLocation: "Los Angeles",
+              dropOffTime: "19:20",
+              total: 100,
+            }}
+          />
         </GridCell>
         <GridCell className="dashboard__cell" gridColumn="2">
           Cell 2
