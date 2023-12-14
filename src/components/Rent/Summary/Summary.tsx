@@ -8,6 +8,7 @@ import { CarPriceItem } from "./CarPriceItem";
 import { SummaryCaptions } from "./SummaryCaptions";
 import { SummaryCarInfo } from "./SummaryCarInfo";
 import { SummaryCarPrice } from "./SummaryCarPrice";
+import { SummaryFooter } from "./SummaryFooter";
 
 type SummaryProps = {
   car: CarData;
@@ -55,17 +56,7 @@ export const Summary = ({ car, subtotal, tax, total, toTop }: SummaryProps) => {
           selfSubmit={onPromoCodeSubmit}
           selfSubmitText="Apply now"
         />
-        <div className="summary__footer">
-          <div className="summary__footer-description">
-            <SummaryCaptions
-              title="Total rental price"
-              subtitle="
-              Overall price and includes rental discount
-            "
-            />
-          </div>
-          <p className="summary__footer-price">${total.toFixed(2)}</p>
-        </div>
+        <SummaryFooter total={total} />
       </div>
     </div>
   );

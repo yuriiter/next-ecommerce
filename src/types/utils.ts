@@ -1,7 +1,5 @@
-export type SingleTrueKey<T extends string> = {
-  [TrueKey in T]?: true;
-} & {
-  [FalseKey in T]?: false;
+export type StringUnionToBooleanKeys<T extends string> = {
+  [TrueKey in T]?: boolean;
 };
 
 export type CamelCase<

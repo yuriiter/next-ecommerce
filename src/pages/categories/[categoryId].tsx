@@ -2,6 +2,8 @@ import { IconButton } from "@/components/Button";
 import { CardsContainer } from "@/components/Cards";
 import { ShowMore } from "@/components/Cards/ShowMore";
 import { Picker } from "@/components/Picker";
+import { PickerSection } from "@/components/Picker/PickerSection";
+import { usePickerSectionData } from "@/components/Picker/hooks/usePickerSectionData";
 import { SelectOption } from "@/components/Select/types";
 import { SidebarFilters } from "@/components/Sidebar";
 import { SwapIcon } from "@/components/svg/icons";
@@ -38,22 +40,14 @@ export default function SpecificCategory() {
     return recommendationCars.slice(0, recommendationCarsDisplayLimit);
   }, [recommendationCarsDisplayLimit]);
 
-  const [pickUpLocation, setPickUpLocation] = useState<SelectOption>();
-  const [pickUpDate, setPickUpDate] = useState<Date>();
-  const [pickUpTime, setPickUpTime] = useState<SelectOption>();
+  const {
+    pickUpData,
+    setPickUpData,
+    dropOffData,
+    setDropOffData,
+    onSwapButtonClick,
+  } = usePickerSectionData();
 
-  const [dropOffLocation, setDropOffLocation] = useState<SelectOption>();
-  const [dropOffDate, setDropOffDate] = useState<Date>();
-  const [dropOffTime, setDropOffTime] = useState<SelectOption>();
-
-  const onSwapButtonClick = () => {
-    setPickUpLocation(dropOffLocation);
-    setPickUpDate(dropOffDate);
-    setPickUpTime(dropOffTime);
-    setDropOffLocation(pickUpLocation);
-    setDropOffDate(pickUpDate);
-    setDropOffTime(pickUpTime);
-  };
   return (
     <>
       <Head>
@@ -71,37 +65,15 @@ export default function SpecificCategory() {
         />
 
         <div className="with-sidebar__content">
-          <section className="container pickers__section">
-            <Picker
-              date={pickUpDate}
-              setDate={setPickUpDate}
-              location={pickUpLocation}
-              setLocation={setPickUpLocation}
-              time={pickUpTime}
-              setTime={setPickUpTime}
-              headerTitle="Pick - up"
-              pointMarkVariant="dark"
-            />
-            <IconButton
-              size="lg"
-              className="picker__swap-button"
-              onClick={onSwapButtonClick}
-            >
-              <SwapIcon />
-            </IconButton>
-            <div className="pickers__placeholder"></div>
-            <Picker
-              date={dropOffDate}
-              setDate={setDropOffDate}
-              location={dropOffLocation}
-              setLocation={setDropOffLocation}
-              time={dropOffTime}
-              setTime={setDropOffTime}
-              headerTitle="drop - off"
-              className="picker--drop-off"
-              pointMarkVariant="light"
-            />
-          </section>
+          <PickerSection
+            className="container"
+            pickUpData={pickUpData}
+            setPickUpData={setPickUpData}
+            dropOffData={dropOffData}
+            setDropOffData={setDropOffData}
+            onSwapButtonClick={onSwapButtonClick}
+          />
+
           <section className="container cards__section cards__section--recommended">
             <CardsContainer
               cards={recommendationCarsToDisplay}

@@ -46,21 +46,21 @@ export const Card = ({ carData }: CardProps) => {
         alt={`Rent car | ${name} - ${carType}`}
         src={thumbnail}
       />
-      <div className="card__footer">
-        <div className="card__info">
-          <div className="card__info-item">
-            <FuelIcon className="card__info-icon" />
-            <span>{fuelCapacity}L</span>
-          </div>
-          <div className="card__info-item">
-            <TransmissionIcon className="card__info-icon" />
-            <span>{isManual ? "manual" : "automatic"}</span>
-          </div>
-          <div className="card__info-item">
-            <PeopleIcon className="card__info-icon" />
-            <span>{makeCapacityString(peopleCapacity)}</span>
-          </div>
+      <div className="card__info">
+        <div className="card__info-item">
+          <FuelIcon className="card__info-icon" />
+          <span>{fuelCapacity}L</span>
         </div>
+        <div className="card__info-item">
+          <TransmissionIcon className="card__info-icon" />
+          <span>{isManual ? "manual" : "automatic"}</span>
+        </div>
+        <div className="card__info-item">
+          <PeopleIcon className="card__info-icon" />
+          <span>{makeCapacityString(peopleCapacity)}</span>
+        </div>
+      </div>
+      <div className="card__footer">
         <PriceInfo
           className="card__price"
           price={price}

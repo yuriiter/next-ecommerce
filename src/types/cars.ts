@@ -1,6 +1,15 @@
+import { PickerData } from "@/components/Picker/types";
 import { ReactNode } from "react";
 
 export type CarType = "SUV" | "sport" | "hatchback" | "sedan";
+
+export type RentalData = {
+  id: string;
+  car: CarData;
+  pickUpData: PickerData | undefined;
+  dropOffData: PickerData | undefined;
+  total: number;
+};
 
 export type Review = {
   id: string;

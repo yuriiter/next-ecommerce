@@ -10,6 +10,7 @@ type SelectWrapperProps = {
   placeholder?: string;
   children: ReactNode;
   className?: string;
+  disabled?: boolean;
 };
 
 export const SelectWrapper = ({
@@ -17,11 +18,13 @@ export const SelectWrapper = ({
   placeholder,
   children,
   className,
+  disabled = false,
 }: SelectWrapperProps) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const selectWrapperRef = useRef<HTMLDivElement>(null);
   useClickOutside(selectWrapperRef, () => setIsDropdownOpen(false));
-  const toggleDropdownOpen = () => setIsDropdownOpen((prev) => !prev);
+  const toggleDropdownOpen = () =>
+    !disabled && setIsDropdownOpen((prev) => !prev);
   const closeDropdown = useCallback(() => {
     setIsDropdownOpen(false);
   }, []);
@@ -31,7 +34,12 @@ export const SelectWrapper = ({
   return (
     <div
       ref={selectWrapperRef}
-      className={cn(["select", isDropdownOpen && "select--open", className])}
+      className={cn([
+        "select",
+        isDropdownOpen && "select--open",
+        disabled && "select--disabled",
+        className,
+      ])}
     >
       <div className="select__data" onClick={toggleDropdownOpen}>
         {value && <span className="select__value">{value}</span>}

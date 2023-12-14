@@ -1,15 +1,13 @@
 import Head from "next/head";
-import { IconButton } from "@/components/Button";
-import { SwapIcon } from "@/components/svg/icons";
 import { Banner } from "@/components/Banner";
 import bannerCar1 from "@/assets/img/banner_car_1.png";
 import bannerCar2 from "@/assets/img/banner_car_2.png";
-import { Picker } from "@/components/Picker";
 import { useMemo, useState } from "react";
-import { SelectOption } from "@/components/Select/types";
 import { CardsContainer } from "@/components/Cards";
 import { ShowMore } from "@/components/Cards/ShowMore";
 import { popularCarsMockup, recommendationCars } from "@/constants/mockupData";
+import { PickerSection } from "@/components/Picker/PickerSection";
+import { usePickerSectionData } from "@/components/Picker/hooks/usePickerSectionData";
 
 export default function Home() {
   const [recommendationCarsDisplayLimit, setRecommendationCarsDisplayLimit] =
@@ -19,22 +17,13 @@ export default function Home() {
     return recommendationCars.slice(0, recommendationCarsDisplayLimit);
   }, [recommendationCarsDisplayLimit]);
 
-  const [pickUpLocation, setPickUpLocation] = useState<SelectOption>();
-  const [pickUpDate, setPickUpDate] = useState<Date>();
-  const [pickUpTime, setPickUpTime] = useState<SelectOption>();
-
-  const [dropOffLocation, setDropOffLocation] = useState<SelectOption>();
-  const [dropOffDate, setDropOffDate] = useState<Date>();
-  const [dropOffTime, setDropOffTime] = useState<SelectOption>();
-
-  const onSwapButtonClick = () => {
-    setPickUpLocation(dropOffLocation);
-    setPickUpDate(dropOffDate);
-    setPickUpTime(dropOffTime);
-    setDropOffLocation(pickUpLocation);
-    setDropOffDate(pickUpDate);
-    setDropOffTime(pickUpTime);
-  };
+  const {
+    pickUpData,
+    setPickUpData,
+    dropOffData,
+    setDropOffData,
+    onSwapButtonClick,
+  } = usePickerSectionData();
 
   return (
     <>
@@ -63,37 +52,14 @@ export default function Home() {
           carPicture={bannerCar2}
         />
       </section>
-      <section className="container pickers__section">
-        <Picker
-          date={pickUpDate}
-          setDate={setPickUpDate}
-          location={pickUpLocation}
-          setLocation={setPickUpLocation}
-          time={pickUpTime}
-          setTime={setPickUpTime}
-          headerTitle="Pick - up"
-          pointMarkVariant="dark"
-        />
-        <div className="pickers__placeholder"></div>
-        <IconButton
-          size="lg"
-          className="picker__swap-button"
-          onClick={onSwapButtonClick}
-        >
-          <SwapIcon />
-        </IconButton>
-        <Picker
-          date={dropOffDate}
-          setDate={setDropOffDate}
-          location={dropOffLocation}
-          setLocation={setDropOffLocation}
-          time={dropOffTime}
-          setTime={setDropOffTime}
-          headerTitle="drop - off"
-          className="picker--drop-off"
-          pointMarkVariant="light"
-        />
-      </section>
+      <PickerSection
+        className="container"
+        pickUpData={pickUpData}
+        setPickUpData={setPickUpData}
+        dropOffData={dropOffData}
+        setDropOffData={setDropOffData}
+        onSwapButtonClick={onSwapButtonClick}
+      />
       <section className="container cards__section">
         <CardsContainer
           cards={popularCarsMockup}
@@ -106,7 +72,6 @@ export default function Home() {
         <CardsContainer
           cards={recommendationCarsToDisplay}
           title="Recomendation cars"
-          horizontalScrolling
         />
         <ShowMore
           step={8}

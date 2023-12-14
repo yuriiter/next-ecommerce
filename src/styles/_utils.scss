@@ -7,8 +7,11 @@
 }
 
 .space-between {
-  display: flex;
   justify-content: space-between;
+}
+
+.items-center {
+  align-items: center;
 }
 
 .mt-auto {

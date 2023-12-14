@@ -9,6 +9,7 @@ type SelectProps = {
   onChange: (newValue: SelectOption | undefined) => void;
   options: SelectOption[];
   className?: string;
+  disabled?: boolean;
 };
 
 export const Select = ({
@@ -17,12 +18,14 @@ export const Select = ({
   onChange,
   options,
   className,
+  disabled = false,
 }: SelectProps) => {
   return (
     <SelectWrapper
       value={typeof value === "string" ? value : value?.value}
       placeholder={placeholder}
       className={className}
+      disabled={disabled}
     >
       <div className="select__options-wrapper">
         {options?.map((option) => {

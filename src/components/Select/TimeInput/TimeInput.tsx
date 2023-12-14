@@ -8,6 +8,7 @@ type TimeInputProps = {
   value: SelectOption | undefined;
   onChange: (newValue: SelectOption) => void;
   className?: string;
+  disabled?: boolean;
 };
 
 export const TimeInput = ({
@@ -15,6 +16,7 @@ export const TimeInput = ({
   value,
   onChange,
   className,
+  disabled = false,
 }: TimeInputProps) => {
   const timeOptions: SelectOption[] = useMemo(
     () => generateTimeOptions().map((value) => timeAsString(value)),
@@ -33,6 +35,7 @@ export const TimeInput = ({
       onChange={handleChange}
       value={value}
       placeholder={placeholder}
+      disabled={disabled}
     />
   );
 };

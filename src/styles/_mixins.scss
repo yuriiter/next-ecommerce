@@ -342,14 +342,15 @@
   }
 }
 
-@mixin scrollbar(
-  $width: 8px,
-  $background-color: #f0f0f0,
-  $thumb-color: #c0c0c0,
-  $hover-thumb-color: #a0a0a0
-) {
+@mixin scrollbar($show_always: false) {
+  $width: 8px;
+  $background-color: #f0f0f0;
+  $thumb-color: #c0c0c0;
+  $hover-thumb-color: #a0a0a0;
+
   &::-webkit-scrollbar {
     width: $width;
+    height: $width;
     background-color: transparent;
   }
 
@@ -357,6 +358,20 @@
     background-color: transparent;
     border-radius: 10px;
     transition: background-color 0.3s ease;
+  }
+
+  @if $show_always {
+    &::-webkit-scrollbar {
+      background-color: $background-color;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: $thumb-color;
+
+      &:hover {
+        background-color: $hover-thumb-color;
+      }
+    }
   }
 
   &:hover {
@@ -374,3 +389,16 @@
   }
 }
 
+@mixin mq($bp, $max_or_min: "max") {
+  $width: map-get($breakpoints, $bp);
+
+  @if $max_or_min == "max" {
+    @media (max-width: $width) {
+      @content;
+    }
+  } @else {
+    @media (min-width: $width) {
+      @content;
+    }
+  }
+}

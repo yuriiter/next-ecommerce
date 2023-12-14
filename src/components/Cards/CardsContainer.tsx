@@ -22,7 +22,14 @@ export const CardsContainer = ({
   className,
 }: CardsContainerProps) => {
   return (
-    <div className={cn(["cards", className, loading && "cards--loading"])}>
+    <div
+      className={cn([
+        "cards",
+        horizontalScrolling && "cards--horizontal-scrolling",
+        loading && "cards--loading",
+        className,
+      ])}
+    >
       {(title || rightLink) && (
         <div className="cards__header">
           {title && <div className="cards__header-title">{title}</div>}

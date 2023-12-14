@@ -23,6 +23,10 @@
   gap: 32px;
   width: 492px;
 
+  &__car-subtitle {
+    color: #3d5278;
+  }
+
   &__wrapper {
     flex-grow: 3;
     position: relative;
@@ -318,4 +322,3 @@
     margin: 8px 0 0;
   }
 }
-
