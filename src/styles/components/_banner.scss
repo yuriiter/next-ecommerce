@@ -68,7 +68,7 @@
   &__section {
     padding-top: 32px;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
     gap: $grid-spacing;
   }
 
@@ -79,5 +79,10 @@
     height: 115px;
     object-fit: contain;
     z-index: 1;
+
+    @include mq(lg, max) {
+      margin: 15px auto;
+      width: 100%;
+    }
   }
 }
