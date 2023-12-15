@@ -36,6 +36,7 @@ export const CarGallery = ({
             isPicked={isPicked}
             src={galleryItemSrc}
             title={title}
+            onChoose={onChoose}
           />
         );
       })}

@@ -23,7 +23,6 @@ export const SidebarFilters = ({
   onChangeFilters,
   hidden = false,
 }: SidebarFiltersProps) => {
-  console.log(hidden);
   return (
     <>
       <Sidebar hidden={hidden} className={className}>

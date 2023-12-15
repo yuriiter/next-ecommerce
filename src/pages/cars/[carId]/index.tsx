@@ -43,8 +43,6 @@ export default function CarPage() {
   const router = useRouter();
   const { carId } = router.query;
 
-  console.log(carId, carMockup(carId));
-
   return (
     <>
       <Head>
