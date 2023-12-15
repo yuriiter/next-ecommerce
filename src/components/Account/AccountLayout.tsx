@@ -1,8 +1,9 @@
 import Head from "next/head";
 import { Sidebar } from "../Sidebar";
 import { Navigation } from "./Navigation";
-import { PropsWithChildren, ReactNode } from "react";
+import { ReactNode } from "react";
 import { cn } from "@/utils";
+import { useHideNavigation } from "../Layout/Navigation/useHideNavigation";
 
 type AccountLayoutProps = {
   className?: string;
@@ -10,6 +11,7 @@ type AccountLayoutProps = {
 };
 
 export const AccountLayout = ({ children, className }: AccountLayoutProps) => {
+  const [, navigationHeight] = useHideNavigation();
   return (
     <>
       <Head>
@@ -19,7 +21,10 @@ export const AccountLayout = ({ children, className }: AccountLayoutProps) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className={cn(["with-sidebar", "account", className])}>
+      <div
+        className={cn(["with-sidebar", "account", className])}
+        style={{ height: `calc(100vh - ${navigationHeight}px)` }}
+      >
         <Sidebar>
           <Navigation />
         </Sidebar>

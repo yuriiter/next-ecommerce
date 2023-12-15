@@ -1,5 +1,4 @@
 .banner {
-  min-width: 330px;
   padding: 24px;
   color: $color-primary-0;
   border-radius: 10px;
@@ -68,7 +67,7 @@
   &__section {
     padding-top: 32px;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
     gap: $grid-spacing;
   }
 

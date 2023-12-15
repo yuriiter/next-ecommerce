@@ -8,14 +8,17 @@
   background-color: $color-primary-0;
   z-index: 30;
 
-  &__placeholder {
-    margin-bottom: $nav-height;
-  }
-
   &__container {
     display: flex;
-    gap: 64px;
+    column-gap: 64px;
+    row-gap: 20px;
     align-items: center;
+    flex-wrap: wrap;
+
+    @include mq(sm, max) {
+      justify-content: center;
+      column-gap: 20px;
+    }
   }
 
   &__buttons {
@@ -24,6 +27,11 @@
     margin-left: auto;
     flex-shrink: 0;
     align-self: center;
+
+    @include mq(sm, max) {
+      margin-left: 0;
+      gap: 10px;
+    }
   }
 
   &__button {
@@ -39,8 +47,13 @@
   }
 
   &__avatar {
-    width: 44px;
-    height: 44px;
+    @include mq(sm, max) {
+      width: 42px;
+      height: 42px;
+    }
+
+    width: 50px;
+    height: 50px;
     border-radius: 100000px;
 
     img {

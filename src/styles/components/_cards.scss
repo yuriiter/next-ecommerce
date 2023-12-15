@@ -166,7 +166,13 @@
   margin-bottom: 64px;
   margin-top: 64px;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: 1fr 3fr 1fr;
+
+  @include mq(sm, max) {
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+  }
 
   &__button {
     grid-column-start: 2;
@@ -182,4 +188,3 @@
     text-align: right;
   }
 }
-

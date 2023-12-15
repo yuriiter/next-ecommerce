@@ -78,7 +78,6 @@ export default function SpecificCategory() {
             <CardsContainer
               cards={recommendationCarsToDisplay}
               title="Recomendation cars"
-              horizontalScrolling
             />
             <ShowMore
               step={8}

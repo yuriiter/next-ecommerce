@@ -34,8 +34,4 @@
 .to-top {
   transition: transform 0.5s;
   transform: translateY(0);
-
-  &--active {
-    transform: translateY(-$nav-height);
-  }
 }

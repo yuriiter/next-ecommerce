@@ -16,7 +16,6 @@
   background-color: $color-primary-0;
   border-radius: 10px;
   position: sticky;
-  top: $nav-height + 32px;
   transition: top 0.5s;
   display: flex;
   flex-direction: column;
@@ -30,10 +29,6 @@
   &__wrapper {
     flex-grow: 3;
     position: relative;
-
-    &--to-top .summary {
-      top: 32px;
-    }
   }
 
   &__title {

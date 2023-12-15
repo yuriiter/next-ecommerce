@@ -5,8 +5,13 @@ import React, {
   useState,
 } from "react";
 import { SearchFilterIcon, SearchIcon } from "../../../svg/icons";
+import { cn } from "@/utils";
 
-export const Search = () => {
+type SearchProps = {
+  className?: string;
+};
+
+export const Search = ({ className }: SearchProps) => {
   const [searchValue, setSearchValue] = useState("");
 
   const inputRef = useRef<HTMLInputElement>(null);
@@ -30,7 +35,7 @@ export const Search = () => {
     setSearchValue(e.currentTarget.value);
 
   return (
-    <div className="search" onClick={handleClickOnWrapper}>
+    <div className={cn(["search", className])} onClick={handleClickOnWrapper}>
       <SearchIcon
         className="search__icon"
         // ref={searchIconRef}

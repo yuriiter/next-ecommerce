@@ -1,24 +1,22 @@
 import { CarData } from "@/types";
 import { cn } from "@/utils";
 import React, { ChangeEvent, useState } from "react";
-import { CarGalleryItem } from "../../CarDetail/CarGallery/CarGalleryItem";
-import { Rating } from "../../CarDetail/Rating";
 import { StepInput } from "../Steps/StepInput";
-import { CarPriceItem } from "./CarPriceItem";
 import { SummaryCaptions } from "./SummaryCaptions";
 import { SummaryCarInfo } from "./SummaryCarInfo";
 import { SummaryCarPrice } from "./SummaryCarPrice";
 import { SummaryFooter } from "./SummaryFooter";
+import { useHideNavigation } from "@/components/Layout/Navigation/useHideNavigation";
 
 type SummaryProps = {
   car: CarData;
   subtotal: number;
   tax: number;
   total: number;
-  toTop: boolean;
 };
 
-export const Summary = ({ car, subtotal, tax, total, toTop }: SummaryProps) => {
+export const Summary = ({ car, subtotal, tax, total }: SummaryProps) => {
+  const [translateToTop, navigationHeight] = useHideNavigation();
   const [promoCode, setPromoCode] = useState("");
   const onPromoCodeChange = (e: ChangeEvent<HTMLInputElement>) =>
     setPromoCode(e.target.value);
@@ -28,9 +26,15 @@ export const Summary = ({ car, subtotal, tax, total, toTop }: SummaryProps) => {
 
   return (
     <div
-      className={cn(["summary__wrapper", toTop && "summary__wrapper--to-top"])}
+      className={cn([
+        "summary__wrapper",
+        translateToTop && "summary__wrapper--to-top",
+      ])}
     >
-      <div className="summary">
+      <div
+        className="summary"
+        style={{ top: `${(!translateToTop ? navigationHeight : 0) + 32}px` }}
+      >
         <div className="summary__header">
           <SummaryCaptions
             title="Rental summary"

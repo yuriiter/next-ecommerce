@@ -7,7 +7,6 @@ import { useRouter } from "next/router";
 import React, { useState } from "react";
 
 export default function CarRentPage() {
-  const summaryToTop = useHideNavigation();
   const [summarySubtotal, setSummarySubtotal] = useState(80);
   const [summaryTax, setSummaryTax] = useState(0);
 
@@ -26,7 +25,6 @@ export default function CarRentPage() {
       <div className="rent container">
         <Steps />
         <Summary
-          toTop={summaryToTop}
           car={carMockup(carId)}
           subtotal={summarySubtotal}
           tax={summaryTax}

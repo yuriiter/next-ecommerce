@@ -6,6 +6,10 @@
   max-width: $container-max-w;
   margin-left: auto;
   margin-right: auto;
+
+  @include mq(sm, max) {
+    padding: 0 $container-px-sm;
+  }
 }
 
 .col {
@@ -17,4 +21,3 @@
     width: 100% / $i;
   }
 }
-

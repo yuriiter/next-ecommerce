@@ -1,24 +1,39 @@
-import { useCallback, useEffect, useState, useRef } from "react";
+import {
+  useCallback,
+  useEffect,
+  useState,
+  useRef,
+  useLayoutEffect,
+} from "react";
 
-export const useHideNavigation = () => {
+export const useHideNavigation = (): [boolean, number] => {
   const [hide, setHide] = useState(false);
+  const [navigationHeight, setNavigationHeight] = useState(0);
   const prevScrollTopRef = useRef<number>(0);
+  const navigationRef = useRef<Element | null>(null);
 
-  useEffect(() => {
-    prevScrollTopRef.current = window.scrollY;
-  }, []);
+  const onScrollOrResize = useCallback(() => {
+    const { current: navigation } = navigationRef;
+    const navigationHeight = navigation?.getBoundingClientRect().height || 0;
+    setNavigationHeight(navigationHeight);
 
-  const onScroll = useCallback(() => {
     const { scrollY } = window;
     setHide(scrollY > prevScrollTopRef.current && scrollY > 132);
     prevScrollTopRef.current = scrollY;
   }, []);
 
-  useEffect(() => {
-    window.addEventListener("scroll", onScroll);
+  useLayoutEffect(() => {
+    prevScrollTopRef.current = window.scrollY;
+    const navigation = document.querySelector(".navigation");
+    navigationRef.current = navigation;
+    const navigationHeight = navigation?.getBoundingClientRect().height || 0;
+    setNavigationHeight(navigationHeight);
 
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+    window.addEventListener("scroll", onScrollOrResize);
+    window.addEventListener("resize", onScrollOrResize);
 
-  return hide;
+    return () => window.removeEventListener("scroll", onScrollOrResize);
+  }, [onScrollOrResize]);
+
+  return [hide, navigationHeight];
 };

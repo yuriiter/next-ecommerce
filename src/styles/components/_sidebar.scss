@@ -12,14 +12,22 @@ body:has(.dashboard) {
     padding-top 0.5s,
     transform 0.5s;
 
-  &:before {
-    content: "";
+  @include mq(md, max) {
+    position: fixed;
+    z-index: 10;
+    width: 100%;
+  }
+
+  &__placeholder {
     position: absolute;
     width: 100%;
-    height: $nav-height;
     left: 0;
     bottom: 100%;
     background-color: $color-primary-0;
+
+    &--hidden {
+      width: 0;
+    }
   }
 
   &__filters {
@@ -34,8 +42,6 @@ body:has(.dashboard) {
     @include scrollbar;
 
     position: sticky;
-    top: $nav-height;
-    height: calc(100vh - $nav-height);
     overflow-y: scroll;
     position: sticky;
   }
@@ -57,19 +63,6 @@ body:has(.dashboard) {
     color: $color-secondary-400;
     margin-top: 16px;
     display: block;
-  }
-
-  &__placeholder {
-    position: absolute;
-    width: 360px;
-    height: $nav-height;
-    top: 0;
-    left: 0;
-    background-color: $color-primary-0;
-
-    &--hidden {
-      width: 0;
-    }
   }
 
   &__input-group-name {
@@ -136,4 +129,3 @@ body:has(.dashboard) {
     flex-grow: 1;
   }
 }
-
