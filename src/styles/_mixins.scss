@@ -342,8 +342,7 @@
   }
 }
 
-@mixin scrollbar($show_always: false) {
-  $width: 8px;
+@mixin scrollbar($show_always: false, $width: 8px) {
   $background-color: #f0f0f0;
   $thumb-color: #c0c0c0;
   $hover-thumb-color: #a0a0a0;

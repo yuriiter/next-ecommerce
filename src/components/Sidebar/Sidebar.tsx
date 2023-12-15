@@ -24,7 +24,6 @@ export const Sidebar = ({
     <>
       <aside
         className={cn(["sidebar", hidden && "sidebar--hidden", className])}
-        style={styleTranslateY}
       >
         <div
           className="sidebar__placeholder"

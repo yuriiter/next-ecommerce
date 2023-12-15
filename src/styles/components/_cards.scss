@@ -65,6 +65,7 @@
       .card {
         flex: 1 0 320px;
         scroll-snap-align: start;
+        scroll-snap-stop: always;
       }
     }
   }

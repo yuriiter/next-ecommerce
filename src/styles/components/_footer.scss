@@ -32,11 +32,12 @@
     flex-grow: 1;
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
     gap: 60px;
+    justify-content: flex-end;
 
     @include mq(md, max) {
       flex-direction: column;
+      justify-content: center;
     }
   }
 

@@ -51,12 +51,12 @@ export const CarDescription = ({ carData }: CarDescriptionProps) => {
       <div className="car-detail__description-attributes">
         {Object.entries(attributes).map(([name, value]) => {
           return (
-            <Fragment key={name}>
+            <div key={name} className="car-detail__attribute-pair">
               <span className="car-detail__description-attribute car-detail__description-attribute--name">
                 {name}
               </span>
               <span className="car-detail__description-attribute">{value}</span>
-            </Fragment>
+            </div>
           );
         })}
       </div>
