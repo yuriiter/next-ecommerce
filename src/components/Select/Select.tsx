@@ -2,6 +2,7 @@ import React from "react";
 import { SelectWrapper } from "./SelectWrapper";
 import { SelectOption } from "./types";
 import { Option } from "./Option";
+import { DropdownPlacement } from "./Dropdown/types";
 
 type SelectProps = {
   placeholder?: string;
@@ -10,6 +11,7 @@ type SelectProps = {
   options: SelectOption[];
   className?: string;
   disabled?: boolean;
+  placement?: DropdownPlacement;
 };
 
 export const Select = ({
@@ -19,6 +21,7 @@ export const Select = ({
   options,
   className,
   disabled = false,
+  placement,
 }: SelectProps) => {
   return (
     <SelectWrapper
@@ -26,6 +29,7 @@ export const Select = ({
       placeholder={placeholder}
       className={className}
       disabled={disabled}
+      placement={placement}
     >
       <div className="select__options-wrapper">
         {options?.map((option) => {

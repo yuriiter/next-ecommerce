@@ -54,10 +54,16 @@
       top: auto;
     }
 
-    &--right-bottom {
+    &--left-bottom {
       transform-origin: right top;
       right: 0;
       left: auto;
+    }
+
+    &--right-bottom {
+      transform-origin: left top;
+      right: auto;
+      left: 0;
     }
 
     pointer-events: none;

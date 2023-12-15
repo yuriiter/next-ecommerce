@@ -389,7 +389,11 @@
 }
 
 @mixin mq($bp, $max_or_min: "max") {
-  $width: map-get($breakpoints, $bp);
+  $width: $bp;
+
+  @if map-has-key($breakpoints, $bp) {
+    $width: map-get($breakpoints, $bp);
+  }
 
   @if $max_or_min == "max" {
     @media (max-width: $width) {

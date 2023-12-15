@@ -150,6 +150,7 @@ export const RentalInfo = ({ register }: RentalInfoProps) => {
                           onChange={
                             onChange as StepInputNewValueHandler<SelectOption>
                           }
+                          placement="right-bottom"
                         />
                       );
                     }
@@ -162,6 +163,7 @@ export const RentalInfo = ({ register }: RentalInfoProps) => {
                           placeholder={placeholder}
                           value={stringToDate(value)}
                           onChange={onDateChange}
+                          placement="right-bottom"
                         />
                       );
                     }
@@ -172,6 +174,7 @@ export const RentalInfo = ({ register }: RentalInfoProps) => {
                           placeholder={placeholder}
                           value={value}
                           onChange={onChange}
+                          placement="right-bottom"
                         />
                       );
                     }

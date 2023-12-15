@@ -4,6 +4,7 @@ import { Dropdown } from "./Dropdown/Dropdown";
 import { useClickOutside } from "@/hooks/useClickOutside";
 import { cn } from "@/utils";
 import { useKeyEvent } from "@/hooks/useKeyEvent";
+import { DropdownPlacement } from "./Dropdown/types";
 
 type SelectWrapperProps = {
   value: string | undefined;
@@ -11,6 +12,7 @@ type SelectWrapperProps = {
   children: ReactNode;
   className?: string;
   disabled?: boolean;
+  placement?: DropdownPlacement;
 };
 
 export const SelectWrapper = ({
@@ -19,6 +21,7 @@ export const SelectWrapper = ({
   children,
   className,
   disabled = false,
+  placement,
 }: SelectWrapperProps) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const selectWrapperRef = useRef<HTMLDivElement>(null);
@@ -53,7 +56,11 @@ export const SelectWrapper = ({
           ])}
         />
       </div>
-      <Dropdown open={isDropdownOpen} setOpen={setIsDropdownOpen}>
+      <Dropdown
+        placement={placement}
+        open={isDropdownOpen}
+        setOpen={setIsDropdownOpen}
+      >
         {children}
       </Dropdown>
     </div>

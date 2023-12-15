@@ -5,12 +5,7 @@ import React, {
   SetStateAction,
   createContext,
 } from "react";
-
-type DropdownPlacement =
-  | "left-top"
-  | "right-top"
-  | "right-bottom"
-  | "left-bottom";
+import { DropdownPlacement } from "./types";
 
 type DropdownProps = {
   children: ReactNode;
@@ -35,7 +30,7 @@ export const Dropdown = ({
   open,
   setOpen,
   className,
-  placement = "right-bottom",
+  placement = "left-bottom",
 }: DropdownProps) => {
   return (
     <DropdownContext.Provider

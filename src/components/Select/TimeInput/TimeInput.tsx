@@ -2,6 +2,7 @@ import React, { useMemo } from "react";
 import { generateTimeOptions, timeAsSelectOption, timeAsString } from "./utils";
 import { Select } from "../Select";
 import { SelectOption } from "../types";
+import { DropdownPlacement } from "../Dropdown/types";
 
 type TimeInputProps = {
   placeholder?: string;
@@ -9,6 +10,7 @@ type TimeInputProps = {
   onChange: (newValue: SelectOption) => void;
   className?: string;
   disabled?: boolean;
+  placement?: DropdownPlacement;
 };
 
 export const TimeInput = ({
@@ -17,6 +19,7 @@ export const TimeInput = ({
   onChange,
   className,
   disabled = false,
+  placement,
 }: TimeInputProps) => {
   const timeOptions: SelectOption[] = useMemo(
     () => generateTimeOptions().map((value) => timeAsString(value)),
@@ -36,6 +39,7 @@ export const TimeInput = ({
       value={value}
       placeholder={placeholder}
       disabled={disabled}
+      placement={placement}
     />
   );
 };

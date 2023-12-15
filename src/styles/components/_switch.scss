@@ -18,6 +18,7 @@
     height: 20px;
     border-radius: 2px;
     border: 2px solid $color-secondary-300;
+    flex-shrink: 0;
 
     &:before {
       $checkmark-size: calc(100% - 4px);

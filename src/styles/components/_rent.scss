@@ -1,7 +1,12 @@
 .rent {
-  padding: 32px 0;
+  padding: 32px;
   display: flex;
   gap: 32px;
+
+  @include mq(900px, max) {
+    flex-wrap: wrap;
+    padding: 32px 15px;
+  }
 
   &__steps {
     flex-grow: 71;
@@ -22,6 +27,19 @@
   gap: 32px;
   width: 492px;
 
+  @include mq(xl, max) {
+    width: 410px;
+  }
+
+  @include mq(lg, max) {
+    width: 350px;
+  }
+
+  @include mq(900px, max) {
+    position: static;
+    width: 100%;
+  }
+
   &__car-subtitle {
     color: #3d5278;
   }
@@ -29,6 +47,7 @@
   &__wrapper {
     flex-grow: 3;
     position: relative;
+    max-width: 100%;
   }
 
   &__title {
@@ -48,23 +67,28 @@
     display: flex;
     gap: 24px;
     align-items: center;
+    flex-wrap: wrap;
   }
 
   &__car-img {
-    width: 132px;
     height: 108px;
-    flex: 0 1 auto;
+    flex: 1 0 132px;
+    width: auto;
   }
 
   &__car-title {
     @include text-style-bold-type-32;
 
+    color: $color-secondary-500;
+    margin-bottom: 8px;
     overflow: hidden;
     white-space: nowrap;
-    max-width: 290px;
-    color: $color-secondary-500;
     text-overflow: ellipsis;
-    margin-bottom: 8px;
+  }
+
+  &__car-title-rating {
+    flex: 1 0 240px;
+    overflow: hidden;
   }
 
   &__car-divider {
@@ -81,6 +105,8 @@
   &__footer {
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px 40px;
   }
 
   &__footer-price {
@@ -118,6 +144,10 @@
   border-radius: 10px;
   width: 100%;
 
+  &__description {
+    width: 70%;
+  }
+
   &__header {
     display: flex;
     justify-content: space-between;
@@ -145,7 +175,7 @@
   width: 100%;
 
   .step-input {
-    flex: 1 0 40%;
+    flex: 1 0 max(40%, 200px);
   }
 }
 
@@ -162,7 +192,7 @@
 
   &__part-inputs {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 24px 32px;
   }
 
@@ -247,6 +277,8 @@
       background-color: #f6f7f9;
       padding: 16px 32px;
       border-radius: 10px;
+      white-space: nowrap;
+      text-overflow: ellipsis;
     }
 
     display: block;

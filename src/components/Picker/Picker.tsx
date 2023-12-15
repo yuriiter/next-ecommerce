@@ -53,6 +53,7 @@ export const Picker = ({
             onChange={onLocationChange}
             options={locationOptions}
             disabled={disabled}
+            placement="right-bottom"
           />
         </PickerSelect>
         <div className="picker__divide-x"></div>
