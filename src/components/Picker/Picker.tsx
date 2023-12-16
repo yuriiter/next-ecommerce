@@ -40,7 +40,7 @@ export const Picker = ({
     setPickerData((current) => ({ ...current, time: newValue }));
 
   return (
-    <div className={cn(["picker", className])}>
+    <div className={cn(["picker", disabled && "picker--disabled", className])}>
       <div className="picker__header">
         <PointMark variant={pointMarkVariant} />
         <span className="picker__header-text">{headerTitle}</span>

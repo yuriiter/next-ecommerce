@@ -17,13 +17,8 @@ export default function Home() {
     return recommendationCars.slice(0, recommendationCarsDisplayLimit);
   }, [recommendationCarsDisplayLimit]);
 
-  const {
-    pickUpData,
-    setPickUpData,
-    dropOffData,
-    setDropOffData,
-    onSwapButtonClick,
-  } = usePickerSectionData();
+  const { pickUpData, setPickUpData, dropOffData, setDropOffData } =
+    usePickerSectionData();
 
   return (
     <>
@@ -58,7 +53,6 @@ export default function Home() {
         setPickUpData={setPickUpData}
         dropOffData={dropOffData}
         setDropOffData={setDropOffData}
-        onSwapButtonClick={onSwapButtonClick}
       />
       <section className="container cards__section">
         <CardsContainer

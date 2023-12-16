@@ -40,13 +40,8 @@ export default function SpecificCategory() {
     return recommendationCars.slice(0, recommendationCarsDisplayLimit);
   }, [recommendationCarsDisplayLimit]);
 
-  const {
-    pickUpData,
-    setPickUpData,
-    dropOffData,
-    setDropOffData,
-    onSwapButtonClick,
-  } = usePickerSectionData();
+  const { pickUpData, setPickUpData, dropOffData, setDropOffData } =
+    usePickerSectionData();
 
   return (
     <>
@@ -71,7 +66,6 @@ export default function SpecificCategory() {
             setPickUpData={setPickUpData}
             dropOffData={dropOffData}
             setDropOffData={setDropOffData}
-            onSwapButtonClick={onSwapButtonClick}
           />
 
           <section className="container cards__section cards__section--recommended">

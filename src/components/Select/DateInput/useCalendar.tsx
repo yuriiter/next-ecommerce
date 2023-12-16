@@ -7,7 +7,7 @@ export const useCalendar = (
   value: Date | undefined,
   onChange: (newValue: Date) => void,
   min: Date,
-  max: Date | undefined
+  max: Date | undefined,
 ) => {
   const { dropdownOpen: isCalendarOpen, setDropdownOpen: setIsCalendarOpen } =
     useDropdownContext();
@@ -38,7 +38,7 @@ export const useCalendar = (
 
     for (let i = 0; i < mod(dayOfWeekStart - 1, 7); i++) {
       cells.push(
-        <div key={`startGap-${i}`} className="calendar__day-container"></div>
+        <div key={`startGap-${i}`} className="calendar__day-container"></div>,
       );
     }
     for (let i = startDate.getDate(); i <= endDate.getDate(); i++) {
@@ -63,7 +63,7 @@ export const useCalendar = (
             min.getHours(),
             min.getMinutes(),
             min.getSeconds(),
-            min.getMilliseconds()
+            min.getMilliseconds(),
           ).getTime() ||
         (max &&
           max.getTime() <
@@ -74,7 +74,7 @@ export const useCalendar = (
               max.getHours(),
               max.getMinutes(),
               max.getSeconds(),
-              max.getMilliseconds()
+              max.getMilliseconds(),
             ).getTime());
 
       cells.push(
@@ -89,12 +89,21 @@ export const useCalendar = (
           onClick={handleSelect}
         >
           <span className="calendar__day">{i}</span>
-        </button>
+        </button>,
       );
     }
 
     return cells;
-  }, [startAndEndOfMonth, value]);
+  }, [
+    max,
+    min,
+    monthPage,
+    onChange,
+    setIsCalendarOpen,
+    startAndEndOfMonth,
+    value,
+    yearPage,
+  ]);
 
   const incrementMonth = () => {
     if (monthPage === 11) {

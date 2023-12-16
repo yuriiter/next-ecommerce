@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction } from "react";
+import React, { Dispatch, SetStateAction, useMemo } from "react";
 import { PickerData } from "./types";
 import { cn } from "@/utils";
 import { Picker } from ".";
@@ -11,7 +11,6 @@ type PickerSectionProps = {
   setPickUpData: Dispatch<SetStateAction<PickerData | undefined>>;
   dropOffData: PickerData | undefined;
   setDropOffData: Dispatch<SetStateAction<PickerData | undefined>>;
-  onSwapButtonClick: () => void;
 };
 
 export const PickerSection = ({
@@ -20,8 +19,26 @@ export const PickerSection = ({
   setPickUpData,
   dropOffData,
   setDropOffData,
-  onSwapButtonClick,
 }: PickerSectionProps) => {
+  const onSwapButtonClick = () => {
+    setDropOffData((current) => ({
+      ...current,
+      location: pickUpData?.location,
+    }));
+    setPickUpData((current) => ({
+      ...current,
+      location: dropOffData?.location,
+    }));
+  };
+
+  const dropOffPickerDisabled = useMemo(() => {
+    const date = pickUpData?.date;
+    const location = pickUpData?.location;
+    const time = pickUpData?.time;
+
+    return !(date && location && time);
+  }, [pickUpData]);
+
   return (
     <section className={cn(["pickers__section", className])}>
       <Picker
@@ -43,6 +60,7 @@ export const PickerSection = ({
         headerTitle="drop - off"
         className="picker--drop-off"
         pointMarkVariant="light"
+        disabled={dropOffPickerDisabled}
       />
     </section>
   );

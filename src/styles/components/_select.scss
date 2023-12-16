@@ -3,13 +3,12 @@
   cursor: pointer;
 
   &--disabled {
-    cursor: default;
+    opacity: 0.5;
   }
 
   &__placeholder {
     @include text-style-medium-type-14;
 
-    color: $color-secondary-300;
     flex-grow: 1;
     user-select: none;
     position: relative;
