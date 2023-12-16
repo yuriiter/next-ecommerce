@@ -41,6 +41,7 @@ export const Dropdown = ({
         className={cn([
           "select__dropdown",
           open && "select__dropdown--open",
+          !open && "select__dropdown--closed",
           `select__dropdown--${placement}`,
           className,
         ])}
