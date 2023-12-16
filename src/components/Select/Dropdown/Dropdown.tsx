@@ -1,3 +1,4 @@
+import { Placement } from "@/types/common";
 import { cn } from "@/utils";
 import React, {
   Dispatch,
@@ -5,14 +6,13 @@ import React, {
   SetStateAction,
   createContext,
 } from "react";
-import { DropdownPlacement } from "./types";
 
 type DropdownProps = {
   children: ReactNode;
   open: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;
   className?: string;
-  placement?: DropdownPlacement;
+  placement?: Placement;
 };
 
 type DropDownContextType = {

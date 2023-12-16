@@ -1,53 +1,54 @@
 .badge {
-    position: relative;
+  position: relative;
+  z-index: 1000;
 
-    &--animated {
-        .badge__content {
-
-            &:before {
-                content: '';
-                border-radius: 10000px;
-                position: absolute;
-                left: 0;
-                top: 0;
-                height: 0;
-                background-color: inherit;
-                animation: 1.75s ease-out infinite pulsing-badge;
-                width: 100%;
-                height: 100%;
-            }
-
-        }
-    }
-
-    &__content {
-        @include text-style-medium-type-12;
-
-        color: $color-primary-0;
-        padding: 5px;
-        background-color: #FF4423;
-        position: absolute;
-        right: 0;
-        top: 0;
-        pointer-events: none;
+  &--animated {
+    .badge__content {
+      &:before {
+        content: "";
         border-radius: 10000px;
-        transform: translate(50%, -50%);
-
-        &--over-round {
-            right: 15%;
-            top: 15%;
-        }
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 0;
+        background-color: inherit;
+        animation: 1.75s ease-out infinite pulsing-badge;
+        width: 100%;
+        height: 100%;
+      }
     }
+  }
+
+  &__content {
+    @include text-style-medium-type-12;
+
+    z-index: 1000;
+    color: $color-primary-0;
+    padding: 5px;
+    background-color: #ff4423;
+    position: absolute;
+    right: 0;
+    top: 0;
+    pointer-events: none;
+    border-radius: 10000px;
+    transform: translate(50%, -50%);
+
+    &--over-round {
+      right: 15%;
+      top: 15%;
+    }
+  }
 }
 
 @keyframes pulsing-badge {
-    40% {
-        opacity: 0.5;
-        transform: scale(1);
-    }
+  40% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
 
-    100% {
-        opacity: 0;
-        transform: scale(2.1);
-    }
+  100% {
+    opacity: 0;
+    transform: scale(2.1);
+  }
 }
+

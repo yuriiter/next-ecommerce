@@ -4,8 +4,8 @@ import { Dropdown } from "./Dropdown/Dropdown";
 import { useClickOutside } from "@/hooks/useClickOutside";
 import { cn } from "@/utils";
 import { useKeyEvent } from "@/hooks/useKeyEvent";
-import { DropdownPlacement } from "./Dropdown/types";
 import { SelectInput } from "./SelectInput";
+import { Placement } from "@/types/common";
 
 type SelectWrapperProps = {
   value: string | undefined;
@@ -13,7 +13,7 @@ type SelectWrapperProps = {
   children: ReactNode;
   className?: string;
   disabled?: boolean;
-  placement?: DropdownPlacement;
+  placement?: Placement;
 };
 
 export const SelectWrapper = ({

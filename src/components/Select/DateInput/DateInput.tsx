@@ -2,9 +2,9 @@ import React from "react";
 import { dateToString } from "./utils";
 import { Calendar } from "./Calendar";
 import { SelectWrapper } from "../SelectWrapper";
-import { DropdownPlacement } from "../Dropdown/types";
 import { useMQ } from "@/hooks/mediaQuery/useMQ";
 import { NativeDateInput } from "./NativeDateInput";
+import { Placement } from "@/types/common";
 
 export type DateInputProps = {
   placeholder?: string;
@@ -14,7 +14,7 @@ export type DateInputProps = {
   onChange: (newValue: Date) => void;
   className?: string;
   disabled?: boolean;
-  placement?: DropdownPlacement;
+  placement?: Placement;
 };
 
 export const DateInput = ({

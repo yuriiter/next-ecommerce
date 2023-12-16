@@ -2,9 +2,9 @@ import React, { ChangeEvent } from "react";
 import { SelectWrapper } from "./SelectWrapper";
 import { SelectOption } from "./types";
 import { Option } from "./Option";
-import { DropdownPlacement } from "./Dropdown/types";
 import { useMQ } from "@/hooks/mediaQuery/useMQ";
 import { NativeSelectInput } from "./NativeSelectInput";
+import { Placement } from "@/types/common";
 
 export type SelectProps = {
   placeholder?: string;
@@ -13,7 +13,7 @@ export type SelectProps = {
   options: SelectOption[];
   className?: string;
   disabled?: boolean;
-  placement?: DropdownPlacement;
+  placement?: Placement;
 };
 
 export const Select = ({
