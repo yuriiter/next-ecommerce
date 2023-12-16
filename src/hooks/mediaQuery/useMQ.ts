@@ -22,9 +22,14 @@ export function useMQ(
         : queryOrBreakpoint
       : `(${maxOrMin}-width: ${queryOrBreakpoint}px)`;
 
+  const [isSSR, setIsSSR] = useState(true);
   const [matches, setMatches] = useState(
-    typeof window !== "undefined" ? window.matchMedia(query).matches : false,
+    !isSSR ? window.matchMedia(query).matches : false,
   );
+
+  useEffect(() => {
+    setIsSSR(false);
+  }, []);
 
   useEffect(() => {
     const media = window.matchMedia(query);

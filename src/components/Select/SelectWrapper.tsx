@@ -5,6 +5,7 @@ import { useClickOutside } from "@/hooks/useClickOutside";
 import { cn } from "@/utils";
 import { useKeyEvent } from "@/hooks/useKeyEvent";
 import { DropdownPlacement } from "./Dropdown/types";
+import { SelectInput } from "./SelectInput";
 
 type SelectWrapperProps = {
   value: string | undefined;
@@ -44,18 +45,12 @@ export const SelectWrapper = ({
         className,
       ])}
     >
-      <div className="select__data" onClick={toggleDropdownOpen}>
-        {value && <span className="select__value">{value}</span>}
-        {!value && placeholder && (
-          <span className="select__placeholder">{placeholder}</span>
-        )}
-        <ArrowDownIcon
-          className={cn([
-            "select__arrow-down",
-            isDropdownOpen && "select__arrow-down--rotate",
-          ])}
-        />
-      </div>
+      <SelectInput
+        isDropdownOpen={isDropdownOpen}
+        toggleDropdownOpen={toggleDropdownOpen}
+        value={value}
+        placeholder={placeholder}
+      />
       <Dropdown
         placement={placement}
         open={isDropdownOpen}

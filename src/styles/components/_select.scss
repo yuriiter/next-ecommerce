@@ -19,6 +19,7 @@
     display: flex;
     align-items: center;
     gap: 8px;
+    cursor: pointer;
   }
 
   &__arrow-down {
@@ -131,5 +132,36 @@
     gap: 2px;
     max-height: 300px;
     overflow-y: scroll;
+  }
+}
+
+.select-wrapper {
+  &--native {
+    position: relative;
+    cursor: pointer;
+
+    select,
+    input {
+      width: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      opacity: 0;
+      cursor: pointer;
+    }
+
+    input[type="date"]::-webkit-calendar-picker-indicator {
+      background: transparent;
+      bottom: 0;
+      color: transparent;
+      cursor: pointer;
+      height: auto;
+      left: 0;
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+    }
   }
 }

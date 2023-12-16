@@ -3,8 +3,10 @@ import { dateToString } from "./utils";
 import { Calendar } from "./Calendar";
 import { SelectWrapper } from "../SelectWrapper";
 import { DropdownPlacement } from "../Dropdown/types";
+import { useMQ } from "@/hooks/mediaQuery/useMQ";
+import { NativeDateInput } from "./NativeDateInput";
 
-type DateInputProps = {
+export type DateInputProps = {
   placeholder?: string;
   min?: Date;
   max?: Date;
@@ -26,7 +28,21 @@ export const DateInput = ({
   placement,
 }: DateInputProps) => {
   const valueAsString = value ? dateToString(value) : value;
+  const useNativeSelect = useMQ("MD", "max");
 
+  if (useNativeSelect && !disabled) {
+    return (
+      <NativeDateInput
+        placeholder={placeholder}
+        min={min}
+        max={max}
+        value={value}
+        onChange={onChange}
+        className={className}
+        disabled={disabled}
+      />
+    );
+  }
   return (
     <SelectWrapper
       className={className}

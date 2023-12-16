@@ -6,10 +6,10 @@ import {
   useLayoutEffect,
 } from "react";
 
-const useIsomorphicLayoutEffect =
-  typeof window !== "undefined" ? useLayoutEffect : useEffect;
-
 export const useHideNavigation = (): [boolean, number] => {
+  const useIsomorphicLayoutEffect =
+    typeof window !== "undefined" ? useLayoutEffect : useEffect;
+
   const [hide, setHide] = useState(false);
   const [navigationHeight, setNavigationHeight] = useState(0);
   const prevScrollTopRef = useRef<number>(0);
