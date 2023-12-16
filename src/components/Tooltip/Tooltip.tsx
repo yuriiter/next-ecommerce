@@ -25,6 +25,7 @@ export const Tooltip = ({
 }: TooltipProps) => {
   const { leftTop, tooltipWrapperRef } = useFollowMouseTooltip({
     followMouse,
+    placement,
   });
 
   const manualOpen = controlledManualOpen;
@@ -50,7 +51,6 @@ export const Tooltip = ({
           typeof manualOpen === "boolean" && "tooltip__content--manual-open",
           manualOpen === true && "tooltip__content--open",
           manualOpen === false && "tooltip__content--closed",
-          className,
         ])}
       >
         {typeof content === "string" || typeof content === "number" ? (

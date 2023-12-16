@@ -1,11 +1,14 @@
+import { Placement } from "@/types/common";
 import { useEffect, useRef, useState } from "react";
 
 type UseFollowMouseTooltipParams = {
   followMouse: boolean;
+  placement: Placement;
 };
 
 export const useFollowMouseTooltip = ({
   followMouse,
+  placement,
 }: UseFollowMouseTooltipParams) => {
   const tooltipWrapperRef = useRef<HTMLDivElement>(null);
   const [leftTop, setLeftTop] = useState([0, 0]);
@@ -20,7 +23,7 @@ export const useFollowMouseTooltip = ({
       console.log("bp3");
       const rect = tooltipWrapper.getBoundingClientRect();
       const tooltipLeft = e.clientX - rect.left;
-      const tooltipTop = e.clientY - rect.top + 15;
+      const tooltipTop = e.clientY - rect.top;
 
       setLeftTop([tooltipLeft, tooltipTop]);
     };

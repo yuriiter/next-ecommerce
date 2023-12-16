@@ -8,7 +8,7 @@ type Props = {
 
 export const Layout = ({ children }: Props) => {
   return (
-    <div>
+    <div className="content">
       <Navigation />
       {children}
       <Footer />

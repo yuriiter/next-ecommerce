@@ -4,6 +4,8 @@ import { cn } from "@/utils";
 import { Picker } from ".";
 import { IconButton } from "../Button";
 import { SwapIcon } from "../svg/icons";
+import { Tooltip } from "../Tooltip/Tooltip";
+import { useMQ } from "@/hooks/mediaQuery/useMQ";
 
 type PickerSectionProps = {
   className?: string;
@@ -20,6 +22,8 @@ export const PickerSection = ({
   dropOffData,
   setDropOffData,
 }: PickerSectionProps) => {
+  const isMobile = useMQ("MD", "max");
+
   const onSwapButtonClick = () => {
     setDropOffData((current) => ({
       ...current,
@@ -47,21 +51,34 @@ export const PickerSection = ({
         pickerData={pickUpData}
         setPickerData={setPickUpData}
       />
-      <IconButton
-        size="lg"
-        className="picker__swap-button"
-        onClick={onSwapButtonClick}
+      <Tooltip
+        className="swap-button__tooltip-wrapper"
+        content="Reverse locations"
       >
-        <SwapIcon />
-      </IconButton>
-      <Picker
-        pickerData={dropOffData}
-        setPickerData={setDropOffData}
-        headerTitle="drop - off"
-        className="picker--drop-off"
-        pointMarkVariant="light"
-        disabled={dropOffPickerDisabled}
-      />
+        <IconButton
+          size="lg"
+          className="picker__swap-button"
+          onClick={onSwapButtonClick}
+        >
+          <SwapIcon />
+        </IconButton>
+      </Tooltip>
+      <Tooltip
+        followMouse={dropOffPickerDisabled}
+        manualOpen={!dropOffPickerDisabled ? false : undefined}
+        content="Fill in pick-up form first"
+        placement={isMobile ? "center-bottom" : "left-center"}
+        className="picker__tooltip-wrapper"
+      >
+        <Picker
+          pickerData={dropOffData}
+          setPickerData={setDropOffData}
+          headerTitle="drop - off"
+          className="picker--drop-off"
+          pointMarkVariant="light"
+          disabled={dropOffPickerDisabled}
+        />
+      </Tooltip>
     </section>
   );
 };

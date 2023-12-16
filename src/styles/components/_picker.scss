@@ -6,6 +6,14 @@
     flex-wrap: wrap;
     column-gap: max(43px, min(148px, -318px + 33%));
     row-gap: 45px;
+
+    .swap-button__tooltip-wrapper {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      z-index: 20;
+      transform: translate(-50%, -50%);
+    }
   }
 }
 
@@ -25,10 +33,7 @@
   }
 
   &__swap-button {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    z-index: 10;
     flex-shrink: 0;
     align-self: center;
     padding: 18px;
@@ -98,5 +103,9 @@
 
   &__select-input {
     margin-top: 8px;
+  }
+
+  &__tooltip-wrapper {
+    flex: 1 1 500px;
   }
 }

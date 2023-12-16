@@ -16,6 +16,11 @@
   padding: 0 $grid-spacing / 2;
 }
 
+.content {
+  overflow: hidden;
+  max-width: 100vw;
+}
+
 @for $i from 1 through 12 {
   .col-1\/#{$i} {
     width: 100% / $i;

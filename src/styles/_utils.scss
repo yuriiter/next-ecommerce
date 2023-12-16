@@ -35,3 +35,7 @@
   transition: transform 0.5s;
   transform: translateY(0);
 }
+
+.no-shrink {
+  flex-shrink: 0;
+}
