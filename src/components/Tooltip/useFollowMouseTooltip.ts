@@ -20,7 +20,6 @@ export const useFollowMouseTooltip = ({
     }
 
     const listener = (e: MouseEvent) => {
-      console.log("bp3");
       const rect = tooltipWrapper.getBoundingClientRect();
       const tooltipLeft = e.clientX - rect.left;
       const tooltipTop = e.clientY - rect.top;
