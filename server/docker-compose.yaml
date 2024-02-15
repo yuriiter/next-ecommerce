@@ -1,0 +1,20 @@
+version: "3"
+
+services:
+    postgres:
+        image: postgres:latest
+        env_file:
+            - .env
+            - .env.local
+        environment:
+            POSTGRES_USER: ${DB_USER}
+            POSTGRES_DB: ${DB_NAME}
+            POSTGRES_PASSWORD: ${DB_PASSWORD}
+        ports:
+            - "${DB_PORT}:5432"
+        volumes:
+            - ./schema.sql:/docker-entrypoint-initdb.d/schema.sql # Mount the SQL script
+            - postgres_data:/var/lib/postgresql/data
+
+volumes:
+    postgres_data:
