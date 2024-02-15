@@ -1,37 +1,15 @@
-import { IconButton } from "@/components/Button";
 import { CardsContainer } from "@/components/Cards";
 import { ShowMore } from "@/components/Cards/ShowMore";
-import { Picker } from "@/components/Picker";
 import { PickerSection } from "@/components/Picker/PickerSection";
 import { usePickerSectionData } from "@/components/Picker/hooks/usePickerSectionData";
-import { SelectOption } from "@/components/Select/types";
 import { SidebarFilters } from "@/components/Sidebar";
-import { SwapIcon } from "@/components/svg/icons";
-import { recommendationCars, sidebarInputs } from "@/constants/mockupData";
+import { recommendationCars } from "@/constants/mockupData";
+import { useFilters } from "@/hooks/useFilters";
 import Head from "next/head";
-import React, { useCallback, useMemo, useState } from "react";
+import React, { useMemo, useState } from "react";
 
 export default function SpecificCategory() {
-  const [filters, setFilters] = useState(sidebarInputs);
-
-  const onChangeFilters = useCallback(
-    (inputGroupName: string, inputName: string, newValue: boolean | number) => {
-      setFilters((prevFilters) => {
-        const groupInputs = prevFilters[inputGroupName];
-        const input = groupInputs.find(({ name }) => name === inputName);
-
-        if (!input) return prevFilters;
-
-        input.value = newValue;
-
-        return {
-          ...prevFilters,
-          [inputGroupName]: [...groupInputs],
-        };
-      });
-    },
-    [],
-  );
+  const [filters, onChangeFilters] = useFilters();
 
   const [recommendationCarsDisplayLimit, setRecommendationCarsDisplayLimit] =
     useState(8);

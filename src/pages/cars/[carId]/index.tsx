@@ -7,32 +7,14 @@ import {
   recommendationCars,
   sidebarInputs,
 } from "@/constants/mockupData";
+import { useFilters } from "@/hooks/useFilters";
+import useURLQueryState from "@/hooks/useURLQueryState";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import React, { useCallback, useMemo, useState } from "react";
 
 export default function CarPage() {
-  const [filters, setFilters] = useState(sidebarInputs);
-
-  const onChangeFilters = useCallback(
-    (inputGroupName: string, inputName: string, newValue: boolean | number) => {
-      setFilters((prevFilters) => {
-        const groupInputs = prevFilters[inputGroupName];
-        const input = groupInputs.find(({ name }) => name === inputName);
-
-        if (!input) return prevFilters;
-
-        input.value = newValue;
-
-        return {
-          ...prevFilters,
-          [inputGroupName]: [...groupInputs],
-        };
-      });
-    },
-    [],
-  );
-
+  const [filters, onChangeFilters] = useFilters();
   const [recommendationCarsDisplayLimit, setRecommendationCarsDisplayLimit] =
     useState(8);
 

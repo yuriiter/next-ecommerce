@@ -2,12 +2,13 @@ import Head from "next/head";
 import { Banner } from "@/components/Banner";
 import bannerCar1 from "@/assets/img/banner_car_1.png";
 import bannerCar2 from "@/assets/img/banner_car_2.png";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { CardsContainer } from "@/components/Cards";
 import { ShowMore } from "@/components/Cards/ShowMore";
 import { popularCarsMockup, recommendationCars } from "@/constants/mockupData";
 import { PickerSection } from "@/components/Picker/PickerSection";
 import { usePickerSectionData } from "@/components/Picker/hooks/usePickerSectionData";
+import axios from "axios";
 
 export default function Home() {
   const [recommendationCarsDisplayLimit, setRecommendationCarsDisplayLimit] =
@@ -19,6 +20,17 @@ export default function Home() {
 
   const { pickUpData, setPickUpData, dropOffData, setDropOffData } =
     usePickerSectionData();
+
+  useEffect(() => {
+    fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/cars`)
+      // fetch("https://google.com")
+      .then((response) => {
+        if (response.ok) return response.text();
+        else throw "Not found";
+      })
+      .then((text) => console.log(text))
+      .catch((err) => console.error(err));
+  }, []);
 
   return (
     <>
