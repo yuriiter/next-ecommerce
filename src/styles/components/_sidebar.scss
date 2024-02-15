@@ -6,6 +6,7 @@ body:has(.dashboard) {
   position: relative;
   background-color: $color-primary-0;
   align-self: stretch;
+  z-index: 21;
   transition:
     top 0.5s,
     width 0.5s,
@@ -14,7 +15,6 @@ body:has(.dashboard) {
 
   @include mq(md, max) {
     position: fixed;
-    z-index: 10;
     width: 100%;
   }
 
