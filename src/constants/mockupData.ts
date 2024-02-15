@@ -1,10 +1,10 @@
 import { CarData } from "@/types";
-import { SidebarInputs } from "@/components/Sidebar/types";
 import avatarPhoto from "@/assets/img/avatar.jpg";
 import carGallery1 from "@/assets/img/car_gallery_1.jpeg";
 import carGallery2 from "@/assets/img/car_gallery_2.jpeg";
 import carCardMockup from "@/assets/img/card_car_mockup.png";
 import { SelectOption } from "@/components/Select/types";
+import { SidebarInput, SidebarInputGroup } from "@/components/Sidebar/types";
 
 export const popularCarsMockup: CarData[] = [
   {
@@ -263,79 +263,78 @@ export const recommendationCars = [
   ...popularCarsMockup,
 ].map((carData, index) => ({ ...carData, id: String(index + 1) }));
 
-export const sidebarInputs: SidebarInputs = {
-  type: [
-    {
-      name: "Sport",
-      numOfItemsOfType: 10,
-      value: true,
-      inputType: "switch",
-    },
-    {
-      name: "SUV",
-      numOfItemsOfType: 12,
-      value: false,
-      inputType: "switch",
-    },
-    {
-      name: "MPV",
-      numOfItemsOfType: 16,
-      value: false,
-      inputType: "switch",
-    },
-    {
-      name: "Sedan",
-      numOfItemsOfType: 20,
-      value: true,
-      inputType: "switch",
-    },
-    {
-      name: "Coupe",
-      numOfItemsOfType: 14,
-      value: false,
-      inputType: "switch",
-    },
-    {
-      name: "Hatchback",
-      numOfItemsOfType: 14,
-      value: true,
-      inputType: "switch",
-    },
-  ],
-  capacity: [
-    {
-      name: "2 Person",
-      numOfItemsOfType: 16,
-      value: false,
-      inputType: "switch",
-    },
-    {
-      name: "4 Person",
-      numOfItemsOfType: 20,
-      value: false,
-      inputType: "switch",
-    },
-    {
-      name: "6 Person",
-      numOfItemsOfType: 14,
-      value: false,
-      inputType: "switch",
-    },
-    {
-      name: "8 Person",
-      numOfItemsOfType: 14,
-      value: false,
-      inputType: "switch",
-    },
-  ],
-  price: [
-    {
-      name: "",
-      value: 1000,
-      inputType: "range",
-    },
-  ],
-};
+export const sidebarInputs: SidebarInputGroup[] = [
+  {
+    groupName: "type",
+    inputs: [
+      {
+        name: "Sport",
+        value: false,
+        key: "typeSport",
+      },
+      {
+        name: "SUV",
+        value: false,
+        key: "typeSUV",
+      },
+      {
+        name: "MPV",
+        value: false,
+        key: "typeMPV",
+      },
+      {
+        name: "Sedan",
+        value: false,
+        key: "typeSedan",
+      },
+      {
+        name: "Coupe",
+        value: false,
+        key: "typeCoupe",
+      },
+      {
+        name: "Hatchback",
+        value: false,
+        key: "typeHatchback",
+      },
+    ],
+  },
+  {
+    groupName: "capacity",
+    inputs: [
+      {
+        name: "2 Person",
+        value: false,
+        key: "capacity2",
+      },
+      {
+        name: "4 Person",
+        value: false,
+        key: "capacity4",
+      },
+      {
+        name: "6 Person",
+        value: false,
+        key: "capacity6",
+      },
+      {
+        name: "8 Person",
+        value: false,
+        key: "capacity8",
+      },
+    ],
+  },
+  {
+    groupName: "price",
+    inputs: [
+      {
+        name: "",
+        value: 1000,
+        key: "price",
+      },
+    ],
+  },
+];
 
 export const carMockup = (id: string) =>
   popularCarsMockup.find(({ id: carId }) => carId === id);
