@@ -13,6 +13,7 @@ type PickerSectionProps = {
   setPickUpData: Dispatch<SetStateAction<PickerData | undefined>>;
   dropOffData: PickerData | undefined;
   setDropOffData: Dispatch<SetStateAction<PickerData | undefined>>;
+  hideSwapButton?: boolean;
 };
 
 export const PickerSection = ({
@@ -21,6 +22,7 @@ export const PickerSection = ({
   setPickUpData,
   dropOffData,
   setDropOffData,
+  hideSwapButton = false,
 }: PickerSectionProps) => {
   const isMobile = useMQ("MD", "max");
 
@@ -51,18 +53,20 @@ export const PickerSection = ({
         pickerData={pickUpData}
         setPickerData={setPickUpData}
       />
-      <Tooltip
-        className="swap-button__tooltip-wrapper"
-        content="Reverse locations"
-      >
-        <IconButton
-          size="lg"
-          className="picker__swap-button"
-          onClick={onSwapButtonClick}
+      {!hideSwapButton && (
+        <Tooltip
+          className="swap-button__tooltip-wrapper"
+          content="Reverse locations"
         >
-          <SwapIcon />
-        </IconButton>
-      </Tooltip>
+          <IconButton
+            size="lg"
+            className="picker__swap-button"
+            onClick={onSwapButtonClick}
+          >
+            <SwapIcon />
+          </IconButton>
+        </Tooltip>
+      )}
       <Tooltip
         followMouse={dropOffPickerDisabled}
         manualOpen={!dropOffPickerDisabled ? false : undefined}
