@@ -1,3 +1,5 @@
+import { SidebarInputGroup } from "./components/Sidebar/types";
+
 export const mod = (a: number, n: number): number => {
   return a - n * Math.floor(a / n);
 };
@@ -14,3 +16,5 @@ export const cn = (classNames: (string | undefined | null | boolean)[]) =>
       (className) => typeof className === "string" && className.length > 0,
     )
     .join(" ");
+
+export const copy = <T>(ob: T) => JSON.parse(JSON.stringify(ob)) as T;
