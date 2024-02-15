@@ -1,0 +1,17 @@
+.dialog {
+  &__wrapper {
+    &--open {
+      animation: slide-in 0.2s forwards;
+    }
+
+    &--closed {
+      animation: slide-out 0.2s forwards;
+    }
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
