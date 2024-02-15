@@ -1,14 +1,11 @@
 import React from "react";
-import { SidebarCheckbox } from "./SidebarCheckbox";
-import { SidebarRange } from "./SidebarRange";
-import { SidebarInputs } from "../types";
+import { SidebarInputGroup as SidebarInputGroupData } from "../types";
 import { SidebarInputGroup } from "./SidebarInputGroup";
-import { cn } from "@/utils";
 import { Sidebar } from "..";
 
 type SidebarFiltersProps = {
   className?: string;
-  inputs: SidebarInputs;
+  inputs: SidebarInputGroupData[];
   onChangeFilters: (
     inputGroupName: string,
     inputName: string,
@@ -27,7 +24,7 @@ export const SidebarFilters = ({
     <>
       <Sidebar hidden={hidden} className={className}>
         <div className="sidebar__filters">
-          {Object.entries(inputs || {}).map(([inputGroupName, groupInputs]) => (
+          {inputs.map(({ groupName: inputGroupName, inputs: groupInputs }) => (
             <SidebarInputGroup
               key={inputGroupName}
               inputGroupName={inputGroupName}

@@ -6,11 +6,7 @@ import { SidebarRange } from "./SidebarRange";
 type SidebarInputGroupProps = {
   inputGroupName: string;
   groupInputs: SidebarInput[];
-  onChangeFilters: (
-    inputGroupName: string,
-    inputName: string,
-    newValue: boolean | number,
-  ) => void;
+  onChangeFilters: (key: string, newValue: boolean | number) => void;
 };
 
 export const SidebarInputGroup = ({
@@ -22,17 +18,16 @@ export const SidebarInputGroup = ({
     <div className="sidebar__input-group">
       <p className="sidebar__input-group-name">{inputGroupName}</p>
       <div className="sidebar__inputs">
-        {groupInputs.map(({ name, inputType, numOfItemsOfType, value }) => {
+        {groupInputs.map(({ name, value, key }) => {
           const onChangeInput = (newValue: boolean | number) => {
-            onChangeFilters(inputGroupName, name, newValue);
+            onChangeFilters(key, newValue);
           };
-          if (inputType === "switch")
+          if (typeof value === "boolean")
             return (
               <SidebarCheckbox
                 key={`${inputGroupName}-${name}`}
                 label={name}
                 value={value}
-                numOfItemsOfType={numOfItemsOfType}
                 onChange={onChangeInput}
               />
             );
