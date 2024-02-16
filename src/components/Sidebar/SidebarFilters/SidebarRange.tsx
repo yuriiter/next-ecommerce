@@ -1,18 +1,16 @@
 import RangeSlider from "@/components/RangeSlider";
-import React, { ChangeEvent } from "react";
+import React from "react";
 
 type SidebarRangeProps = {
-  label: string;
   value: number;
   onChange: (newValue: number) => void;
 };
 
-export const SidebarRange = ({ label, value, onChange }: SidebarRangeProps) => {
+export const SidebarRange = ({ value, onChange }: SidebarRangeProps) => {
+  if (typeof value !== "number") return null;
   return (
-    <label className="">
+    <label>
       <RangeSlider min={0} max={100} value={value} onChange={onChange} />
-      {label}
-      <span className="sidebar__range-value">Max. ${value.toFixed(2)}</span>
     </label>
   );
 };

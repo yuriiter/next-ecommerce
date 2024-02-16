@@ -1,5 +1,6 @@
-import { clamp, cn } from "@/utils";
-import React, { useState, useRef, useEffect, DragEvent } from "react";
+import { cn } from "@/utils";
+import React, { useState } from "react";
+import { useRanger } from "react-ranger";
 
 type RangeSliderProps = {
   min: number;
@@ -14,59 +15,60 @@ const RangeSlider: React.FC<RangeSliderProps> = ({
   value,
   onChange,
 }) => {
-  const sliderRef = useRef<HTMLDivElement>(null);
+  const [bufferValue, setBufferValue] = useState(value);
 
-  const [isDragging, setIsDragging] = useState(false);
-
-  const onDrag = (e: DragEvent<HTMLDivElement>) => {
-    const { current: slider } = sliderRef;
-    if (!slider) return;
-
-    const sliderRect = slider.getBoundingClientRect();
-    const { left: sliderLeft, right: sliderRight } = sliderRect;
-    const { clientX } = e;
-
-    if (clientX === 0) return;
-    onChange(
-      clamp(
-        min,
-        max,
-        ((clientX - sliderLeft) / (sliderRight - sliderLeft)) * (max - min) +
-          min
-      )
-    );
+  const rangerOnChange = (values: number[]) => {
+    setBufferValue(values[0]);
+    onChange(values[0]);
   };
 
-  const onDragStart = () => {
-    setIsDragging(true);
-  };
+  const { getTrackProps, handles, segments } = useRanger({
+    min,
+    max,
+    stepSize: 1,
+    values: [bufferValue],
+    onChange: rangerOnChange,
+  });
 
-  const onDragEnd = () => {
-    setIsDragging(false);
-  };
+  const handle = handles[0];
+  const { active: isHandleActive, value: handleValue } = handle;
 
   return (
-    <div
-      className={cn(["range-slider", isDragging && "range-slider--dragging"])}
-      ref={sliderRef}
-    >
+    <>
       <div
-        className="range-slider__line range-slider__line--left"
-        style={{
-          width: `${((value - min) / (max - min)) * 100}%`,
-        }}
-      />
-      <div
-        onDragStart={onDragStart}
-        onDragEnd={onDragEnd}
-        onDrag={onDrag}
-        className="range-slider__thumb"
-        style={{
-          left: `${clamp(0, 1, (value - min) / (max - min)) * 100}%`,
-        }}
-      ></div>
-      <div className="range-slider__line range-slider__line--right" />
-    </div>
+        {...getTrackProps({
+          className: cn([
+            "range-slider",
+            isHandleActive && "range-slider--dragging",
+          ]),
+        })}
+      >
+        {segments.map(({ getSegmentProps }, i) => (
+          <div
+            {...getSegmentProps()}
+            key={i}
+            className={cn([
+              "range-slider__line",
+              i === 0
+                ? "range-slider__line--left"
+                : "range-slider__line--right",
+            ])}
+          ></div>
+        ))}
+        {handles.map(({ getHandleProps }, i) => (
+          <button
+            {...getHandleProps({
+              className: cn(["range-slider__thumb"]),
+              style: {},
+            })}
+            key={i}
+          />
+        ))}
+      </div>
+      <span className="sidebar__range-value">
+        Max. ${handleValue.toFixed(2)}
+      </span>
+    </>
   );
 };
 
