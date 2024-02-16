@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { useCallback, useMemo } from "react";
+import { SetStateAction, useCallback, useMemo } from "react";
 
 const floatRegex = /^-?\d+(\.\d+)?$/;
 
@@ -12,8 +12,8 @@ const transformString = (value: string | string[] | undefined) => {
 };
 
 export const useURLQueryObjectState = <T extends Record<string, unknown>>(
-  initialValue: T,
-): [T, (newValue: T) => void] => {
+  initialValue: T
+): [T, SetStateAction<T>] => {
   const router = useRouter();
 
   const getQueryValue = useCallback((): T => {
@@ -34,8 +34,12 @@ export const useURLQueryObjectState = <T extends Record<string, unknown>>(
   const currentState = useMemo(() => getQueryValue(), [getQueryValue]);
 
   const updateQuery = useCallback(
-    (newValue: T) => {
-      console.log("bp1", newValue);
+    (newValueOrAction: SetStateAction<T>) => {
+      const newValue =
+        typeof newValueOrAction !== "function"
+          ? newValueOrAction
+          : newValueOrAction(currentState);
+
       const keyValuePairsToSave = Object.entries(newValue).reduce(
         (acc, [key, value]) => {
           if (value === undefined || value === initialValue[key]) {
@@ -45,21 +49,20 @@ export const useURLQueryObjectState = <T extends Record<string, unknown>>(
           }
           return acc;
         },
-        {},
+        {}
       );
 
-      const newQuery = {
-        categoryId: router.query.categoryId,
-        ...keyValuePairsToSave,
-      };
-
-      router.replace({ query: newQuery }, undefined, {
-        shallow: true,
-      });
+      router.push(
+        { pathname: window.location.pathname, query: keyValuePairsToSave },
+        undefined,
+        {
+          shallow: true,
+        }
+      );
     },
-    [router],
+    [router]
   );
-  // console.log(JSON.stringify(currentState));
+  console.log(JSON.stringify(currentState));
 
   return [currentState, updateQuery];
 };
