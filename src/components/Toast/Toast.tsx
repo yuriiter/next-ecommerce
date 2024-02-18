@@ -27,10 +27,7 @@ export const Toast = ({ id, type, duration = 3000, content }: ToastProps) => {
     <div
       ref={toastElementRef}
       onAnimationEnd={removeSelf}
-      className={cn([
-        "toast",
-        disappearAnimationFlag && "toast--slide-out-right",
-      ])}
+      className={cn(["toast", disappearAnimationFlag && "toast--disappear"])}
     >
       <div className="toast__icon"></div>
       <div className="toast__content">{content}</div>
