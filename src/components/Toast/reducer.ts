@@ -10,12 +10,18 @@ type ModifyAction = {
   payload: Partial<ToastData> & { id: string };
 };
 
-export type ToastAction = AddAction | ModifyAction;
+type RemoveAction = {
+  type: "REMOVE";
+  payload: { id: string };
+};
+
+export type ToastAction = AddAction | ModifyAction | RemoveAction;
 
 export const reducer = (state: ToastData[], action: ToastAction) => {
+  console.log("bp2", action);
   switch (action.type) {
     case "ADD":
-      state.push(action.payload);
+      state.unshift(action.payload);
       return [...state];
     case "MODIFY":
       const searchedToast = state.find(({ id }) => id === action.payload.id);
@@ -35,6 +41,9 @@ export const reducer = (state: ToastData[], action: ToastAction) => {
       }
       if (hasChanged) return [...state];
       else return state;
+    case "REMOVE":
+      const { id: toastIdToRemove } = action.payload;
+      return state.filter(({ id }) => id !== toastIdToRemove);
     default:
       return state;
   }

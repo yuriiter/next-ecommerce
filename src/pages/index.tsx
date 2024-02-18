@@ -9,8 +9,14 @@ import { popularCarsMockup, recommendationCars } from "@/constants/mockupData";
 import { PickerSection } from "@/components/Picker/PickerSection";
 import { usePickerSectionData } from "@/components/Picker/hooks/usePickerSectionData";
 import axios from "axios";
+import { useToast } from "@/components/Toast/useToast";
 
 export default function Home() {
+  const toast = useToast();
+
+  const testToast = () =>
+    toast.addToast({ content: "Test", type: "success", duration: 3000 });
+
   const [recommendationCarsDisplayLimit, setRecommendationCarsDisplayLimit] =
     useState(8);
 
@@ -21,16 +27,16 @@ export default function Home() {
   const { pickUpData, setPickUpData, dropOffData, setDropOffData } =
     usePickerSectionData();
 
-  useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/cars`)
-      // fetch("https://google.com")
-      .then((response) => {
-        if (response.ok) return response.text();
-        else throw "Not found";
-      })
-      .then((text) => console.log(text))
-      .catch((err) => console.error(err));
-  }, []);
+  // useEffect(() => {
+  //   fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/cars`)
+  //     // fetch("https://google.com")
+  //     .then((response) => {
+  //       if (response.ok) return response.text();
+  //       else throw "Not found";
+  //     })
+  //     .then((text) => console.log(text))
+  //     .catch((err) => console.error(err));
+  // }, []);
 
   return (
     <>
@@ -41,7 +47,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <section className="container banner__section">
+      <section onClick={testToast} className="container banner__section">
         <Banner
           variant="light"
           title="The Best Platform for Car Rental"

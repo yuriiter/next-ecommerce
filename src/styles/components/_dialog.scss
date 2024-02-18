@@ -1,11 +1,11 @@
 .dialog {
   &__wrapper {
     &--open {
-      animation: slide-in 0.2s forwards;
+      animation: slide-in-right 0.2s forwards;
     }
 
     &--closed {
-      animation: slide-out 0.2s forwards;
+      animation: slide-out-right 0.2s forwards;
     }
   }
 

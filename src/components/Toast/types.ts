@@ -6,7 +6,6 @@ export type ToastParams = {
   type: ToastType;
   content: ReactNode;
   duration?: number;
-  dismissed?: true;
 };
 
 export type ToastData = ToastParams & {

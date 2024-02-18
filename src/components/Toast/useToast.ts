@@ -58,6 +58,18 @@ export const useToast = () => {
     [dispatch],
   );
 
+  const removeToast = useCallback(
+    (toastId: string) => {
+      dispatch({
+        type: "REMOVE",
+        payload: {
+          id: toastId,
+        },
+      });
+    },
+    [dispatch],
+  );
+
   const promisify = useCallback(
     (promise: Promise<any>, params: PromisifyToastParams) => {
       const toastId = addToast({ type: "pending", content: params.pending });
@@ -66,11 +78,17 @@ export const useToast = () => {
 
       Promise.resolve(promise)
         .then(() => {
-          modifyToast(toastId, {
-            type: resultToastType,
-            content: resultToastContent,
-            dismissed: resultToastType === undefined || undefined,
-          });
+          const shouldBeRemoved = resultToastType === undefined;
+
+          if (!shouldBeRemoved)
+            modifyToast(toastId, {
+              type: resultToastType,
+              content: resultToastContent,
+            });
+          else
+            modifyToast(toastId, {
+              duration: 0,
+            });
         })
         .catch((error: unknown) => {
           const errorAsString =
@@ -91,6 +109,7 @@ export const useToast = () => {
   return {
     addToast,
     modifyToast,
+    removeToast,
     promisify,
   };
 };
