@@ -15,7 +15,7 @@ export default function Home() {
   const toast = useToast();
 
   const testToast = () =>
-    toast.addToast({ content: "Test", type: "success", duration: 3000 });
+    toast.addToast({ content: "Test", type: "success", duration: 1000 });
 
   const [recommendationCarsDisplayLimit, setRecommendationCarsDisplayLimit] =
     useState(8);

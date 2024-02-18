@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { AnimationEvent, useEffect, useRef, useState } from "react";
 import { ToastData } from "./types";
 import { cn } from "@/utils";
 import { useToast } from "./useToast";
@@ -32,10 +32,12 @@ export const Toast = ({ id, type, duration = 3000, content }: ToastProps) => {
       <div className="toast__icon"></div>
       <div className="toast__content">{content}</div>
       <button className="toast__close"></button>
-      <div
-        className="toast__progress"
-        style={{ animationDuration: `${duration}ms` }}
-      ></div>
+      {type !== "pending" ? (
+        <div
+          className="toast__progress"
+          style={{ animationDuration: `${Math.max(duration - 50, 0)}ms` }}
+        ></div>
+      ) : null}
     </div>
   );
 };

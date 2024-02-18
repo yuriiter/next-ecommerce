@@ -5,7 +5,6 @@ import { Toast } from "./Toast";
 export const ToastContainer = () => {
   const { toasts } = useContext(ToastContext);
 
-  console.log("bp1", toasts);
   return (
     <div className="toast__container">
       {toasts.map((toast) => (

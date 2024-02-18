@@ -18,7 +18,6 @@ type RemoveAction = {
 export type ToastAction = AddAction | ModifyAction | RemoveAction;
 
 export const reducer = (state: ToastData[], action: ToastAction) => {
-  console.log("bp2", action);
   switch (action.type) {
     case "ADD":
       state.unshift(action.payload);

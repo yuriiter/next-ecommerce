@@ -1,6 +1,7 @@
 $toast-height: 90px;
 
 .toast {
+  position: relative;
   width: 350px;
   height: $toast-height;
   -webkit-box-shadow: -3px 3px 8px 2px rgba(0, 0, 0, 0.3);
@@ -32,6 +33,25 @@ $toast-height: 90px;
   }
 
   &__close {
+  }
+
+  &__progress {
+    background-color: #000;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 3px;
+    animation: progress forwards linear;
+  }
+}
+
+@keyframes progress {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
   }
 }
 
