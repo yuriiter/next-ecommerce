@@ -11,14 +11,14 @@ import {
   ToastSuccess,
 } from "../svg/icons";
 
-type ToastProps = ToastData;
-
 const toastIcons: Record<ToastType, ReactNode> = {
   error: <ToastError />,
   pending: <Loader />,
   info: <ToastInfo />,
   success: <ToastSuccess />,
 };
+
+type ToastProps = ToastData;
 
 export const Toast = ({ id, type, duration = 3000, content }: ToastProps) => {
   const timeoutRef = useRef<Timeout>();

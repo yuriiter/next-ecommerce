@@ -6,6 +6,7 @@ import React, {
 } from "react";
 import { SearchFilterIcon, SearchIcon } from "../../../svg/icons";
 import { cn } from "@/utils";
+import { Tooltip } from "@/components/Tooltip/Tooltip";
 
 type SearchProps = {
   className?: string;
@@ -48,11 +49,13 @@ export const Search = ({ className }: SearchProps) => {
         value={searchValue}
         onChange={handleInputChange}
       />
-      <SearchFilterIcon
-        className="search__icon"
-        // ref={filterIconRef}
-        onClick={stopPropagation}
-      />
+      <Tooltip content="Filtering">
+        <SearchFilterIcon
+          className="search__icon"
+          // ref={filterIconRef}
+          onClick={stopPropagation}
+        />
+      </Tooltip>
     </div>
   );
 };

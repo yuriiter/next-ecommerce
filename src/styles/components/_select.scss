@@ -4,6 +4,10 @@
 
   &--disabled {
     opacity: 0.5;
+
+    .select__data {
+      cursor: default;
+    }
   }
 
   &__placeholder {

@@ -1,12 +1,23 @@
-.dialog {
-  &__wrapper {
-    &--open {
-      animation: slide-in-right 0.2s forwards;
-    }
+body:has(.dialog--open) {
+  overflow-y: hidden;
+}
 
-    &--closed {
-      animation: slide-out-right 0.2s forwards;
-    }
+.dialog {
+  top: 0;
+  left: 0;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba($color-primary-0, 0.9);
+  transition: background-color 0.2s;
+  z-index: 70;
+
+  &--open {
+    animation: slide-in-left 0.2s forwards;
+  }
+
+  &--closed {
+    animation: slide-out-left 0.2s forwards;
   }
 
   &__header {
