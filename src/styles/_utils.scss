@@ -6,7 +6,7 @@
   display: flex;
 }
 
-.space-between {
+.justify-between {
   justify-content: space-between;
 }
 
@@ -38,4 +38,8 @@
 
 .no-shrink {
   flex-shrink: 0;
+}
+
+.text-center {
+  text-align: center;
 }

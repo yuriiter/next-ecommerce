@@ -9,13 +9,19 @@ import { popularCarsMockup, recommendationCars } from "@/constants/mockupData";
 import { PickerSection } from "@/components/Picker/PickerSection";
 import { usePickerSectionData } from "@/components/Picker/hooks/usePickerSectionData";
 import axios from "axios";
-
-const promised = (duration: number) =>
-  new Promise((resolve) => {
-    setTimeout(() => resolve(1), duration);
-  });
+import { Dialog } from "@/components/Dialog/Dialog";
+import { promisedTimeout } from "@/utils";
+import { LoadingButton } from "@/components/Button/LoadingButton";
 
 export default function Home() {
+  const [isDialogOpen, setIsDialogOpen] = useState(true);
+  const [isButtonLoading, setIsButtonLoading] = useState(false);
+
+  const loaderButtonClicked = () => {
+    setIsButtonLoading(true);
+    promisedTimeout(3000).then(() => setIsButtonLoading(false));
+  };
+
   const [recommendationCarsDisplayLimit, setRecommendationCarsDisplayLimit] =
     useState(8);
 
@@ -93,6 +99,51 @@ export default function Home() {
           itemNameSingular="car"
         />
       </section>
+      {/* <Dialog */}
+      {/*   open={isDialogOpen} */}
+      {/*   setOpen={setIsDialogOpen} */}
+      {/*   title="Testing dialog" */}
+      {/* > */}
+      {/*   <LoadingButton */}
+      {/*     size="lg" */}
+      {/*     loading={isButtonLoading} */}
+      {/*     onClick={loaderButtonClicked} */}
+      {/*   > */}
+      {/*     Load data */}
+      {/*   </LoadingButton> */}
+      {/*   <Banner */}
+      {/*     variant="light" */}
+      {/*     title="The Best Platform for Car Rental" */}
+      {/*     description="Ease of doing a car rental safely and reliably. Of course at a low price." */}
+      {/*     buttonText="Rental car" */}
+      {/*     href="/rental" */}
+      {/*     carPicture={bannerCar1} */}
+      {/*   /> */}
+      {/*   <Banner */}
+      {/*     variant="dark" */}
+      {/*     title="Easy way to rent a car at a low price" */}
+      {/*     description="Providing cheap car rental services and safe and comfortable facilities." */}
+      {/*     buttonText="Rental car" */}
+      {/*     href="/rental" */}
+      {/*     carPicture={bannerCar2} */}
+      {/*   /> */}
+      {/*   <Banner */}
+      {/*     variant="light" */}
+      {/*     title="The Best Platform for Car Rental" */}
+      {/*     description="Ease of doing a car rental safely and reliably. Of course at a low price." */}
+      {/*     buttonText="Rental car" */}
+      {/*     href="/rental" */}
+      {/*     carPicture={bannerCar1} */}
+      {/*   /> */}
+      {/*   <Banner */}
+      {/*     variant="dark" */}
+      {/*     title="Easy way to rent a car at a low price" */}
+      {/*     description="Providing cheap car rental services and safe and comfortable facilities." */}
+      {/*     buttonText="Rental car" */}
+      {/*     href="/rental" */}
+      {/*     carPicture={bannerCar2} */}
+      {/*   /> */}
+      {/* </Dialog> */}
     </>
   );
 }

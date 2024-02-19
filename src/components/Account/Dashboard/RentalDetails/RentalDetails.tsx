@@ -24,7 +24,7 @@ export const RentalDetails = ({ rentalData }: RentalDetailsProps) => {
           Rental details
         </Typography>
         <RentalDetailsMap />
-        <div className="flex space-between items-center">
+        <div className="flex justify-between items-center">
           <SummaryCarInfo
             thumbnailSrc={thumbnail}
             carTitle={name}

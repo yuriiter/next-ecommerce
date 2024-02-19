@@ -1,28 +1,39 @@
-body:has(.dialog--open) {
+body:has(.modal-window--open) {
   overflow-y: hidden;
 }
 
-.dialog {
+.modal-window {
+  @include scrollbar;
+
   top: 0;
   left: 0;
-  position: absolute;
+  position: fixed;
   width: 100%;
   height: 100%;
-  background-color: rgba($color-primary-0, 0.9);
+  overflow-y: scroll;
+  background-color: rgba($color-primary-0, 0.95);
   transition: background-color 0.2s;
   z-index: 70;
 
   &--open {
-    animation: slide-in-left 0.2s forwards;
+    animation: appear 0.2s forwards;
   }
 
   &--closed {
-    animation: slide-out-left 0.2s forwards;
+    animation: disappear 0.2s forwards;
+    pointer-events: none;
   }
 
   &__header {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    margin-bottom: 10px;
+  }
+
+  &__content {
+    padding: 30px 15px;
+    margin: 0 auto;
+    width: clamp(300px, 95%, 700px);
+    min-height: 100%;
   }
 }
