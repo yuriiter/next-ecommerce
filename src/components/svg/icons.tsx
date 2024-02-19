@@ -1,3 +1,4 @@
+import { cn } from "@/utils";
 import { IconProps } from "./types";
 
 export const TurnOnWifiIcon = (props: IconProps) => {
@@ -1140,12 +1141,13 @@ export const ToastError = (props: IconProps) => {
   );
 };
 
-export const Loader = (props: IconProps) => {
+export const Loader = ({ className, ...rest }: IconProps) => {
   return (
     <svg
       viewBox="0 0 100 100"
       preserveAspectRatio="xMidYMid"
-      className="rotate-animation"
+      className={cn(["rotate-animation", className])}
+      {...rest}
     >
       <circle
         cx="50"

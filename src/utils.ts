@@ -28,3 +28,8 @@ export const uuid = () => {
   });
   return uuid;
 };
+
+export const promisedTimeout = (duration: number) =>
+  new Promise((resolve) => {
+    setTimeout(() => resolve(1), duration);
+  });
