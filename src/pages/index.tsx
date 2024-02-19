@@ -9,7 +9,6 @@ import { popularCarsMockup, recommendationCars } from "@/constants/mockupData";
 import { PickerSection } from "@/components/Picker/PickerSection";
 import { usePickerSectionData } from "@/components/Picker/hooks/usePickerSectionData";
 import axios from "axios";
-import { useToast } from "@/components/Toast/useToast";
 
 const promised = (duration: number) =>
   new Promise((resolve) => {
@@ -17,13 +16,6 @@ const promised = (duration: number) =>
   });
 
 export default function Home() {
-  const toast = useToast();
-
-  const testToast = () => {
-    // toast.promisify(promised(4000), {'pending': "Loading response...", success: "Response loaded!"})
-    toast.addToast({ content: "Test", type: "success", duration: 4000 });
-  };
-
   const [recommendationCarsDisplayLimit, setRecommendationCarsDisplayLimit] =
     useState(8);
 
@@ -54,7 +46,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <section onClick={testToast} className="container banner__section">
+      <section className="container banner__section">
         <Banner
           variant="light"
           title="The Best Platform for Car Rental"
