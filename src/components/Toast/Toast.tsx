@@ -1,20 +1,36 @@
-import React, { AnimationEvent, useEffect, useRef, useState } from "react";
-import { ToastData } from "./types";
+import React, { ReactNode, useEffect, useRef, useState } from "react";
+import { ToastData, ToastType } from "./types";
 import { cn } from "@/utils";
 import { useToast } from "./useToast";
+import {
+  Close,
+  Loader,
+  ToastError,
+  ToastInfo,
+  ToastSuccess,
+} from "../svg/icons";
 
 type ToastProps = ToastData;
+
+const toastIcons: Record<ToastType, ReactNode> = {
+  error: <ToastError />,
+  pending: <Loader />,
+  info: <ToastInfo />,
+  success: <ToastSuccess />,
+};
 
 export const Toast = ({ id, type, duration = 3000, content }: ToastProps) => {
   const toastElementRef = useRef<HTMLDivElement>(null);
   const toast = useToast();
   const [disappearAnimationFlag, setDisappearAnimationFlag] = useState(false);
 
+  const closeToast = () => setDisappearAnimationFlag(true);
+
   useEffect(() => {
     setDisappearAnimationFlag(false);
     if (type === "pending") return;
     const timeout = setTimeout(() => {
-      setDisappearAnimationFlag(true);
+      closeToast();
     }, duration);
     return () => clearTimeout(timeout);
   }, [duration, type]);
@@ -27,11 +43,18 @@ export const Toast = ({ id, type, duration = 3000, content }: ToastProps) => {
     <div
       ref={toastElementRef}
       onAnimationEnd={removeSelf}
-      className={cn(["toast", disappearAnimationFlag && "toast--disappear"])}
+      className={cn([
+        "toast",
+        disappearAnimationFlag && "toast--disappear",
+        `toast--${type}`,
+        "no-shrink",
+      ])}
     >
-      <div className="toast__icon"></div>
-      <div className="toast__content">{content}</div>
-      <button className="toast__close"></button>
+      <div className="toast__icon no-shrink">
+        {toastIcons[type] ?? <ToastInfo />}
+      </div>
+      <div className="toast__content no-shrink">{content}</div>
+      <Close onClick={closeToast} className="toast__close" />
       {type !== "pending" ? (
         <div
           className="toast__progress"

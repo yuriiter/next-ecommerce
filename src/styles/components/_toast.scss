@@ -1,18 +1,27 @@
-$toast-height: 90px;
+$toast-max-height: 300px;
+$toast-progress-height: 5px;
 
 .toast {
+  pointer-events: all;
+  padding: 10px;
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
   position: relative;
   width: 350px;
-  height: $toast-height;
+  max-height: $toast-max-height;
   -webkit-box-shadow: -3px 3px 8px 2px rgba(0, 0, 0, 0.3);
   box-shadow: -3px 3px 8px 2px rgba(0, 0, 0, 0.3);
   background-color: #fff;
+  overflow: hidden;
+
   &:not(.toast--disappear) {
     animation: slide-in-left 0.2s forwards;
   }
 
   &--disappear {
-    animation: toast-disappear 0.4s forwards;
+    animation: toast-disappear 0.2s forwards;
   }
 
   &__container {
@@ -21,18 +30,40 @@ $toast-height: 90px;
     position: fixed;
     left: 20px;
     bottom: 20px;
-    row-gap: 10px;
+    row-gap: 15px;
     pointer-events: none;
     z-index: 60;
   }
 
   &__icon {
+    width: 40px;
+    height: 40px;
+
+    & > svg {
+      width: 100%;
+      height: 100%;
+    }
   }
 
   &__content {
+    @include text-style-semibold-type-16;
+
+    color: $color-secondary-500;
+    margin-right: 40px;
+    word-break: break-all;
+    width: 240px;
   }
 
   &__close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: $color-secondary-400;
+    margin: 4px;
+    align-self: flex-start;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
   }
 
   &__progress {
@@ -41,8 +72,54 @@ $toast-height: 90px;
     left: 0;
     bottom: 0;
     width: 0;
-    height: 3px;
+    height: $toast-progress-height;
     animation: progress forwards linear;
+  }
+}
+
+.toast {
+  &--success {
+    .toast {
+      &__icon {
+        color: $color-success-800;
+      }
+      &__progress {
+        background-color: $color-success-800;
+      }
+    }
+  }
+
+  &--error {
+    .toast {
+      &__icon {
+        color: $color-error-700;
+      }
+      &__progress {
+        background-color: $color-error-700;
+      }
+    }
+  }
+
+  &--info {
+    .toast {
+      &__icon {
+        color: $color-information-700;
+      }
+      &__progress {
+        background-color: $color-information-700;
+      }
+    }
+  }
+
+  &--pending {
+    .toast {
+      &__icon {
+        color: $color-secondary-500;
+      }
+      &__progress {
+        background-color: $color-secondary-500;
+      }
+    }
   }
 }
 
@@ -59,15 +136,15 @@ $toast-height: 90px;
   0% {
     transform: translateX(0);
     opacity: 1;
-    height: $toast-height;
+    max-height: $toast-max-height;
   }
   80% {
     transform: translateX(100%);
     opacity: 0;
-    height: $toast-height;
+    max-height: $toast-max-height;
   }
   100% {
-    height: 0;
+    max-height: 0;
     opacity: 0;
     transform: translateX(100%);
   }

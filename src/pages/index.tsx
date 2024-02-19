@@ -2,21 +2,14 @@ import Head from "next/head";
 import { Banner } from "@/components/Banner";
 import bannerCar1 from "@/assets/img/banner_car_1.png";
 import bannerCar2 from "@/assets/img/banner_car_2.png";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { CardsContainer } from "@/components/Cards";
 import { ShowMore } from "@/components/Cards/ShowMore";
 import { popularCarsMockup, recommendationCars } from "@/constants/mockupData";
 import { PickerSection } from "@/components/Picker/PickerSection";
 import { usePickerSectionData } from "@/components/Picker/hooks/usePickerSectionData";
-import axios from "axios";
-import { useToast } from "@/components/Toast/useToast";
 
 export default function Home() {
-  const toast = useToast();
-
-  const testToast = () =>
-    toast.addToast({ content: "Test", type: "success", duration: 1000 });
-
   const [recommendationCarsDisplayLimit, setRecommendationCarsDisplayLimit] =
     useState(8);
 
@@ -47,7 +40,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <section onClick={testToast} className="container banner__section">
+      <section className="container banner__section">
         <Banner
           variant="light"
           title="The Best Platform for Car Rental"

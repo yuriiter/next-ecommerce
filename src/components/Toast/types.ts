@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 
-export type ToastType = "success" | "warning" | "info" | "error" | "pending";
+export type ToastType = "success" | "info" | "error" | "pending";
 
 export type ToastParams = {
   type: ToastType;
