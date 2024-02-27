@@ -14,6 +14,7 @@ export type SelectProps = {
   className?: string;
   disabled?: boolean;
   placement?: Placement;
+  forceUseNativeSelect?: boolean;
 };
 
 export const Select = ({
@@ -24,10 +25,11 @@ export const Select = ({
   className,
   disabled = false,
   placement,
+  forceUseNativeSelect = false,
 }: SelectProps) => {
   const useNativeSelect = useMQ("MD", "max");
 
-  if (useNativeSelect && !disabled) {
+  if (forceUseNativeSelect || (useNativeSelect && !disabled)) {
     return (
       <NativeSelectInput
         placeholder={placeholder}
