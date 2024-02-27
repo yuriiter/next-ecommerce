@@ -1,4 +1,4 @@
-import { SidebarInputGroup } from "./components/Sidebar/types";
+import { CSSProperties } from "react";
 
 export const mod = (a: number, n: number): number => {
   return a - n * Math.floor(a / n);
@@ -16,6 +16,20 @@ export const cn = (classNames: (string | undefined | null | boolean)[]) =>
       (className) => typeof className === "string" && className.length > 0,
     )
     .join(" ");
+
+export const joinStyles = (
+  styles: (CSSProperties | undefined | null | boolean)[],
+): CSSProperties => {
+  const validStyles = styles.filter(
+    (style) => typeof style === "object" && style !== null,
+  ) as CSSProperties[];
+
+  const mergedStyles = validStyles.reduce((acc, style) => {
+    return { ...acc, ...style };
+  }, {});
+
+  return mergedStyles;
+};
 
 export const copy = <T>(ob: T) => JSON.parse(JSON.stringify(ob)) as T;
 
