@@ -1,3 +1,5 @@
+import { CSSProperties, HTMLAttributes, ComponentPropsWithoutRef } from "react";
+
 export type StringUnionToBooleanKeys<T extends string> = {
   [TrueKey in T]?: boolean;
 };
@@ -12,3 +14,14 @@ export type CamelCase<
   : IsStart extends true
     ? undefined
     : Capitalize<S>;
+
+export type WithStyleAndClassName = {
+  className?: string;
+  style?: CSSProperties;
+};
+
+export type Tags = keyof JSX.IntrinsicElements;
+
+export type WithAsProp<T extends Tags> = {
+  as?: T | Tags;
+} & (ComponentPropsWithoutRef<T> & HTMLAttributes<HTMLOrSVGElement>);
