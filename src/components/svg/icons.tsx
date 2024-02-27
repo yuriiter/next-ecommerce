@@ -1146,7 +1146,7 @@ export const Loader = ({ className, ...rest }: IconProps) => {
     <svg
       viewBox="0 0 100 100"
       preserveAspectRatio="xMidYMid"
-      className={cn(["rotate-animation", className])}
+      className={cn(["animate-rotate", className])}
       {...rest}
     >
       <circle
