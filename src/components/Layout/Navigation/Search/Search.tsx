@@ -37,11 +37,13 @@ export const Search = ({ className }: SearchProps) => {
 
   return (
     <div className={cn(["search", className])} onClick={handleClickOnWrapper}>
-      <SearchIcon
-        className="search__icon"
-        // ref={searchIconRef}
-        onClick={stopPropagation}
-      />
+      <Tooltip content="Search">
+        <SearchIcon
+          className="search__icon"
+          // ref={searchIconRef}
+          onClick={stopPropagation}
+        />
+      </Tooltip>
       <input
         placeholder="Search something here"
         ref={inputRef}
