@@ -1,29 +1,58 @@
-@keyframes appear {
+.animate-rotate {
+  animation: rotate 0.6s infinite linear;
+}
+
+.animate-appear {
+  animation: appear 0.08s ease-out forwards;
+}
+
+.animate-disappear {
+  animation: disappear 0.1s ease-out forwards;
+}
+
+.animate-fadein {
+  animation: fadein 0.08s ease-out forwards;
+}
+
+.animate-fadeout {
+  animation: fadeout 0.08s ease-out forwards;
+}
+
+@keyframes fadein {
   from {
-    transform: scale(0.7);
-    opacity: 0.8;
+    opacity: 0;
   }
 
   to {
-    transform: scale(1);
     opacity: 1;
+  }
+}
+
+@keyframes fadeout {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
   }
 }
 
 @keyframes disappear {
   0% {
-    transform: scale(1);
+    scale: 1;
     opacity: 1;
   }
 
   70% {
-    transform: scale(0.9);
+    scale: 0.9;
     opacity: 0;
   }
 
   100% {
-    transform: scale(0.9);
+    scale: 0.9;
     opacity: 0;
+    display: none;
   }
 }
 
@@ -46,6 +75,7 @@
   to {
     transform: translateX(-100%);
     opacity: 0;
+    display: none;
   }
 }
 
@@ -68,11 +98,8 @@
   to {
     transform: translateX(100%);
     opacity: 0;
+    display: none;
   }
-}
-
-.rotate-animation {
-  animation: rotate 0.6s infinite linear;
 }
 
 @keyframes rotate {

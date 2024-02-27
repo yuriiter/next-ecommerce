@@ -1,17 +1,14 @@
-import { Placement } from "@/types/common";
 import { useEffect, useRef, useState } from "react";
 
 type UseFollowMouseTooltipParams = {
   followMouse: boolean;
-  placement: Placement;
 };
 
 export const useFollowMouseTooltip = ({
   followMouse,
-  placement,
 }: UseFollowMouseTooltipParams) => {
   const tooltipWrapperRef = useRef<HTMLDivElement>(null);
-  const [leftTop, setLeftTop] = useState([0, 0]);
+  const [leftTop, setLeftTop] = useState<[number, number]>([0, 0]);
 
   useEffect(() => {
     const { current: tooltipWrapper } = tooltipWrapperRef;
