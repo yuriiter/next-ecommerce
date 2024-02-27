@@ -15,6 +15,7 @@ export type DateInputProps = {
   className?: string;
   disabled?: boolean;
   placement?: Placement;
+  forceUseNativeSelect?: boolean;
 };
 
 export const DateInput = ({
@@ -26,11 +27,12 @@ export const DateInput = ({
   className,
   disabled = false,
   placement,
+  forceUseNativeSelect = false,
 }: DateInputProps) => {
   const valueAsString = value ? dateToString(value) : value;
   const useNativeSelect = useMQ("MD", "max");
 
-  if (useNativeSelect && !disabled) {
+  if (forceUseNativeSelect || (useNativeSelect && !disabled)) {
     return (
       <NativeDateInput
         placeholder={placeholder}
