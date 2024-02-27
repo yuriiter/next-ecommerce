@@ -13,7 +13,7 @@ const transformString = (value: string | string[] | undefined) => {
 
 export const useURLQueryObjectState = <T extends Record<string, unknown>>(
   initialValue: T
-): [T, SetStateAction<T>] => {
+): [T, (newValueOrAction: SetStateAction<T>) => void] => {
   const router = useRouter();
 
   const getQueryValue = useCallback((): T => {
@@ -62,7 +62,6 @@ export const useURLQueryObjectState = <T extends Record<string, unknown>>(
     },
     [router]
   );
-  console.log(JSON.stringify(currentState));
 
   return [currentState, updateQuery];
 };
