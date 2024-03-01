@@ -8,7 +8,7 @@ import initRouters from "@utils/initRouters"
 import ExpressError from "@errors/ExpressError"
 import accountRouter from "@routers/account.router"
 import { PORT } from "@/config"
-import pool from "@/db/db"
+import { closeMongoDBConnection, connectToMongoDB } from "@/db/db"
 import carRouter from "@routers/car.router"
 
 dotenv.config()
@@ -30,14 +30,9 @@ app.get("/health", (req, res) => {
 
 app.listen(PORT, () => {
     console.log(`Server is runniung on port ${PORT}`)
+    void connectToMongoDB()
 })
 
 app.on("close", () => {
-    pool.end()
-        .then(() => {
-            console.log("PostgreSQL pool closed")
-        })
-        .catch((err) => {
-            console.error("Error closing PostgreSQL pool:", err)
-        })
+    void closeMongoDBConnection()
 })

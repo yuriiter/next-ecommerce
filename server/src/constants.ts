@@ -1,5 +1,3 @@
-export const PENPALS_ENDPOINT = 'https://studentsoftheworld.info/penpals/penpal_ads.php'
-export const PENPAL_ENDPOINT = 'https://studentsoftheworld.info/penpals/mypage_light.php'
-export const PENPAL_BOX_ENDPOINT = 'https://studentsoftheworld.info/mail/box.php'
-export const PENPAL_REGISTRATION = 'https://studentsoftheworld.info/penpals/insert_bdd.php'
+import { DB_HOST, DB_PORT, DB_USER, DB_PASSWORD } from "@/config"
 
+export const mongoUrl = `mongodb+srv://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/test?retryWrites=true&w=majority`
