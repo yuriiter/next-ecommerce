@@ -2,7 +2,7 @@ import { cn } from "@/utils";
 import React, {
   useState,
   HTMLAttributes,
-  ComponentPropsWithoutRef,
+  ComponentPropsWithRef,
   useEffect,
 } from "react";
 import { Tags, WithAsProp } from "@/types/utils";
@@ -19,7 +19,7 @@ type AnimatedDisplaySpecialProps = {
 
 type AnimatedDisplayProps<T extends Tags> = WithAsProp<T> &
   AnimatedDisplaySpecialProps &
-  (ComponentPropsWithoutRef<T> & HTMLAttributes<HTMLOrSVGElement>);
+  (ComponentPropsWithRef<T> & HTMLAttributes<HTMLOrSVGElement>);
 
 export const AnimatedDisplay = <T extends Tags = typeof DEFAULT_TAG>({
   as = DEFAULT_TAG,

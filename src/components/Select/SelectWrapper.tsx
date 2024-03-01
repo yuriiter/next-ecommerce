@@ -1,5 +1,4 @@
 import React, { ReactNode, useCallback, useRef, useState } from "react";
-import { ArrowDownIcon } from "../svg/icons";
 import { Dropdown } from "./Dropdown/Dropdown";
 import { useClickOutside } from "@/hooks/useClickOutside";
 import { cn } from "@/utils";

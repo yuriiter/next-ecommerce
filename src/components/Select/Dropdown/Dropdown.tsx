@@ -1,4 +1,5 @@
 import { Placement } from "@/types/common";
+import { AnimatedDisplay } from "@/components/AnimatedDisplay";
 import { cn } from "@/utils";
 import React, {
   Dispatch,
@@ -36,18 +37,17 @@ export const Dropdown = ({
     <DropdownContext.Provider
       value={{ dropdownOpen: open, setDropdownOpen: setOpen }}
     >
-      <div
+      <AnimatedDisplay
         tabIndex={open ? 0 : -1}
+        display={open}
         className={cn([
           "select__dropdown",
-          open && "select__dropdown--open",
-          !open && "select__dropdown--closed",
           `select__dropdown--${placement}`,
           className,
         ])}
       >
         {children}
-      </div>
+      </AnimatedDisplay>
     </DropdownContext.Provider>
   );
 };

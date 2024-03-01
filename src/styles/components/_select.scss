@@ -79,17 +79,6 @@
     border-radius: 5px;
     background-color: $color-primary-0;
     width: 280px;
-
-    &--closed {
-      animation: disappear 0.1s ease-out forwards;
-      display: none;
-    }
-
-    &--open {
-      pointer-events: all;
-      display: block;
-      animation: appear 0.08s ease-out forwards;
-    }
   }
 
   &__value {
