@@ -1,0 +1,28 @@
+version: "3"
+
+services:
+  db:
+    image: mongo
+    restart: unless-stopped
+    env_file:
+      - ./.env
+      - ./.env.local
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=DB_USER
+      - MONGO_INITDB_ROOT_PASSWORD=DB_PASSWORD
+    ports:
+      - $DB_PORT:$DB_PORT
+    volumes:
+      - /data/db:/data/db
+
+  app:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - "3000:80"
+    depends_on:
+      - db
+    env_file:
+      - ./.env
+      - ./.env.local
