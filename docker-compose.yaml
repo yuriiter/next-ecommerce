@@ -6,14 +6,17 @@ services:
     restart: unless-stopped
     env_file:
       - ./.env
-      - ./.env.local
+      # - ./.env.${NODE_ENV}
+      # - ./.env.local
+      # - ./.env.local.${NODE_ENV}
     environment:
-      - MONGO_INITDB_ROOT_USERNAME=DB_USER
-      - MONGO_INITDB_ROOT_PASSWORD=DB_PASSWORD
+      - MONGO_INITDB_ROOT_USERNAME=${DB_USER}
+      - MONGO_INITDB_ROOT_PASSWORD=${DB_PASSWORD}
+      - MONGO_INITDB_DATABASE=${DB_NAME}
     ports:
-      - $DB_PORT:$DB_PORT
+      - ${DB_PORT}:${DB_PORT}
     volumes:
-      - /data/db:/data/db
+      - db_volume:/data/db
 
   app:
     build:
@@ -25,4 +28,9 @@ services:
       - db
     env_file:
       - ./.env
-      - ./.env.local
+      # - ./.env.${NODE_ENV}
+      # - ./.env.local
+      # - ./.env.local.${NODE_ENV}
+
+volumes:
+  db_volume:

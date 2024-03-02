@@ -4,9 +4,10 @@
   "private": true,
   "scripts": {
     "next:dev": "next dev",
-    "db:dev": "docker-compose down db; docker-compose up db >/dev/null",
+    "db:dev": "docker-compose down; docker-compose up --remove-orphans db 0>&1> /dev/null",
     "express:dev": "pnpm run --prefix ./server dev",
-    "dev": "pnpx concurrently \"pnpm run next:dev\" \"pnpm run express:dev\"",
+    "docker:reset": "docker-compose down -v; docker-compose rm -f",
+    "dev": "pnpx concurrently \"pnpm run next:dev\" \"pnpm run express:dev\" \"pnpm run db:dev\" ",
     "build": "docker-compose up -d",
     "start": "next start"
   },
@@ -17,6 +18,7 @@
     "axios": "^1.6.2",
     "eslint": "8.47.0",
     "eslint-config-next": "13.4.13",
+    "jsonwebtoken": "^9.0.2",
     "next": "13.4.13",
     "react": "18.2.0",
     "react-dom": "18.2.0",
