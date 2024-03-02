@@ -20,7 +20,6 @@ export interface SignUpDtoType {
 export type Permission = "anonymous" | "user"
 
 export interface ReqLocalUser {
-    id: string | undefined
     email: string | undefined
-    role: Permission | undefined
+    fullName: string | undefined
 }

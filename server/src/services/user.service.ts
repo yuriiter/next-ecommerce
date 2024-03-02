@@ -1,14 +1,29 @@
 import { hashPassword } from "@utils/utils"
-import { getUserByEmailAndPasswordHashQuery } from "@/db/queries"
+import { UserModel } from "@models/index"
+import { type CreateUserSchema } from "@schemas/users.schema"
 
 export const validateUser = async (email: string, password: string) => {
-    const userResult = await getUserByEmailAndPasswordHashQuery([
-        email,
-        await hashPassword(password),
-    ])
+    const hashedPassword = await hashPassword(password)
+    return await UserModel.findOne({ email, passwordHash: hashedPassword })
+}
 
-    if (userResult.rowCount !== 1)
-        return { id: undefined, email: undefined, role: undefined }
+export const createUser = async (userData: CreateUserSchema) => {
+    const { password, ...rest } = userData
+    const passwordHash = await hashPassword(password)
+    const newUser = new UserModel({ ...rest, passwordHash })
+    await newUser.save()
 
-    return userResult.rows[0]
+    const newUserAsObject = newUser.toObject()
+    delete newUserAsObject.passwordHash
+
+    return newUserAsObject
+}
+
+export const getUserByEmail = async (email: string) => {
+    const user = await UserModel.findOne({ email })
+    const userAsObject = user.toObject()
+
+    delete userAsObject.passwordHash
+
+    return userAsObject
 }

@@ -1,17 +1,37 @@
 import { type NextFunction, type Request, type Response, Router } from "express"
-import queryValidation from "@middleware/queryValidation.middleware"
-import { getUsersQueryParams } from "@schemas/users.schema"
+import { type CreateUserSchema, createUserSchema } from "@schemas/users.schema"
+import validateBody from "@middleware/bodyValidation.middleware"
+import { createUser, getUserByEmail } from "@services/user.service"
 
 const userRouter = Router()
 const initialRouter = Router()
 
 initialRouter.get(
-    "/",
-    queryValidation(getUsersQueryParams),
-    (req: Request, res: Response, next: NextFunction) => {
+    "/:email",
+    (req: Request<{ email: string }>, res: Response, next: NextFunction) => {
         void (async () => {
             try {
-                const a = "comment" //
+                const user = await getUserByEmail(req.params.email)
+                return res.status(200).json({ data: { user } })
+            } catch (err) {
+                next(err)
+            }
+        })()
+    }
+)
+
+initialRouter.post(
+    "/",
+    validateBody(createUserSchema),
+    (
+        req: Request<unknown, unknown, CreateUserSchema>,
+        res: Response,
+        next: NextFunction
+    ) => {
+        void (async () => {
+            try {
+                const newUser = await createUser(req.body)
+                return res.status(200).json({ data: { user: newUser } })
             } catch (err) {
                 next(err)
             }

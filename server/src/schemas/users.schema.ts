@@ -1,10 +1,17 @@
 import { z } from "zod"
+import { passwordSchema } from "./utils.schema"
 
-export const getUsersQueryParams = z.object({
-    country: z.optional(z.string().nonempty()),
-    ageFrom: z.optional(z.string().regex(/^\d+$/).transform(Number)),
-    ageTo: z.optional(z.string().regex(/^\d+$/).transform(Number)),
-    refOrMail: z.optional(
-        z.union([z.string().email(), z.string().regex(/\d{6}/)])
-    ),
+export const createUserSchema = z.object({
+    email: z.string().email(),
+    fullName: z.string().min(1).max(50),
+    password: passwordSchema,
+    avatar: z.string().optional(),
 })
+
+export const authenticationSchema = z.object({
+    email: z.string().email(),
+    password: passwordSchema,
+})
+
+export type CreateUserSchema = z.infer<typeof createUserSchema>
+export type AuthenticationSchema = z.infer<typeof authenticationSchema>

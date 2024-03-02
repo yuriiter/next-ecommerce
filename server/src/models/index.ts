@@ -45,6 +45,13 @@ export interface LinkData extends Document {
     content: any
 }
 
+export interface UserData extends Document {
+    email: string
+    avatar: string
+    fullName: string
+    passwordHash: string
+}
+
 const ReviewSchema = new Schema({
     id: String,
     avatar: String,
@@ -73,11 +80,13 @@ const CarSchema = new Schema({
     reviews: [ReviewSchema],
 })
 
+const UserSchema = new Schema({
+    email: { type: String, unique: true },
+    avatar: String,
+    fullName: String,
+    passwordHash: String,
+})
+
 export const ReviewModel = mongoose.model<Review>("Review", ReviewSchema)
 export const CarModel = mongoose.model<CarData>("Car", CarSchema)
-
-// CarSchema.virtual('rating').get(function () {
-//   if(this.reviews)
-//     return this.reviews.reduce((sum, currentReview) => return sum + currentReview.rating) / this.reviews.length
-//     return 0
-// })
+export const UserModel = mongoose.model<UserData>("User", UserSchema)

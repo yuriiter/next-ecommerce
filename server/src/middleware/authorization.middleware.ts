@@ -1,50 +1,43 @@
-import ExpressError from "@errors/ExpressError"
-import { validateUser } from "@services/user.service"
+import { getUserByEmail } from "@services/user.service"
 import { type Permission } from "@typings/user"
+import { verifyJWT } from "@utils/utils"
 import { type NextFunction, type Request, type Response } from "express"
-import * as jwt from "jsonwebtoken"
 
 const authorizationMiddleware = (minPermissionRole: Permission) => {
     return (req: Request, _res: Response, next: NextFunction): void => {
         void (async () => {
-            console.log("request")
             try {
                 const token: string | undefined =
                     req.cookies.authorization_token
                 if (token === undefined) {
                     if (minPermissionRole === "user")
-                        throw ExpressError.BAD_CREDENTIALS
+                        // TODO: CREATE EXPRESSERROR CLASS
+                        // throw ExpressError.BAD_CREDENTIALS
+                        throw new Error("Not authorized")
                     next()
                 } else {
-                    const JWT_SECRET = process.env.JWT_SECRET
-
-                    const decoded: jwt.JwtPayload = jwt.verify(
-                        token,
-                        JWT_SECRET
-                    ) as jwt.JwtPayload
+                    const decoded = verifyJWT(token)
 
                     if (
-                        decoded?.sub === undefined ||
-                        (decoded?.password as string | undefined) === undefined
+                        typeof decoded !== "string" &&
+                        typeof decoded?.sub !== "string"
                     ) {
-                        throw ExpressError.BAD_CREDENTIALS
+                        // throw ExpressError.BAD_CREDENTIALS
+                        throw new Error("Not authorized")
                     }
                     const email = decoded.sub
-                    const password = decoded.password
 
-                    const { id, role } = await validateUser(email, password)
-
-                    const isValid = true
-                    if (isValid) {
-                        const { sub: email } = decoded
+                    const user = await getUserByEmail(email)
+                    if (user) {
+                        const { email, fullName } = user
                         req.locals.user = {
-                            id,
                             email,
-                            role,
+                            fullName,
                         }
                         next()
                     } else if (minPermissionRole === "user")
-                        throw ExpressError.BAD_CREDENTIALS
+                        // throw ExpressError.BAD_CREDENTIALS
+                        throw new Error("Not authorized")
                 }
             } catch (err) {
                 console.error(err)
