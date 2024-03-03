@@ -1,20 +1,12 @@
 import { type NextFunction, type Request, type Response, Router } from "express"
-import queryValidation from "@middleware/queryValidation.middleware"
-import {
-    type CreateUserSchema,
-    createUserSchema,
-    getUsersQueryParams,
-    authenticationSchema,
-    AuthenticationSchema,
-} from "@schemas/users.schema"
 import validateBody from "@middleware/bodyValidation.middleware"
-import {
-    createUser,
-    getUserByEmail,
-    validateUser,
-} from "@services/user.service"
+import { getUserByEmail, validateUser } from "@services/user.service"
 import authorizationMiddleware from "@middleware/authorization.middleware"
-import { buildResponse, createJWT, createJWT } from "@utils/utils"
+import { buildResponse, createJWT } from "@utils/utils"
+import {
+    type AuthenticationSchema,
+    authenticationSchema,
+} from "@schemas/users.schema"
 
 const sessionRouter = Router()
 const initialRouter = Router()
@@ -27,7 +19,7 @@ initialRouter.get(
         void (async () => {
             try {
                 const user = await getUserByEmail(req.locals.user.email)
-                return res.status(200).json(buildResponse(200, undefined, user))
+                return res.status(200).json(buildResponse(200, user))
             } catch (err) {
                 next(err)
             }
@@ -46,12 +38,14 @@ initialRouter.post(
     ) => {
         void (async () => {
             try {
-                const user = await validateUser(...req.body)
-                if (!user) throw ExpressError.UNAUTHORIZED
+                const user = await validateUser(
+                    req.body.email,
+                    req.body.password
+                )
 
-                const jwt = createJWT(user.email)
-                res.cookie("jwt", jwt, { maxAge: 900000, httpOnly: true })
-                return res.status(200).json(buildResponse(200, undefined, user))
+                const jwt = createJWT(user.email, "user")
+                res.cookie("jwt", jwt, { maxAge: 86400, httpOnly: true })
+                return res.status(200).json(buildResponse(200, user))
             } catch (err) {
                 next(err)
             }
