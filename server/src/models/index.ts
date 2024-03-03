@@ -1,3 +1,4 @@
+import { Permission } from "@typings/user"
 import mongoose, { Schema, type Document } from "mongoose"
 
 export type CarType = "SUV" | "sport" | "hatchback" | "sedan"
@@ -50,6 +51,7 @@ export interface UserData extends Document {
     avatar: string
     fullName: string
     passwordHash: string
+    permission: Permission
 }
 
 const ReviewSchema = new Schema({
@@ -85,6 +87,7 @@ const UserSchema = new Schema({
     avatar: String,
     fullName: String,
     passwordHash: String,
+    permission: { type: String, enum: ["anonymous", "user", "admin"] },
 })
 
 export const ReviewModel = mongoose.model<Review>("Review", ReviewSchema)
