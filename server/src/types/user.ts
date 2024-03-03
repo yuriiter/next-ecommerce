@@ -17,9 +17,10 @@ export interface SignUpDtoType {
     avatar?: Express.Multer.File
 }
 
-export type Permission = "anonymous" | "user"
+export type Permission = "anonymous" | "user" | "admin"
 
 export interface ReqLocalUser {
     email: string | undefined
     fullName: string | undefined
+    permission: Permission | undefined
 }
