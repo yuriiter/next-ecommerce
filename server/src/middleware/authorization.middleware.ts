@@ -1,3 +1,4 @@
+import ExpressError from "@errors/ExpressError"
 import { getUserByEmail } from "@services/user.service"
 import { type Permission } from "@typings/user"
 import { verifyJWT } from "@utils/utils"
@@ -11,33 +12,30 @@ const authorizationMiddleware = (minPermissionRole: Permission) => {
                     req.cookies.authorization_token
                 if (token === undefined) {
                     if (minPermissionRole === "user")
-                        // TODO: CREATE EXPRESSERROR CLASS
-                        // throw ExpressError.BAD_CREDENTIALS
-                        throw new Error("Not authorized")
+                        throw ExpressError.BAD_CREDENTIALS
                     next()
                 } else {
-                    const decoded = verifyJWT(token)
+                    const decoded = await verifyJWT(token)
 
-                    if (
-                        typeof decoded !== "string" &&
-                        typeof decoded?.sub !== "string"
-                    ) {
-                        // throw ExpressError.BAD_CREDENTIALS
-                        throw new Error("Not authorized")
-                    }
-                    const email = decoded.sub
+                    if (!decoded) throw ExpressError.BAD_CREDENTIALS
+
+                    const { email, permission, fullName } = decoded as any
 
                     const user = await getUserByEmail(email)
                     if (user) {
-                        const { email, fullName } = user
+                        if (
+                            permission === "user" &&
+                            minPermissionRole === "admin"
+                        )
+                            throw ExpressError.BAD_CREDENTIALS
                         req.locals.user = {
                             email,
                             fullName,
+                            permission,
                         }
                         next()
-                    } else if (minPermissionRole === "user")
-                        // throw ExpressError.BAD_CREDENTIALS
-                        throw new Error("Not authorized")
+                    } else if (minPermissionRole !== "anonymous")
+                        throw ExpressError.BAD_CREDENTIALS
                 }
             } catch (err) {
                 console.error(err)
