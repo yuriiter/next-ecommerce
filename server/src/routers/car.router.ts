@@ -1,7 +1,8 @@
 import { type NextFunction, type Request, type Response, Router } from "express"
-import queryValidation from "@middleware/queryValidation.middleware"
 import authorizationMiddleware from "@middleware/authorization.middleware"
-import { carsQuerySchema } from "@schemas/carFilters.schema"
+import { type carsQuery } from "@typings/carsQuery"
+import { getCars } from "@services/car.service"
+import { buildResponse } from "@utils/utils"
 
 const carRouter = Router()
 const initialRouter = Router()
@@ -9,14 +10,17 @@ const initialRouter = Router()
 carRouter.get(
     "/",
     authorizationMiddleware("anonymous"),
-    queryValidation(carsQuerySchema),
-    (req: Request, res: Response, next: NextFunction) => {
+    (
+        req: Request<unknown, unknown, carsQuery>,
+        res: Response,
+        next: NextFunction
+    ) => {
         void (async () => {
             try {
                 const filters = req.query
+                const cars = getCars(filters, req.locals.user.email)
 
-                const data: number[] = []
-                return res.send(data)
+                return res.status(200).send(buildResponse(200, cars))
             } catch (err) {
                 next(err)
             }
