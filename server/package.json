@@ -44,7 +44,7 @@
         "@interfaces": "dist/interfaces",
         "@models": "dist/models",
         "@schemas": "dist/schemas",
-        "@typings": "dist/types",
+        "@types": "dist/types",
         "@errors": "dist/errors",
         "@services": "dist/services",
         "@": "dist/"

@@ -1,6 +1,6 @@
-import { type carsQuery } from "@typings/carsQuery"
+import { type CarsQuery } from "@types/carsQuery"
 
-export const buildCarQuery = (query: carsQuery) => {
+export const buildCarQuery = (query: CarsQuery) => {
     const {
         typeSport,
         typeSUV,

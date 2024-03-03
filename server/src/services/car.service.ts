@@ -1,5 +1,5 @@
 import { CarModel } from "@models/index"
-import { type carsQuery } from "@typings/carsQuery"
+import { type carsQuery } from "@types/carsQuery"
 import { buildCarQuery } from "@utils/buildCarsQuery"
 
 export const getCars = async (query: carsQuery, userEmail?: string) => {

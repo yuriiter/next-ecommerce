@@ -1,6 +1,6 @@
-import { type sortFilter } from "./sortFilter"
+import { type SortFilter } from "./sortFilter"
 
-export type carsQuery = sortFilter & {
+export type CarsQuery = SortFilter & {
     typeSport?: boolean
     typeSUV?: boolean
     typeMPV?: boolean

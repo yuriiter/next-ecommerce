@@ -38,7 +38,7 @@
             "@interfaces/*": ["interfaces/*"],
             "@models/*": ["models/*"],
             "@schemas/*": ["schemas/*"],
-            "@typings/*": ["types/*"],
+            "@types/*": ["types/*"],
             "@errors/*": ["errors/*"],
             "@services/*": ["services/*"],
             "@/*": ["./*"]

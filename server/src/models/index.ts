@@ -1,4 +1,4 @@
-import { Permission } from "@typings/user"
+import { Permission } from "@types/user"
 import mongoose, { Schema, type Document } from "mongoose"
 
 export type CarType = "SUV" | "sport" | "hatchback" | "sedan"

@@ -1,6 +1,6 @@
 import { type NextFunction, type Request, type Response, Router } from "express"
 import authorizationMiddleware from "@middleware/authorization.middleware"
-import { type carsQuery } from "@typings/carsQuery"
+import { type carsQuery } from "@types/carsQuery"
 import { getCars } from "@services/car.service"
 import { buildResponse } from "@utils/utils"
 
@@ -18,7 +18,7 @@ carRouter.get(
         void (async () => {
             try {
                 const filters = req.query
-                const cars = getCars(filters, req.locals.user.email)
+                const cars = getCars(filters, req.locals?.user?.email)
 
                 return res.status(200).send(buildResponse(200, cars))
             } catch (err) {
@@ -27,29 +27,6 @@ carRouter.get(
         })()
     }
 )
-
-// messageRouter.get(`${routerPath}/:refOrMail`, async (req: Request, res: Response, next: NextFunction) => {
-//     try {
-//         const refOrMail = req.params.refOrMail as Nullable<string>
-//         const data = await getUser(refOrMail)
-//         return res.send(data)
-//
-//     } catch (err) {
-//         next(err)
-//     }
-// });
-
-// messageRouter.get(`${routerPath}`, authorizationMiddleware(), async (req: Request, res: Response, next: NextFunction) => {
-//     try {
-//         const refOrMail = req.query.refOrMail as Nullable<string>
-//         const password = req.query.password as Nullable<string>
-//         const messages = await getUser(refOrMail)
-//         return res.send(data)
-//
-//     } catch (err) {
-//         next(err)
-//     }
-// });
 
 initialRouter.use("/cars", carRouter)
 

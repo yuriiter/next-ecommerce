@@ -1,6 +1,6 @@
 import { codeToMessage } from "@/code"
 import { JWT_EXPIRES, JWT_SECRET } from "@/config"
-import { type Permission } from "@typings/user"
+import { type Permission } from "@types/user"
 import argon2 from "argon2"
 import jwt, { type JwtPayload } from "jsonwebtoken"
 

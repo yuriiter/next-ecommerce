@@ -1,4 +1,4 @@
-export type sortFilter = {
+export type SortFilter = {
     page?: number
     pageSize?: number
 }
