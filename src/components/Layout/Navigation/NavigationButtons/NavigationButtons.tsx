@@ -45,7 +45,7 @@ export const NavigationButtons = () => {
         </IconButton>
       </Tooltip>
       <Tooltip content="Profile" placement="center-bottom">
-        <Avatar />
+        <Avatar asButton />
       </Tooltip>
     </div>
   );

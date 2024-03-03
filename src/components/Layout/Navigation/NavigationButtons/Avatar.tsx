@@ -1,17 +1,22 @@
 import React from "react";
-import avatarPhoto from "@/assets/img/avatar.jpg";
-import Image from "next/image";
-import Link from "next/link";
 import { cn } from "@/utils";
+import { AvatarIcon } from "@/components/svg/icons";
+import { IconButton } from "@/components/Button";
 
 type AvatarProps = {
   className?: string;
+  asButton?: boolean;
 };
 
-export const Avatar = ({ className }: AvatarProps) => {
+export const Avatar = ({ className, asButton = false }: AvatarProps) => {
   return (
-    <Link href="#" className={cn(["navigation__avatar", className])}>
-      <Image alt="Profile photo" src={avatarPhoto} />
-    </Link>
+    <IconButton
+      disabled={!asButton}
+      variant="secondary"
+      size="md"
+      className={cn(["navigation__button ", className])}
+    >
+      <AvatarIcon />
+    </IconButton>
   );
 };
