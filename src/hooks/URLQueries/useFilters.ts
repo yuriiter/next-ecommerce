@@ -5,10 +5,12 @@ import { useURLQueryObjectState } from "./useURLQueryObjectState";
 import { copy } from "@/utils";
 
 const sidebarInputsToQueryState = (sidebarInputs: SidebarInputGroup[]) =>
-  sidebarInputs.reduce((filtersObject, group) => {
-    group.inputs.forEach(({ key, value }) => {
-      filtersObject[key] = value;
-    });
+  sidebarInputs.reduce((filtersObject, { groupName, inputs }) => {
+    const inputsString = inputs
+      .filter(({ value }) => ![null, undefined, false, ""].includes(value))
+      .join(",");
+
+    if (inputsString !== "") filtersObject[groupName] = inputsString;
     return filtersObject;
   }, {});
 
