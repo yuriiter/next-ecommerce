@@ -1,13 +1,18 @@
 import { Permission } from "@types/user"
 import mongoose, { Schema, type Document } from "mongoose"
 
-export type CarType = "SUV" | "sport" | "hatchback" | "sedan"
+export type CarType = "SUV" | "Sport" | "Hatchback" | "Sedan"
+
+export type PickerData = {
+    location?: string
+    dateTime?: Date
+}
 
 export interface RentalData extends Document {
     id: string
     car: CarData
-    // pickUpData: PickerData | undefined
-    // dropOffData: PickerData | undefined
+    pickUpData: PickerData | undefined
+    dropOffData: PickerData | undefined
     total: number
 }
 
@@ -55,7 +60,6 @@ export interface UserData extends Document {
 }
 
 const ReviewSchema = new Schema({
-    id: String,
     avatar: String,
     fullName: String,
     caption: String,
@@ -64,8 +68,21 @@ const ReviewSchema = new Schema({
     comment: String,
 })
 
+const DateTimeLocation = {
+    dateTime: Date,
+    location: String,
+}
+
+const ImageSchema = new Schema({
+    name: String,
+    desc: String,
+    img: {
+        data: Buffer,
+        contentType: String,
+    },
+})
+
 const CarSchema = new Schema({
-    id: String,
     name: String,
     title: String,
     subtitle: String,
@@ -76,10 +93,16 @@ const CarSchema = new Schema({
     price: Number,
     previousPrice: Number,
     isInFavorites: Boolean,
-    thumbnail: String,
-    photos: [String],
+    thumbnail: ImageSchema,
+    photos: [ImageSchema],
     description: String,
     reviews: [ReviewSchema],
+    rentalData: [
+        {
+            pickUpData: DateTimeLocation,
+            dropOffData: DateTimeLocation,
+        },
+    ],
 })
 
 const UserSchema = new Schema({
