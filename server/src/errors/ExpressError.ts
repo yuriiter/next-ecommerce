@@ -1,10 +1,14 @@
+import { codeToMessage } from "@/code"
+import { buildResponse } from "@utils/utils"
 import { type NextFunction, type Request, type Response } from "express"
 
 export default class ExpressError extends Error {
     public statusCode: number
+    public message: string
 
-    constructor(message: string, statusCode: number) {
-        super(message)
+    constructor(statusCode: number, customMessage?: string) {
+        super(customMessage ?? codeToMessage[statusCode])
+        this.message = customMessage ?? codeToMessage[statusCode]
         this.statusCode = statusCode
     }
 
@@ -14,31 +18,24 @@ export default class ExpressError extends Error {
         res: Response,
         next: NextFunction
     ): void {
-        let message: string, statusCode: number
+        let statusCode: number, message: string
         if (err instanceof ExpressError) {
             message = err.message
-
             statusCode = err.statusCode
-        } else {
-            message = "Internal server error"
-            statusCode = 500
-        }
-        res.status(statusCode).json({
-            error: {
-                statusCode,
-                message,
-            },
-        })
+        } else statusCode = 500
+        if (statusCode >= 500)
+            console.log(`${new Date().toUTCString()} ${message}`)
+
+        res.status(statusCode).json(
+            buildResponse(statusCode, undefined, message)
+        )
     }
 
-    public static NOT_FOUND = new ExpressError("Not found", 404)
+    public static NOT_FOUND = new ExpressError(404)
 
-    public static INTERNAL_SERVER_ERROR = new ExpressError(
-        "Internal server error",
-        500
-    )
+    public static INTERNAL_SERVER_ERROR = new ExpressError(500)
 
-    public static BAD_REQUEST = new ExpressError("Bad request", 400)
+    public static BAD_REQUEST = new ExpressError(400)
 
-    public static BAD_CREDENTIALS = new ExpressError("Bad credentials", 401)
+    public static BAD_CREDENTIALS = new ExpressError(401)
 }
