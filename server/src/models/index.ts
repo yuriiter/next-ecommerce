@@ -8,6 +8,16 @@ export type PickerData = {
     dateTime?: Date
 }
 
+export type ImageData = {
+    name: string
+    desc: string
+    img: {
+        data?: Buffer
+        contentType?: string
+        url?: string
+    }
+}
+
 export interface RentalData extends Document {
     id: string
     car: CarData
@@ -17,9 +27,7 @@ export interface RentalData extends Document {
 }
 
 export interface Review extends Document {
-    id: string
-    avatar: string
-    fullName: string
+    user: UserData
     caption: string
     date: Date
     rating: number
@@ -38,8 +46,8 @@ export interface CarData extends Document {
     price: number
     previousPrice?: number
     isInFavorites: boolean
-    thumbnail: string
-    photos: string[]
+    thumbnail: ImageData
+    photos: ImageData[]
     description: string
     rating: number
     numOfVotes: number
@@ -59,9 +67,16 @@ export interface UserData extends Document {
     permission: Permission
 }
 
+export interface NotificationData extends Document {
+    id: string
+    fromDate: Date
+    title: string
+    message: string
+    url: string
+}
+
 const ReviewSchema = new Schema({
-    avatar: String,
-    fullName: String,
+    user: { type: Schema.Types.ObjectId, ref: "User" },
     caption: String,
     date: Date,
     rating: Number,
@@ -73,14 +88,15 @@ const DateTimeLocation = {
     location: String,
 }
 
-const ImageSchema = new Schema({
+const Image = {
     name: String,
     desc: String,
     img: {
         data: Buffer,
         contentType: String,
+        url: String,
     },
-})
+}
 
 const CarSchema = new Schema({
     name: String,
@@ -93,10 +109,10 @@ const CarSchema = new Schema({
     price: Number,
     previousPrice: Number,
     isInFavorites: Boolean,
-    thumbnail: ImageSchema,
-    photos: [ImageSchema],
+    thumbnail: Image,
+    photos: [Image],
     description: String,
-    reviews: [ReviewSchema],
+    reviews: [{ type: Schema.Types.ObjectId, ref: "Review" }],
     rentalData: [
         {
             pickUpData: DateTimeLocation,
@@ -113,6 +129,17 @@ const UserSchema = new Schema({
     permission: { type: String, enum: ["anonymous", "user", "admin"] },
 })
 
+const NotificationSchema = new Schema({
+    fromDate: Date,
+    title: String,
+    message: String,
+    url: String,
+})
+
 export const ReviewModel = mongoose.model<Review>("Review", ReviewSchema)
 export const CarModel = mongoose.model<CarData>("Car", CarSchema)
 export const UserModel = mongoose.model<UserData>("User", UserSchema)
+export const NotificationModel = mongoose.model<NotificationData>(
+    "Notification",
+    NotificationSchema
+)
