@@ -3,7 +3,7 @@ import { JWT_EXPIRES, JWT_SECRET } from "@/config"
 import { type Permission } from "@/types/user"
 import argon2 from "argon2"
 import jwt, { type JwtPayload } from "jsonwebtoken"
-import { FilterQuery, Model, type Query } from "mongoose"
+import { type FilterQuery, type Model } from "mongoose"
 
 export const hashPassword = async (password: string): Promise<string> => {
     try {
