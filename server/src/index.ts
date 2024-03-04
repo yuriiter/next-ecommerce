@@ -6,7 +6,7 @@ import initRouters from "@utils/initRouters"
 import ExpressError from "@errors/ExpressError"
 import accountRouter from "@routers/account.router"
 import { PORT } from "@/config"
-import { closeMongoDBConnection, connectToMongoDB } from "@/db/db"
+import { closeMongoDBConnection, connectToMongoDB } from "@/db"
 import carRouter from "@routers/car.router"
 import { healthRouter } from "@routers/health.router"
 

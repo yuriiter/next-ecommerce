@@ -1,4 +1,4 @@
-import { type CarsQuery } from "@types/carsQuery"
+import { type CarsQuery } from "@/types/carsQuery"
 
 export const buildCarQuery = (query: CarsQuery) => {
     const {

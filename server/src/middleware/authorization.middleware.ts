@@ -1,6 +1,6 @@
 import ExpressError from "@errors/ExpressError"
 import { getUserByEmail } from "@services/user.service"
-import { type Permission } from "@types/user"
+import { type Permission } from "@/types/user"
 import { verifyJWT } from "@utils/utils"
 import { type NextFunction, type Request, type Response } from "express"
 

@@ -1,8 +1,8 @@
 import { CarModel } from "@models/index"
-import { type carsQuery } from "@types/carsQuery"
+import { type CarsQuery } from "@/types/carsQuery"
 import { buildCarQuery } from "@utils/buildCarsQuery"
 
-export const getCars = async (query: carsQuery, userEmail?: string) => {
+export const getCars = async (query: CarsQuery, userEmail?: string) => {
     const finalQuery = buildCarQuery(query)
 
     const { page = 0, pageSize = 8 } = query

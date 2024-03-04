@@ -1,6 +1,6 @@
 import { type NextFunction, type Request, type Response, Router } from "express"
 import authorizationMiddleware from "@middleware/authorization.middleware"
-import { type carsQuery } from "@types/carsQuery"
+import { type CarsQuery } from "@/types/carsQuery"
 import { getCars } from "@services/car.service"
 import { buildResponse } from "@utils/utils"
 
@@ -11,7 +11,7 @@ carRouter.get(
     "/",
     authorizationMiddleware("anonymous"),
     (
-        req: Request<unknown, unknown, carsQuery>,
+        req: Request<unknown, unknown, CarsQuery>,
         res: Response,
         next: NextFunction
     ) => {
