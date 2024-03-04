@@ -3,6 +3,7 @@ import { JWT_EXPIRES, JWT_SECRET } from "@/config"
 import { type Permission } from "@/types/user"
 import argon2 from "argon2"
 import jwt, { type JwtPayload } from "jsonwebtoken"
+import { FilterQuery, Model, type Query } from "mongoose"
 
 export const hashPassword = async (password: string): Promise<string> => {
     try {
@@ -37,3 +38,14 @@ export const verifyJWT = (token: string): Promise<string | JwtPayload> => {
         })
     })
 }
+
+export const getDocumentsAndCount = <D extends { [P in keyof T]?: any }>(
+    model: Model<D>,
+    query: FilterQuery<D>,
+    skip: number,
+    limit: number
+) =>
+    Promise.all([
+        model.find(query).skip(skip).limit(limit),
+        model.countDocuments(query),
+    ])

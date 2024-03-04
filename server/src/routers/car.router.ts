@@ -18,7 +18,7 @@ carRouter.get(
         void (async () => {
             try {
                 const filters = req.query
-                const cars = getCars(filters, req.locals?.user?.email)
+                const cars = await getCars(filters, req.locals?.user?.email)
 
                 return res.status(200).send(buildResponse(200, cars))
             } catch (err) {
