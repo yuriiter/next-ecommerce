@@ -14,18 +14,11 @@ type SearchProps = {
 
 export const Search = ({ className }: SearchProps) => {
   const [searchValue, setSearchValue] = useState("");
-
   const inputRef = useRef<HTMLInputElement>(null);
-  //   const searchIconRef = useRef<SVGSVGElement>(null);
-  //   const filterIconRef = useRef<SVGSVGElement>(null);
 
   const handleClickOnWrapper: MouseEventHandler<HTMLDivElement> = (e) => {
     const { current: input } = inputRef;
     if (!input) return;
-    // const { current: searchIcon } = searchIconRef;
-    // const { current: filterIcon } = filterIconRef;
-
-    // if (e.currentTarget !== searchIcon && e.currentTarget !== filterIcon)
     input.focus();
   };
 
@@ -38,11 +31,7 @@ export const Search = ({ className }: SearchProps) => {
   return (
     <div className={cn(["search", className])} onClick={handleClickOnWrapper}>
       <Tooltip content="Search">
-        <SearchIcon
-          className="search__icon"
-          // ref={searchIconRef}
-          onClick={stopPropagation}
-        />
+        <SearchIcon className="search__icon" onClick={stopPropagation} />
       </Tooltip>
       <input
         placeholder="Search something here"
@@ -52,11 +41,7 @@ export const Search = ({ className }: SearchProps) => {
         onChange={handleInputChange}
       />
       <Tooltip content="Filtering">
-        <SearchFilterIcon
-          className="search__icon"
-          // ref={filterIconRef}
-          onClick={stopPropagation}
-        />
+        <SearchFilterIcon className="search__icon" onClick={stopPropagation} />
       </Tooltip>
     </div>
   );
