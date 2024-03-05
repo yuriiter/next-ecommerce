@@ -19,7 +19,6 @@ export type ImageData = {
 }
 
 export interface RentalData extends Document {
-    id: string
     car: CarData
     pickUpData: PickerData | undefined
     dropOffData: PickerData | undefined
@@ -35,7 +34,6 @@ export interface Review extends Document {
 }
 
 export interface CarData extends Document {
-    id: string
     name: string
     title: string
     subtitle: string
@@ -45,7 +43,6 @@ export interface CarData extends Document {
     isManual: boolean
     price: number
     previousPrice?: number
-    isInFavorites: boolean
     thumbnail: ImageData
     photos: ImageData[]
     description: string
@@ -65,10 +62,10 @@ export interface UserData extends Document {
     fullName: string
     passwordHash: string
     permission: Permission
+    favouriteCars: CarData[]
 }
 
 export interface NotificationData extends Document {
-    id: string
     fromDate: Date
     title: string
     message: string
@@ -108,7 +105,6 @@ const CarSchema = new Schema({
     isManual: Boolean,
     price: Number,
     previousPrice: Number,
-    isInFavorites: Boolean,
     thumbnail: Image,
     photos: [Image],
     description: String,
@@ -127,6 +123,7 @@ const UserSchema = new Schema({
     fullName: String,
     passwordHash: String,
     permission: { type: String, enum: ["anonymous", "user", "admin"] },
+    favouriteCars: [{ type: Schema.Types.ObjectId, ref: "Car" }],
 })
 
 const NotificationSchema = new Schema({
