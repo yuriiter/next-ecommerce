@@ -6,14 +6,19 @@ import { IconButton } from "@/components/Button";
 type AvatarProps = {
   className?: string;
   asButton?: boolean;
+  size?: "sm" | "md" | "lg";
 };
 
-export const Avatar = ({ className, asButton = false }: AvatarProps) => {
+export const Avatar = ({
+  className,
+  asButton = false,
+  size = "md",
+}: AvatarProps) => {
   return (
     <IconButton
       disabled={!asButton}
       variant="secondary"
-      size="md"
+      size={size}
       className={cn(["navigation__button ", className])}
     >
       <AvatarIcon />
