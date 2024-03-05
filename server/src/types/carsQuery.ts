@@ -13,4 +13,5 @@ export type CarsQuery = SortFilter & {
     capacity8?: boolean
     price?: number
     search?: string
+    favourites?: boolean
 }
