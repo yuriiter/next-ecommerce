@@ -8,7 +8,6 @@ import { cn } from "@/utils";
 import { PointMark } from "../PointMark";
 import { locationOptions } from "@/constants/mockupData";
 import { PickerData } from "./types";
-import { useToast } from "../Toast/useToast";
 
 type PickerProps = {
   headerTitle: string;
