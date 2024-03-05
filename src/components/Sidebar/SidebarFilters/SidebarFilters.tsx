@@ -1,18 +1,7 @@
 import React from "react";
-import { SidebarInputGroup as SidebarInputGroupData } from "../types";
 import { SidebarInputGroup } from "./SidebarInputGroup";
 import { Sidebar } from "..";
-
-type SidebarFiltersProps = {
-  className?: string;
-  inputs: SidebarInputGroupData[];
-  onChangeFilters: (
-    inputGroupName: string,
-    inputName: string,
-    newValue: boolean | number,
-  ) => void;
-  hidden?: boolean;
-};
+import { SidebarFiltersProps } from "./types";
 
 export const SidebarFilters = ({
   inputs,
