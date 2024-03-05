@@ -39,7 +39,7 @@ export const verifyJWT = (token: string): Promise<string | JwtPayload> => {
     })
 }
 
-export const getDocumentsAndCount = <D extends { [P in keyof T]?: any }>(
+export const getDocumentsAndCount = <T, D extends { [P in keyof T]?: any }>(
     model: Model<D>,
     query: FilterQuery<D>,
     skip: number,
