@@ -5,9 +5,17 @@ import { Avatar } from "./Avatar";
 import { Badge } from "@/components/Badge";
 import { useMQ } from "@/hooks/mediaQuery/useMQ";
 import { Tooltip } from "@/components/Tooltip/Tooltip";
+import { useModalWindow } from "@/components/ModalWindow/useModalWindow";
+import { MODAL_WINDOW } from "@/types/modalWindow";
 
 export const NavigationButtons = () => {
+  const { openWindowId, setOpenWindowId } = useModalWindow();
   const isMobile = useMQ("SM", "max");
+
+  const toggleFavouritesModalWindow = () => {
+    if (openWindowId === null) setOpenWindowId(MODAL_WINDOW.FAVOURITES);
+    else setOpenWindowId(null);
+  };
 
   return (
     <div className="navigation__buttons">
@@ -16,6 +24,7 @@ export const NavigationButtons = () => {
           variant="secondary"
           size={isMobile ? "sm" : "md"}
           className={`navigation__button`}
+          onClick={toggleFavouritesModalWindow}
         >
           <HeartIcon />
         </IconButton>
