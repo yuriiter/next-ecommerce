@@ -2,16 +2,13 @@ import Head from "next/head";
 import { Banner } from "@/components/Banner";
 import bannerCar1 from "@/assets/img/banner_car_1.png";
 import bannerCar2 from "@/assets/img/banner_car_2.png";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { CardsContainer } from "@/components/Cards";
 import { ShowMore } from "@/components/Cards/ShowMore";
 import { popularCarsMockup, recommendationCars } from "@/constants/mockupData";
 import { PickerSection } from "@/components/Picker/PickerSection";
 import { usePickerSectionData } from "@/components/Picker/hooks/usePickerSectionData";
-import axios from "axios";
-import { Dialog } from "@/components/Dialog/Dialog";
 import { promisedTimeout } from "@/utils";
-import { LoadingButton } from "@/components/Button/LoadingButton";
 
 export default function Home() {
   const [isDialogOpen, setIsDialogOpen] = useState(true);
@@ -31,17 +28,6 @@ export default function Home() {
 
   const { pickUpData, setPickUpData, dropOffData, setDropOffData } =
     usePickerSectionData();
-
-  // useEffect(() => {
-  //   fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/cars`)
-  //     // fetch("https://google.com")
-  //     .then((response) => {
-  //       if (response.ok) return response.text();
-  //       else throw "Not found";
-  //     })
-  //     .then((text) => console.log(text))
-  //     .catch((err) => console.error(err));
-  // }, []);
 
   return (
     <>
@@ -99,51 +85,6 @@ export default function Home() {
           itemNameSingular="car"
         />
       </section>
-      {/* <Dialog */}
-      {/*   open={isDialogOpen} */}
-      {/*   setOpen={setIsDialogOpen} */}
-      {/*   title="Testing dialog" */}
-      {/* > */}
-      {/*   <LoadingButton */}
-      {/*     size="lg" */}
-      {/*     loading={isButtonLoading} */}
-      {/*     onClick={loaderButtonClicked} */}
-      {/*   > */}
-      {/*     Load data */}
-      {/*   </LoadingButton> */}
-      {/*   <Banner */}
-      {/*     variant="light" */}
-      {/*     title="The Best Platform for Car Rental" */}
-      {/*     description="Ease of doing a car rental safely and reliably. Of course at a low price." */}
-      {/*     buttonText="Rental car" */}
-      {/*     href="/rental" */}
-      {/*     carPicture={bannerCar1} */}
-      {/*   /> */}
-      {/*   <Banner */}
-      {/*     variant="dark" */}
-      {/*     title="Easy way to rent a car at a low price" */}
-      {/*     description="Providing cheap car rental services and safe and comfortable facilities." */}
-      {/*     buttonText="Rental car" */}
-      {/*     href="/rental" */}
-      {/*     carPicture={bannerCar2} */}
-      {/*   /> */}
-      {/*   <Banner */}
-      {/*     variant="light" */}
-      {/*     title="The Best Platform for Car Rental" */}
-      {/*     description="Ease of doing a car rental safely and reliably. Of course at a low price." */}
-      {/*     buttonText="Rental car" */}
-      {/*     href="/rental" */}
-      {/*     carPicture={bannerCar1} */}
-      {/*   /> */}
-      {/*   <Banner */}
-      {/*     variant="dark" */}
-      {/*     title="Easy way to rent a car at a low price" */}
-      {/*     description="Providing cheap car rental services and safe and comfortable facilities." */}
-      {/*     buttonText="Rental car" */}
-      {/*     href="/rental" */}
-      {/*     carPicture={bannerCar2} */}
-      {/*   /> */}
-      {/* </Dialog> */}
     </>
   );
 }
