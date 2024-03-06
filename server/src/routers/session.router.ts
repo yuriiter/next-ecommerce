@@ -1,6 +1,6 @@
 import { type NextFunction, type Request, type Response, Router } from "express"
 import validateBody from "@middleware/bodyValidation.middleware"
-import { getUserByEmail, validateUser } from "@services/user.service"
+import { getMe, validateUser } from "@services/user.service"
 import authorizationMiddleware from "@middleware/authorization.middleware"
 import { buildResponse, createJWT } from "@utils/utils"
 import {
@@ -18,8 +18,11 @@ initialRouter.get(
     (req: Request, res: Response, next: NextFunction) => {
         void (async () => {
             try {
-                const user = await getUserByEmail(req.locals.user.email)
-                return res.status(200).json(buildResponse(200, user))
+                const user = await getMe(req.locals?.user.email)
+                const { fullName, email, permission } = user
+                return res
+                    .status(200)
+                    .json(buildResponse(200, { fullName, email, permission }))
             } catch (err) {
                 next(err)
             }
