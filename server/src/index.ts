@@ -17,8 +17,7 @@ app.use(cors({ origin: FRONTEND_URL, credentials: true }))
 app.use(cookieParser())
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
-app.use(cors())
-app.use(ExpressError.handleError)
+app.use(authorizationMiddleware("anonymous"))
 
 initRouters(app, [carRouter, accountRouter, healthRouter])
 
