@@ -25,15 +25,19 @@ export type FetchStatus<T> = {
   type: FetchStatusType;
 } & (FetchError | FetchPending | FetchPause | FetchSuccess<T>);
 
+export type FetchCallback<T> = () => Promise<FetchStatus<T>>;
+
 export type UseFetchParams<DataToSendType = any> = {
   url: string;
   requestConfig?: AxiosRequestConfig<DataToSendType>;
   pause?: boolean;
 };
 
-export type UseGetParams = {
+export type UseGetParams<
+  Q extends Record<string, string | number | boolean | undefined> = any,
+> = {
   url: string;
   requestConfig?: AxiosRequestConfig;
   pause?: boolean;
-  queryParams?: Record<string, string | number | boolean | undefined>;
+  queryParams?: Q;
 };

@@ -1,5 +1,10 @@
 import { AxiosError, AxiosResponse } from "axios";
-import { FetchError, FetchStatus, UseFetchParams } from "@/types/fetchStatus";
+import {
+  FetchError,
+  FetchStatus,
+  UseFetchParams,
+  FetchCallback,
+} from "@/types/fetchStatus";
 import { useCallback, useEffect, useRef, useState } from "react";
 import axios, { CancelTokenSource } from "axios";
 
@@ -7,7 +12,7 @@ export const useFetch = <T, D = any>({
   url,
   requestConfig,
   pause,
-}: UseFetchParams<D>): [FetchStatus<T>, () => Promise<FetchStatus<T>>] => {
+}: UseFetchParams<D>): [FetchStatus<T>, FetchCallback<T>] => {
   const [status, setStatus] = useState<FetchStatus<T>>(
     pause ? { type: "pause" } : { type: "pending" },
   );
@@ -37,7 +42,6 @@ export const useFetch = <T, D = any>({
       newStatus = { type: "success", data: response.data };
     } catch (error) {
       const axiosError = error as AxiosError;
-
       if (axios.isCancel(error)) {
         // Request was canceled
         newStatus = buildError(0, "Request cancelled");
