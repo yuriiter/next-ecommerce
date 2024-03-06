@@ -30,11 +30,7 @@ export default function SpecificCategory() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <WithSidebarFilters
-        inputs={filters}
-        onChangeFilters={onChangeFilters}
-        hidden
-      >
+      <WithSidebarFilters inputs={filters} onChangeFilters={onChangeFilters}>
         <PickerSection
           className="container"
           pickUpData={pickUpData}
