@@ -8,15 +8,10 @@ export const WithSidebarFilters = ({
   children,
   inputs,
   onChangeFilters,
-  hidden = false,
 }: WithSidebarFiltersProps) => {
   return (
     <div className="with-sidebar">
-      <SidebarFilters
-        inputs={inputs}
-        onChangeFilters={onChangeFilters}
-        hidden={hidden}
-      />
+      <SidebarFilters inputs={inputs} onChangeFilters={onChangeFilters} />
 
       <div className="with-sidebar__content">{children}</div>
     </div>

@@ -8,5 +8,4 @@ export type SidebarFiltersProps = {
     inputName: string,
     newValue: boolean | number,
   ) => void;
-  hidden?: boolean;
 };
