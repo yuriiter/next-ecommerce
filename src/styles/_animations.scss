@@ -38,6 +38,18 @@
   }
 }
 
+@keyframes appear {
+  0% {
+    scale: 0.9;
+    opacity: 0;
+  }
+
+  100% {
+    scale: 1;
+    opacity: 1;
+  }
+}
+
 @keyframes disappear {
   0% {
     scale: 1;
