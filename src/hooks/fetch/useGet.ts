@@ -1,13 +1,16 @@
-import { FetchStatus, UseGetParams } from "@/types/fetchStatus";
+import { FetchStatus, UseGetParams, FetchCallback } from "@/types/fetchStatus";
 import { useFetch } from "./useFetch";
 import { useMemo } from "react";
 
-export const useGet = <T>({
+export const useGet = <
+  T,
+  Q extends Record<string, string | number | boolean | undefined> = any,
+>({
   url,
   requestConfig,
   pause,
   queryParams,
-}: UseGetParams): [FetchStatus<T>, () => Promise<FetchStatus<T>>] => {
+}: UseGetParams<Q>): [FetchStatus<T>, FetchCallback<T>] => {
   const finalUrl = useMemo(() => {
     if (queryParams === undefined) return url;
 
@@ -19,6 +22,7 @@ export const useGet = <T>({
         params.set(key, value.toString());
       }
     });
+    newUrl.search = params.toString();
     return newUrl.toString();
   }, [...Object.values(queryParams || {}), url]);
 
