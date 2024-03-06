@@ -1,21 +1,12 @@
 import { CarDetail } from "@/components/CarDetail";
 import { CardsContainer } from "@/components/Cards";
 import { ShowMore } from "@/components/Cards/ShowMore";
-import { SidebarFilters } from "@/components/Sidebar";
-import { WithSidebarFilters } from "@/components/Sidebar/SidebarFilters/WithSidebarFilters";
-import {
-  carMockup,
-  recommendationCars,
-  sidebarInputs,
-} from "@/constants/mockupData";
-import { useFilters } from "@/hooks/URLQueries/useFilters";
-import useURLQueryState from "@/hooks/URLQueries/useURLQueryState";
+import { carMockup, recommendationCars } from "@/constants/mockupData";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import React, { useCallback, useMemo, useState } from "react";
+import React, { useMemo, useState } from "react";
 
 export default function CarPage() {
-  const [filters, onChangeFilters] = useFilters();
   const [recommendationCarsDisplayLimit, setRecommendationCarsDisplayLimit] =
     useState(8);
 
@@ -34,31 +25,24 @@ export default function CarPage() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
-      <WithSidebarFilters
-        inputs={filters}
-        onChangeFilters={onChangeFilters}
-        hidden
-      >
-        <section className="container car-detail">
-          <CarDetail data={carMockup(carId)} />
-        </section>
-        <section className="container cards__section cards__section--recommended">
-          <CardsContainer
-            cards={recommendationCarsToDisplay}
-            title="Recent cars"
-            horizontalScrolling
-          />
-          <ShowMore
-            step={8}
-            totalItemsCount={recommendationCars.length}
-            itemsToShowLimit={recommendationCarsDisplayLimit}
-            setItemsToShowLimit={setRecommendationCarsDisplayLimit}
-            itemNamePlural="cars"
-            itemNameSingular="car"
-          />
-        </section>
-      </WithSidebarFilters>
+      <section className="container car-detail">
+        <CarDetail data={carMockup(carId)} />
+      </section>
+      <section className="container cards__section cards__section--recommended">
+        <CardsContainer
+          cards={recommendationCarsToDisplay}
+          title="Recent cars"
+          horizontalScrolling
+        />
+        <ShowMore
+          step={8}
+          totalItemsCount={recommendationCars.length}
+          itemsToShowLimit={recommendationCarsDisplayLimit}
+          setItemsToShowLimit={setRecommendationCarsDisplayLimit}
+          itemNamePlural="cars"
+          itemNameSingular="car"
+        />
+      </section>
     </>
   );
 }
