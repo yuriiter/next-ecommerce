@@ -12,7 +12,7 @@ const transformString = (value: string | string[] | undefined) => {
 };
 
 export const useURLQueryObjectState = <T extends Record<string, unknown>>(
-  initialValue: T
+  initialValue: T,
 ): [T, (newValueOrAction: SetStateAction<T>) => void] => {
   const router = useRouter();
 
@@ -40,27 +40,30 @@ export const useURLQueryObjectState = <T extends Record<string, unknown>>(
           ? newValueOrAction
           : newValueOrAction(currentState);
 
-      const keyValuePairsToSave = Object.entries(newValue).reduce(
-        (acc, [key, value]) => {
-          if (value === undefined || value === initialValue[key]) {
-            delete acc[key];
-          } else {
-            acc[key] = value;
-          }
-          return acc;
-        },
-        {}
-      );
+      const keyValuePairsToSave = Object.entries({
+        ...router.query,
+        ...newValue,
+      }).reduce((acc, [key, value]) => {
+        if (value === undefined || value === initialValue[key]) {
+          delete acc[key];
+        } else {
+          acc[key] = value;
+        }
+        return acc;
+      }, {});
 
       router.push(
-        { pathname: window.location.pathname, query: keyValuePairsToSave },
+        {
+          pathname: window.location.pathname,
+          query: keyValuePairsToSave,
+        },
         undefined,
         {
           shallow: true,
-        }
+        },
       );
     },
-    [router]
+    [router],
   );
 
   return [currentState, updateQuery];
