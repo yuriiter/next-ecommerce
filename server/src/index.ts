@@ -21,6 +21,8 @@ app.use(authorizationMiddleware("anonymous"))
 
 initRouters(app, [carRouter, accountRouter, healthRouter])
 
+app.use(ExpressError.handleError)
+
 app.listen(PORT, () => {
     console.log(`Server is runniung on port ${PORT}`)
     void connectToMongoDB()
