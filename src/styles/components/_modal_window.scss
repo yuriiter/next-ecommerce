@@ -11,7 +11,7 @@ body:has(.modal-window--open) {
   width: 100%;
   height: 100%;
   overflow-y: scroll;
-  background-color: rgba($color-primary-0, 0.95);
+  background-color: rgba($color-primary-0, 0.97);
   transition: background-color 0.2s;
   z-index: 70;
 
@@ -33,7 +33,7 @@ body:has(.modal-window--open) {
   &__content {
     padding: 30px 15px;
     margin: 0 auto;
-    width: clamp(300px, 95%, 700px);
+    width: clamp(250px, 85%, 1200px);
     min-height: 100%;
   }
 }
