@@ -24,22 +24,22 @@ export const Footer = () => {
               <nav>
                 <ul className="footer__nav-link-list">
                   <li>
-                    <Link className="footer__nav-link" href="#">
+                    <Link className="footer__nav-link" href="/#">
                       How it works
                     </Link>
                   </li>
                   <li>
-                    <Link className="footer__nav-link" href="#">
+                    <Link className="footer__nav-link" href="/#">
                       Featured
                     </Link>
                   </li>
                   <li>
-                    <Link className="footer__nav-link" href="#">
+                    <Link className="footer__nav-link" href="/#">
                       Partnership
                     </Link>
                   </li>
                   <li>
-                    <Link className="footer__nav-link" href="#">
+                    <Link className="footer__nav-link" href="/#">
                       Bussiness Relation
                     </Link>
                   </li>
@@ -51,22 +51,22 @@ export const Footer = () => {
               <nav>
                 <ul className="footer__nav-link-list">
                   <li>
-                    <Link className="footer__nav-link" href="#">
+                    <Link className="footer__nav-link" href="/#">
                       Events
                     </Link>
                   </li>
                   <li>
-                    <Link className="footer__nav-link" href="#">
+                    <Link className="footer__nav-link" href="/#">
                       Blog
                     </Link>
                   </li>
                   <li>
-                    <Link className="footer__nav-link" href="#">
+                    <Link className="footer__nav-link" href="/#">
                       Podcast
                     </Link>
                   </li>
                   <li>
-                    <Link className="footer__nav-link" href="#">
+                    <Link className="footer__nav-link" href="/#">
                       Invite a friend
                     </Link>
                   </li>
@@ -78,22 +78,22 @@ export const Footer = () => {
               <nav>
                 <ul className="footer__nav-link-list">
                   <li>
-                    <Link className="footer__nav-link" href="#">
+                    <Link className="footer__nav-link" href="/#">
                       Discord
                     </Link>
                   </li>
                   <li>
-                    <Link className="footer__nav-link" href="#">
+                    <Link className="footer__nav-link" href="/#">
                       Instagram
                     </Link>
                   </li>
                   <li>
-                    <Link className="footer__nav-link" href="#">
+                    <Link className="footer__nav-link" href="/#">
                       Twitter
                     </Link>
                   </li>
                   <li>
-                    <Link className="footer__nav-link" href="#">
+                    <Link className="footer__nav-link" href="/#">
                       Facebook
                     </Link>
                   </li>
@@ -107,10 +107,10 @@ export const Footer = () => {
               ©2022 MORENT. All rights reserved
             </p>
             <div className="footer__bottom-links">
-              <Link href="#" className="footer__bottom-link">
+              <Link href="/#" className="footer__bottom-link">
                 Privacy & Policy
               </Link>
-              <Link href="#" className="footer__bottom-link">
+              <Link href="/#" className="footer__bottom-link">
                 Terms & Condition
               </Link>
             </div>
