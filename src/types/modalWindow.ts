@@ -1,0 +1,5 @@
+export enum MODAL_WINDOW {
+  FAVOURITES = "FAVOURITES",
+  SIGN_IN = "SIGN_IN",
+  SIGN_UP = "SIGN_UP",
+}

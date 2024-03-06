@@ -1,34 +1,50 @@
 import { cn } from "@/utils";
-import React, { Dispatch, ReactNode, SetStateAction, useEffect } from "react";
+import React, { Dispatch, ReactNode, SetStateAction } from "react";
 import { IconButton } from "../Button";
 import { Close } from "../svg/icons";
 import { Typography } from "../Typography/Typography";
 import { useKeyEvent } from "@/hooks/useKeyEvent";
+import { useModalWindow } from "./useModalWindow";
+import { AnimatedDisplay } from "@/components/AnimatedDisplay";
 
-type ModalWindowProps = {
+type ModalWindowWithIdStateProps = {
+  id?: never;
   open: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;
+};
+
+type ModalWindowWithIdOpenProps = {
+  id: string;
+  open?: never;
+  setOpen?: never;
+};
+
+type ModalWindowProps = {
   children: ReactNode;
   title: ReactNode;
-};
+} & (ModalWindowWithIdStateProps | ModalWindowWithIdOpenProps);
 
 export const ModalWindow = ({
   open,
   setOpen,
   children,
   title,
+  id,
 }: ModalWindowProps) => {
-  const closeModalWindow = () => setOpen(false);
+  const { openWindowId, setOpenWindowId } = useModalWindow();
+  const closeModalWindow = () => {
+    if (id) setOpenWindowId(null);
+    setOpen?.(false);
+  };
   useKeyEvent("Escape", closeModalWindow);
 
+  const finalOpen = typeof id === "string" ? id === openWindowId : open;
+
   return (
-    <div
+    <AnimatedDisplay
       tabIndex={-1}
-      className={cn([
-        "modal-window",
-        open && "modal-window--open",
-        !open && "modal-window--closed",
-      ])}
+      display={finalOpen}
+      className={cn(["modal-window"])}
     >
       <div className="modal-window__content">
         <div className="modal-window__header">
@@ -43,13 +59,11 @@ export const ModalWindow = ({
             <IconButton onClick={closeModalWindow}>
               <Close />
             </IconButton>
-            <Typography bold secondary400 size="14" className="text-center">
-              ESC
-            </Typography>
           </div>
         </div>
+        <div className="divider-x"></div>
         {children}
       </div>
-    </div>
+    </AnimatedDisplay>
   );
 };
