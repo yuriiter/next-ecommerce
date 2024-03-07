@@ -1,6 +1,6 @@
-import React, { ChangeEvent } from "react";
+import React from "react";
 import { SelectWrapper } from "./SelectWrapper";
-import { SelectOption } from "./types";
+import { RenderInputFunction, SelectOption } from "./types";
 import { Option } from "./Option";
 import { useMQ } from "@/hooks/mediaQuery/useMQ";
 import { NativeSelectInput } from "./NativeSelectInput";
@@ -15,6 +15,7 @@ export type SelectProps = {
   disabled?: boolean;
   placement?: Placement;
   forceUseNativeSelect?: boolean;
+  renderInput?: RenderInputFunction;
 };
 
 export const Select = ({
@@ -25,13 +26,18 @@ export const Select = ({
   className,
   disabled = false,
   placement,
-  forceUseNativeSelect = false,
+  forceUseNativeSelect = undefined,
+  renderInput,
 }: SelectProps) => {
   const useNativeSelect = useMQ("MD", "max");
 
-  if (forceUseNativeSelect || (useNativeSelect && !disabled)) {
+  if (
+    forceUseNativeSelect ||
+    (useNativeSelect && !disabled && forceUseNativeSelect === undefined)
+  ) {
     return (
       <NativeSelectInput
+        renderInput={renderInput}
         placeholder={placeholder}
         value={value}
         onChange={onChange}
@@ -49,6 +55,7 @@ export const Select = ({
       className={className}
       disabled={disabled}
       placement={placement}
+      renderInput={renderInput}
     >
       <div className="select__options-wrapper">
         {options?.map((option) => {

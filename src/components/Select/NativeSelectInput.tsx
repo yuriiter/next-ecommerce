@@ -12,6 +12,7 @@ export const NativeSelectInput = ({
   options,
   className,
   disabled,
+  renderInput,
 }: NativeSelectInputProps) => {
   const onNativeSelectChange = (e: ChangeEvent<HTMLSelectElement>) => {
     onChange(
@@ -24,12 +25,19 @@ export const NativeSelectInput = ({
   };
   return (
     <div className={cn(["select-wrapper--native", className])}>
-      <SelectInput
-        isDropdownOpen={false}
-        toggleDropdownOpen={() => null}
-        value={typeof value === "string" ? value : value?.value}
-        placeholder={placeholder}
-      />
+      {renderInput?.({
+        isDropdownOpen: false,
+        toggleDropdownOpen: () => null,
+        value: typeof value === "string" ? value : value?.value,
+        placeholder,
+      }) ?? (
+        <SelectInput
+          isDropdownOpen={false}
+          toggleDropdownOpen={() => null}
+          value={typeof value === "string" ? value : value?.value}
+          placeholder={placeholder}
+        />
+      )}
       <select
         disabled={disabled}
         value={typeof value === "string" ? value : value?.value}

@@ -5,6 +5,7 @@ import { cn } from "@/utils";
 import { useKeyEvent } from "@/hooks/useKeyEvent";
 import { SelectInput } from "./SelectInput";
 import { Placement } from "@/types/common";
+import { RenderInputFunction } from "./types";
 
 type SelectWrapperProps = {
   value: string | undefined;
@@ -13,6 +14,7 @@ type SelectWrapperProps = {
   className?: string;
   disabled?: boolean;
   placement?: Placement;
+  renderInput?: RenderInputFunction;
 };
 
 export const SelectWrapper = ({
@@ -22,6 +24,7 @@ export const SelectWrapper = ({
   className,
   disabled = false,
   placement,
+  renderInput,
 }: SelectWrapperProps) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const selectWrapperRef = useRef<HTMLDivElement>(null);
@@ -44,12 +47,19 @@ export const SelectWrapper = ({
         className,
       ])}
     >
-      <SelectInput
-        isDropdownOpen={isDropdownOpen}
-        toggleDropdownOpen={toggleDropdownOpen}
-        value={value}
-        placeholder={placeholder}
-      />
+      {renderInput?.({
+        isDropdownOpen,
+        toggleDropdownOpen,
+        value,
+        placeholder,
+      }) ?? (
+        <SelectInput
+          isDropdownOpen={isDropdownOpen}
+          toggleDropdownOpen={toggleDropdownOpen}
+          value={value}
+          placeholder={placeholder}
+        />
+      )}
       <Dropdown
         placement={placement}
         open={isDropdownOpen}

@@ -2,7 +2,7 @@ import React from "react";
 import { ArrowDownIcon } from "../svg/icons";
 import { cn } from "@/utils";
 
-type SelectInputProps = {
+export type SelectInputProps = {
   isDropdownOpen: boolean;
   toggleDropdownOpen: () => void;
   value: string | undefined;
