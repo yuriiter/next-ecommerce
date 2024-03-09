@@ -1,6 +1,6 @@
 import { cn } from "@/utils";
 import React, { Children } from "react";
-import { ReactElement, ReactNode, useState } from "react";
+import { ReactElement, useState } from "react";
 import { AccordionDetailProps, AccordionSummaryProps } from ".";
 
 type ControlledAccordionProps = {

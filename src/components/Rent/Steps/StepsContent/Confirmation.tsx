@@ -31,7 +31,7 @@ export const Confirmation = ({ register }: ConfirmationProps) => {
           ([name, { label, placeholder }]) => {
             const { value, ...rest } = register(
               name as keyof RentCarForm,
-              true,
+              true
             );
 
             return (
@@ -52,7 +52,7 @@ export const Confirmation = ({ register }: ConfirmationProps) => {
                 />
               </div>
             );
-          },
+          }
         )}
       </div>
       <Button size="lg" className="confirmation__submit">
@@ -60,7 +60,7 @@ export const Confirmation = ({ register }: ConfirmationProps) => {
       </Button>
       <div className="confirmation__safety-caption">
         <Safety className="safety-caption__icon" />
-        <p className="safety-caption__title">All your data are safe</p>
+        <p className="safety-caption__title">All your data is safe</p>
         <p className="safety-caption__subtitle">
           We are using the most advanced security to provide you the best
           experience ever.

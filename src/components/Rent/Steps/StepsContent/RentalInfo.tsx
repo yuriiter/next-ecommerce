@@ -1,4 +1,4 @@
-import { NewValueHandler, RegisterFunction } from "@/hooks/forms/types";
+import { RegisterFunction } from "@/hooks/forms/types";
 import React from "react";
 import { PartialRentCarForm, RentCarForm } from "../types";
 import { PointMark } from "@/components/PointMark";
@@ -67,7 +67,7 @@ export const RentalInfo = ({ register }: RentalInfoProps) => {
             ([name, { label, placeholder, type }]) => {
               const { value, ...rest } = register(
                 name as keyof RentCarForm,
-                true,
+                true
               );
 
               return (
@@ -83,9 +83,11 @@ export const RentalInfo = ({ register }: RentalInfoProps) => {
                         <Select
                           className="step-input__input"
                           placeholder={placeholder}
-                          value={value}
+                          value={value as SelectOption}
                           options={locationOptions}
-                          onChange={onChange as StepInputNewValueHandler}
+                          onChange={
+                            onChange as StepInputNewValueHandler<unknown>
+                          }
                         />
                       );
                     }
@@ -96,7 +98,7 @@ export const RentalInfo = ({ register }: RentalInfoProps) => {
                         <DateInput
                           className="step-input__input"
                           placeholder={placeholder}
-                          value={stringToDate(value)}
+                          value={stringToDate(value as string)}
                           onChange={onDateChange}
                         />
                       );
@@ -106,7 +108,7 @@ export const RentalInfo = ({ register }: RentalInfoProps) => {
                         <TimeInput
                           className="step-input__input"
                           placeholder={placeholder}
-                          value={value}
+                          value={value as SelectOption}
                           onChange={onChange}
                         />
                       );
@@ -115,7 +117,7 @@ export const RentalInfo = ({ register }: RentalInfoProps) => {
                   }}
                 />
               );
-            },
+            }
           )}
         </div>
       </div>
@@ -129,7 +131,7 @@ export const RentalInfo = ({ register }: RentalInfoProps) => {
             ([name, { label, placeholder, type }]) => {
               const { value, ...rest } = register(
                 name as keyof RentCarForm,
-                true,
+                true
               );
 
               return (
@@ -145,7 +147,7 @@ export const RentalInfo = ({ register }: RentalInfoProps) => {
                         <Select
                           className="step-input__input"
                           placeholder={placeholder}
-                          value={value}
+                          value={value as SelectOption}
                           options={locationOptions}
                           onChange={
                             onChange as StepInputNewValueHandler<SelectOption>
@@ -161,7 +163,7 @@ export const RentalInfo = ({ register }: RentalInfoProps) => {
                         <DateInput
                           className="step-input__input"
                           placeholder={placeholder}
-                          value={stringToDate(value)}
+                          value={stringToDate(value as string)}
                           onChange={onDateChange}
                           placement="right-bottom"
                         />
@@ -172,7 +174,7 @@ export const RentalInfo = ({ register }: RentalInfoProps) => {
                         <TimeInput
                           className="step-input__input"
                           placeholder={placeholder}
-                          value={value}
+                          value={value as SelectOption}
                           onChange={onChange}
                           placement="right-bottom"
                         />
@@ -182,7 +184,7 @@ export const RentalInfo = ({ register }: RentalInfoProps) => {
                   }}
                 />
               );
-            },
+            }
           )}
         </div>
       </div>

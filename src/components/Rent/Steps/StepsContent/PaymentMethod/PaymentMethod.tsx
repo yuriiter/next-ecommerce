@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { StepInput } from "../../StepInput";
 import { PartialRentCarForm, RentCarForm } from "../../types";
 import { RegisterFunction } from "@/hooks/forms/types";
@@ -37,7 +37,7 @@ const billingInfoInputs: PartialRentCarForm = {
 export const PaymentMethod = ({ register }: PaymentMethodProps) => {
   const { value: paymentMethod, onChange: expandAccordion } = register(
     "paymentMethod",
-    true,
+    true
   );
 
   const handleAccordionChange = (value: PaymentMethodType) => () =>
@@ -70,7 +70,7 @@ export const PaymentMethod = ({ register }: PaymentMethodProps) => {
                     value={value as string}
                   />
                 );
-              },
+              }
             )}
           </div>
         </AccordionDetail>

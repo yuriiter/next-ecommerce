@@ -4,20 +4,18 @@ import React, { ChangeEvent, ReactNode } from "react";
 
 export type StepInputEventHandler = (e: ChangeEvent<HTMLInputElement>) => void;
 export type StepInputNewValueHandler<T> = <T>(newValue: T) => void;
-type ChangeHandler<T = unknown> = (
-  arg: T | ChangeEvent<HTMLInputElement>,
-) => void;
+type ChangeHandler<T = any> = (arg: T | ChangeEvent<HTMLInputElement>) => void;
 
 type WithCustomInput = {
   renderInput: (
-    props: Omit<StepInputProps, "renderInput" | "showLabel">,
+    props: Omit<StepInputProps, "renderInput" | "showLabel">
   ) => JSX.Element | undefined;
-  selfSubmit: never;
-  selfSubmitText: never;
+  selfSubmit?: never;
+  selfSubmitText?: never;
 };
 
 type WithoutCustomInput = {
-  renderInput: never;
+  renderInput?: never;
   selfSubmit?: () => void;
   selfSubmitText?: string;
 };
