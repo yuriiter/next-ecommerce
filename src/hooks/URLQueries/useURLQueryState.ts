@@ -11,7 +11,7 @@ const useURLQueryState = <T>(
     const queryValue = router.query[key];
     if (queryValue !== undefined) {
       try {
-        return JSON.parse(decodeURIComponent(queryValue as string)) as T;
+        return queryValue as T;
       } catch (error) {
         console.error("Error parsing query value:", error);
       }
@@ -22,7 +22,10 @@ const useURLQueryState = <T>(
   const setQueryValue = useCallback(
     (value: T) => {
       const query = { ...router.query };
-      query[key] = encodeURIComponent(JSON.stringify(value));
+      if (typeof value === "object")
+        query[key] = encodeURIComponent(JSON.stringify(value));
+      else query[key] = value;
+      if (value === undefined || value === null) delete query[key];
       router.replace({ pathname: router.pathname, query }, undefined, {
         shallow: true,
       });
