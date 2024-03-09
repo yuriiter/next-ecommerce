@@ -47,3 +47,12 @@ export const promisedTimeout = (duration: number) =>
   new Promise((resolve) => {
     setTimeout(() => resolve(1), duration);
   });
+
+export const isValidJSON = (str: string) => {
+  try {
+    JSON.parse(str);
+    return true;
+  } catch (e) {
+    return false;
+  }
+};
