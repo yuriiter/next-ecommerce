@@ -1,16 +1,16 @@
-import { FetchStatus, UseGetParams, FetchCallback } from "@/types/fetchStatus";
+import { FetchStatus, UseGetParams, GetCallback } from "@/types/fetchStatus";
 import { useFetch } from "./useFetch";
 import { useMemo } from "react";
 
 export const useGet = <
   T,
-  Q extends Record<string, string | number | boolean | undefined> = any,
+  Q extends Record<string, string | number | boolean | undefined> = any
 >({
   url,
   requestConfig,
   pause,
   queryParams,
-}: UseGetParams<Q>): [FetchStatus<T>, FetchCallback<T>] => {
+}: UseGetParams<Q>): [FetchStatus<T>, GetCallback<Q, T>] => {
   const finalUrl = useMemo(() => {
     if (queryParams === undefined) return url;
 
