@@ -56,6 +56,24 @@ initialRouter.post(
     }
 )
 
+// Sign out
+initialRouter.delete(
+    "/",
+    authorizationMiddleware("user"),
+    (req: Request, res: Response, next: NextFunction) => {
+        void (async () => {
+            try {
+                res.clearCookie("jwt")
+                return res
+                    .status(200)
+                    .json(buildResponse(200, undefined, "Signed out"))
+            } catch (err) {
+                next(err)
+            }
+        })()
+    }
+)
+
 sessionRouter.use("/session", initialRouter)
 
 export default sessionRouter
