@@ -7,12 +7,14 @@ type AvatarProps = {
   className?: string;
   asButton?: boolean;
   size?: "sm" | "md" | "lg";
+  onClick?: () => void;
 };
 
 export const Avatar = ({
   className,
   asButton = false,
   size = "md",
+  onClick,
 }: AvatarProps) => {
   return (
     <IconButton
@@ -20,6 +22,7 @@ export const Avatar = ({
       variant="secondary"
       size={size}
       className={cn(["navigation__button ", className])}
+      onClick={onClick}
     >
       <AvatarIcon />
     </IconButton>
