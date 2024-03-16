@@ -37,3 +37,14 @@ body:has(.modal-window--open) {
     min-height: 100%;
   }
 }
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 40px;
+
+  &__submit {
+    margin-top: 15px;
+  }
+}

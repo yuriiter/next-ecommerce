@@ -37,7 +37,7 @@ export const useFetch = <T>({
           url,
           withCredentials: true,
           cancelToken: source?.token,
-          ...(callbackRequestConfig ?? requestConfig),
+          ...{ ...requestConfig, ...callbackRequestConfig },
         });
 
         newStatus = { type: "success", data: response.data };

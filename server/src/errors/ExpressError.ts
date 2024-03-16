@@ -14,20 +14,25 @@ export default class ExpressError extends Error {
 
     public static handleError(
         err: ExpressError | Error,
-        req: Request,
+        _req: Request,
         res: Response,
-        next: NextFunction
+        _next: NextFunction
     ): void {
-        let statusCode: number, message: string
+        let statusCode: number
         if (err instanceof ExpressError) {
-            message = err.message
             statusCode = err.statusCode
-        } else statusCode = 500
-        if (statusCode >= 500)
-            console.log(`${new Date().toUTCString()} ${message}`)
+        } else {
+            statusCode = 500
+        }
+        if (statusCode >= 500) {
+            console.log("\n\n")
+            console.log("==========", new Date().toUTCString(), "==========")
+            console.log(err)
+            console.log("\n")
+        }
 
         res.status(statusCode).json(
-            buildResponse(statusCode, undefined, message)
+            buildResponse(statusCode, undefined, `${err}`)
         )
     }
 

@@ -25,7 +25,7 @@ export const useForm = <FormSchema extends FormValues>({
 }: UseFormParams<FormSchema>) => {
   const initialValuesRef = useRef<FormSchema>(initialValues);
   const [values, setValues] = useState<Partial<FormSchema>>(
-    initialValues || {},
+    initialValues || {}
   );
   const [errors, setErrors] = useState<FormErrors<FormSchema>>({});
 
@@ -37,18 +37,18 @@ export const useForm = <FormSchema extends FormValues>({
         ...customOnChange?.(name, value),
       }));
     },
-    [customOnChange],
+    [customOnChange]
   );
 
   const isDirty = useMemo(
     (): boolean => !compareStringRecords(initialValuesRef.current, values),
-    [values],
+    [values]
   );
 
   const register: RegisterFunction<FormSchema> = useCallback(
     <ShouldUseNewValueHandler extends boolean = false>(
       name: keyof FormSchema,
-      shouldUseNewValueHandler: ShouldUseNewValueHandler = false as ShouldUseNewValueHandler,
+      shouldUseNewValueHandler: ShouldUseNewValueHandler = false as ShouldUseNewValueHandler
     ) => {
       const onChange: OnChangeFunction<FormSchema, ShouldUseNewValueHandler> = (
         shouldUseNewValueHandler
@@ -65,7 +65,7 @@ export const useForm = <FormSchema extends FormValues>({
         onChange,
       };
     },
-    [handleChange, values, initialValuesRef],
+    [handleChange, values, initialValuesRef]
   );
 
   const handleSubmit = useCallback(
@@ -90,10 +90,10 @@ export const useForm = <FormSchema extends FormValues>({
       if (isValid) {
         onValid(values);
       } else {
-        onInvalid(newErrors);
+        onInvalid?.(newErrors);
       }
     },
-    [validationFunction, values, onValid, onInvalid],
+    [validationFunction, values, onValid, onInvalid]
   );
 
   const reset = useCallback((newInitialValues?: FormSchema) => {

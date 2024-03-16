@@ -6,6 +6,7 @@ type BadgeProps = {
   children: ReactNode;
   overRoundIcon?: boolean;
   animated?: boolean;
+  show?: boolean;
 } & ({ value: number; max: number } | { value?: never; max?: never });
 
 export const Badge = ({
@@ -15,13 +16,15 @@ export const Badge = ({
   max,
   animated = true,
   overRoundIcon = true,
+  show = true,
 }: BadgeProps) => {
   return (
-    <div className={cn(["badge", animated && "badge--animated"])}>
+    <div className={cn([className, "badge", animated && "badge--animated"])}>
       <div
         className={cn([
           "badge__content",
           overRoundIcon && "badge__content--over-round",
+          !show && "hidden",
         ])}
       >
         {value ? (value > max ? `${max - 1}+` : value) : null}

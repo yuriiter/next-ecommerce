@@ -10,6 +10,8 @@ import { closeMongoDBConnection, connectToMongoDB } from "@/db"
 import carRouter from "@routers/car.router"
 import { healthRouter } from "@routers/health.router"
 import authorizationMiddleware from "@middleware/authorization.middleware"
+import userRouter from "@routers/user.router"
+import sessionRouter from "@routers/session.router"
 
 const app: Express = express()
 
@@ -19,7 +21,13 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(authorizationMiddleware("anonymous"))
 
-initRouters(app, [carRouter, accountRouter, healthRouter])
+initRouters(app, [
+    carRouter,
+    accountRouter,
+    userRouter,
+    sessionRouter,
+    healthRouter,
+])
 
 app.use(ExpressError.handleError)
 

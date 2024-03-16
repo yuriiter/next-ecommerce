@@ -1,4 +1,5 @@
 import { CSSProperties } from "react";
+import { ZodError, ZodSchema, z } from "zod";
 
 export const mod = (a: number, n: number): number => {
   return a - n * Math.floor(a / n);
@@ -13,15 +14,15 @@ export const makeCapacityString = (peopleCapacity: number) =>
 export const cn = (classNames: (string | undefined | null | boolean)[]) =>
   classNames
     .filter(
-      (className) => typeof className === "string" && className.length > 0,
+      (className) => typeof className === "string" && className.length > 0
     )
     .join(" ");
 
 export const joinStyles = (
-  styles: (CSSProperties | undefined | null | boolean)[],
+  styles: (CSSProperties | undefined | null | boolean)[]
 ): CSSProperties => {
   const validStyles = styles.filter(
-    (style) => typeof style === "object" && style !== null,
+    (style) => typeof style === "object" && style !== null
   ) as CSSProperties[];
 
   const mergedStyles = validStyles.reduce((acc, style) => {
@@ -55,4 +56,17 @@ export const isValidJSON = (str: string) => {
   } catch (e) {
     return false;
   }
+};
+
+export const zodResolver = <T>(schema: ZodSchema<T>) => {
+  return (data: Partial<z.infer<typeof schema>>) => {
+    try {
+      schema.parse(data);
+      return {};
+    } catch (e) {
+      if (e instanceof ZodError) {
+        return e.flatten().fieldErrors;
+      } else throw e;
+    }
+  };
 };

@@ -5,13 +5,15 @@ import argon2 from "argon2"
 import jwt, { type JwtPayload } from "jsonwebtoken"
 import { type FilterQuery, type Model } from "mongoose"
 
-export const hashPassword = async (password: string): Promise<string> => {
-    try {
-        const hash = await argon2.hash(password)
-        return hash
-    } catch (error) {
-        throw new Error(error as string)
-    }
+export const hashPassword = (password: string): Promise<string> => {
+    return argon2.hash(password)
+}
+
+export const validateHash = async (
+    password: string,
+    hashToBeValidated: string
+): Promise<boolean> => {
+    return argon2.verify(hashToBeValidated, password)
 }
 
 export const buildResponse = <T>(

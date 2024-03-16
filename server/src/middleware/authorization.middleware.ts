@@ -8,8 +8,7 @@ const authorizationMiddleware = (minPermissionRole: Permission) => {
     return (req: Request, _res: Response, next: NextFunction): void => {
         void (async () => {
             try {
-                const token: string | undefined =
-                    req.cookies.authorization_token
+                const token: string | undefined = req.cookies.jwt
                 if (token === undefined) {
                     if (minPermissionRole === "user")
                         throw ExpressError.BAD_CREDENTIALS
@@ -28,11 +27,14 @@ const authorizationMiddleware = (minPermissionRole: Permission) => {
                             minPermissionRole === "admin"
                         )
                             throw ExpressError.BAD_CREDENTIALS
-                        req.locals.user = {
-                            email,
-                            fullName,
-                            permission,
+                        req.locals = {
+                            user: {
+                                email,
+                                fullName,
+                                permission,
+                            },
                         }
+
                         next()
                     } else if (minPermissionRole !== "anonymous")
                         throw ExpressError.BAD_CREDENTIALS

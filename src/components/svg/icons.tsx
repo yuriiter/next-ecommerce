@@ -1182,7 +1182,7 @@ export const Loader = ({ className, ...rest }: IconProps) => {
         stroke="currentColor"
         strokeWidth="10"
         r="42"
-        stroke-dasharray="164.93361431346415 56.97787143782138"
+        strokeDasharray="164.93361431346415 56.97787143782138"
       ></circle>
     </svg>
   );

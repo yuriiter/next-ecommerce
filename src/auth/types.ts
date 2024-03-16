@@ -1,7 +1,5 @@
 export type AuthData =
-  | {
-      authenticated: false;
-    }
+  | { authenticated: false; fetching: boolean }
   | {
       authenticated: true;
       email: string;
@@ -9,5 +7,6 @@ export type AuthData =
     };
 
 export type AuthAction =
+  | { type: "PENDING" }
   | { type: "NOT_AUTHENTICATED" }
   | { type: "AUTHENTICATED"; payload: { email: string; fullName: string } };

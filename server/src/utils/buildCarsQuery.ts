@@ -53,7 +53,8 @@ export const buildCarQuery = (query: CarsQuery) => {
         })
     }
 
-    const finalQuery = conditions.length > 0 ? { $and: conditions } : {}
+    const finalQuery =
+        conditions.length > 0 ? { $and: conditions } : { $and: [] }
 
     return finalQuery
 }

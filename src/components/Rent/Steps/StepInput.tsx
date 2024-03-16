@@ -1,6 +1,6 @@
 import { Button } from "@/components/Button";
 import { cn } from "@/utils";
-import React, { ChangeEvent, ReactNode } from "react";
+import React, { ChangeEvent, HTMLProps, ReactNode } from "react";
 
 export type StepInputEventHandler = (e: ChangeEvent<HTMLInputElement>) => void;
 export type StepInputNewValueHandler<T> = <T>(newValue: T) => void;
@@ -18,13 +18,14 @@ type WithoutCustomInput = {
   renderInput?: never;
   selfSubmit?: () => void;
   selfSubmitText?: string;
+  inputProps?: HTMLProps<HTMLInputElement>;
 };
 
 type StepInputProps = {
   value: unknown;
   onChange: ChangeHandler;
   className?: string;
-  error?: string;
+  error?: string | string[];
   name: string;
   label?: string;
   placeholder?: string;
@@ -32,9 +33,6 @@ type StepInputProps = {
 } & (WithCustomInput | WithoutCustomInput);
 
 export const StepInput = ({
-  renderInput,
-  selfSubmit,
-  selfSubmitText,
   showLabel = true,
   ...mainProps
 }: StepInputProps) => {
@@ -46,7 +44,9 @@ export const StepInput = ({
       {showLabel && label && (
         <label className="step-input__label">{label}</label>
       )}
-      {renderInput?.(mainProps) || (
+      {"renderInput" in mainProps ? (
+        mainProps.renderInput?.(mainProps)
+      ) : (
         <div className="step-input__input-wrapper">
           <input
             name={name}
@@ -55,20 +55,29 @@ export const StepInput = ({
             value={typeof value === "string" ? value : ""}
             onChange={onChange}
             className="step-input__input step-input__textfield"
+            {...mainProps.inputProps}
           />
-          {selfSubmit && selfSubmitText && (
+          {mainProps.selfSubmit && mainProps.selfSubmitText ? (
             <Button
               className="step-input__self-submit"
               variant="minimal"
               size="md"
-              onClick={selfSubmit}
+              onClick={mainProps.selfSubmit}
             >
-              {selfSubmitText}
+              {mainProps.selfSubmitText}
             </Button>
-          )}
+          ) : null}
         </div>
       )}
-      <p className="step-input__error">{error}</p>
+      {typeof error === "string" ? (
+        <p className="step-input__error">{error}</p>
+      ) : Array.isArray(error) ? (
+        error.map((errorItem) => (
+          <p key={errorItem} className="step-input__error">
+            {errorItem}
+          </p>
+        ))
+      ) : null}
     </div>
   );
 };

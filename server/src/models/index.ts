@@ -58,7 +58,7 @@ export interface LinkData extends Document {
 
 export interface UserData extends Document {
     email: string
-    avatar: string
+    avatar?: string
     fullName: string
     passwordHash: string
     permission: Permission
