@@ -21,8 +21,7 @@ export const Search = ({ className }: SearchProps) => {
   const [searchValue, setSearchValue] = useState(searchValueFromQuery ?? "");
 
   useEffect(() => {
-    if (typeof searchValueFromQuery === "string" && searchValueFromQuery !== "")
-      setSearchValue(searchValueFromQuery);
+    setSearchValue(searchValueFromQuery ?? "");
   }, [searchValueFromQuery]);
 
   const inputRef = useRef<HTMLInputElement>(null);
