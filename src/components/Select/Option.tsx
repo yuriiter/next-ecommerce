@@ -1,14 +1,7 @@
 import React from "react";
-import { SelectOption } from "./types";
+import { OptionProps } from "./types";
 import { useDropdownContext } from "./useDropdownContext";
 import { cn } from "@/utils";
-
-type OptionProps = {
-  onClick: () => void;
-  option: SelectOption;
-  isSelected: boolean;
-  disabled?: boolean;
-};
 
 export const Option = ({
   onClick,

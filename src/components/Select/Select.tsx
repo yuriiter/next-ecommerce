@@ -1,6 +1,10 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { SelectWrapper } from "./SelectWrapper";
-import { RenderInputFunction, SelectOption } from "./types";
+import {
+  RenderInputFunction,
+  RenderOptionFunction,
+  SelectOption,
+} from "./types";
 import { Option } from "./Option";
 import { useMQ } from "@/hooks/mediaQuery/useMQ";
 import { NativeSelectInput } from "./NativeSelectInput";
@@ -16,6 +20,7 @@ export type SelectProps = {
   placement?: Placement;
   forceUseNativeSelect?: boolean;
   renderInput?: RenderInputFunction;
+  renderOption?: RenderOptionFunction;
 };
 
 export const Select = ({
@@ -28,6 +33,7 @@ export const Select = ({
   placement,
   forceUseNativeSelect = undefined,
   renderInput,
+  renderOption,
 }: SelectProps) => {
   const useNativeSelect = useMQ("MD", "max");
 
@@ -61,12 +67,19 @@ export const Select = ({
         {options?.map((option) => {
           const selectOption = () => onChange(option);
           return (
-            <Option
-              key={typeof option === "string" ? option : option.value}
-              isSelected={option === value}
-              option={option}
-              onClick={selectOption}
-            />
+            <Fragment key={typeof option === "string" ? option : option.value}>
+              {renderOption?.({
+                isSelected: option === value,
+                option,
+                onClick: selectOption,
+              }) ?? (
+                <Option
+                  isSelected={option === value}
+                  option={option}
+                  onClick={selectOption}
+                />
+              )}
+            </Fragment>
           );
         })}
       </div>
