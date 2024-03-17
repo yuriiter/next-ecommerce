@@ -15,4 +15,13 @@ export type SelectInputProps = {
   placeholder?: string;
 };
 
+export type OptionProps = {
+  onClick: () => void;
+  option: SelectOption;
+  isSelected: boolean;
+  disabled?: boolean;
+};
+
 export type RenderInputFunction = (inputProps: SelectInputProps) => ReactNode;
+
+export type RenderOptionFunction = (optionProps: OptionProps) => ReactNode;
