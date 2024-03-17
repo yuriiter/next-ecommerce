@@ -1,4 +1,5 @@
 import { type SortFilter } from "./sortFilter"
+import { AllOrNothing } from "./utils"
 
 export type CarsQuery = SortFilter & {
     typeSport?: boolean
@@ -14,4 +15,13 @@ export type CarsQuery = SortFilter & {
     price?: number
     search?: string
     favourites?: boolean
-}
+    popularFlag?: boolean
+    recommendedFlag?: boolean
+} & AllOrNothing<{
+        pickUpLocation: string
+        pickUpDate: string
+        pickUpTime: string
+        dropOffLocation: string
+        dropOffDate: string
+        dropOffTime: string
+    }>

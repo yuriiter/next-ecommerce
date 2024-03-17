@@ -42,7 +42,7 @@ export default function SpecificCategory() {
         <section className="container cards__section cards__section--recommended">
           <CardsContainer
             cards={recommendationCarsToDisplay}
-            title="Recomendation cars"
+            title="Filtered cars"
           />
           <ShowMore
             step={8}

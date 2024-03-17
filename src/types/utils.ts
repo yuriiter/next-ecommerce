@@ -6,14 +6,14 @@ export type StringUnionToBooleanKeys<T extends string> = {
 
 export type CamelCase<
   S extends string,
-  IsStart = true,
+  IsStart = true
 > = S extends `${infer First}-${infer Rest}`
   ? IsStart extends true
     ? `${First}${CamelCase<Capitalize<Rest>, false>}`
     : `${Capitalize<First>}${CamelCase<Capitalize<Rest>, false>}`
   : IsStart extends true
-    ? undefined
-    : Capitalize<S>;
+  ? undefined
+  : Capitalize<S>;
 
 export type WithStyleAndClassName = {
   className?: string;
@@ -25,3 +25,11 @@ export type Tags = keyof JSX.IntrinsicElements;
 export type WithAsProp<T extends Tags> = {
   as?: T | Tags;
 } & (ComponentPropsWithoutRef<T> & HTMLAttributes<HTMLOrSVGElement>);
+
+export type AllOrNothing<T extends Record<string, any>> =
+  | {
+      [K in keyof T]: T[K];
+    }
+  | {
+      [K in keyof T]?: never;
+    };

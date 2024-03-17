@@ -1,4 +1,4 @@
-import { type CarsQuery } from "@/types/carsQuery"
+import { CarsQuery } from "@/types/carsQuery"
 
 export const buildCarQuery = (query: CarsQuery) => {
     const {
@@ -14,6 +14,14 @@ export const buildCarQuery = (query: CarsQuery) => {
         capacity8,
         price,
         search,
+        recommendedFlag,
+        popularFlag,
+        pickUpLocation,
+        pickUpDate,
+        pickUpTime,
+        dropOffLocation,
+        dropOffDate,
+        dropOffTime,
     } = query
 
     const conditions = []
@@ -49,6 +57,33 @@ export const buildCarQuery = (query: CarsQuery) => {
             $or: [
                 { title: { $regex: search, $options: "i" } },
                 { description: { $regex: search, $options: "i" } },
+            ],
+        })
+    }
+
+    if (recommendedFlag) conditions.push({ recommendedFlag: true })
+    if (popularFlag) conditions.push({ popularFlag: true })
+
+    if (pickUpLocation && pickUpDate && dropOffLocation && dropOffDate) {
+        conditions.push({
+            $or: [
+                {
+                    $and: [
+                        {
+                            "rentalData.pickUpData.dateTime": {
+                                $lte: new Date(pickUpDate + "T" + pickUpTime),
+                            },
+                        },
+                        {
+                            "rentalData.dropOffData.dateTime": {
+                                $gte: new Date(dropOffDate + "T" + dropOffTime),
+                            },
+                        },
+                    ],
+                },
+                {
+                    rentalData: { $exists: false },
+                },
             ],
         })
     }

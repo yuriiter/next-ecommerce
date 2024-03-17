@@ -1,3 +1,5 @@
+import { AllOrNothing } from "./utils";
+
 export type SortFilter = {
   page?: number;
   pageSize?: number;
@@ -17,7 +19,16 @@ export type CarsQuery = SortFilter & {
   price?: number;
   search?: string;
   favourites?: boolean;
-};
+  popularFlag?: boolean;
+  recommendedFlag?: boolean;
+} & AllOrNothing<{
+    pickUpLocation: string;
+    pickUpDate: string;
+    pickUpTime: string;
+    dropOffLocation: string;
+    dropOffDate: string;
+    dropOffTime: string;
+  }>;
 
 export type StandardResponse<T> = {
   statusCode: number;

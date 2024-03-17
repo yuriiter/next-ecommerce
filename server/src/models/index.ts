@@ -43,6 +43,8 @@ export interface CarData extends Document {
     isManual: boolean
     price: number
     previousPrice?: number
+    recommendedFlag: boolean
+    popularFlag: boolean
     thumbnail: ImageData
     photos: ImageData[]
     description: string
@@ -105,6 +107,8 @@ const CarSchema = new Schema({
     isManual: Boolean,
     price: Number,
     previousPrice: Number,
+    recommendedFlag: Boolean,
+    popularFlag: Boolean,
     thumbnail: Image,
     photos: [Image],
     description: String,
