@@ -7,7 +7,7 @@
     column-gap: max(43px, min(148px, -318px + 33%));
     row-gap: 45px;
 
-    .swap-button__tooltip-wrapper {
+    .picker-central-button__tooltip-wrapper {
       position: absolute;
       top: 50%;
       left: 50%;
@@ -32,7 +32,7 @@
     padding: 16px 32px;
   }
 
-  &__swap-button {
+  &__central-button {
     z-index: 10;
     flex-shrink: 0;
     align-self: center;
