@@ -41,7 +41,7 @@ export const RentalDetails = ({ rentalData }: RentalDetailsProps) => {
           setPickUpData={() => null}
           dropOffData={dropOffData}
           setDropOffData={() => null}
-          hideSwapButton
+          hideCentralButton
         />
         <div className="summary__car-divider picker__divide-x"></div>
         <SummaryFooter total={total} />

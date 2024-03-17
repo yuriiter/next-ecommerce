@@ -4,7 +4,7 @@ import { DateInput } from "../Select/DateInput/DateInput";
 import { Select } from "../Select/Select";
 import { SelectOption } from "../Select/types";
 import TimeInput from "../Select/TimeInput";
-import { cn } from "@/utils";
+import { cn, dateOrDateStringToDate } from "@/utils";
 import { PointMark } from "../PointMark";
 import { locationOptions } from "@/constants/mockupData";
 import { PickerData } from "./types";
@@ -60,7 +60,7 @@ export const Picker = ({
         <PickerSelect title="Date">
           <DateInput
             placeholder="Select date"
-            value={date}
+            value={dateOrDateStringToDate(date)}
             onChange={onDateChange}
             disabled={disabled}
           />

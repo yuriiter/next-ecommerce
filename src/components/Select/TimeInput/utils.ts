@@ -7,16 +7,17 @@ export const timeAsString = (time: Time) =>
     .padStart(2, "0")} ${time.ampm}`;
 
 export const stringAsTime = (str: string) => {
-  const regex = /^(\d{2}):(\d{2})\s(AM|PM)$/;
+  const processedStr = str.replaceAll(" ", "");
+  const regex = /^(\d{2}):(\d{2})(AM|PM)$/;
 
-  const matches = str.match(regex);
+  const matches = processedStr.match(regex);
 
   if (matches) {
     const hr = parseInt(matches[1], 10);
     const min = parseInt(matches[2], 10);
     const ampm = matches[3];
 
-    if (hr >= 1 && hr <= 12 && min >= 0 && min <= 59) {
+    if (hr >= 0 && hr <= 12 && min >= 0 && min <= 59) {
       return { hr, min, ampm } as Time;
     }
   }

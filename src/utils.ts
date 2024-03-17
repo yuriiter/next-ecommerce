@@ -1,5 +1,6 @@
 import { CSSProperties } from "react";
 import { ZodError, ZodSchema, z } from "zod";
+import { Time } from "./components/Select/TimeInput/types";
 
 export const mod = (a: number, n: number): number => {
   return a - n * Math.floor(a / n);
@@ -70,3 +71,28 @@ export const zodResolver = <T>(schema: ZodSchema<T>) => {
     }
   };
 };
+
+export const setTimeOfDate = (originalDate: Date, time: Time): Date => {
+  const year = originalDate.getFullYear();
+  const month = originalDate.getMonth();
+  const day = originalDate.getDate();
+
+  let { hr, min, ampm } = time;
+
+  if (ampm === "PM" && hr !== 12) {
+    hr = hr + 12;
+  } else if (ampm === "AM" && hr === 12) {
+    hr = 0;
+  }
+
+  const newDate: Date = new Date(year, month, day, hr, min);
+
+  return newDate;
+};
+
+export const dateOrDateStringToDate = (
+  dateOrDateString: string | Date | undefined
+) =>
+  typeof dateOrDateString === "string"
+    ? new Date(dateOrDateString)
+    : dateOrDateString;
