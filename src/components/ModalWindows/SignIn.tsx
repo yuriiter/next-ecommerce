@@ -12,8 +12,10 @@ import { Typography } from "../Typography/Typography";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useSignInAndSetAuthData } from "@/hooks/auth/useSignInAndSetAuthData";
+import { useAuth } from "@/auth/useAuth";
 
 export const SignIn = () => {
+  const { authData } = useAuth();
   const router = useRouter();
   const { promisify } = useToast();
   const [signInResponse, signIn] = useSignInAndSetAuthData();
@@ -52,7 +54,7 @@ export const SignIn = () => {
           error={formState.errors["password"] ?? undefined}
         />
         <Button
-          disabled={signInResponse.type === "pending"}
+          disabled={signInResponse.type === "pending" || authData.authenticated}
           className="auth-form__submit"
           type="submit"
           size="lg"
