@@ -127,13 +127,6 @@ CarSchema.virtual("numOfVotes").get(function () {
     return this.reviews.length
 })
 
-CarSchema.virtual("rating").get(async function () {
-    return (
-        this.reviews.reduce((sum, review) => sum + (review as any).rating, 0) /
-        (this.reviews.length || 1)
-    )
-})
-
 const UserSchema = new Schema({
     email: { type: String, unique: true },
     avatar: String,
