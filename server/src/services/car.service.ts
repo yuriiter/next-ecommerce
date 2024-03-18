@@ -3,6 +3,7 @@ import { type CarsQuery } from "@/types/carsQuery"
 import { buildCarQuery } from "@utils/buildCarsQuery"
 import { getDocumentsAndCount } from "@utils/utils"
 import ExpressError from "@errors/ExpressError"
+import { ObjectId } from "mongoose"
 
 export const getCars = async (query: CarsQuery, email?: string) => {
     const finalQuery = buildCarQuery(query)
@@ -40,4 +41,33 @@ export const getCars = async (query: CarsQuery, email?: string) => {
     }))
 
     return { documents: processedCars, count }
+}
+
+export const setCarIsInFavourites = async (
+    email: string,
+    carId: string,
+    newValue: boolean
+) => {
+    const car = await CarModel.findById(carId)
+    const user = await UserModel.findOne({ email })
+
+    const carIsFavouriteForUsers = car.isFavouriteForUsers
+    const userFavouriteCars = user.favouriteCars
+
+    let newCarIsFavouriteForUsers = new Set(carIsFavouriteForUsers)
+    let newUserFavouriteCars = new Set(userFavouriteCars)
+
+    if (newValue === false) {
+        newCarIsFavouriteForUsers.delete(email)
+        newUserFavouriteCars.delete(carId as any as ObjectId)
+    } else {
+        newCarIsFavouriteForUsers.add(email)
+        newUserFavouriteCars.add(carId as any as ObjectId)
+    }
+
+    car.isFavouriteForUsers = [...newCarIsFavouriteForUsers]
+    user.favouriteCars = [...newUserFavouriteCars]
+
+    car.save()
+    user.save()
 }
