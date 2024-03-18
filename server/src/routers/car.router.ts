@@ -1,7 +1,11 @@
 import { type NextFunction, type Request, type Response, Router } from "express"
 import authorizationMiddleware from "@middleware/authorization.middleware"
 import { type CarsQuery } from "@/types/carsQuery"
-import { getCars, setCarIsInFavourites } from "@services/car.service"
+import {
+    getCarById,
+    getCars,
+    setCarIsInFavourites,
+} from "@services/car.service"
 import { buildResponse } from "@utils/utils"
 
 const carRouter = Router()
@@ -21,6 +25,25 @@ carRouter.get(
                 const cars = await getCars(filters, req.locals?.user?.email)
 
                 return res.status(200).send(buildResponse(200, cars))
+            } catch (err) {
+                next(err)
+            }
+        })()
+    }
+)
+
+carRouter.get(
+    "/:carId",
+    authorizationMiddleware("anonymous"),
+    (req: Request<{ carId: string }>, res: Response, next: NextFunction) => {
+        void (async () => {
+            try {
+                const { carId } = req.params
+                const { email } = req.locals.user
+
+                const car = await getCarById(carId, email)
+
+                return res.status(200).send(buildResponse(200, car))
             } catch (err) {
                 next(err)
             }

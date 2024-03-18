@@ -71,3 +71,23 @@ export const setCarIsInFavourites = async (
     car.save()
     user.save()
 }
+
+export const getCarById = async (carId: string, email: string | undefined) => {
+    const car = await CarModel.findById(carId)
+
+    const processedCar = {
+        ...car,
+        isInFavourites: email
+            ? car.isFavouriteForUsers.some((likingUser) => likingUser === email)
+            : false,
+        rating:
+            car.reviews.reduce(
+                (sum, review) => sum + (review as any).rating,
+                0
+            ) / (car.reviews.length || 1),
+    }
+
+    delete processedCar.isFavouriteForUsers
+
+    return processedCar.toObject()
+}
