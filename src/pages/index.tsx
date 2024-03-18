@@ -8,19 +8,27 @@ import { ShowMore } from "@/components/Cards/ShowMore";
 import { popularCarsMockup, recommendationCars } from "@/constants/mockupData";
 import { PickerSection } from "@/components/Picker/PickerSection";
 import { usePickerSectionData } from "@/components/Picker/hooks/usePickerSectionData";
-import { promisedTimeout } from "@/utils";
+import { useGetCars } from "@/queries/useGetCars";
 
 export default function Home() {
-  const [isDialogOpen, setIsDialogOpen] = useState(true);
-  const [isButtonLoading, setIsButtonLoading] = useState(false);
-
-  const loaderButtonClicked = () => {
-    setIsButtonLoading(true);
-    promisedTimeout(3000).then(() => setIsButtonLoading(false));
-  };
+  const [popularCarsResponse] = useGetCars({
+    queryParams: {
+      popularFlag: true,
+      page: 0,
+      pageSize: 4,
+    },
+  });
 
   const [recommendationCarsDisplayLimit, setRecommendationCarsDisplayLimit] =
     useState(8);
+
+  const [recommendedCarsResponse] = useGetCars({
+    queryParams: {
+      recommendedFlag: true,
+      page: 0,
+      pageSize: recommendationCarsDisplayLimit,
+    },
+  });
 
   const recommendationCarsToDisplay = useMemo(() => {
     return recommendationCars.slice(0, recommendationCarsDisplayLimit);
@@ -67,7 +75,7 @@ export default function Home() {
         <CardsContainer
           cards={popularCarsMockup}
           title="Popular cars"
-          rightLink={{ href: "/popular", content: "view all" }}
+          rightLink={{ href: "/cars", content: "View all" }}
           horizontalScrolling
         />
       </section>
@@ -75,6 +83,7 @@ export default function Home() {
         <CardsContainer
           cards={recommendationCarsToDisplay}
           title="Recomendation cars"
+          rightLink={{ href: "/cars", content: "View all" }}
         />
         <ShowMore
           step={8}

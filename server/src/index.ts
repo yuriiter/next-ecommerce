@@ -12,6 +12,7 @@ import { healthRouter } from "@routers/health.router"
 import authorizationMiddleware from "@middleware/authorization.middleware"
 import userRouter from "@routers/user.router"
 import sessionRouter from "@routers/session.router"
+import { CarModel } from "./models"
 
 const app: Express = express()
 

@@ -51,6 +51,7 @@ export interface CarData extends Document {
     rating: number
     numOfVotes: number
     reviews: Review[]
+    isFavoriteForUsers: string[]
 }
 
 export interface LinkData extends Document {
@@ -64,7 +65,8 @@ export interface UserData extends Document {
     fullName: string
     passwordHash: string
     permission: Permission
-    favouriteCars: CarData[]
+    favouriteCars: Schema.Types.ObjectId[]
+    []
 }
 
 export interface NotificationData extends Document {
@@ -119,7 +121,14 @@ const CarSchema = new Schema({
             dropOffData: DateTimeLocation,
         },
     ],
+    isFavoriteForUsers: [String],
 })
+
+CarSchema.methods.isInFavorites = function (userEmail: string | undefined) {
+    return userEmail
+        ? this.isFavoriteForUsers.some(({ email }) => email === userEmail)
+        : false
+}
 
 const UserSchema = new Schema({
     email: { type: String, unique: true },
@@ -127,7 +136,7 @@ const UserSchema = new Schema({
     fullName: String,
     passwordHash: String,
     permission: { type: String, enum: ["anonymous", "user", "admin"] },
-    favouriteCars: [{ type: Schema.Types.ObjectId, ref: "Car" }],
+    favouriteCars: [{ type: Schema.Types.ObjectId }],
 })
 
 const NotificationSchema = new Schema({

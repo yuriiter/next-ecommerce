@@ -17,16 +17,22 @@ export const getCars = async (query: CarsQuery, email?: string) => {
                 500,
                 "Authenticated user doesn't have an account"
             )
-        const favouriteCarsIds = user.favouriteCars.map(({ _id }) => _id)
-        finalQuery.$and.push({ _id: { $in: favouriteCarsIds } })
+        finalQuery.$and.push({ _id: { $in: user.favouriteCars } })
     }
 
-    const [cars, count] = await getDocumentsAndCount(
+    let [cars, count] = await getDocumentsAndCount(
         CarModel,
         finalQuery,
         page * pageSize,
         pageSize
     )
+
+    cars = cars.map((car) => ({
+        ...car,
+        isInFavourites: email
+            ? car.isFavoriteForUsers.some((likingUser) => likingUser === email)
+            : false,
+    }))
 
     return { documents: cars, count }
 }
