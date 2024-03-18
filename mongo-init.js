@@ -39,36 +39,6 @@ const users = [
 const userInsertResults = db.users.insertMany(users);
 const userIds = userInsertResults.insertedIds;
 
-const notifications = [
-  {
-    fromDate: new Date(),
-    title: "New Mercedes of High Class Available",
-    message: "Discover the latest Mercedes models now in stock.",
-    url: "https://example.com/mercedes",
-  },
-  {
-    fromDate: new Date(),
-    title: "Summer Sale: Up to 30% Off!",
-    message: "Don't miss our exclusive summer sale. Limited time offer!",
-    url: "https://example.com/summer-sale",
-  },
-  {
-    fromDate: new Date(),
-    title: "Test Drive Event: Join Us!",
-    message:
-      "Experience the thrill of driving our latest models. Join us for a test drive event.",
-    url: "https://example.com/test-drive-event",
-  },
-  {
-    fromDate: new Date(),
-    title: "Exclusive Membership Benefits",
-    message: "Unlock exclusive membership benefits today. Join now!",
-    url: "https://example.com/membership",
-  },
-];
-
-const notificationInsertResults = db.notifications.insertMany(notifications);
-
 const cars = [];
 for (let i = 0; i < 20; i++) {
   cars.push({

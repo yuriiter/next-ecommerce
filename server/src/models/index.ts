@@ -68,13 +68,6 @@ export interface UserData extends Document {
     favouriteCars: Schema.Types.ObjectId[]
 }
 
-export interface NotificationData extends Document {
-    fromDate: Date
-    title: string
-    message: string
-    url: string
-}
-
 const ReviewSchema = new Schema({
     user: { type: Schema.Types.ObjectId, ref: "User" },
     caption: String,
@@ -136,17 +129,6 @@ const UserSchema = new Schema({
     favouriteCars: [{ type: Schema.Types.ObjectId }],
 })
 
-const NotificationSchema = new Schema({
-    fromDate: Date,
-    title: String,
-    message: String,
-    url: String,
-})
-
 export const ReviewModel = mongoose.model<Review>("Review", ReviewSchema)
 export const CarModel = mongoose.model<CarData>("Car", CarSchema)
 export const UserModel = mongoose.model<UserData>("User", UserSchema)
-export const NotificationModel = mongoose.model<NotificationData>(
-    "Notification",
-    NotificationSchema
-)

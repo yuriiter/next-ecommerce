@@ -4,17 +4,17 @@ import { type CreateUserSchema } from "@schemas/users.schema"
 import ExpressError from "@errors/ExpressError"
 
 export const validateUser = async (email: string, password: string) => {
-    const user = await UserModel.findOne({
-        email,
-    })
+    const user = await UserModel.findOne(
+        {
+            email,
+        },
+        ["email", "fullName"]
+    )
     const isPasswordValid = validateHash(password, user?.passwordHash)
     if (!isPasswordValid) return null
     const userAsObject = user.toObject()
 
-    delete userAsObject.passwordHash
-    delete userAsObject.favouriteCars
-
-    return user
+    return userAsObject
 }
 
 export const createUser = async (userData: CreateUserSchema) => {
@@ -25,6 +25,7 @@ export const createUser = async (userData: CreateUserSchema) => {
         await newUser.save()
         const newUserAsObject = newUser.toObject()
         delete newUserAsObject.passwordHash
+        delete newUserAsObject.favouriteCars
         return newUserAsObject
     } catch (err) {
         if (err.code === 11000)
@@ -34,11 +35,8 @@ export const createUser = async (userData: CreateUserSchema) => {
 }
 
 export const getUserByEmail = async (email: string) => {
-    const user = await UserModel.findOne({ email })
+    const user = await UserModel.findOne({ email }, ["email", "fullName"])
     const userAsObject = user.toObject()
-
-    delete userAsObject.passwordHash
-    delete userAsObject.favouriteCars
 
     return userAsObject
 }
