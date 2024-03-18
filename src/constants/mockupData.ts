@@ -18,7 +18,7 @@ export const popularCarsMockup: CarData[] = [
     isManual: true,
     price: 99,
     previousPrice: undefined,
-    isInFavorites: true,
+    isInFavourites: true,
     thumbnail: carCardMockup,
     photos: [carGallery1, carGallery2],
     description:
@@ -80,7 +80,7 @@ export const popularCarsMockup: CarData[] = [
     isManual: true,
     price: 80,
     previousPrice: 100,
-    isInFavorites: false,
+    isInFavourites: false,
     thumbnail: carCardMockup,
     photos: [carGallery1, carGallery2],
     description:
@@ -142,7 +142,7 @@ export const popularCarsMockup: CarData[] = [
     isManual: true,
     price: 96,
     previousPrice: undefined,
-    isInFavorites: true,
+    isInFavourites: true,
     thumbnail: carCardMockup,
     photos: [carGallery1],
     description:
@@ -204,7 +204,7 @@ export const popularCarsMockup: CarData[] = [
     isManual: true,
     price: 80,
     previousPrice: 100,
-    isInFavorites: false,
+    isInFavourites: false,
     thumbnail: carCardMockup,
     photos: [carGallery1, carGallery2],
     description:

@@ -21,7 +21,7 @@ export const CarDescription = ({ carData }: CarDescriptionProps) => {
     isManual,
     price,
     previousPrice,
-    isInFavorites,
+    isInFavourites,
     rating,
     numOfVotes,
   } = carData;
@@ -38,7 +38,7 @@ export const CarDescription = ({ carData }: CarDescriptionProps) => {
       <div className="car-detail__description-header">
         <h3 className="car-detail__description-title">{name}</h3>
         <Like
-          isLiked={isInFavorites}
+          isLiked={isInFavourites}
           onClick={function (): void {
             throw new Error("Function not implemented.");
           }}

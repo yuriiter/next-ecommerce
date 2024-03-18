@@ -21,7 +21,7 @@ export const Card = ({ carData }: CardProps) => {
     isManual,
     price,
     previousPrice,
-    isInFavorites,
+    isInFavourites,
     thumbnail,
   } = carData;
 
@@ -34,7 +34,7 @@ export const Card = ({ carData }: CardProps) => {
         </div>
         <div className="card__favourite">
           <Like
-            isLiked={isInFavorites}
+            isLiked={isInFavourites}
             onClick={function (): void {
               throw new Error("Function not implemented.");
             }}

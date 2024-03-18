@@ -81,7 +81,7 @@ for (let i = 0; i < 20; i++) {
     isManual: false,
     price: Math.floor(Math.random() * 50000) + 20000, // Random price between 20000 and 70000
     previousPrice: 0,
-    isInFavorites: false,
+    isInFavourites: false,
     thumbnail: {
       name: `Thumbnail ${i + 1}`,
       desc: `Thumbnail ${i + 1} Description`,

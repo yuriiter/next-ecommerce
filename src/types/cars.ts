@@ -32,7 +32,7 @@ export type CarData = {
   isManual: boolean;
   price: number;
   previousPrice?: number;
-  isInFavorites: boolean;
+  isInFavourites: boolean;
   thumbnail: string;
   photos: string[];
   description: string;

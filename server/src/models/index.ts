@@ -51,7 +51,7 @@ export interface CarData extends Document {
     rating: number
     numOfVotes: number
     reviews: Review[]
-    isFavoriteForUsers: string[]
+    isFavouriteForUsers: string[]
 }
 
 export interface LinkData extends Document {
@@ -66,7 +66,6 @@ export interface UserData extends Document {
     passwordHash: string
     permission: Permission
     favouriteCars: Schema.Types.ObjectId[]
-    []
 }
 
 export interface NotificationData extends Document {
@@ -121,14 +120,19 @@ const CarSchema = new Schema({
             dropOffData: DateTimeLocation,
         },
     ],
-    isFavoriteForUsers: [String],
+    isFavouriteForUsers: [String],
 })
 
-CarSchema.methods.isInFavorites = function (userEmail: string | undefined) {
-    return userEmail
-        ? this.isFavoriteForUsers.some(({ email }) => email === userEmail)
-        : false
-}
+CarSchema.virtual("numOfVotes").get(function () {
+    return this.reviews.length
+})
+
+CarSchema.virtual("rating").get(async function () {
+    return (
+        this.reviews.reduce((sum, review) => sum + (review as any).rating, 0) /
+        (this.reviews.length || 1)
+    )
+})
 
 const UserSchema = new Schema({
     email: { type: String, unique: true },
