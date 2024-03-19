@@ -2,12 +2,12 @@ import Head from "next/head";
 import { Banner } from "@/components/Banner";
 import bannerCar1 from "@/assets/img/banner_car_1.png";
 import bannerCar2 from "@/assets/img/banner_car_2.png";
-import { useState } from "react";
 import { CardsContainer } from "@/components/Cards";
 import { ShowMore } from "@/components/Cards/ShowMore";
 import { PickerSection } from "@/components/Picker/PickerSection";
 import { usePickerSectionData } from "@/components/Picker/hooks/usePickerSectionData";
 import { useGetCars } from "@/queries/useGetCars";
+import useURLQueryState from "@/hooks/URLQueries/useURLQueryState";
 
 export default function Home() {
   const [popularCarsResponse] = useGetCars({
@@ -19,7 +19,7 @@ export default function Home() {
   });
 
   const [recommendationCarsDisplayLimit, setRecommendationCarsDisplayLimit] =
-    useState(8);
+    useURLQueryState("pageSize", 8);
 
   const [recommendedCarsResponse] = useGetCars({
     queryParams: {
@@ -68,11 +68,7 @@ export default function Home() {
       />
       <section className="container cards__section">
         <CardsContainer
-          cards={
-            popularCarsResponse.type === "success"
-              ? popularCarsResponse.data?.data?.documents ?? []
-              : []
-          }
+          cards={popularCarsResponse.data?.data?.documents ?? []}
           title="Popular cars"
           rightLink={{ href: "/cars", content: "View all" }}
           horizontalScrolling
@@ -81,22 +77,14 @@ export default function Home() {
       </section>
       <section className="container cards__section cards__section--recommended">
         <CardsContainer
-          cards={
-            recommendedCarsResponse.type === "success"
-              ? recommendedCarsResponse.data?.data?.documents ?? []
-              : []
-          }
+          cards={recommendedCarsResponse.data?.data?.documents ?? []}
           title="Recomendation cars"
           rightLink={{ href: "/cars", content: "View all" }}
           loading={recommendedCarsResponse.type === "pending"}
         />
         <ShowMore
           step={8}
-          totalItemsCount={
-            recommendedCarsResponse.type === "success"
-              ? recommendedCarsResponse.data?.data?.count ?? 0
-              : 0
-          }
+          totalItemsCount={recommendedCarsResponse.data?.data?.count ?? 0}
           itemsToShowLimit={recommendationCarsDisplayLimit}
           setItemsToShowLimit={setRecommendationCarsDisplayLimit}
           itemNamePlural="cars"
