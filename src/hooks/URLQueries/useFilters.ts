@@ -2,26 +2,11 @@ import { useCallback, useMemo } from "react";
 import { sidebarInputs } from "@/constants/mockupData";
 import { SidebarInputGroup } from "@/components/Sidebar/types";
 import { useURLQueryObjectState } from "./useURLQueryObjectState";
-import { copy } from "@/utils";
+import { copy, sidebarInputsToQueryState } from "@/utils";
 
-const sidebarInputsToQueryState = (sidebarInputs: SidebarInputGroup[]) =>
-  sidebarInputs.reduce((filtersObject, group) => {
-    group.inputs.forEach(({ key, value }) => {
-      filtersObject[key] = value;
-    });
-    return filtersObject;
-  }, {});
-
-export const useFilters = (): [
-  SidebarInputGroup[],
-  (
-    inputGroupName: string,
-    inputName: string,
-    newValue: boolean | number,
-  ) => void,
-] => {
+export const useFilters = (): [SidebarInputGroup[], typeof onChangeFilters] => {
   const [filters, setFilters] = useURLQueryObjectState(
-    sidebarInputsToQueryState(sidebarInputs),
+    sidebarInputsToQueryState(sidebarInputs)
   );
 
   const onChangeFilters = useCallback(
@@ -30,7 +15,7 @@ export const useFilters = (): [
 
       for (const group of sidebarInputsCopy) {
         const searchedInput = group.inputs.find(
-          ({ key: iteratedKey }) => iteratedKey === key,
+          ({ key: iteratedKey }) => iteratedKey === key
         );
         if (!searchedInput) continue;
         searchedInput.value = newValue;
@@ -38,7 +23,7 @@ export const useFilters = (): [
         break;
       }
     },
-    [filters, setFilters],
+    [filters, setFilters]
   );
 
   const filtersFormValues = useMemo(() => {
@@ -46,7 +31,7 @@ export const useFilters = (): [
     sidebarInputsCopy.forEach((group) =>
       group.inputs.forEach((input) => {
         input.value = filters[input.key] ?? input.value;
-      }),
+      })
     );
 
     return sidebarInputsCopy;

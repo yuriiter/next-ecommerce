@@ -40,7 +40,6 @@ const authorizationMiddleware = (minPermissionRole: Permission) => {
                         throw ExpressError.BAD_CREDENTIALS
                 }
             } catch (err) {
-                console.error(err)
                 next(err)
             }
         })()

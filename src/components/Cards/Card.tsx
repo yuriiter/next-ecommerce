@@ -6,6 +6,7 @@ import { Like } from "../Like";
 import { FuelIcon, PeopleIcon, TransmissionIcon } from "../svg/icons";
 import { makeCapacityString } from "@/utils";
 import { PriceInfo } from "../PriceInfo";
+import { ImageWrapper } from "../ImageWrapper";
 
 type CardProps = {
   carData: CarData;
@@ -13,7 +14,7 @@ type CardProps = {
 
 export const Card = ({ carData }: CardProps) => {
   const {
-    id,
+    _id,
     name,
     carType,
     fuelCapacity,
@@ -41,10 +42,10 @@ export const Card = ({ carData }: CardProps) => {
           />
         </div>
       </div>
-      <Image
+      <ImageWrapper
         className="card__thumbnail"
-        alt={`Rent car | ${name} - ${carType}`}
-        src={thumbnail}
+        alt={thumbnail?.desc ?? ""}
+        src={thumbnail?.img?.url ?? ""}
       />
       <div className="card__info">
         <div className="card__info-item">
@@ -70,7 +71,7 @@ export const Card = ({ carData }: CardProps) => {
           size="lg"
           className="card__link"
           href="/cars/[carId]"
-          as={`/cars/${id}`}
+          as={`/cars/${_id}`}
         >
           Rent now
         </Button>

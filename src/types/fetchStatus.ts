@@ -16,14 +16,14 @@ export type FetchPause = {
   type: "pause";
 };
 
-export type FetchSuccess<T> = {
+export type FetchSuccess = {
   type: "success";
-  data: T | undefined;
 };
 
 export type FetchStatus<T> = {
   type: FetchStatusType;
-} & (FetchError | FetchPending | FetchPause | FetchSuccess<T>);
+  data?: T;
+} & (FetchError | FetchPending | FetchPause | FetchSuccess);
 
 export type FetchCallback<T> = (
   fetchParams?: Pick<UseFetchParams, "requestConfig">

@@ -48,6 +48,6 @@ export const getDocumentsAndCount = <T, D extends { [P in keyof T]?: any }>(
     limit: number
 ) =>
     Promise.all([
-        model.find(query).skip(skip).limit(limit),
+        model.find(query).skip(skip).limit(limit).lean(),
         model.countDocuments(query),
     ])

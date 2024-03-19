@@ -2,10 +2,9 @@ import Head from "next/head";
 import { Banner } from "@/components/Banner";
 import bannerCar1 from "@/assets/img/banner_car_1.png";
 import bannerCar2 from "@/assets/img/banner_car_2.png";
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { CardsContainer } from "@/components/Cards";
 import { ShowMore } from "@/components/Cards/ShowMore";
-import { popularCarsMockup, recommendationCars } from "@/constants/mockupData";
 import { PickerSection } from "@/components/Picker/PickerSection";
 import { usePickerSectionData } from "@/components/Picker/hooks/usePickerSectionData";
 import { useGetCars } from "@/queries/useGetCars";
@@ -29,10 +28,6 @@ export default function Home() {
       pageSize: recommendationCarsDisplayLimit,
     },
   });
-
-  const recommendationCarsToDisplay = useMemo(() => {
-    return recommendationCars.slice(0, recommendationCarsDisplayLimit);
-  }, [recommendationCarsDisplayLimit]);
 
   const { pickUpData, setPickUpData, dropOffData, setDropOffData } =
     usePickerSectionData();
@@ -73,21 +68,35 @@ export default function Home() {
       />
       <section className="container cards__section">
         <CardsContainer
-          cards={popularCarsMockup}
+          cards={
+            popularCarsResponse.type === "success"
+              ? popularCarsResponse.data?.data?.documents ?? []
+              : []
+          }
           title="Popular cars"
           rightLink={{ href: "/cars", content: "View all" }}
           horizontalScrolling
+          loading={popularCarsResponse.type === "pending"}
         />
       </section>
       <section className="container cards__section cards__section--recommended">
         <CardsContainer
-          cards={recommendationCarsToDisplay}
+          cards={
+            recommendedCarsResponse.type === "success"
+              ? recommendedCarsResponse.data?.data?.documents ?? []
+              : []
+          }
           title="Recomendation cars"
           rightLink={{ href: "/cars", content: "View all" }}
+          loading={recommendedCarsResponse.type === "pending"}
         />
         <ShowMore
           step={8}
-          totalItemsCount={recommendationCars.length}
+          totalItemsCount={
+            recommendedCarsResponse.type === "success"
+              ? recommendedCarsResponse.data?.data?.count ?? 0
+              : 0
+          }
           itemsToShowLimit={recommendationCarsDisplayLimit}
           setItemsToShowLimit={setRecommendationCarsDisplayLimit}
           itemNamePlural="cars"

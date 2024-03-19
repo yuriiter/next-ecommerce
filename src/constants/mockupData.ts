@@ -329,7 +329,7 @@ export const sidebarInputs: SidebarInputGroup[] = [
     inputs: [
       {
         name: "",
-        value: 1000,
+        value: 100,
         key: "price",
       },
     ],

@@ -24,7 +24,7 @@ export const useGet = <
     });
     newUrl.search = params.toString();
     return newUrl.toString();
-  }, [...Object.values(queryParams || {}), url]);
+  }, [url, JSON.stringify(queryParams)]);
 
   return useFetch({ url: finalUrl, requestConfig, pause });
 };

@@ -49,7 +49,7 @@ for (let i = 0; i < 20; i++) {
     fuelCapacity: 60,
     peopleCapacity: 5,
     isManual: false,
-    price: Math.floor(Math.random() * 50000) + 20000, // Random price between 20000 and 70000
+    price: Math.floor(Math.random() * 50) + 20, // Random price between 20000 and 70000
     previousPrice: 0,
     isInFavourites: false,
     thumbnail: {

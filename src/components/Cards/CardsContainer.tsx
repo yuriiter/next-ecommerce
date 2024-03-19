@@ -3,6 +3,7 @@ import React from "react";
 import { Card } from "./Card";
 import Link from "next/link";
 import { cn } from "@/utils";
+import { Typography } from "../Typography/Typography";
 
 type CardsContainerProps = {
   title?: string;
@@ -41,9 +42,13 @@ export const CardsContainer = ({
         </div>
       )}
       <div className="cards__container">
-        {cards.map((card) => (
-          <Card key={card.id} carData={card} />
-        ))}
+        {cards?.length > 0 ? (
+          cards.map((card) => <Card key={card._id} carData={card} />)
+        ) : (
+          <Typography className="text-center" secondary300 size="16">
+            No data found
+          </Typography>
+        )}
       </div>
     </div>
   );

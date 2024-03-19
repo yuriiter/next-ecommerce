@@ -79,7 +79,7 @@ export const useFetch = <T>({
         cancelTokenSourceRef.current.cancel("Request canceled by cleanup");
       }
     };
-  }, [fetchCallback, pause]);
+  }, [pause, url]);
 
   return [status, fetchCallback];
 };

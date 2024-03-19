@@ -3,23 +3,45 @@ import { ShowMore } from "@/components/Cards/ShowMore";
 import { PickerSection } from "@/components/Picker/PickerSection";
 import { usePickerSectionData } from "@/components/Picker/hooks/usePickerSectionData";
 import { WithSidebarFilters } from "@/components/Sidebar/SidebarFilters/WithSidebarFilters";
-import { recommendationCars } from "@/constants/mockupData";
 import { useFilters } from "@/hooks/URLQueries/useFilters";
+import useURLQueryState from "@/hooks/URLQueries/useURLQueryState";
+import { useDidUpdate } from "@/hooks/useDidUpdate";
+import { useGetCars } from "@/queries/useGetCars";
+import { convertPickerData, sidebarInputsToQueryState } from "@/utils";
 import Head from "next/head";
-import React, { useMemo, useState } from "react";
+import React, { useState } from "react";
 
-export default function SpecificCategory() {
+export default function Cars() {
   const [filters, onChangeFilters] = useFilters();
-
-  const [recommendationCarsDisplayLimit, setRecommendationCarsDisplayLimit] =
-    useState(8);
-
-  const recommendationCarsToDisplay = useMemo(() => {
-    return recommendationCars.slice(0, recommendationCarsDisplayLimit);
-  }, [recommendationCarsDisplayLimit]);
-
+  const [carsDisplayLimit, setCarsDisplayLimit] = useState(8);
   const { pickUpData, setPickUpData, dropOffData, setDropOffData } =
     usePickerSectionData();
+  const [search] = useURLQueryState("search", "");
+
+  const [carsResponse] = useGetCars({
+    queryParams: {
+      ...Object.fromEntries(
+        Object.entries(sidebarInputsToQueryState(filters)).filter(
+          ([, value]) => value !== false
+        )
+      ),
+      ...convertPickerData({ pickUpData, dropOffData }),
+      search: search === "" ? undefined : search,
+      page: 0,
+      pageSize: carsDisplayLimit,
+    },
+  });
+
+  useDidUpdate(() => {
+    setCarsDisplayLimit(8);
+  }, [
+    JSON.stringify({
+      filters,
+      search,
+      pickUpData,
+      dropOffData,
+    }),
+  ]);
 
   return (
     <>
@@ -41,14 +63,23 @@ export default function SpecificCategory() {
 
         <section className="container cards__section cards__section--recommended">
           <CardsContainer
-            cards={recommendationCarsToDisplay}
+            cards={
+              carsResponse.type === "success"
+                ? carsResponse.data?.data?.documents ?? []
+                : []
+            }
             title="Filtered cars"
+            loading={carsResponse.type === "pending"}
           />
           <ShowMore
             step={8}
-            totalItemsCount={recommendationCars.length}
-            itemsToShowLimit={recommendationCarsDisplayLimit}
-            setItemsToShowLimit={setRecommendationCarsDisplayLimit}
+            totalItemsCount={
+              carsResponse.type === "success"
+                ? carsResponse.data?.data?.count ?? 0
+                : 0
+            }
+            itemsToShowLimit={carsDisplayLimit}
+            setItemsToShowLimit={setCarsDisplayLimit}
             itemNamePlural="cars"
             itemNameSingular="car"
           />

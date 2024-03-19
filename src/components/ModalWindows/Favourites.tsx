@@ -1,19 +1,34 @@
 import { MODAL_WINDOW } from "@/types/modalWindow";
 import { ModalWindow } from "@/components/ModalWindow/ModalWindow";
-import React from "react";
+import React, { useEffect } from "react";
 import { CardsContainer } from "../Cards";
 import { useGetCars } from "@/queries/useGetCars";
+import { useAuth } from "@/auth/useAuth";
 
 export const Favourites = () => {
-  const [carsData, fetch] = useGetCars({ queryParams: { favourites: true } });
+  const { authData } = useAuth();
+  const [carsResponse, fetchCars] = useGetCars({
+    queryParams: { favourites: true },
+    pause: true,
+  });
 
-  // if(carsData.type === "success") {
-  //   carsData.data?.data.
-  // }
+  useEffect(() => {
+    if (authData.authenticated) fetchCars;
+  }, [authData]);
+
+  if (!authData.authenticated) return null;
 
   return (
     <ModalWindow title="Your favourite cars" id={MODAL_WINDOW.FAVOURITES}>
-      <CardsContainer cards={[]} title="" />
+      <CardsContainer
+        cards={
+          carsResponse.type === "success"
+            ? carsResponse.data?.data?.documents ?? []
+            : []
+        }
+        loading={carsResponse.type === "pending"}
+        title=""
+      />
     </ModalWindow>
   );
 };

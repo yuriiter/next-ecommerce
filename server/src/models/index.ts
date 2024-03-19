@@ -52,6 +52,7 @@ export interface CarData extends Document {
     numOfVotes: number
     reviews: Review[]
     isFavouriteForUsers: string[]
+    isInFavourites: boolean
 }
 
 export interface LinkData extends Document {

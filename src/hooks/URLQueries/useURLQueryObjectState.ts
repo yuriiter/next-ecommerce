@@ -12,7 +12,7 @@ const transformString = (value: string | string[] | undefined) => {
 };
 
 export const useURLQueryObjectState = <T extends Record<string, unknown>>(
-  initialValue: T,
+  initialValue: T
 ): [T, (newValueOrAction: SetStateAction<T>) => void] => {
   const router = useRouter();
 
@@ -29,7 +29,7 @@ export const useURLQueryObjectState = <T extends Record<string, unknown>>(
     }, {});
 
     return currentValue as T;
-  }, [initialValue, router.query]);
+  }, [router]);
 
   const currentState = useMemo(() => getQueryValue(), [getQueryValue]);
 
@@ -60,10 +60,10 @@ export const useURLQueryObjectState = <T extends Record<string, unknown>>(
         undefined,
         {
           shallow: true,
-        },
+        }
       );
     },
-    [router],
+    [router]
   );
 
   return [currentState, updateQuery];

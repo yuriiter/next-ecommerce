@@ -1,5 +1,5 @@
 import { cn } from "@/utils";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRanger } from "react-ranger";
 
 type RangeSliderProps = {
@@ -9,13 +9,12 @@ type RangeSliderProps = {
   onChange: (newValue: number) => void;
 };
 
-const RangeSlider: React.FC<RangeSliderProps> = ({
-  min,
-  max,
-  value,
-  onChange,
-}) => {
+const RangeSlider = ({ min, max, value, onChange }: RangeSliderProps) => {
   const [bufferValue, setBufferValue] = useState(value);
+
+  useEffect(() => {
+    setBufferValue(value);
+  }, [value]);
 
   const rangerOnChange = (values: number[]) => {
     setBufferValue(values[0]);

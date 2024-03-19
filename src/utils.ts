@@ -1,6 +1,8 @@
 import { CSSProperties } from "react";
 import { ZodError, ZodSchema, z } from "zod";
 import { Time } from "./components/Select/TimeInput/types";
+import { SidebarInputGroup } from "./components/Sidebar/types";
+import { PickerData } from "./components/Picker/types";
 
 export const mod = (a: number, n: number): number => {
   return a - n * Math.floor(a / n);
@@ -96,3 +98,72 @@ export const dateOrDateStringToDate = (
   typeof dateOrDateString === "string"
     ? new Date(dateOrDateString)
     : dateOrDateString;
+
+export const sidebarInputsToQueryState = (sidebarInputs: SidebarInputGroup[]) =>
+  sidebarInputs.reduce((filtersObject, group) => {
+    group.inputs.forEach(({ key, value }) => {
+      filtersObject[key] = value;
+    });
+    return filtersObject;
+  }, {});
+
+type ConvertPickerDataParams = {
+  pickUpData: PickerData | undefined;
+  dropOffData: PickerData | undefined;
+};
+
+export const convertPickerData = ({
+  pickUpData,
+  dropOffData,
+}: ConvertPickerDataParams) => {
+  const pickUpLocation = pickUpData?.location;
+  const pickUpDate =
+    pickUpData?.date instanceof Date
+      ? pickUpData?.date.toISOString()
+      : pickUpData?.date;
+  const pickUpTime = pickUpData?.time;
+  const dropOffLocation = dropOffData?.location;
+  const dropOffDate =
+    dropOffData?.date instanceof Date
+      ? dropOffData?.date.toISOString()
+      : dropOffData?.date;
+  const dropOffTime = dropOffData?.time;
+
+  const rentalData = {
+    pickUpLocation: pickUpLocation,
+    pickUpDate: pickUpDate,
+    pickUpTime: pickUpTime,
+    dropOffLocation: dropOffLocation,
+    dropOffDate: dropOffDate,
+    dropOffTime: dropOffTime,
+  };
+
+  if (Object.values(rentalData).includes(undefined)) return {};
+  else return rentalData;
+};
+
+export const deepObjectCompare = (obj1: unknown, obj2: unknown) => {
+  if (
+    typeof obj1 !== "object" ||
+    typeof obj2 !== "object" ||
+    obj1 === null ||
+    obj2 === null
+  ) {
+    return obj1 === obj2;
+  }
+
+  const keys1 = Object.keys(obj1);
+  const keys2 = Object.keys(obj2);
+
+  if (keys1.length !== keys2.length) {
+    return false;
+  }
+
+  for (const key of keys1) {
+    if (!deepObjectCompare(obj1[key], obj2[key])) {
+      return false;
+    }
+  }
+
+  return true;
+};
