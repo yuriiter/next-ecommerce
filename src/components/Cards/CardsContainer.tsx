@@ -4,6 +4,7 @@ import { Card } from "./Card";
 import Link from "next/link";
 import { cn } from "@/utils";
 import { Typography } from "../Typography/Typography";
+import { LoadingPoints } from "../LoadingPoints";
 
 type CardsContainerProps = {
   title?: string;
@@ -44,6 +45,10 @@ export const CardsContainer = ({
       <div className="cards__container">
         {cards?.length > 0 ? (
           cards.map((card) => <Card key={card._id} carData={card} />)
+        ) : loading ? (
+          <Typography className="text-center" secondary300 size="16">
+            Loading <LoadingPoints />
+          </Typography>
         ) : (
           <Typography className="text-center" secondary300 size="16">
             No data found

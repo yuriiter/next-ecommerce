@@ -9,11 +9,15 @@ import { useDidUpdate } from "@/hooks/useDidUpdate";
 import { useGetCars } from "@/queries/useGetCars";
 import { convertPickerData, sidebarInputsToQueryState } from "@/utils";
 import Head from "next/head";
-import React, { useState } from "react";
+import React from "react";
 
 export default function Cars() {
   const [filters, onChangeFilters] = useFilters();
-  const [carsDisplayLimit, setCarsDisplayLimit] = useState(8);
+  const [carsDisplayLimit, setCarsDisplayLimit] = useURLQueryState(
+    "pageSize",
+    8
+  );
+
   const { pickUpData, setPickUpData, dropOffData, setDropOffData } =
     usePickerSectionData();
   const [search] = useURLQueryState("search", "");
@@ -36,10 +40,13 @@ export default function Cars() {
     setCarsDisplayLimit(8);
   }, [
     JSON.stringify({
-      filters,
-      search,
-      pickUpData,
-      dropOffData,
+      ...Object.fromEntries(
+        Object.entries(sidebarInputsToQueryState(filters)).filter(
+          ([, value]) => value !== false
+        )
+      ),
+      ...convertPickerData({ pickUpData, dropOffData }),
+      search: search === "" ? undefined : search,
     }),
   ]);
 
@@ -63,11 +70,7 @@ export default function Cars() {
 
         <section className="container cards__section cards__section--recommended">
           <CardsContainer
-            cards={
-              carsResponse.type === "success"
-                ? carsResponse.data?.data?.documents ?? []
-                : []
-            }
+            cards={carsResponse.data?.data?.documents ?? []}
             title="Filtered cars"
             loading={carsResponse.type === "pending"}
           />

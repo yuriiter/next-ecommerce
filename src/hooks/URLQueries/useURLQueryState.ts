@@ -1,10 +1,10 @@
 import { useRouter } from "next/router";
-import { useCallback, useMemo } from "react";
+import { Dispatch, SetStateAction, useCallback, useMemo } from "react";
 
 const useURLQueryState = <T>(
   key: string,
   initialValue: T
-): [T, (value: T) => void] => {
+): [T, Dispatch<SetStateAction<T>>] => {
   const router = useRouter();
 
   const getQueryValue = useCallback((): T => {
@@ -27,14 +27,15 @@ const useURLQueryState = <T>(
       if (value === undefined || value === null) delete query[key];
       router.push({ query }, undefined, { shallow: true });
     },
-    [key, router, router.query]
+    [key, router]
   );
 
   const currentState = useMemo(() => getQueryValue(), [getQueryValue]);
 
-  const updateQuery = useCallback(
-    (value: T) => {
-      setQueryValue(value);
+  const updateQuery: Dispatch<SetStateAction<T>> = useCallback(
+    (action) => {
+      if (action instanceof Function) setQueryValue(action(currentState));
+      else setQueryValue(action);
     },
     [setQueryValue]
   );

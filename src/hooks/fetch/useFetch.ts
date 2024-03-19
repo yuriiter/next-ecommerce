@@ -30,7 +30,7 @@ export const useFetch = <T>({
       cancelTokenSourceRef.current = source;
 
       let newStatus: FetchStatus<T> = { type: "pending" };
-      setStatus(newStatus);
+      setStatus((current) => ({ ...current, ...newStatus }));
 
       try {
         const response: AxiosResponse<T> = await axios.request<T>({
@@ -59,7 +59,8 @@ export const useFetch = <T>({
         }
       }
 
-      setStatus(newStatus);
+      setStatus((current) => ({ ...current, ...newStatus }));
+
       return newStatus;
     },
     [url, requestConfig]

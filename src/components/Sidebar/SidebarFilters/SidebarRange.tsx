@@ -7,7 +7,6 @@ type SidebarRangeProps = {
 };
 
 export const SidebarRange = ({ value, onChange }: SidebarRangeProps) => {
-  console.log("bp4", value, typeof value);
   if (typeof value !== "number") return null;
   return (
     <label>
