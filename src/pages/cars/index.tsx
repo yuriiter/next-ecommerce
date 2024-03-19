@@ -9,9 +9,11 @@ import { useDidUpdate } from "@/hooks/useDidUpdate";
 import { useGetCars } from "@/queries/useGetCars";
 import { convertPickerData, sidebarInputsToQueryState } from "@/utils";
 import Head from "next/head";
+import { useRouter } from "next/router";
 import React from "react";
 
 export default function Cars() {
+  const router = useRouter();
   const [filters, onChangeFilters] = useFilters();
   const [carsDisplayLimit, setCarsDisplayLimit] = useURLQueryState(
     "pageSize",
@@ -37,7 +39,8 @@ export default function Cars() {
   });
 
   useDidUpdate(() => {
-    setCarsDisplayLimit(8);
+    if (Array.isArray(router.query) && router.query?.length !== 0)
+      setCarsDisplayLimit(8);
   }, [
     JSON.stringify({
       ...Object.fromEntries(
