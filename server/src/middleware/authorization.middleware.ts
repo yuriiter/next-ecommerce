@@ -8,7 +8,11 @@ const authorizationMiddleware = (minPermissionRole: Permission) => {
     return (req: Request, _res: Response, next: NextFunction): void => {
         void (async () => {
             try {
-                const token: string | undefined = req.cookies.jwt
+                const authHeader = req.headers.authorization ?? ""
+                const jwtFromAuthHeader = authHeader.split("Bearer ")[1]
+
+                const token: string | undefined =
+                    req.cookies.jwt ?? jwtFromAuthHeader
                 if (token === undefined) {
                     if (minPermissionRole === "user")
                         throw ExpressError.BAD_CREDENTIALS
