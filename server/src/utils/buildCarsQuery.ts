@@ -1,4 +1,5 @@
-import { CarsQuery } from "@/types/carsQuery"
+import { CarsQuery } from "../types/carsQuery"
+import { setTimeOfDate } from "./time"
 
 export const buildCarQuery = (query: CarsQuery) => {
     const {
@@ -68,18 +69,14 @@ export const buildCarQuery = (query: CarsQuery) => {
         conditions.push({
             $or: [
                 {
-                    $and: [
-                        {
-                            "rentalData.pickUpData.dateTime": {
-                                $lte: new Date(pickUpDate + "T" + pickUpTime),
-                            },
-                        },
-                        {
-                            "rentalData.dropOffData.dateTime": {
-                                $gte: new Date(dropOffDate + "T" + dropOffTime),
-                            },
-                        },
-                    ],
+                    "rentalData.pickUpData.dateTime": {
+                        $gte: setTimeOfDate(dropOffDate, dropOffTime),
+                    },
+                },
+                {
+                    "rentalData.dropOffData.dateTime": {
+                        $lte: setTimeOfDate(pickUpDate, pickUpTime),
+                    },
                 },
                 {
                     rentalData: { $exists: false },

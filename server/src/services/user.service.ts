@@ -8,11 +8,13 @@ export const validateUser = async (email: string, password: string) => {
         {
             email,
         },
-        ["email", "fullName"]
+        ["email", "fullName", "passwordHash"]
     )
+    if (!user) return null
     const isPasswordValid = validateHash(password, user?.passwordHash)
     if (!isPasswordValid) return null
     const userAsObject = user.toObject()
+    delete userAsObject.passwordHash
 
     return userAsObject
 }

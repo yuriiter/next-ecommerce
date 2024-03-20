@@ -7,6 +7,7 @@ import {
     type AuthenticationSchema,
     authenticationSchema,
 } from "@schemas/users.schema"
+import ExpressError from "@errors/ExpressError"
 
 const sessionRouter = Router()
 const initialRouter = Router()
@@ -45,6 +46,8 @@ initialRouter.post(
                     req.body.email,
                     req.body.password
                 )
+
+                if (!user) throw ExpressError.BAD_CREDENTIALS
 
                 const jwt = createJWT(user.email, "user")
                 res.cookie("jwt", jwt, { maxAge: 86400, httpOnly: true })

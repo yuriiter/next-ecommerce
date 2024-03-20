@@ -1,6 +1,6 @@
 import { Button } from "@/components/Button";
 import { cn } from "@/utils";
-import React, { ChangeEvent, HTMLProps, ReactNode } from "react";
+import React, { ChangeEvent, HTMLProps } from "react";
 
 export type StepInputEventHandler = (e: ChangeEvent<HTMLInputElement>) => void;
 export type StepInputNewValueHandler<T> = <T>(newValue: T) => void;

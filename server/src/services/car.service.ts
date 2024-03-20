@@ -31,13 +31,15 @@ export const getCars = async (query: CarsQuery, email?: string) => {
     const processedCars = cars.map((car) => ({
         ...car,
         isInFavourites: email
-            ? car.isFavouriteForUsers.some((likingUser) => likingUser === email)
+            ? car.isFavouriteForUsers?.some(
+                  (likingUser) => likingUser === email
+              )
             : false,
         rating:
-            car.reviews.reduce(
+            car.reviews?.reduce(
                 (sum, review) => sum + (review as any).rating,
                 0
-            ) / (car.reviews.length || 1),
+            ) / (car.reviews?.length || 1),
     }))
 
     return { documents: processedCars, count }

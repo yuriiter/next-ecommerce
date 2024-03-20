@@ -11,6 +11,7 @@ import { convertPickerData, sidebarInputsToQueryState } from "@/utils";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import React from "react";
+import { PickerData } from "../../../server/src/models";
 
 export default function Cars() {
   const router = useRouter();
@@ -23,6 +24,8 @@ export default function Cars() {
   const { pickUpData, setPickUpData, dropOffData, setDropOffData } =
     usePickerSectionData();
   const [search] = useURLQueryState("search", "");
+  const [pickUpStateFromQuery] = useURLQueryState<PickerData>("pickUp", {});
+  const [dropOffStateFromQuery] = useURLQueryState<PickerData>("dropOff", {});
 
   const [carsResponse] = useGetCars({
     queryParams: {
@@ -31,7 +34,10 @@ export default function Cars() {
           ([, value]) => value !== false
         )
       ),
-      ...convertPickerData({ pickUpData, dropOffData }),
+      ...convertPickerData({
+        pickUpData: pickUpStateFromQuery,
+        dropOffData: dropOffStateFromQuery,
+      }),
       search: search === "" ? undefined : search,
       page: 0,
       pageSize: carsDisplayLimit,
@@ -48,7 +54,10 @@ export default function Cars() {
           ([, value]) => value !== false
         )
       ),
-      ...convertPickerData({ pickUpData, dropOffData }),
+      ...convertPickerData({
+        pickUpData: pickUpStateFromQuery,
+        dropOffData: dropOffStateFromQuery,
+      }),
       search: search === "" ? undefined : search,
     }),
   ]);

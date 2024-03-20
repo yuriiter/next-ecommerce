@@ -2,7 +2,6 @@ import { useGet } from "@/hooks/fetch/useGet";
 import { CarData } from "@/types";
 import { CarsQuery, StandardResponse } from "@/types/query";
 
-// TODO: specify reponse data type
 type UseGetCarsParams = {
   pause?: boolean;
   queryParams?: CarsQuery;
