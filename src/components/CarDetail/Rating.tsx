@@ -37,9 +37,7 @@ export const Rating = ({
         {yellowStars}
         {emptyStars}
       </div>
-      {numOfVotes !== undefined && (
-        <span className="rating__num-of-votes">{numOfVotes}+ reviews</span>
-      )}
+      <span className="rating__num-of-votes">{numOfVotes ?? 0} reviews</span>
     </div>
   );
 };

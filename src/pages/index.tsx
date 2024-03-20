@@ -46,16 +46,16 @@ export default function Home() {
           variant="light"
           title="The Best Platform for Car Rental"
           description="Ease of doing a car rental safely and reliably. Of course at a low price."
-          buttonText="Rental car"
-          href="/rental"
+          buttonText="Rent a car"
+          href="/cars"
           carPicture={bannerCar1.src}
         />
         <Banner
           variant="dark"
           title="Easy way to rent a car at a low price"
           description="Providing cheap car rental services and safe and comfortable facilities."
-          buttonText="Rental car"
-          href="/rental"
+          buttonText="Rent a car"
+          href="/cars"
           carPicture={bannerCar2.src}
         />
       </section>
