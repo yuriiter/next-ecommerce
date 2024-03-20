@@ -10,6 +10,7 @@ import { SearchFilterIcon, SearchIcon } from "../../../svg/icons";
 import { cn } from "@/utils";
 import { Tooltip } from "@/components/Tooltip/Tooltip";
 import { useRouter } from "next/router";
+import { useSidebar } from "@/components/Sidebar/useSidebar";
 
 type SearchProps = {
   className?: string;
@@ -19,6 +20,7 @@ export const Search = ({ className }: SearchProps) => {
   const router = useRouter();
   const searchValueFromQuery = router.query.search;
   const [searchValue, setSearchValue] = useState(searchValueFromQuery ?? "");
+  const { setHidden } = useSidebar();
 
   useEffect(() => {
     setSearchValue(searchValueFromQuery ?? "");
@@ -49,8 +51,9 @@ export const Search = ({ className }: SearchProps) => {
     submit();
   };
 
-  const toggleFilterSidebar: MouseEventHandler<SVGSVGElement> = (e) => {
+  const openFilterSidebar: MouseEventHandler<SVGSVGElement> = (e) => {
     e.stopPropagation();
+    setHidden(false);
     router.replace({ pathname: "/cars", query: router.query });
   };
 
@@ -72,7 +75,7 @@ export const Search = ({ className }: SearchProps) => {
       />
       <Tooltip content="Filtering">
         <SearchFilterIcon
-          onClick={toggleFilterSidebar}
+          onClick={openFilterSidebar}
           className="search__icon"
         />
       </Tooltip>

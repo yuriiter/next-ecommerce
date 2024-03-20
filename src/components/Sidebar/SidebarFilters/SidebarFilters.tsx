@@ -2,14 +2,17 @@ import React from "react";
 import { SidebarInputGroup } from "./SidebarInputGroup";
 import { Sidebar } from "..";
 import { SidebarFiltersProps } from "./types";
-import { Button } from "@/components/Button";
+import { Button, ButtonWIcon } from "@/components/Button";
 import { useRouter } from "next/router";
+import { Close } from "@/components/svg/icons";
+import { useSidebar } from "../useSidebar";
 
 export const SidebarFilters = ({
   inputs,
   className,
   onChangeFilters,
 }: SidebarFiltersProps) => {
+  const { setHidden } = useSidebar();
   const router = useRouter();
   const removeAllFilters = () =>
     router.push({ pathname: router.pathname, query: "" }, undefined, {
@@ -22,13 +25,23 @@ export const SidebarFilters = ({
     <>
       <Sidebar className={className}>
         <div className="sidebar__filters">
-          <Button
-            disabled={resetButtonDisabled}
-            onClick={removeAllFilters}
-            variant="secondary"
-          >
-            Remove all filters
-          </Button>
+          <div className="flex justify-between">
+            <Button
+              disabled={resetButtonDisabled}
+              onClick={removeAllFilters}
+              variant="secondary"
+            >
+              Remove all filters
+            </Button>
+            <ButtonWIcon
+              className="sidebar__close-icon"
+              icon={<Close />}
+              variant="secondary"
+              onClick={() => setHidden(true)}
+            >
+              Close
+            </ButtonWIcon>
+          </div>
           {inputs.map(({ groupName: inputGroupName, inputs: groupInputs }) => (
             <SidebarInputGroup
               key={inputGroupName}

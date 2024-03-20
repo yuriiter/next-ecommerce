@@ -1,7 +1,6 @@
 import { cn } from "@/utils";
 import { ReactNode } from "react";
 import { useHideNavigation } from "../Layout/Navigation/useHideNavigation";
-import { createStyleTranslateY } from "../Layout/Navigation/utils";
 import { useSidebar } from "./useSidebar";
 
 type SidebarProps = {
@@ -11,11 +10,7 @@ type SidebarProps = {
 
 export const Sidebar = ({ children, className }: SidebarProps) => {
   const { hidden } = useSidebar();
-  const [translateToTop, navigationHeight] = useHideNavigation();
-  const styleTranslateY = createStyleTranslateY(
-    translateToTop,
-    navigationHeight,
-  );
+  const [_translateToTop, navigationHeight] = useHideNavigation();
 
   return (
     <>

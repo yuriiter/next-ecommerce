@@ -1,19 +1,25 @@
-import { createContext, PropsWithChildren, useCallback, useState } from "react";
+import {
+  createContext,
+  Dispatch,
+  PropsWithChildren,
+  SetStateAction,
+  useCallback,
+  useState,
+} from "react";
 
 export const SidebarContext = createContext<{
   hidden: boolean;
-  toggleSidebar: () => void;
+  setHidden: Dispatch<SetStateAction<boolean>>;
 }>({
   hidden: false,
-  toggleSidebar: () => null,
+  setHidden: () => null,
 });
 
 export const SidebarContextProvider = ({ children }: PropsWithChildren) => {
   const [hidden, setHidden] = useState(false);
-  const toggleSidebar = useCallback(() => setHidden((current) => !current), []);
 
   return (
-    <SidebarContext.Provider value={{ hidden, toggleSidebar }}>
+    <SidebarContext.Provider value={{ hidden, setHidden }}>
       {children}
     </SidebarContext.Provider>
   );

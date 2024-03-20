@@ -14,6 +14,12 @@ body:has(.dashboard) {
     width: 100%;
   }
 
+  &__close-icon {
+    @include mq(md, min) {
+      display: none;
+    }
+  }
+
   &__placeholder {
     position: absolute;
     width: 100%;
