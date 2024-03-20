@@ -66,8 +66,8 @@ export const CarDescription = ({ carData }: CarDescriptionProps) => {
         <Button
           size="lg"
           className="car-detail__description-button"
-          href="/cars/[carId]"
-          as={`/cars/${_id}`}
+          href="/cars/[carId]/rent"
+          as={`/cars/${_id}/rent`}
         >
           Rent now
         </Button>

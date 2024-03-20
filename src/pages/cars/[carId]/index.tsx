@@ -1,7 +1,6 @@
 import { CarDetail } from "@/components/CarDetail";
 import { CardsContainer } from "@/components/Cards";
 import { ShowMore } from "@/components/Cards/ShowMore";
-import { recommendationCars } from "@/constants/mockupData";
 import useURLQueryState from "@/hooks/URLQueries/useURLQueryState";
 import { useGetCar } from "@/queries/useGetCar";
 import { useGetCars } from "@/queries/useGetCars";

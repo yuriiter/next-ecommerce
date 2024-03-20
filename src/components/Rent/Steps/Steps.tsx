@@ -3,11 +3,7 @@ import { Step } from "./Step";
 import { BillingInfo } from "./StepsContent/BillingInfo";
 import { useForm } from "@/hooks/forms/useForm";
 import { RentCarForm } from "./types";
-import {
-  OnChangeFunction,
-  OnValidHandler,
-  ValidationFunction,
-} from "@/hooks/forms/types";
+import { ValidationFunction } from "@/hooks/forms/types";
 import { RentalInfo } from "./StepsContent/RentalInfo";
 import { PaymentMethod } from "./StepsContent/PaymentMethod/PaymentMethod";
 import { Confirmation } from "./StepsContent/Confirmation";

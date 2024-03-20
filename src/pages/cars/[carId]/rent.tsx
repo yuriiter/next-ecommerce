@@ -1,17 +1,19 @@
-import { useHideNavigation } from "@/components/Layout/Navigation/useHideNavigation";
+import { LoadingPoints } from "@/components/LoadingPoints";
 import { Steps } from "@/components/Rent/Steps/Steps";
 import { Summary } from "@/components/Rent/Summary";
-import { carMockup } from "@/constants/mockupData";
+import { Typography } from "@/components/Typography/Typography";
+import { useGetCar } from "@/queries/useGetCar";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 
 export default function CarRentPage() {
-  const [summarySubtotal, setSummarySubtotal] = useState(80);
-  const [summaryTax, setSummaryTax] = useState(0);
-
   const router = useRouter();
   const { carId } = router.query;
+  const [carResponse] = useGetCar(carId as string, false);
+
+  const [summarySubtotal, setSummarySubtotal] = useState(80);
+  const [summaryTax, setSummaryTax] = useState(0);
 
   return (
     <>
@@ -23,13 +25,25 @@ export default function CarRentPage() {
       </Head>
 
       <div className="rent container">
-        <Steps />
-        <Summary
-          car={carMockup(carId)}
-          subtotal={summarySubtotal}
-          tax={summaryTax}
-          total={80}
-        />
+        {carResponse.type === "pending" ? (
+          <Typography className="text-center" secondary300 size="16">
+            Loading <LoadingPoints />
+          </Typography>
+        ) : !carResponse.data?.data ? (
+          <Typography className="text-center" secondary300 size="16">
+            No data found
+          </Typography>
+        ) : (
+          <>
+            <Steps />
+            <Summary
+              car={carResponse.data?.data}
+              subtotal={summarySubtotal}
+              tax={summaryTax}
+              total={80}
+            />
+          </>
+        )}
       </div>
     </>
   );

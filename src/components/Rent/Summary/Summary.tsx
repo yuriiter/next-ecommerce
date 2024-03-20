@@ -7,6 +7,7 @@ import { SummaryCarInfo } from "./SummaryCarInfo";
 import { SummaryCarPrice } from "./SummaryCarPrice";
 import { SummaryFooter } from "./SummaryFooter";
 import { useHideNavigation } from "@/components/Layout/Navigation/useHideNavigation";
+import { useToast } from "@/components/Toast/useToast";
 
 type SummaryProps = {
   car: CarData;
@@ -16,11 +17,16 @@ type SummaryProps = {
 };
 
 export const Summary = ({ car, subtotal, tax, total }: SummaryProps) => {
+  const { addToast } = useToast();
   const [translateToTop, navigationHeight] = useHideNavigation();
   const [promoCode, setPromoCode] = useState("");
   const onPromoCodeChange = (e: ChangeEvent<HTMLInputElement>) =>
     setPromoCode(e.target.value);
-  const onPromoCodeSubmit = () => console.error("Not implemented");
+  const onPromoCodeSubmit = () =>
+    addToast({
+      type: "error",
+      content: "Promo code invalid",
+    });
 
   if (!car) return null;
 
@@ -45,7 +51,7 @@ export const Summary = ({ car, subtotal, tax, total }: SummaryProps) => {
           />
         </div>
         <SummaryCarInfo
-          thumbnailSrc={car?.thumbnail}
+          thumbnailSrc={car?.thumbnail?.img.url}
           carTitle={car?.title}
           carRating={car?.rating}
           carNumOfVotes={car?.numOfVotes}
