@@ -8,16 +8,20 @@ const useURLQueryState = <T>(
   const router = useRouter();
 
   const getQueryValue = useCallback((): T => {
-    const queryValue = router.query[key];
-    if (queryValue !== undefined) {
+    const query =
+      typeof location !== "undefined"
+        ? Object.fromEntries(new URLSearchParams(location.search).entries())
+        : router.query;
+    const value = query[key];
+    if (value !== undefined) {
       try {
-        return JSON.parse(decodeURIComponent(queryValue as string)) as T;
+        return JSON.parse(decodeURIComponent(value as string)) as T;
       } catch (error) {
-        return decodeURIComponent(queryValue as string) as T;
+        return decodeURIComponent(value as string) as T;
       }
     }
     return initialValue;
-  }, [key, JSON.stringify(router.query[key])]);
+  }, [JSON.stringify(router.query[key])]);
 
   const setQueryValue = useCallback(
     (value: T) => {
@@ -27,7 +31,7 @@ const useURLQueryState = <T>(
       if (value === undefined || value === null) delete query[key];
       router.push({ query }, undefined, { shallow: true });
     },
-    [key, router]
+    [router]
   );
 
   const currentState = useMemo(() => getQueryValue(), [getQueryValue]);

@@ -19,12 +19,16 @@ export const useURLQueryObjectState = <T extends Record<string, unknown>>(
   const getQueryValue = useCallback((): T => {
     const valueKeys = Object.keys(initialValue);
     const currentValue = valueKeys.reduce((acc, key) => {
-      const value = router.query[key];
+      const query =
+        typeof location !== "undefined"
+          ? Object.fromEntries(new URLSearchParams(location.search).entries())
+          : router.query;
+      const value = query[key];
       if (value === undefined) return acc;
 
       return {
         ...acc,
-        [key]: transformString(value),
+        [key]: transformString(value ?? undefined),
       };
     }, {});
 
