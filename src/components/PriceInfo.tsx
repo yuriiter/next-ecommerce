@@ -15,7 +15,7 @@ export const PriceInfo = ({
   return (
     <div className={cn(["price__info", className])}>
       <div className="price">
-        <span className="price__number">${price.toFixed(2)}/ </span>
+        <span className="price__number">${price?.toFixed(2)}/ </span>
         <sub className="price__day">day</sub>
       </div>
       {previousPrice !== undefined && (

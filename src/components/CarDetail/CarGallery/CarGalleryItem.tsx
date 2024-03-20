@@ -1,7 +1,4 @@
-import React, { useState } from "react";
-import Image from "next/image";
-import { CarPickedImg } from "./CarPickedImg";
-import { CarData } from "@/types";
+import React from "react";
 import { BannerArrowBg } from "@/components/svg/images";
 import { cn } from "@/utils";
 
@@ -40,7 +37,7 @@ export const CarGalleryItem = ({
             preserveAspectRatio="xMinYMin slice"
           />
         )}
-        <Image
+        <img
           className="car-detail__item-img"
           src={src}
           alt={`Rent car - ${title}`}

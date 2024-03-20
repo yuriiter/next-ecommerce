@@ -9,13 +9,13 @@ import { zodResolver } from "@/utils";
 import { SignUpData, signUpSchema } from "@/schemas/credentials.schema";
 import { Typography } from "../Typography/Typography";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import { useSignUpAndSignIn } from "@/hooks/auth/useSignUpAndSignIn";
 import { useAuth } from "@/auth/useAuth";
+import { useModalWindow } from "../ModalWindow/useModalWindow";
 
 export const SignUp = () => {
   const { authData } = useAuth();
-  const router = useRouter();
+  const { setOpenWindowId } = useModalWindow();
   const { promisify } = useToast();
   const [signUpResponse, signUp] = useSignUpAndSignIn();
   const { register, handleSubmit, formState } = useForm<SignUpData>({
@@ -35,7 +35,7 @@ export const SignUp = () => {
       };
       promisify(
         signUp(signUpData as Omit<SignUpData, "confirmPassword">).then(() =>
-          router.push("/")
+          setOpenWindowId(null)
         ),
         {
           pending: "Signing up...",

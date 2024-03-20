@@ -5,6 +5,7 @@ import { Rating } from "./Rating";
 import { makeCapacityString } from "@/utils";
 import { Button } from "../Button";
 import { PriceInfo } from "../PriceInfo";
+import { useLikeCar } from "@/queries/useLikeCar";
 
 type CarDescriptionProps = {
   carData: CarData;
@@ -12,7 +13,7 @@ type CarDescriptionProps = {
 
 export const CarDescription = ({ carData }: CarDescriptionProps) => {
   const {
-    id,
+    _id,
     name,
     description,
     carType,
@@ -25,6 +26,7 @@ export const CarDescription = ({ carData }: CarDescriptionProps) => {
     rating,
     numOfVotes,
   } = carData;
+  const sendLikeRequest = useLikeCar(_id);
 
   const attributes = {
     "car type": carType,
@@ -37,12 +39,7 @@ export const CarDescription = ({ carData }: CarDescriptionProps) => {
     <div className="car-detail__description">
       <div className="car-detail__description-header">
         <h3 className="car-detail__description-title">{name}</h3>
-        <Like
-          isLiked={isInFavourites}
-          onClick={function (): void {
-            throw new Error("Function not implemented.");
-          }}
-        />
+        <Like isLiked={isInFavourites} sendRequest={sendLikeRequest} />
         <div className="car-detail__description-rating">
           <Rating rating={rating} numOfVotes={numOfVotes} />
         </div>
@@ -70,7 +67,7 @@ export const CarDescription = ({ carData }: CarDescriptionProps) => {
           size="lg"
           className="car-detail__description-button"
           href="/cars/[carId]"
-          as={`/cars/${id}`}
+          as={`/cars/${_id}`}
         >
           Rent now
         </Button>

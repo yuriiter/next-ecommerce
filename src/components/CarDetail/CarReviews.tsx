@@ -28,18 +28,19 @@ export const CarReviews = ({ reviews }: CarReviewProps) => {
   return (
     <div className="car-reviews">
       <h4 className="car-reviews__title">
-        Reviews <span className="car-reviews__count">{reviews.length}</span>
+        Reviews{" "}
+        <span className="car-reviews__count">{reviews?.length ?? 0}</span>
       </h4>
       <div className="car-reviews__container">
-        {reviews.slice(0, commentsToShowLimit).map((review) => (
-          <CarReview key={review.id} review={review} />
+        {reviews?.slice(0, commentsToShowLimit).map((review) => (
+          <CarReview key={review._id} review={review} />
         ))}
       </div>
       <ShowMore
         step={1000000000}
         itemsToShowLimit={commentsToShowLimit}
         setItemsToShowLimit={setCommentsToShowLimit}
-        totalItemsCount={reviews.length}
+        totalItemsCount={reviews?.length ?? 0}
         itemNamePlural={""}
         itemNameSingular={""}
         renderButton={ReviewShowAll}

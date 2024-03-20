@@ -1,5 +1,6 @@
 .car-detail {
   display: flex;
+  margin-top: 30px;
   gap: 32px;
   flex-wrap: wrap;
 
@@ -15,9 +16,7 @@
     height: 150px;
     width: 30%;
     border-radius: 10px;
-    transition:
-      padding 0.2s,
-      border-width 0.2s;
+    transition: padding 0.2s, border-width 0.2s;
     border-color: $color-primary-500;
     border-width: 0;
     border-style: solid;
@@ -168,4 +167,3 @@
     padding: 16px 32px;
   }
 }
-

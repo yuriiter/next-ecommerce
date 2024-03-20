@@ -1,21 +1,29 @@
 import { CarDetail } from "@/components/CarDetail";
 import { CardsContainer } from "@/components/Cards";
 import { ShowMore } from "@/components/Cards/ShowMore";
-import { carMockup, recommendationCars } from "@/constants/mockupData";
+import { recommendationCars } from "@/constants/mockupData";
+import useURLQueryState from "@/hooks/URLQueries/useURLQueryState";
+import { useGetCar } from "@/queries/useGetCar";
+import { useGetCars } from "@/queries/useGetCars";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import React, { useMemo, useState } from "react";
+import React from "react";
 
 export default function CarPage() {
-  const [recommendationCarsDisplayLimit, setRecommendationCarsDisplayLimit] =
-    useState(8);
-
-  const recommendationCarsToDisplay = useMemo(() => {
-    return recommendationCars.slice(0, recommendationCarsDisplayLimit);
-  }, [recommendationCarsDisplayLimit]);
-
   const router = useRouter();
   const { carId } = router.query;
+  const [carResponse] = useGetCar(carId as string, false);
+  const [recommendationCarsDisplayLimit, setRecommendationCarsDisplayLimit] =
+    useURLQueryState("pageSize", 8);
+
+  const [recommendedCarsResponse] = useGetCars({
+    queryParams: {
+      recommendedFlag: true,
+      popularFlag: true,
+      page: 0,
+      pageSize: recommendationCarsDisplayLimit,
+    },
+  });
 
   return (
     <>
@@ -26,17 +34,21 @@ export default function CarPage() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <section className="container car-detail">
-        <CarDetail data={carMockup(carId)} />
+        <CarDetail
+          data={carResponse.data?.data}
+          loading={carResponse.type === "pending"}
+        />
       </section>
       <section className="container cards__section cards__section--recommended">
         <CardsContainer
-          cards={recommendationCarsToDisplay}
+          cards={recommendedCarsResponse.data?.data?.documents ?? []}
           title="Recent cars"
           horizontalScrolling
+          loading={recommendedCarsResponse.type === "pending"}
         />
         <ShowMore
           step={8}
-          totalItemsCount={recommendationCars.length}
+          totalItemsCount={recommendedCarsResponse.data?.data?.count ?? 0}
           itemsToShowLimit={recommendationCarsDisplayLimit}
           setItemsToShowLimit={setRecommendationCarsDisplayLimit}
           itemNamePlural="cars"

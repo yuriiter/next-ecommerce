@@ -10,13 +10,13 @@ import { zodResolver } from "@/utils";
 import { credentialsSchema } from "@/schemas/credentials.schema";
 import { Typography } from "../Typography/Typography";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import { useSignInAndSetAuthData } from "@/hooks/auth/useSignInAndSetAuthData";
 import { useAuth } from "@/auth/useAuth";
+import { useModalWindow } from "../ModalWindow/useModalWindow";
 
 export const SignIn = () => {
+  const { setOpenWindowId } = useModalWindow();
   const { authData } = useAuth();
-  const router = useRouter();
   const { promisify } = useToast();
   const [signInResponse, signIn] = useSignInAndSetAuthData();
   const { register, handleSubmit, formState } = useForm<Credentials>({
@@ -27,7 +27,7 @@ export const SignIn = () => {
     validationFunction: zodResolver(credentialsSchema),
     onValid: (data) => {
       promisify(
-        signIn(data as Credentials).then(() => router.push("/")),
+        signIn(data as Credentials).then(() => setOpenWindowId(null)),
         {
           pending: "Signing in...",
           success: "Successfully signed in",

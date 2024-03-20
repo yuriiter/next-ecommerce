@@ -7,6 +7,7 @@ import {
     setCarIsInFavourites,
 } from "@services/car.service"
 import { buildResponse } from "@utils/utils"
+import ExpressError from "@errors/ExpressError"
 
 const carRouter = Router()
 const initialRouter = Router()
@@ -39,7 +40,9 @@ carRouter.get(
         void (async () => {
             try {
                 const { carId } = req.params
-                const { email } = req.locals.user
+                if (carId === "undefined" || carId === undefined)
+                    throw ExpressError.BAD_REQUEST
+                const email = req.locals?.user?.email
 
                 const car = await getCarById(carId, email)
 

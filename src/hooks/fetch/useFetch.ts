@@ -26,11 +26,14 @@ export const useFetch = <T>({
 
   const fetchCallback: FetchCallback<T> = useCallback(
     async (callbackRequestConfig) => {
+      if (cancelTokenSourceRef.current) {
+        cancelTokenSourceRef.current.cancel("Request canceled by cleanup");
+      }
       const source = axios.CancelToken.source();
       cancelTokenSourceRef.current = source;
 
       let newStatus: FetchStatus<T> = { type: "pending" };
-      setStatus((current) => ({ ...current, ...newStatus }));
+      setStatus((current) => ({ data: current.data, ...newStatus }));
 
       try {
         const response: AxiosResponse<T> = await axios.request<T>({
@@ -59,7 +62,7 @@ export const useFetch = <T>({
         }
       }
 
-      setStatus((current) => ({ ...current, ...newStatus }));
+      setStatus((current) => ({ data: current.data, ...newStatus }));
 
       return newStatus;
     },

@@ -17,24 +17,30 @@ export const CarGallery = ({
   const [pickedImg, setPickedImg] = useState(thumbnail);
   const galleryItems = [thumbnail, ...photos.slice(0, 2)];
 
+  const pickedImgSrc = pickedImg?.img?.url;
+
   return (
     <div className="car-detail__gallery">
-      <CarPickedImg
-        src={pickedImg}
-        thumbnail={thumbnail}
-        title={title}
-        subtitle={subtitle}
-      />
+      {pickedImgSrc !== undefined && (
+        <CarPickedImg
+          src={pickedImgSrc}
+          thumbnail={thumbnail}
+          title={title}
+          subtitle={subtitle}
+        />
+      )}
       {galleryItems.map((galleryItemSrc, idx) => {
         const onChoose = () => setPickedImg(galleryItemSrc);
         const isPicked = pickedImg === galleryItemSrc;
         const isThumbnail = galleryItemSrc === thumbnail;
+        const imgUrl = galleryItemSrc?.img?.url;
+        if (!imgUrl) return;
         return (
           <CarGalleryItem
             key={idx}
             isThumbnail={isThumbnail}
             isPicked={isPicked}
-            src={galleryItemSrc}
+            src={imgUrl}
             title={title}
             onChoose={onChoose}
           />

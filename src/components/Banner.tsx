@@ -1,16 +1,15 @@
-import React, { ReactNode } from "react";
+import React from "react";
 import { Button } from "./Button";
 import { BannerArrowBg, BannerEllipseBg } from "./svg/images";
-import Image from "next/image";
-import { StaticImport } from "next/dist/shared/lib/get-img-props";
 import { cn } from "@/utils";
+import { ImageData } from "@/types";
 
 type BannerProps = {
   title?: string;
   description?: string;
   variant: "light" | "dark";
   className?: string;
-  carPicture: string | StaticImport;
+  carPicture: string | ImageData;
 } & (
   | { buttonText: string; href?: never; onClick: () => void }
   | { buttonText: string; href: string; onClick?: never }
@@ -58,10 +57,14 @@ export const Banner = ({
         </Button>
       )}
 
-      <Image
+      <img
         className="banner__car-img"
         alt={`Car for rental. ${title}`}
-        src={carPicture}
+        src={
+          typeof carPicture === "string"
+            ? carPicture
+            : carPicture.img?.url ?? ""
+        }
       />
     </div>
   );

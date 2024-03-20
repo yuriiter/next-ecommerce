@@ -75,7 +75,8 @@ export const setCarIsInFavourites = async (
 }
 
 export const getCarById = async (carId: string, email: string | undefined) => {
-    const car = await CarModel.findById(carId)
+    let car = await CarModel.findById(carId)
+    car = car.toObject()
 
     const processedCar = {
         ...car,
@@ -91,5 +92,5 @@ export const getCarById = async (carId: string, email: string | undefined) => {
 
     delete processedCar.isFavouriteForUsers
 
-    return processedCar.toObject()
+    return processedCar
 }
