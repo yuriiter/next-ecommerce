@@ -1,17 +1,14 @@
-import {
-  FetchStatus,
-  FetchCallback,
-  UseFetchParams,
-} from "@/types/fetchStatus";
+import { FetchStatus, UsePostParams, PostCallback } from "@/types/fetchStatus";
 import { useFetch } from "./useFetch";
 
-export const usePut = <T>({
+export const usePut = <T, D>({
   url,
   requestConfig,
   pause,
-}: UseFetchParams): [FetchStatus<T>, FetchCallback<T>] =>
+  data,
+}: UsePostParams<D>): [FetchStatus<T>, PostCallback<D, T>] =>
   useFetch({
     url,
-    requestConfig: { ...requestConfig, method: "PUT" },
+    requestConfig: { ...requestConfig, data, method: "PUT" },
     pause,
   });

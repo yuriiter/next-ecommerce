@@ -1,12 +1,12 @@
 import { CarData } from "@/types";
 import React from "react";
 import { Button } from "../Button";
-import Image from "next/image";
 import { Like } from "../Like";
 import { FuelIcon, PeopleIcon, TransmissionIcon } from "../svg/icons";
 import { makeCapacityString } from "@/utils";
 import { PriceInfo } from "../PriceInfo";
 import { ImageWrapper } from "../ImageWrapper";
+import { useLikeCar } from "@/queries/useLikeCar";
 
 type CardProps = {
   carData: CarData;
@@ -26,6 +26,8 @@ export const Card = ({ carData }: CardProps) => {
     thumbnail,
   } = carData;
 
+  const sendLikeRequest = useLikeCar(_id);
+
   return (
     <div className="card">
       <div className="card__header">
@@ -34,12 +36,7 @@ export const Card = ({ carData }: CardProps) => {
           <p className="card__subtitle">{carType}</p>
         </div>
         <div className="card__favourite">
-          <Like
-            isLiked={isInFavourites}
-            onClick={function (): void {
-              throw new Error("Function not implemented.");
-            }}
-          />
+          <Like isLiked={isInFavourites} sendRequest={sendLikeRequest} />
         </div>
       </div>
       <ImageWrapper
