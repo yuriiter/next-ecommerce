@@ -9,6 +9,7 @@ import { useAuth } from "@/auth/useAuth";
 import { useMQ } from "@/hooks/mediaQuery/useMQ";
 import { useSignOutAndGoHome } from "@/hooks/auth/useSignOutAndGoHome";
 import { Badge } from "@/components/Badge";
+import { cn } from "@/utils";
 
 export const AvatarMenu = () => {
   const isMobile = useMQ("SM", "max");
@@ -39,11 +40,7 @@ export const AvatarMenu = () => {
   };
 
   return (
-    <Badge
-      animated={false}
-      show={authData.authenticated}
-      className="menu__badge"
-    >
+    <Badge className={cn([authData.authenticated && "menu__badge"])}>
       <Select
         className="menu"
         placement="left-bottom"

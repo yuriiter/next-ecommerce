@@ -18,12 +18,15 @@ export const Rating = ({
   const yellowStarsLen = Math.round(rating);
   const emptyStarsLen = 5 - yellowStarsLen;
 
-  const yellowStars = Array.from({ length: yellowStarsLen }, (value, index) => {
-    const onClick = () => onVote?.(index);
-    return <StarYellow key={index} onClick={onClick} />;
-  });
+  const yellowStars = Array.from(
+    { length: yellowStarsLen },
+    (_value, index) => {
+      const onClick = () => onVote?.(index);
+      return <StarYellow key={index} onClick={onClick} />;
+    }
+  );
 
-  const emptyStars = Array.from({ length: emptyStarsLen }, (value, index) => {
+  const emptyStars = Array.from({ length: emptyStarsLen }, (_value, index) => {
     const onClick = () => onVote?.(index);
     return <StarEmpty key={index} onClick={onClick} />;
   });

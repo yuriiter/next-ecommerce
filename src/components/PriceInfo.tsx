@@ -18,9 +18,9 @@ export const PriceInfo = ({
         <span className="price__number">${price?.toFixed(2)}/ </span>
         <sub className="price__day">day</sub>
       </div>
-      {previousPrice !== undefined && (
+      {previousPrice !== undefined && previousPrice > price ? (
         <span className="price__previous">${previousPrice.toFixed(2)}</span>
-      )}
+      ) : null}
     </div>
   );
 };

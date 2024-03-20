@@ -36,7 +36,7 @@ export const NavigationButtons = () => {
           <HeartIcon />
         </IconButton>
       </Tooltip>
-      <Badge>
+      <Badge show={false}>
         <Select
           className="menu"
           placement="left-bottom"
@@ -44,10 +44,11 @@ export const NavigationButtons = () => {
           renderInput={({ toggleDropdownOpen, isDropdownOpen }) => (
             <Tooltip
               manualOpen={isDropdownOpen ? false : undefined}
-              content="Notifications"
+              content="No notifications yet"
               placement="center-bottom"
             >
               <IconButton
+                disabled
                 variant="secondary"
                 size={isMobile ? "sm" : "md"}
                 className={`navigation__button`}
