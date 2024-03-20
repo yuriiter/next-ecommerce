@@ -6,6 +6,7 @@ import { Typography } from "../Typography/Typography";
 import { useKeyEvent } from "@/hooks/useKeyEvent";
 import { useModalWindow } from "./useModalWindow";
 import { AnimatedDisplay } from "@/components/AnimatedDisplay";
+import dynamic from "next/dynamic";
 
 type ModalWindowWithIdStateProps = {
   id?: never;
@@ -24,7 +25,7 @@ type ModalWindowProps = {
   title: ReactNode;
 } & (ModalWindowWithIdStateProps | ModalWindowWithIdOpenProps);
 
-export const ModalWindow = ({
+const ModalWindowNoDynamic = ({
   open,
   setOpen,
   children,
@@ -67,3 +68,8 @@ export const ModalWindow = ({
     </AnimatedDisplay>
   );
 };
+
+export const ModalWindow = dynamic(
+  () => Promise.resolve(ModalWindowNoDynamic),
+  { ssr: false }
+);
