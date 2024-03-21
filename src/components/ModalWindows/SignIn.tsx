@@ -13,8 +13,10 @@ import Link from "next/link";
 import { useSignInAndSetAuthData } from "@/hooks/auth/useSignInAndSetAuthData";
 import { useAuth } from "@/auth/useAuth";
 import { useModalWindow } from "../ModalWindow/useModalWindow";
+import { useRouter } from "next/router";
 
 export const SignIn = () => {
+  const router = useRouter();
   const { setOpenWindowId } = useModalWindow();
   const { authData } = useAuth();
   const { promisify } = useToast();
@@ -27,7 +29,11 @@ export const SignIn = () => {
     validationFunction: zodResolver(credentialsSchema),
     onValid: (data) => {
       promisify(
-        signIn(data as Credentials).then(() => setOpenWindowId(null)),
+        signIn(data as Credentials).then(() => {
+          if (typeof router.query.redirect === "string") {
+            router.push(router.query.redirect);
+          } else setOpenWindowId(null);
+        }),
         {
           pending: "Signing in...",
           success: "Successfully signed in",
@@ -36,6 +42,8 @@ export const SignIn = () => {
       );
     },
   });
+
+  if (authData.authenticated) return null;
 
   return (
     <ModalWindow title="Sign in" id={MODAL_WINDOW.SIGN_IN}>
@@ -63,7 +71,17 @@ export const SignIn = () => {
         </Button>
         <Typography>
           Don't have an account?{" "}
-          <Link href={`?modal=${MODAL_WINDOW.SIGN_UP}`}>Sign up here</Link>
+          <Link
+            href={{
+              pathname: "/",
+              query: {
+                modal: MODAL_WINDOW.SIGN_UP,
+                redirect: router.query.redirect,
+              },
+            }}
+          >
+            Sign up here
+          </Link>
         </Typography>
       </form>
     </ModalWindow>

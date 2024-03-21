@@ -29,7 +29,7 @@ export const useCheckAuth = () => {
     fetching: true,
   });
 
-  const [sessionResponse, getSession] = useGetSession(true);
+  const [sessionResponse, getSession] = useGetSession(false);
 
   useEffect(() => {
     getSession();

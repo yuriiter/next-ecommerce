@@ -7,6 +7,7 @@ import { useKeyEvent } from "@/hooks/useKeyEvent";
 import { useModalWindow } from "./useModalWindow";
 import { AnimatedDisplay } from "@/components/AnimatedDisplay";
 import dynamic from "next/dynamic";
+import { useRouter } from "next/router";
 
 type ModalWindowWithIdStateProps = {
   id?: never;
@@ -32,10 +33,14 @@ const ModalWindowNoDynamic = ({
   title,
   id,
 }: ModalWindowProps) => {
+  const router = useRouter();
   const { openWindowId, setOpenWindowId } = useModalWindow();
   const closeModalWindow = () => {
     if (id) setOpenWindowId(null);
     setOpen?.(false);
+    const { query } = router;
+    delete query.redirect;
+    router.push({ query: { ...query } });
   };
   useKeyEvent("Escape", closeModalWindow);
 
