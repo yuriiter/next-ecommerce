@@ -1,3 +1,7 @@
+body:has(.dialog__wrapper--open) {
+  overflow: hidden;
+}
+
 .dialog {
   &__wrapper {
     position: fixed;
@@ -21,7 +25,7 @@
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  max-width: min(95%, 450px);
+  width: min(90%, 450px);
   background-color: $color-primary-0;
   border-radius: 3px;
   padding: 20px;

@@ -51,6 +51,8 @@ const ModalWindowNoDynamic = ({
       tabIndex={-1}
       display={finalOpen}
       className={cn(["modal-window"])}
+      appearAnimationClassName="modal-window--open"
+      disappearAnimationClassName="modal-window--closed"
     >
       <div className="modal-window__content">
         <div className="modal-window__header">

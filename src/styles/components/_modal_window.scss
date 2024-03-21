@@ -1,5 +1,5 @@
 body:has(.modal-window--open) {
-  overflow-y: hidden;
+  overflow: hidden;
 }
 
 .modal-window {
@@ -35,6 +35,11 @@ body:has(.modal-window--open) {
     margin: 0 auto;
     width: clamp(250px, 85%, 1200px);
     min-height: 100%;
+
+    @include mq(sm, max) {
+      padding: 15px;
+      width: clamp(230px, 100%, 1200px);
+    }
   }
 }
 
