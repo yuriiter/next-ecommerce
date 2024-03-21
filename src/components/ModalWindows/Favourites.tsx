@@ -8,13 +8,13 @@ import { useAuth } from "@/auth/useAuth";
 export const Favourites = () => {
   const { authData } = useAuth();
   const [carsResponse, fetchCars] = useGetCars({
-    queryParams: { favourites: true },
+    queryParams: { favourites: true, pageSize: 100000 },
     pause: true,
   });
 
   useEffect(() => {
-    if (authData.authenticated) fetchCars;
-  }, [authData]);
+    if (authData.authenticated) fetchCars();
+  }, [authData, fetchCars]);
 
   if (!authData.authenticated) return null;
 
