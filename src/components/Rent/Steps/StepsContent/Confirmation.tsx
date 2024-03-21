@@ -7,6 +7,8 @@ import { Button } from "@/components/Button";
 import { Safety } from "@/components/svg/icons";
 import { Switch } from "@/components/Switch";
 import { Dialog, DialogHeader, DialogActions } from "@/components/Dialog";
+import { LoadingButton } from "@/components/Button/LoadingButton";
+import { promisedTimeout } from "@/utils";
 
 type ConfirmationProps = {
   register: RegisterFunction<RentCarForm>;
@@ -28,11 +30,20 @@ const confirmationInputs: PartialRentCarForm = {
 
 export const Confirmation = ({ register }: ConfirmationProps) => {
   const router = useRouter();
+  const [isRentButtonLoading, setIsRentButtonLoading] = useState(false);
   const [dialogOpen, setDialogOpen] = useState(false);
 
   const closeDialog = () => {
     router.push("/");
     setDialogOpen(false);
+  };
+
+  const onRentButtonClick = () => {
+    setIsRentButtonLoading(true);
+    promisedTimeout(2000).then(() => {
+      setDialogOpen(true);
+      setIsRentButtonLoading(false);
+    });
   };
 
   return (
@@ -66,13 +77,14 @@ export const Confirmation = ({ register }: ConfirmationProps) => {
           }
         )}
       </div>
-      <Button
-        onClick={() => setDialogOpen(true)}
+      <LoadingButton
+        onClick={onRentButtonClick}
+        loading={isRentButtonLoading}
         size="lg"
         className="confirmation__submit"
       >
         Rent now
-      </Button>
+      </LoadingButton>
       <div className="confirmation__safety-caption">
         <Safety className="safety-caption__icon" />
         <p className="safety-caption__title">All your data is safe</p>
