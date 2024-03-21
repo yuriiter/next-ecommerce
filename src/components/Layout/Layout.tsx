@@ -14,26 +14,24 @@ type Props = {
 
 export const Layout = ({ children }: Props) => {
   return (
-    <>
-      <AuthContextProvider>
-        <ModalWindowContextProvider>
-          <SidebarContextProvider>
-            <ToastContextProvider>
-              <div className="content">
-                <Navigation />
-                <div className="width-sidebar">
-                  <div className="width-sidebar__content">
-                    {children}
-                    <ModalWindows />
-                  </div>
+    <AuthContextProvider>
+      <ModalWindowContextProvider>
+        <SidebarContextProvider>
+          <ToastContextProvider>
+            <div className="content">
+              <Navigation />
+              <div className="width-sidebar">
+                <div className="width-sidebar__content">
+                  {children}
+                  <ModalWindows />
                 </div>
-                <Footer />
               </div>
-              <ToastContainer />
-            </ToastContextProvider>
-          </SidebarContextProvider>
-        </ModalWindowContextProvider>
-      </AuthContextProvider>
-    </>
+              <Footer />
+            </div>
+            <ToastContainer />
+          </ToastContextProvider>
+        </SidebarContextProvider>
+      </ModalWindowContextProvider>
+    </AuthContextProvider>
   );
 };

@@ -1,9 +1,12 @@
+import { useState } from "react";
+import { useRouter } from "next/router";
 import { RegisterFunction } from "@/hooks/forms/types";
 import { PartialRentCarForm, RentCarForm } from "../types";
 import { StepInput } from "../StepInput";
 import { Button } from "@/components/Button";
 import { Safety } from "@/components/svg/icons";
 import { Switch } from "@/components/Switch";
+import { Dialog, DialogHeader, DialogActions } from "@/components/Dialog";
 
 type ConfirmationProps = {
   register: RegisterFunction<RentCarForm>;
@@ -24,6 +27,14 @@ const confirmationInputs: PartialRentCarForm = {
 } as const;
 
 export const Confirmation = ({ register }: ConfirmationProps) => {
+  const router = useRouter();
+  const [dialogOpen, setDialogOpen] = useState(false);
+
+  const closeDialog = () => {
+    router.push("/");
+    setDialogOpen(false);
+  };
+
   return (
     <>
       <div className="step__content confirmation">
@@ -55,7 +66,11 @@ export const Confirmation = ({ register }: ConfirmationProps) => {
           }
         )}
       </div>
-      <Button size="lg" className="confirmation__submit">
+      <Button
+        onClick={() => setDialogOpen(true)}
+        size="lg"
+        className="confirmation__submit"
+      >
         Rent now
       </Button>
       <div className="confirmation__safety-caption">
@@ -66,6 +81,15 @@ export const Confirmation = ({ register }: ConfirmationProps) => {
           experience ever.
         </p>
       </div>
+      <Dialog open={dialogOpen} close={closeDialog}>
+        <DialogHeader>Successfully rented a car</DialogHeader>
+        Details have been sent to your email. Enjoy your ride!
+        <DialogActions>
+          <Button variant="secondary" onClick={closeDialog}>
+            Go home
+          </Button>
+        </DialogActions>
+      </Dialog>
     </>
   );
 };
