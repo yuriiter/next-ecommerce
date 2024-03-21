@@ -25,6 +25,7 @@ const useURLQueryState = <T>(
 
   const setQueryValue = useCallback(
     (value: T) => {
+      if (!router.isReady) return;
       const { query } = router;
       if (typeof value === "string") query[key] = value;
       else query[key] = encodeURIComponent(JSON.stringify(value));

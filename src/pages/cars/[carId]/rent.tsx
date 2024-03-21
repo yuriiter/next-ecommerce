@@ -1,3 +1,4 @@
+import { AuthGuard } from "@/components/AuthGuard";
 import { LoadingPoints } from "@/components/LoadingPoints";
 import { Steps } from "@/components/Rent/Steps/Steps";
 import { Summary } from "@/components/Rent/Summary";
@@ -23,28 +24,29 @@ export default function CarRentPage() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
-      <div className="rent container">
-        {carResponse.type === "pending" ? (
-          <Typography className="text-center" secondary300 size="16">
-            Loading <LoadingPoints />
-          </Typography>
-        ) : !carResponse.data?.data ? (
-          <Typography className="text-center" secondary300 size="16">
-            No data found
-          </Typography>
-        ) : (
-          <>
-            <Steps />
-            <Summary
-              car={carResponse.data?.data}
-              subtotal={summarySubtotal}
-              tax={summaryTax}
-              total={80}
-            />
-          </>
-        )}
-      </div>
+      <AuthGuard>
+        <div className="rent container">
+          {carResponse.type === "pending" ? (
+            <Typography className="text-center" secondary300 size="16">
+              Loading <LoadingPoints />
+            </Typography>
+          ) : !carResponse.data?.data ? (
+            <Typography className="text-center" secondary300 size="16">
+              No data found
+            </Typography>
+          ) : (
+            <>
+              <Steps />
+              <Summary
+                car={carResponse.data?.data}
+                subtotal={summarySubtotal}
+                tax={summaryTax}
+                total={80}
+              />
+            </>
+          )}
+        </div>
+      </AuthGuard>
     </>
   );
 }
