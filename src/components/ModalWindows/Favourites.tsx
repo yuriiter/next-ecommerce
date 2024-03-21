@@ -21,11 +21,7 @@ export const Favourites = () => {
   return (
     <ModalWindow title="Your favourite cars" id={MODAL_WINDOW.FAVOURITES}>
       <CardsContainer
-        cards={
-          carsResponse.type === "success"
-            ? carsResponse.data?.data?.documents ?? []
-            : []
-        }
+        cards={carsResponse.data?.data?.documents ?? []}
         loading={carsResponse.type === "pending"}
         title=""
       />
