@@ -66,7 +66,7 @@ export interface UserData extends Document {
     fullName: string
     passwordHash: string
     permission: Permission
-    favouriteCars: Schema.Types.ObjectId[]
+    favouriteCars: string[]
 }
 
 const ReviewSchema = new Schema({
@@ -127,7 +127,7 @@ const UserSchema = new Schema({
     fullName: String,
     passwordHash: String,
     permission: { type: String, enum: ["anonymous", "user", "admin"] },
-    favouriteCars: [{ type: Schema.Types.ObjectId }],
+    favouriteCars: [String],
 })
 
 export const ReviewModel = mongoose.model<Review>("Review", ReviewSchema)

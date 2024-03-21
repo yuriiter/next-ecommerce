@@ -4,8 +4,10 @@ import React, { useEffect } from "react";
 import { CardsContainer } from "../Cards";
 import { useGetCars } from "@/queries/useGetCars";
 import { useAuth } from "@/auth/useAuth";
+import { useModalWindow } from "../ModalWindow/useModalWindow";
 
 export const Favourites = () => {
+  const { openWindowId } = useModalWindow();
   const { authData } = useAuth();
   const [carsResponse, fetchCars] = useGetCars({
     queryParams: { favourites: true, pageSize: 100000 },
@@ -13,8 +15,9 @@ export const Favourites = () => {
   });
 
   useEffect(() => {
-    if (authData.authenticated) fetchCars();
-  }, [authData, fetchCars]);
+    if (authData.authenticated && openWindowId === MODAL_WINDOW.FAVOURITES)
+      fetchCars();
+  }, [authData, fetchCars, openWindowId]);
 
   if (!authData.authenticated) return null;
 

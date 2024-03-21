@@ -51,7 +51,9 @@ export const setCarIsInFavourites = async (
     newValue: boolean
 ) => {
     const car = await CarModel.findById(carId)
+    if (!car) throw ExpressError.BAD_REQUEST
     const user = await UserModel.findOne({ email })
+    if (!user) throw ExpressError.BAD_REQUEST
 
     const carIsFavouriteForUsers = car.isFavouriteForUsers
     const userFavouriteCars = user.favouriteCars
@@ -61,10 +63,10 @@ export const setCarIsInFavourites = async (
 
     if (newValue === false) {
         newCarIsFavouriteForUsers.delete(email)
-        newUserFavouriteCars.delete(carId as any as ObjectId)
+        newUserFavouriteCars.delete(carId)
     } else {
         newCarIsFavouriteForUsers.add(email)
-        newUserFavouriteCars.add(carId as any as ObjectId)
+        newUserFavouriteCars.add(carId)
     }
 
     car.isFavouriteForUsers = [...newCarIsFavouriteForUsers]
