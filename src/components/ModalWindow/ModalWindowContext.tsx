@@ -4,7 +4,6 @@ import {
   Dispatch,
   PropsWithChildren,
   SetStateAction,
-  useState,
 } from "react";
 
 export const ModalWindowContext = createContext<{
@@ -19,7 +18,7 @@ export const ModalWindowContextProvider = ({ children }: PropsWithChildren) => {
   // const [openWindowId, setOpenWindowId] = useState<string | null>(null);
   const [openWindowId, setOpenWindowId] = useURLQueryState<string | null>(
     "modal",
-    null,
+    null
   );
 
   return (
