@@ -3,7 +3,6 @@ import { type CarsQuery } from "@/types/carsQuery"
 import { buildCarQuery } from "@utils/buildCarsQuery"
 import { getDocumentsAndCount } from "@utils/utils"
 import ExpressError from "@errors/ExpressError"
-import { ObjectId } from "mongoose"
 
 export const getCars = async (query: CarsQuery, email?: string) => {
     const finalQuery = buildCarQuery(query)
