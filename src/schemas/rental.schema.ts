@@ -16,10 +16,10 @@ export const rentCarFormSchema = z
 
     // Rental info
     pickUpLocation: z.string().min(1, "Required").max(100),
-    pickUpDate: z.date(),
+    pickUpDate: z.string(),
     pickUpTime: z.string().min(1, "Required").max(100),
     dropOffLocation: z.string().min(1, "Required").max(100),
-    dropOffDate: z.date(),
+    dropOffDate: z.string(),
     dropOffTime: z.string().min(1, "Required").max(100),
 
     // Payment method

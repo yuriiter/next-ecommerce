@@ -9,6 +9,7 @@ import { Confirmation } from "./StepsContent/Confirmation";
 import { promisedTimeout, zodResolver } from "@/utils";
 import { rentCarFormSchema } from "@/schemas/rental.schema";
 import { useToast } from "@/components/Toast/useToast";
+import { dateToString } from "@/components/Select/DateInput/utils";
 
 const stepMax = 3;
 
@@ -33,10 +34,10 @@ export const Steps = () => {
       phoneNumber: "",
       townOrCity: "",
       pickUpLocation: "",
-      pickUpDate: new Date(),
+      pickUpDate: dateToString(new Date()),
       pickUpTime: "",
       dropOffLocation: "",
-      dropOffDate: new Date(),
+      dropOffDate: dateToString(new Date()),
       dropOffTime: "",
       paymentMethod: "CREDIT_CARD",
       cardNumber: "",
@@ -65,7 +66,7 @@ export const Steps = () => {
   const [dialogOpen, setDialogOpen] = useState(false);
 
   return (
-    <form className="rent__steps">
+    <div className="rent__steps">
       <Step
         stepIdx={0}
         stepMax={stepMax}
@@ -106,6 +107,6 @@ export const Steps = () => {
           setDialogOpen={setDialogOpen}
         />
       </Step>
-    </form>
+    </div>
   );
 };

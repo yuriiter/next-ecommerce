@@ -8,6 +8,7 @@ import { Safety } from "@/components/svg/icons";
 import { Switch } from "@/components/Switch";
 import { Dialog, DialogHeader, DialogActions } from "@/components/Dialog";
 import { LoadingButton } from "@/components/Button/LoadingButton";
+import Link from "next/link";
 
 const confirmationInputs: PartialRentCarForm = {
   marketingAgreement: {
@@ -17,7 +18,15 @@ const confirmationInputs: PartialRentCarForm = {
     type: "switch",
   },
   termsAndConditionsAgreement: {
-    label: "I agree with our terms and conditions and privacy policy.",
+    label: (
+      <>
+        I agree with our{" "}
+        <Link target="_blank" href="/articles/terms-and-conditions">
+          terms and conditions and privacy policy
+        </Link>
+        .
+      </>
+    ),
     placeholder: "",
     type: "switch",
   },
@@ -64,6 +73,7 @@ export const Confirmation = ({
                   value={value?.toString()}
                   renderInput={({ value, onChange }) => (
                     <Switch
+                      changeHandlerForCheckboxOnly
                       value={value === "true" ? true : false}
                       label={label}
                       onChange={onChange}

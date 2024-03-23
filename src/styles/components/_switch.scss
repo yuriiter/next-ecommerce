@@ -40,4 +40,16 @@
     user-select: none;
     color: #1f2544;
   }
+
+  &--unclickable-label {
+    cursor: default;
+
+    .switch__checkbox {
+      cursor: pointer;
+    }
+
+    .switch__label {
+      cursor: default;
+    }
+  }
 }

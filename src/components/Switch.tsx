@@ -6,16 +6,37 @@ type SwitchProps = {
   value: boolean;
   onChange: (newValue: boolean) => void;
   className?: string;
+  changeHandlerForCheckboxOnly?: boolean;
 };
 
-export const Switch = ({ label, value, onChange, className }: SwitchProps) => {
-  const toggle = () => onChange(!value);
+export const Switch = ({
+  label,
+  value,
+  onChange,
+  className,
+  changeHandlerForCheckboxOnly,
+}: SwitchProps) => {
+  const labelToggle = () => {
+    if (changeHandlerForCheckboxOnly) return;
+    onChange(!value);
+  };
+
+  const checkboxToggle = () => {
+    if (!changeHandlerForCheckboxOnly) return;
+    onChange(!value);
+  };
+
   return (
     <label
-      onClick={toggle}
-      className={cn(["switch", value && "switch--checked", className])}
+      onClick={labelToggle}
+      className={cn([
+        "switch",
+        value && "switch--checked",
+        changeHandlerForCheckboxOnly && "switch--unclickable-label",
+        className,
+      ])}
     >
-      <div className="switch__checkbox"></div>
+      <div className="switch__checkbox" onClick={checkboxToggle}></div>
       <span className="switch__label">{label}</span>
     </label>
   );
