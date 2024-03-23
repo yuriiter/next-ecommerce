@@ -14,7 +14,7 @@ export default class ExpressError extends Error {
 
     public static handleError(
         err: ExpressError | Error,
-        _req: Request,
+        req: Request,
         res: Response,
         _next: NextFunction
     ): void {
@@ -27,6 +27,7 @@ export default class ExpressError extends Error {
         if (statusCode >= 500) {
             console.log("\n\n")
             console.log("==========", new Date().toUTCString(), "==========")
+            console.log("Original URL: ", req.originalUrl)
             console.log(err)
             console.log("\n")
         }

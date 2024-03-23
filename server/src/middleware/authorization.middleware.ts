@@ -1,3 +1,4 @@
+import "express-async-errors"
 import ExpressError from "@errors/ExpressError"
 import { getUserByEmail } from "@services/user.service"
 import { type Permission } from "@/types/user"

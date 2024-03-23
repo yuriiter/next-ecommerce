@@ -9,7 +9,6 @@ import { FRONTEND_URL, PORT } from "@/config"
 import { closeMongoDBConnection, connectToMongoDB } from "@/db"
 import carRouter from "@routers/car.router"
 import { healthRouter } from "@routers/health.router"
-import authorizationMiddleware from "@middleware/authorization.middleware"
 import userRouter from "@routers/user.router"
 import sessionRouter from "@routers/session.router"
 
@@ -19,7 +18,6 @@ app.use(cors({ origin: FRONTEND_URL, credentials: true }))
 app.use(cookieParser())
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
-app.use(authorizationMiddleware("anonymous"))
 
 initRouters(app, [
     carRouter,
