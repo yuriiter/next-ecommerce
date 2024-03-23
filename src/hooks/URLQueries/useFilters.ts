@@ -3,8 +3,13 @@ import { sidebarInputs } from "@/constants/mockupData";
 import { SidebarInputGroup } from "@/components/Sidebar/types";
 import { useURLQueryObjectState } from "./useURLQueryObjectState";
 import { copy, sidebarInputsToQueryState } from "@/utils";
+import useURLQueryState from "./useURLQueryState";
 
 export const useFilters = (): [SidebarInputGroup[], typeof onChangeFilters] => {
+  const [_pageSize, setPageSize] = useURLQueryState<number | undefined>(
+    "pageSize",
+    undefined
+  );
   const [filters, setFilters] = useURLQueryObjectState(
     sidebarInputsToQueryState(sidebarInputs)
   );
@@ -19,11 +24,13 @@ export const useFilters = (): [SidebarInputGroup[], typeof onChangeFilters] => {
         );
         if (!searchedInput) continue;
         searchedInput.value = newValue;
+        setPageSize(undefined);
         setFilters(sidebarInputsToQueryState(sidebarInputsCopy));
+        window.scrollTo({ top: 0 });
         break;
       }
     },
-    [filters, setFilters]
+    [setFilters, setPageSize]
   );
 
   const filtersFormValues = useMemo(() => {

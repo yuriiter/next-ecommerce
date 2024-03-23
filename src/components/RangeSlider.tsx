@@ -1,6 +1,7 @@
 import { cn } from "@/utils";
 import React, { useEffect, useState } from "react";
 import { useRanger } from "react-ranger";
+import dynamic from "next/dynamic";
 
 type RangeSliderProps = {
   min: number;
@@ -9,7 +10,12 @@ type RangeSliderProps = {
   onChange: (newValue: number) => void;
 };
 
-const RangeSlider = ({ min, max, value, onChange }: RangeSliderProps) => {
+const RangeSliderNoDynamic = ({
+  min,
+  max,
+  value,
+  onChange,
+}: RangeSliderProps) => {
   const [bufferValue, setBufferValue] = useState(value);
 
   useEffect(() => {
@@ -71,4 +77,7 @@ const RangeSlider = ({ min, max, value, onChange }: RangeSliderProps) => {
   );
 };
 
-export default RangeSlider;
+export const RangeSlider = dynamic(
+  () => Promise.resolve(RangeSliderNoDynamic),
+  { ssr: false }
+);
