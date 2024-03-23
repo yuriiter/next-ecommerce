@@ -7,6 +7,7 @@ import { makeCapacityString } from "@/utils";
 import { PriceInfo } from "../PriceInfo";
 import { ImageWrapper } from "../ImageWrapper";
 import { useLikeCar } from "@/queries/useLikeCar";
+import Link from "next/link";
 
 type CardProps = {
   carData: CarData;
@@ -32,7 +33,13 @@ export const Card = ({ carData }: CardProps) => {
     <div className="card">
       <div className="card__header">
         <div className="card__captions">
-          <h4 className="card__title">{name}</h4>
+          <Link
+            href="/cars/[carId]"
+            as={`/cars/${_id}`}
+            className="card__title"
+          >
+            {name}
+          </Link>
           <p className="card__subtitle">{carType}</p>
         </div>
         <div className="card__favourite">
