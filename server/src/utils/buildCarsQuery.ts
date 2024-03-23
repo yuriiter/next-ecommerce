@@ -28,12 +28,12 @@ export const buildCarQuery = (query: CarsQuery) => {
     const conditions = []
 
     const carTypeConditions = []
-    if (typeSport) carTypeConditions.push({ carType: "Sport" })
+    if (typeSport) carTypeConditions.push({ carType: "sport" })
     if (typeSUV) carTypeConditions.push({ carType: "SUV" })
     if (typeMPV) carTypeConditions.push({ carType: "MPV" })
-    if (typeSedan) carTypeConditions.push({ carType: "Sedan" })
-    if (typeCoupe) carTypeConditions.push({ carType: "Coupe" })
-    if (typeHatchback) carTypeConditions.push({ carType: "Hatchback" })
+    if (typeSedan) carTypeConditions.push({ carType: "sedan" })
+    if (typeCoupe) carTypeConditions.push({ carType: "coupe" })
+    if (typeHatchback) carTypeConditions.push({ carType: "hatchback" })
 
     if (carTypeConditions.length > 0) {
         conditions.push({ $or: carTypeConditions })
