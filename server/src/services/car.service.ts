@@ -76,7 +76,11 @@ export const setCarIsInFavourites = async (
 }
 
 export const getCarById = async (carId: string, email: string | undefined) => {
-    let car = await CarModel.findById(carId)
+    let car = await CarModel.findById(carId).populate({
+        path: "reviews",
+        populate: { path: "user" },
+    })
+    if (!car) throw ExpressError.NOT_FOUND
     car = car.toObject()
 
     const processedCar = {

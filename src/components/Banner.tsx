@@ -63,7 +63,7 @@ export const Banner = ({
         src={
           typeof carPicture === "string"
             ? carPicture
-            : carPicture.img?.url ?? ""
+            : carPicture?.img?.url ?? ""
         }
       />
     </div>
