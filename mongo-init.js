@@ -19,6 +19,18 @@ try {
   const MAX_DATE = Date.now() + HOUR * 24 * 100
   const randomDate = (minDate) => new Date((new Date(minDate ?? MIN_DATE)).getTime() + MAX_DATE * Math.random())
 
+  const thumbnails = [
+    "https://live.staticflickr.com/65535/53604593407_997a00d7fc_o.png",
+    "https://live.staticflickr.com/65535/53604593412_8b882dd385_o.png",
+    "https://live.staticflickr.com/65535/53605932545_52c79825dc_o.png",
+    "https://live.staticflickr.com/65535/53605932560_2c01e84428_o.png",
+    "https://live.staticflickr.com/65535/53605469616_8c5f6eea92_o.png",
+    "https://live.staticflickr.com/65535/53604593437_4b04553464_o.png",
+    "https://live.staticflickr.com/65535/53605932600_829947278b_o.png",
+    "https://live.staticflickr.com/65535/53604593477_c2f5286787_o.png",
+    "https://live.staticflickr.com/65535/53605932615_ae7d33b6c4_o.png"
+  ]
+
   const images = [
     "https://live.staticflickr.com/113/297599225_7bdf6ff5d3_c.jpg",
     "https://live.staticflickr.com/3347/3649971266_77aeb509ff_c.jpg",
@@ -251,7 +263,7 @@ try {
         name: `Thumbnail ${i + 1}`,
         desc: `Thumbnail ${i + 1} Description`,
         img: {
-          url: randomItemInArray(images),
+          url: randomItemInArray(thumbnails),
         },
       },
       photos: [
