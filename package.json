@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "next:dev": "next dev",
-    "db:dev": "docker-compose down; docker-compose up --remove-orphans db 0>&1> /dev/null",
+    "db:dev": "docker-compose up --build --remove-orphans db 0>&1> /dev/null",
     "express:dev": "NODE_ENV=development pnpm run --prefix ./server dev",
     "docker:reset": "docker-compose down -v; docker-compose rm -f",
     "dev": "pnpx concurrently \"pnpm run next:dev\" \"pnpm run express:dev\" \"pnpm run db:dev\" ",
