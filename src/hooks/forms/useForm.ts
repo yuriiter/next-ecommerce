@@ -24,6 +24,8 @@ export const useForm = <FormSchema extends FormValues>({
   customOnChange,
 }: UseFormParams<FormSchema>) => {
   const initialValuesRef = useRef<FormSchema>(initialValues);
+  const onceSubmittedRef = useRef(false);
+
   const [values, setValues] = useState<Partial<FormSchema>>(
     initialValues || {}
   );
@@ -31,13 +33,28 @@ export const useForm = <FormSchema extends FormValues>({
 
   const handleChange: HandleChangeFunction<FormSchema> = useCallback(
     <T extends keyof FormSchema>(name: T, value: FormSchema[T]) => {
-      setValues((currentValues) => ({
-        ...currentValues,
+      const newValues = {
+        ...values,
         [name]: value,
         ...customOnChange?.(name, value),
-      }));
+      };
+      setValues(newValues);
+
+      if (onceSubmittedRef.current) {
+        const newErrors: FormErrors<FormSchema> = {};
+        const validationResults = validationFunction(newValues);
+
+        for (const fieldName in validationResults) {
+          const error = validationResults[fieldName];
+          if (error) {
+            newErrors[fieldName] = error;
+          }
+        }
+
+        setErrors(newErrors);
+      }
     },
-    [customOnChange]
+    [customOnChange, validationFunction, values]
   );
 
   const isDirty = useMemo(
@@ -71,7 +88,7 @@ export const useForm = <FormSchema extends FormValues>({
   const handleSubmit = useCallback(
     (e: FormEvent) => {
       e.preventDefault();
-
+      onceSubmittedRef.current = true;
       const newErrors: FormErrors<FormSchema> = {};
       let isValid = true;
 
