@@ -50,7 +50,7 @@ initialRouter.post(
                 if (!user) throw ExpressError.BAD_CREDENTIALS
 
                 const jwt = createJWT(user.email, "user")
-                res.cookie("jwt", jwt, { maxAge: 86400, httpOnly: true })
+                res.cookie("jwt", jwt, { maxAge: 86400 * 1000, httpOnly: true })
                 return res.status(200).json(buildResponse(200, user))
             } catch (err) {
                 next(err)
