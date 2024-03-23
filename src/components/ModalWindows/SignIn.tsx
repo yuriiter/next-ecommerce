@@ -70,7 +70,7 @@ export const SignIn = () => {
           Submit
         </Button>
         <Typography>
-          Don't have an account?{" "}
+          Don&apos;t have an account?{" "}
           <Link
             href={{
               pathname: "/",

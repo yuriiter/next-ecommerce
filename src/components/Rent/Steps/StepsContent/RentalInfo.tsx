@@ -1,4 +1,4 @@
-import { RegisterFunction } from "@/hooks/forms/types";
+import { FormErrors, RegisterFunction } from "@/hooks/forms/types";
 import React from "react";
 import { PartialRentCarForm, RentCarForm } from "../types";
 import { PointMark } from "@/components/PointMark";
@@ -16,6 +16,7 @@ import { SelectOption } from "@/components/Select/types";
 
 type RentalInfoProps = {
   register: RegisterFunction<RentCarForm>;
+  errors: FormErrors<RentCarForm>;
 };
 
 const pickUpInputs: PartialRentCarForm = {
@@ -54,7 +55,7 @@ const dropOffInputs: PartialRentCarForm = {
   },
 } as const;
 
-export const RentalInfo = ({ register }: RentalInfoProps) => {
+export const RentalInfo = ({ register, errors }: RentalInfoProps) => {
   return (
     <div className="step__content rental-info">
       <div className="rental-info__part">
@@ -77,6 +78,7 @@ export const RentalInfo = ({ register }: RentalInfoProps) => {
                   placeholder={placeholder}
                   {...rest}
                   value={value?.toString() || ""}
+                  error={errors[name as keyof RentCarForm]}
                   renderInput={({ placeholder, value, onChange }) => {
                     if (type === "select") {
                       return (
@@ -141,6 +143,7 @@ export const RentalInfo = ({ register }: RentalInfoProps) => {
                   placeholder={placeholder}
                   {...rest}
                   value={value?.toString() || ""}
+                  error={errors[name as keyof RentCarForm]}
                   renderInput={({ placeholder, value, onChange }) => {
                     if (type === "select") {
                       return (

@@ -29,7 +29,7 @@ export type RentCarForm = {
   // Payment method
   paymentMethod: PaymentMethodType;
   cardNumber?: string;
-  expirationDate?: Date;
+  expirationDate?: string;
   cardHolder?: string;
   CVC?: string;
 

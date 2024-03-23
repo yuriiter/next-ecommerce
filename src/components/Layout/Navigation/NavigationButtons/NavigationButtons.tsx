@@ -62,7 +62,7 @@ export const NavigationButtons = () => {
           onChange={function (newValue: SelectOption | undefined): void {
             console.log(newValue);
           }}
-          options={["Hello", "Hello2", "Hello3"]}
+          options={["Option 1", "Option 2", "Option 3"]}
         />
       </Badge>
       <AvatarMenu />

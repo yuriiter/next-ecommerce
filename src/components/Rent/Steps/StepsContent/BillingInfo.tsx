@@ -1,10 +1,11 @@
 import React from "react";
 import { StepInput } from "../StepInput";
 import { PartialRentCarForm, RentCarForm } from "../types";
-import { RegisterFunction } from "@/hooks/forms/types";
+import { FormErrors, RegisterFunction } from "@/hooks/forms/types";
 
 type BillingInfoProps = {
   register: RegisterFunction<RentCarForm>;
+  errors: FormErrors<RentCarForm>;
 };
 
 const billingInfoInputs: PartialRentCarForm = {
@@ -26,7 +27,7 @@ const billingInfoInputs: PartialRentCarForm = {
   },
 } as const;
 
-export const BillingInfo = ({ register }: BillingInfoProps) => {
+export const BillingInfo = ({ register, errors }: BillingInfoProps) => {
   return (
     <div className="step__content billing-info">
       {Object.entries(billingInfoInputs).map(
@@ -40,6 +41,7 @@ export const BillingInfo = ({ register }: BillingInfoProps) => {
               placeholder={placeholder}
               {...rest}
               value={value as string}
+              error={errors[name as keyof RentCarForm]}
             />
           );
         }

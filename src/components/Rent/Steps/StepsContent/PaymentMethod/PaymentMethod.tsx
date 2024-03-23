@@ -1,7 +1,7 @@
 import React from "react";
 import { StepInput } from "../../StepInput";
 import { PartialRentCarForm, RentCarForm } from "../../types";
-import { RegisterFunction } from "@/hooks/forms/types";
+import { FormErrors, RegisterFunction } from "@/hooks/forms/types";
 import { PaymentMethodType } from "../../types";
 import {
   Accordion,
@@ -13,6 +13,7 @@ import { Bitcoin, Paypal, VisaMastercard } from "@/components/svg/icons";
 
 type PaymentMethodProps = {
   register: RegisterFunction<RentCarForm>;
+  errors: FormErrors<RentCarForm>;
 };
 
 const billingInfoInputs: PartialRentCarForm = {
@@ -34,7 +35,7 @@ const billingInfoInputs: PartialRentCarForm = {
   },
 } as const;
 
-export const PaymentMethod = ({ register }: PaymentMethodProps) => {
+export const PaymentMethod = ({ register, errors }: PaymentMethodProps) => {
   const { value: paymentMethod, onChange: expandAccordion } = register(
     "paymentMethod",
     true
@@ -68,6 +69,7 @@ export const PaymentMethod = ({ register }: PaymentMethodProps) => {
                     placeholder={placeholder}
                     {...rest}
                     value={value as string}
+                    error={errors[name as keyof RentCarForm]}
                   />
                 );
               }

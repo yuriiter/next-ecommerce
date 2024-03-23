@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { Dispatch, FormEvent, SetStateAction, useState } from "react";
 import { useRouter } from "next/router";
 import { RegisterFunction } from "@/hooks/forms/types";
 import { PartialRentCarForm, RentCarForm } from "../types";
@@ -8,11 +8,6 @@ import { Safety } from "@/components/svg/icons";
 import { Switch } from "@/components/Switch";
 import { Dialog, DialogHeader, DialogActions } from "@/components/Dialog";
 import { LoadingButton } from "@/components/Button/LoadingButton";
-import { promisedTimeout } from "@/utils";
-
-type ConfirmationProps = {
-  register: RegisterFunction<RentCarForm>;
-};
 
 const confirmationInputs: PartialRentCarForm = {
   marketingAgreement: {
@@ -28,22 +23,25 @@ const confirmationInputs: PartialRentCarForm = {
   },
 } as const;
 
-export const Confirmation = ({ register }: ConfirmationProps) => {
-  const router = useRouter();
-  const [isRentButtonLoading, setIsRentButtonLoading] = useState(false);
-  const [dialogOpen, setDialogOpen] = useState(false);
+type ConfirmationProps = {
+  register: RegisterFunction<RentCarForm>;
+  isRentButtonLoading: boolean;
+  dialogOpen: boolean;
+  setDialogOpen: Dispatch<SetStateAction<boolean>>;
+  handleSubmit: (e: FormEvent) => void;
+};
 
+export const Confirmation = ({
+  register,
+  isRentButtonLoading,
+  dialogOpen,
+  setDialogOpen,
+  handleSubmit,
+}: ConfirmationProps) => {
+  const router = useRouter();
   const closeDialog = () => {
     router.push("/");
     setDialogOpen(false);
-  };
-
-  const onRentButtonClick = () => {
-    setIsRentButtonLoading(true);
-    promisedTimeout(2000).then(() => {
-      setDialogOpen(true);
-      setIsRentButtonLoading(false);
-    });
   };
 
   return (
@@ -78,12 +76,13 @@ export const Confirmation = ({ register }: ConfirmationProps) => {
         )}
       </div>
       <LoadingButton
-        onClick={onRentButtonClick}
+        onClick={handleSubmit}
         loading={isRentButtonLoading}
         size="lg"
         className="confirmation__submit"
+        disabled={isRentButtonLoading}
       >
-        Rent now
+        {isRentButtonLoading ? "Sending rent request" : "Rent now"}
       </LoadingButton>
       <div className="confirmation__safety-caption">
         <Safety className="safety-caption__icon" />

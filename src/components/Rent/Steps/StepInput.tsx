@@ -25,7 +25,7 @@ type StepInputProps = {
   value: unknown;
   onChange: ChangeHandler;
   className?: string;
-  error?: string | string[];
+  error?: string | string[] | null;
   name: string;
   label?: string;
   placeholder?: string;
