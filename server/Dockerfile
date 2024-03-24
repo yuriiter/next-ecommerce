@@ -16,4 +16,6 @@ CMD ["npm", "run", "dev"]
 
 FROM base as production
 
-CMD ["npm", "run", "build"]
+RUN npm run build
+
+CMD ["npm", "run", "pm2:start"]

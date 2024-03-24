@@ -5,10 +5,7 @@ services:
     image: mongo
     restart: unless-stopped
     env_file:
-      - ./.env
-      # - ./.env.${NODE_ENV}
-      # - ./.env.local
-      # - ./.env.local.${NODE_ENV}
+      - ./server/.env
     environment:
       - MONGO_INITDB_ROOT_USERNAME=${DB_USER}
       - MONGO_INITDB_ROOT_PASSWORD=${DB_PASSWORD}
@@ -19,19 +16,39 @@ services:
       - db_volume:/data/db
       - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
 
-  app:
+  server:
     build:
-      context: .
-      dockerfile: ./Dockerfile
+      context: ./server
+      dockerfile: ./server/Dockerfile
+      target: production
     ports:
-      - "3000:80"
+      - ${PORT}:${PORT}
     depends_on:
       - db
     env_file:
-      - ./.env
-      # - ./.env.${NODE_ENV}
-      # - ./.env.local
-      # - ./.env.local.${NODE_ENV}
+      - ./server/.env
+
+  client:
+    build:
+      context: ./client
+      target: production
+    ports:
+      - "3000:3000"
+    env_file:
+      - ./client/.env
+
+  nginx:
+    image: nginx
+    depends_on:
+      - db
+      - server
+      - client
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./client/.next:/usr/share/nginx/html
+      - ./server/dist:/usr/share/nginx/html/api
 
 volumes:
   db_volume:

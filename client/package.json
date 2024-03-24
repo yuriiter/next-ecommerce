@@ -3,14 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "next:dev": "next dev",
-    "next:build": "next build",
-    "next:export": "next export",
-    "db:dev": "docker-compose up --build --remove-orphans db 0>&1> /dev/null",
-    "express:dev": "npm run --prefix ./server dev",
-    "docker:reset": "docker-compose down -v; docker-compose rm -f",
-    "dev": "npx concurrently \"npm run next:dev\" \"npm run express:dev\" \"pnpm run db:dev\" ",
-    "build": "docker-compose up -d",
+    "dev": "next dev",
+    "build": "next build",
+    "export": "next export",
     "start": "next start"
   },
   "dependencies": {
