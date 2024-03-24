@@ -4,10 +4,12 @@
   "private": true,
   "scripts": {
     "next:dev": "next dev",
+    "next:build": "next build",
+    "next:export": "next export",
     "db:dev": "docker-compose up --build --remove-orphans db 0>&1> /dev/null",
-    "express:dev": "NODE_ENV=development pnpm run --prefix ./server dev",
+    "express:dev": "npm run --prefix ./server dev",
     "docker:reset": "docker-compose down -v; docker-compose rm -f",
-    "dev": "pnpx concurrently \"pnpm run next:dev\" \"pnpm run express:dev\" \"pnpm run db:dev\" ",
+    "dev": "npx concurrently \"npm run next:dev\" \"npm run express:dev\" \"pnpm run db:dev\" ",
     "build": "docker-compose up -d",
     "start": "next start"
   },
