@@ -18,7 +18,7 @@ export const AvatarMenu = () => {
   const [_signOutResponse, signOut] = useSignOutAndGoHome();
 
   const avatarMenuOptionToAction = useMemo(() => {
-    const map = {
+    const map: Partial<Record<string, () => unknown>> = {
       "Sign in": () => setOpenWindowId(MODAL_WINDOW.SIGN_IN),
       "Sign up": () => setOpenWindowId(MODAL_WINDOW.SIGN_UP),
       "Sign out": () => signOut(),
@@ -30,13 +30,16 @@ export const AvatarMenu = () => {
     } else delete map["Sign out"];
 
     return map;
-  }, [setOpenWindowId, authData]);
+  }, [authData.authenticated, setOpenWindowId, signOut]);
 
   const onMenuSelect = (newValue: SelectOption | undefined) => {
     if (typeof newValue !== "string") return;
-    const action = avatarMenuOptionToAction[newValue];
+    const action =
+      avatarMenuOptionToAction[
+        newValue as keyof typeof avatarMenuOptionToAction
+      ];
 
-    if (typeof action === "function") action(newValue);
+    if (typeof action === "function") action();
   };
 
   return (

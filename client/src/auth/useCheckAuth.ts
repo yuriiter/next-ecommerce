@@ -33,7 +33,7 @@ export const useCheckAuth = () => {
 
   useEffect(() => {
     getSession();
-  }, [pathname]);
+  }, [getSession, pathname]);
 
   useEffect(() => {
     if (sessionResponse.type === "pending") authDispatch({ type: "PENDING" });

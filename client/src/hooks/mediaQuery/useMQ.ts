@@ -9,11 +9,11 @@ export function useMQ(query: string): boolean;
 export function useMQ(breakpoint: number, maxOrMin: "max" | "min"): boolean;
 export function useMQ(
   breakpoint: BreakpointUnion,
-  maxOrMin: "max" | "min",
+  maxOrMin: "max" | "min"
 ): boolean;
 export function useMQ(
   queryOrBreakpoint: BreakpointUnion | string | number,
-  maxOrMin: "max" | "min" = "max",
+  maxOrMin: "max" | "min" = "max"
 ): boolean {
   const query =
     typeof queryOrBreakpoint === "string"
@@ -24,7 +24,7 @@ export function useMQ(
 
   const [isSSR, setIsSSR] = useState(true);
   const [matches, setMatches] = useState(
-    !isSSR ? window.matchMedia(query).matches : false,
+    !isSSR ? window.matchMedia(query).matches : false
   );
 
   useEffect(() => {
@@ -40,6 +40,7 @@ export function useMQ(
     media.addListener(listener);
 
     return () => media.removeListener(listener);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [query]);
 
   return matches;

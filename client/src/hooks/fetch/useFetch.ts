@@ -73,7 +73,7 @@ export const useFetch = <T>({
     if (pause) return;
 
     const fetchData = async () => {
-      await fetchCallback(requestConfig);
+      await fetchCallback({ requestConfig });
     };
 
     fetchData();
@@ -83,6 +83,7 @@ export const useFetch = <T>({
         cancelTokenSourceRef.current.cancel("Request canceled by cleanup");
       }
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pause, url]);
 
   return [status, fetchCallback];

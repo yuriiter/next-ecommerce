@@ -46,6 +46,7 @@ export const PickerSection = ({
         router.push({ query: router.query, pathname: "/cars" });
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pickUpStateFromQuery, dropOffStateFromQuery]);
 
   const onCentralButtonClick = () => {

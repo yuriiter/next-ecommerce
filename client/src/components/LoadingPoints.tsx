@@ -15,7 +15,7 @@ export const LoadingPoints = ({
       animationSpeed / 3
     );
     return () => clearInterval(interval);
-  }, []);
+  }, [animationSpeed]);
 
   const points = [];
 

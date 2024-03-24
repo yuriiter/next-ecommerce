@@ -9,5 +9,6 @@ export const useDidUpdate: typeof useEffect = (cb, deps) => {
       return;
     }
     return cb();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, deps);
 };

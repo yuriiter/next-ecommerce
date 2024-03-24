@@ -24,6 +24,7 @@ export const useGet = <
     });
     newUrl.search = params.toString();
     return newUrl.toString();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [url, JSON.stringify(queryParams)]);
 
   return useFetch({ url: finalUrl, requestConfig, pause });

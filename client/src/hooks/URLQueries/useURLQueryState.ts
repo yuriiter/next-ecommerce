@@ -21,6 +21,7 @@ const useURLQueryState = <T>(
       }
     }
     return initialValue;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [JSON.stringify(router.query[key])]);
 
   const setQueryValue = useCallback(
@@ -32,7 +33,7 @@ const useURLQueryState = <T>(
       if (value === undefined || value === null) delete query[key];
       router.push({ query }, undefined, { shallow: true });
     },
-    [router]
+    [key, router]
   );
 
   const currentState = useMemo(() => getQueryValue(), [getQueryValue]);
@@ -42,7 +43,7 @@ const useURLQueryState = <T>(
       if (action instanceof Function) setQueryValue(action(currentState));
       else setQueryValue(action);
     },
-    [setQueryValue]
+    [currentState, setQueryValue]
   );
 
   return [currentState, updateQuery];

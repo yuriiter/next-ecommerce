@@ -14,6 +14,17 @@ export const useFilters = (): [SidebarInputGroup[], typeof onChangeFilters] => {
     sidebarInputsToQueryState(sidebarInputs)
   );
 
+  const filtersFormValues = useMemo(() => {
+    const sidebarInputsCopy = copy(sidebarInputs);
+    sidebarInputsCopy.forEach((group) =>
+      group.inputs.forEach((input) => {
+        input.value = filters[input.key as keyof typeof filters] ?? input.value;
+      })
+    );
+
+    return sidebarInputsCopy;
+  }, [filters]);
+
   const onChangeFilters = useCallback(
     (key: string, newValue: boolean | number) => {
       const sidebarInputsCopy = copy(filtersFormValues);
@@ -30,19 +41,8 @@ export const useFilters = (): [SidebarInputGroup[], typeof onChangeFilters] => {
         break;
       }
     },
-    [setFilters, setPageSize]
+    [filtersFormValues, setFilters, setPageSize]
   );
-
-  const filtersFormValues = useMemo(() => {
-    const sidebarInputsCopy = copy(sidebarInputs);
-    sidebarInputsCopy.forEach((group) =>
-      group.inputs.forEach((input) => {
-        input.value = filters[input.key] ?? input.value;
-      })
-    );
-
-    return sidebarInputsCopy;
-  }, [filters]);
 
   return [filtersFormValues, onChangeFilters];
 };

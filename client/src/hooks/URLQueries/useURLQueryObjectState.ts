@@ -33,6 +33,7 @@ export const useURLQueryObjectState = <T extends Record<string, unknown>>(
     }, {});
 
     return currentValue as T;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router]);
 
   const currentState = useMemo(() => getQueryValue(), [getQueryValue]);
@@ -54,7 +55,7 @@ export const useURLQueryObjectState = <T extends Record<string, unknown>>(
           acc[key] = value;
         }
         return acc;
-      }, {});
+      }, {} as Record<string, string | number | string[]>);
 
       router.push(
         {
@@ -67,6 +68,7 @@ export const useURLQueryObjectState = <T extends Record<string, unknown>>(
         }
       );
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [router]
   );
 

@@ -9,6 +9,7 @@ export const useHasObjectChanged = <T extends Record<string, any>>(
   useEffect(() => {
     const hasObjectChanged = !deepObjectCompare(memoizedOb, ob);
     if (hasObjectChanged) setMemoizedOb(ob);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ob]);
 
   return memoizedOb;
