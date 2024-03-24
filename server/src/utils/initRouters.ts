@@ -3,7 +3,7 @@ import { type Express, Router } from "express"
 const initRouters = (
     app: Express,
     routers: Router[],
-    apiBaseURL: string = "/api"
+    apiBaseURL: string = "/"
 ): void => {
     const mainRouter = Router()
     routers.forEach((router) => mainRouter.use(apiBaseURL, router))
