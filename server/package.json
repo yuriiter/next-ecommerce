@@ -34,10 +34,12 @@
         "typescript": "^4.9.5"
     },
     "scripts": {
-        "start": "NODE_ENV=production npx pm2 --no-daemon start dist/index.js",
+        "start": "NODE_ENV=production node dist/index.js",
+        "start:dev": "nodemon --exec 'npm run build && NODE_ENV=development node dist/index.js'",
         "build": "npx tsc -p .",
-        "dev": "NODE_ENV=development npx nodemon -w src/ -e ts -x \"npm run build && npm run start:dev\"",
-        "start:dev": "npx nodemon dist/index.js"
+        "pm2:start": "NODE_ENV=production pm2 start dist/index.js --name=my-server --no-daemon",
+        "pm2:stop": "pm2 stop my-server",
+        "pm2:restart": "pm2 restart my-server"
     },
     "_moduleAliases": {
         "@routers": "dist/routers",

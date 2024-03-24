@@ -1,0 +1,37 @@
+version: "3"
+
+services:
+  db:
+    image: mongo
+    restart: unless-stopped
+    env_file:
+      - ./.env
+      # - ./.env.${NODE_ENV}
+      # - ./.env.local
+      # - ./.env.local.${NODE_ENV}
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${DB_USER}
+      - MONGO_INITDB_ROOT_PASSWORD=${DB_PASSWORD}
+      - MONGO_INITDB_DATABASE=${DB_NAME}
+    ports:
+      - ${DB_PORT}:${DB_PORT}
+    volumes:
+      - db_volume:/data/db
+      - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+
+  app:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - "3000:80"
+    depends_on:
+      - db
+    env_file:
+      - ./.env
+      # - ./.env.${NODE_ENV}
+      # - ./.env.local
+      # - ./.env.local.${NODE_ENV}
+
+volumes:
+  db_volume:
