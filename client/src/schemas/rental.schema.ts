@@ -1,8 +1,8 @@
-import { dateOrDateStringToDate } from "@/utils";
+import { dateOrDateStringToDate, setTimeOfDate } from "@/utils";
 import { z } from "zod";
-import { setTimeOfDate, stringAsTime } from "../../server/src/utils/time";
 import { cardExpiryDate, phoneNumberRegex } from "@/constants/regex";
 import { isCreditCard } from "validator";
+import { stringAsTime } from "@/components/Select/TimeInput/utils";
 
 export const PaymentMethodType = z.enum(["CREDIT_CARD", "PAY_PAL", "BITCOIN"]);
 
