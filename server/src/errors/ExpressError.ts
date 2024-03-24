@@ -32,9 +32,7 @@ export default class ExpressError extends Error {
             console.log("\n")
         }
 
-        res.status(statusCode).json(
-            buildResponse(statusCode, undefined, `${err}`)
-        )
+        res.status(statusCode).json(buildResponse(statusCode, undefined))
     }
 
     public static NOT_FOUND = new ExpressError(404)
