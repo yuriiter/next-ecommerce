@@ -42,7 +42,7 @@ export const Search = ({ className }: SearchProps) => {
     if (searchValue === "") return;
     router.replace({
       pathname: "/cars",
-      query: { ...router.query, search: searchValue },
+      query: { search: searchValue },
     });
   };
 
@@ -54,7 +54,7 @@ export const Search = ({ className }: SearchProps) => {
   const openFilterSidebar: MouseEventHandler<SVGSVGElement> = (e) => {
     e.stopPropagation();
     setHidden(false);
-    router.replace({ pathname: "/cars", query: router.query });
+    router.replace({ pathname: "/cars" });
   };
 
   return (
