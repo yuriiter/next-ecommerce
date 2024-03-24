@@ -25,7 +25,7 @@ export default class ExpressError extends Error {
             statusCode = 500
         }
         if (statusCode >= 500) {
-            console.log("\n\n")
+            console.log("\n")
             console.log("==========", new Date().toUTCString(), "==========")
             console.log("Original URL: ", req.originalUrl)
             console.log(err)

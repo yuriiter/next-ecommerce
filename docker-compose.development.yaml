@@ -4,26 +4,23 @@ services:
   db:
     image: mongo
     restart: unless-stopped
-    env_file:
-      - path: ./server/.env
-      - required: true
+    hostname: db
     environment:
       - MONGO_INITDB_ROOT_USERNAME=${DB_USER}
       - MONGO_INITDB_ROOT_PASSWORD=${DB_PASSWORD}
       - MONGO_INITDB_DATABASE=${DB_NAME}
     ports:
-      - ${DB_PORT}:${DB_PORT}
+      - ${DB_PORT}:27017
     volumes:
       - db_volume:/data/db
       - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+    command: mongod --quiet --logpath /dev/null
 
   server:
     env_file:
-      - path: ./server/.env
-      - required: true
+      - ./server/.env
     build:
       context: ./server
-      dockerfile: ./server/Dockerfile
       target: development
     ports:
       - ${PORT}:${PORT}
@@ -31,11 +28,12 @@ services:
       - db
     volumes:
       - ./server:/app
+    links:
+      - db
 
   client:
     env_file:
-      - path: ./client/.env
-      - required: true
+      - ./client/.env
     build:
       context: ./client
       target: development

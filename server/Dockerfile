@@ -4,7 +4,7 @@ WORKDIR /app
 
 COPY package*.json ./
 
-RUN npm ci
+RUN npm i
 
 COPY . .
 
@@ -16,6 +16,4 @@ CMD ["npm", "run", "dev"]
 
 FROM base as production
 
-RUN npm run build
-
-CMD ["npm", "run", "pm2:start"]
+CMD ["npm", "run", "build"]
