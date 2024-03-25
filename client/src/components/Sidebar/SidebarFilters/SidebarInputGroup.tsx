@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React from "react";
 import { SidebarInput } from "../types";
 import { SidebarCheckbox } from "./SidebarCheckbox";
 import { SidebarRange } from "./SidebarRange";

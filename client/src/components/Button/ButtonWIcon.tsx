@@ -1,4 +1,4 @@
-import React, { cloneElement } from "react";
+import React from "react";
 import { ButtonWIconProps } from "./types";
 import { Button } from ".";
 

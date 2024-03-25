@@ -1,6 +1,6 @@
 import { cn } from "@/utils";
 import { Placement } from "@/types/common";
-import React, { PropsWithChildren, ReactNode } from "react";
+import React, { ReactNode } from "react";
 import { AnimatedDisplay } from "../AnimatedDisplay";
 import { Typography } from "../Typography/Typography";
 

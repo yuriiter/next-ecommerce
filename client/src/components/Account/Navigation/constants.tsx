@@ -16,7 +16,6 @@ import { Chart } from "@/components/svg/icons";
 import { EmptyWalletChange } from "@/components/svg/icons";
 import { Home } from "@/components/svg/icons";
 import { InfoCircle } from "@/components/svg/icons";
-import { Logout } from "@/components/svg/icons";
 import { Message } from "@/components/svg/icons";
 import { Setting } from "@/components/svg/icons";
 

@@ -1,8 +1,5 @@
 import { cn } from "@/utils";
-import React, { Dispatch, ReactNode, SetStateAction } from "react";
-import { IconButton } from "../Button";
-import { Close } from "../svg/icons";
-import { Typography } from "../Typography/Typography";
+import React, { ReactNode } from "react";
 import { useKeyEvent } from "@/hooks/useKeyEvent";
 import { AnimatedDisplay } from "@/components/AnimatedDisplay";
 

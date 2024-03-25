@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { StarEmpty, StarYellow } from "../svg/icons";
 import { cn } from "@/utils";
 

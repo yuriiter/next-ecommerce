@@ -4,7 +4,7 @@ import carGallery1 from "@/assets/img/car_gallery_1.jpeg";
 import carGallery2 from "@/assets/img/car_gallery_2.jpeg";
 import carCardMockup from "@/assets/img/card_car_mockup.png";
 import { SelectOption } from "@/components/Select/types";
-import { SidebarInput, SidebarInputGroup } from "@/components/Sidebar/types";
+import { SidebarInputGroup } from "@/components/Sidebar/types";
 
 export const popularCarsMockup: CarData[] = [
   {

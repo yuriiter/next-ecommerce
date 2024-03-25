@@ -1,7 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export',
   reactStrictMode: false,
+  experimental: {
+    esmExternals: false,
+  },
   images: {
     unoptimized: true,
     remotePatterns: [

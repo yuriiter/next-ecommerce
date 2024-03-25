@@ -1,5 +1,5 @@
 import { CarData } from "@/types";
-import React, { Fragment } from "react";
+import React from "react";
 import { Like } from "../Like";
 import { Rating } from "./Rating";
 import { makeCapacityString } from "@/utils";

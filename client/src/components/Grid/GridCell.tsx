@@ -1,4 +1,4 @@
-import { CSSProperties, ReactNode } from "react";
+import { CSSProperties } from "react";
 import { cn } from "@/utils";
 import { GridCellProps } from "./types";
 import { gridCellCSSPropertiesAsNonBooleanKeys } from "./constants";

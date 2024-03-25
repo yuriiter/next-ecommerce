@@ -1,4 +1,4 @@
-import { Dispatch, FormEvent, SetStateAction, useState } from "react";
+import { Dispatch, FormEvent, SetStateAction } from "react";
 import { useRouter } from "next/router";
 import { RegisterFunction } from "@/hooks/forms/types";
 import { PartialRentCarForm, RentCarForm } from "../types";

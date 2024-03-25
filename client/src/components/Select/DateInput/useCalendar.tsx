@@ -1,6 +1,5 @@
-import { useClickOutside } from "@/hooks/useClickOutside";
 import { cn, mod } from "@/utils";
-import { ReactNode, useEffect, useMemo, useRef, useState } from "react";
+import { ReactNode, useEffect, useMemo, useState } from "react";
 import { useDropdownContext } from "../useDropdownContext";
 
 export const useCalendar = (

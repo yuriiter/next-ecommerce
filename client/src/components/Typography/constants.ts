@@ -1,5 +1,4 @@
 import {
-  ColorMap,
   TypographyComponent,
   TypographySize,
   TypographyWeight,

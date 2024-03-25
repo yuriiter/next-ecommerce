@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import { generateTimeOptions, timeAsSelectOption, timeAsString } from "./utils";
+import { generateTimeOptions, timeAsString } from "./utils";
 import { Select } from "../Select";
 import { SelectOption } from "../types";
 import { Placement } from "@/types/common";

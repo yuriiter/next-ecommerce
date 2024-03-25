@@ -3,7 +3,6 @@ import { ToastContext } from "./ToastContext";
 import {
   PromisifyToastParams,
   PromisifyToastResultType,
-  ToastData,
   ToastParams,
   ToastType,
 } from "./types";

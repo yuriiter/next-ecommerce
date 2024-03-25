@@ -1,6 +1,5 @@
 import { Grid } from "@/components/Grid/Grid";
 import { AccountLayout } from "../AccountLayout";
-import { Typography } from "@/components/Typography/Typography";
 import { GridCell } from "@/components/Grid/GridCell";
 import { RentalDetails } from "./RentalDetails";
 import { popularCarsMockup } from "@/constants/mockupData";
