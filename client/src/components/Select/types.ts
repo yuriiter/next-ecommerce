@@ -1,3 +1,4 @@
+import { Placement } from "@/types/common";
 import { ReactNode } from "react";
 
 export type SelectOption =
@@ -25,3 +26,16 @@ export type OptionProps = {
 export type RenderInputFunction = (inputProps: SelectInputProps) => ReactNode;
 
 export type RenderOptionFunction = (optionProps: OptionProps) => ReactNode;
+
+export type SelectProps = {
+  placeholder?: string;
+  value: SelectOption | undefined;
+  onChange: (newValue: SelectOption | undefined) => void;
+  options: SelectOption[];
+  className?: string;
+  disabled?: boolean;
+  placement?: Placement;
+  forceUseNativeSelect?: boolean;
+  renderInput?: RenderInputFunction;
+  renderOption?: RenderOptionFunction;
+};

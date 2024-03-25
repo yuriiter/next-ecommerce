@@ -4,19 +4,7 @@ import { Calendar } from "./Calendar";
 import { SelectWrapper } from "../SelectWrapper";
 import { useMQ } from "@/hooks/mediaQuery/useMQ";
 import { NativeDateInput } from "./NativeDateInput";
-import { Placement } from "@/types/common";
-
-export type DateInputProps = {
-  placeholder?: string;
-  min?: Date;
-  max?: Date;
-  value: Date | undefined;
-  onChange: (newValue: Date) => void;
-  className?: string;
-  disabled?: boolean;
-  placement?: Placement;
-  forceUseNativeSelect?: boolean;
-};
+import { DateInputProps } from "./types";
 
 export const DateInput = ({
   placeholder,

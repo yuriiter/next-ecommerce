@@ -1,27 +1,9 @@
 import React, { Fragment } from "react";
 import { SelectWrapper } from "./SelectWrapper";
-import {
-  RenderInputFunction,
-  RenderOptionFunction,
-  SelectOption,
-} from "./types";
 import { Option } from "./Option";
 import { useMQ } from "@/hooks/mediaQuery/useMQ";
 import { NativeSelectInput } from "./NativeSelectInput";
-import { Placement } from "@/types/common";
-
-export type SelectProps = {
-  placeholder?: string;
-  value: SelectOption | undefined;
-  onChange: (newValue: SelectOption | undefined) => void;
-  options: SelectOption[];
-  className?: string;
-  disabled?: boolean;
-  placement?: Placement;
-  forceUseNativeSelect?: boolean;
-  renderInput?: RenderInputFunction;
-  renderOption?: RenderOptionFunction;
-};
+import { SelectProps } from "./types";
 
 export const Select = ({
   placeholder,

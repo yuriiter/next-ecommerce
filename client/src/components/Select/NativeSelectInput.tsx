@@ -1,7 +1,7 @@
 import React, { ChangeEvent } from "react";
-import { SelectProps } from "./Select";
 import { SelectInput } from "./SelectInput";
 import { cn } from "@/utils";
+import { SelectProps } from "./types";
 
 type NativeSelectInputProps = Omit<SelectProps, "placement">;
 
@@ -19,8 +19,8 @@ export const NativeSelectInput = ({
       options.find((option) =>
         typeof option === "string"
           ? option === e.target.value
-          : option.value === e.target.value,
-      ),
+          : option.value === e.target.value
+      )
     );
   };
   return (

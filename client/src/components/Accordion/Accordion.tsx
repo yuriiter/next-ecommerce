@@ -1,7 +1,8 @@
 import { cn } from "@/utils";
 import React, { Children } from "react";
 import { ReactElement, useState } from "react";
-import { AccordionDetailProps, AccordionSummaryProps } from ".";
+import { AccordionSummaryProps } from "./AccordionSummary";
+import { AccordionDetailProps } from "./AccordionDetail";
 
 type ControlledAccordionProps = {
   expanded: boolean;

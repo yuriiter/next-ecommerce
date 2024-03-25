@@ -1,12 +1,12 @@
 import { StringUnionToBooleanKeys } from "@/types/utils";
+import { CSSProperties, ReactNode } from "react";
 import {
-  typographyColorWeights,
   typographyColorVariants,
+  typographyColorWeights,
   typographyComponents,
   typographySizes,
   typographyWeights,
 } from "./constants";
-import { CSSProperties, ReactNode } from "react";
 
 export type TypographyComponent = (typeof typographyComponents)[number];
 

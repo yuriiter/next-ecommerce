@@ -1,8 +1,8 @@
 import React from "react";
 import Link from "next/link";
-import { NavigationItemData } from ".";
 import { cn } from "@/utils";
 import { useIsOnRoute } from "@/hooks/useIsOnRoute";
+import { NavigationItemData } from "./types";
 
 type NavigationItemProps = NavigationItemData & {
   className?: string;

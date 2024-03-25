@@ -1,6 +1,6 @@
 import React from "react";
 import { ButtonWIconProps } from "./types";
-import { Button } from ".";
+import { Button } from "./Button";
 
 export const ButtonWIcon = ({
   icon,

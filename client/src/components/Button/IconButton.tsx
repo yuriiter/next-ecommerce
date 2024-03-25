@@ -1,7 +1,7 @@
 import React from "react";
-import { Button } from ".";
 import { IconButtonProps } from "./types";
 import { cn } from "@/utils";
+import { Button } from "./Button";
 
 export const IconButton = ({
   className,

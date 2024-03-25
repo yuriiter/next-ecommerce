@@ -1,9 +1,3 @@
-import {
-  TypographyComponent,
-  TypographySize,
-  TypographyWeight,
-} from "./types";
-
 export const typographyComponents = [
   "h1",
   "h2",
@@ -58,11 +52,11 @@ export const typographyColorWeights = [
 ] as const;
 
 export const typographyColors = typographyColorVariants.flatMap((variant) =>
-  typographyColorWeights.map((weight) => `${variant}${weight}`),
+  typographyColorWeights.map((weight) => `${variant}${weight}`)
 );
 
-export const defaultTypographyComponent: TypographyComponent = "p";
+export const defaultTypographyComponent = "p" as const;
 
-export const defaultTypographyWeight: TypographyWeight = "regular";
+export const defaultTypographyWeight = "regular" as const;
 
-export const defaultTypographySize: TypographySize = "16";
+export const defaultTypographySize = "16" as const;

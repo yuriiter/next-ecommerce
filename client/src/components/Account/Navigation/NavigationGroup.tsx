@@ -1,5 +1,5 @@
 import React from "react";
-import { NavigationItemData } from ".";
+import { NavigationItemData } from "./types";
 import { NavigationItem } from "./NavigationItem";
 
 type NavigationGroupProps = {

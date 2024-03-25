@@ -1,11 +1,11 @@
 import React from "react";
 import { SidebarInputGroup } from "./SidebarInputGroup";
-import { Sidebar } from "..";
 import { SidebarFiltersProps } from "./types";
 import { Button, ButtonWIcon } from "@/components/Button";
 import { useRouter } from "next/router";
 import { Close } from "@/components/svg/icons";
 import { useSidebar } from "../useSidebar";
+import { Sidebar } from "../Sidebar";
 
 export const SidebarFilters = ({
   inputs,

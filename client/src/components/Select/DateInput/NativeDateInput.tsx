@@ -5,8 +5,8 @@ import {
   dateToStringForNativeInput,
   stringToDate,
 } from "./utils";
-import { DateInputProps } from "./DateInput";
 import { cn } from "@/utils";
+import { DateInputProps } from "./types";
 
 type NativeDateInputProps = Omit<DateInputProps, "placement">;
 
