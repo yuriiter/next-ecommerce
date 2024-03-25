@@ -39,7 +39,7 @@ export const CarGalleryItem = ({
           />
         )}
         <div className="car-detail__item-img">
-          <Image layout="fill" src={src} alt={`Rent car - ${title}`} />
+          <Image fill src={src} alt={`Rent car - ${title}`} />
         </div>
       </div>
     </div>

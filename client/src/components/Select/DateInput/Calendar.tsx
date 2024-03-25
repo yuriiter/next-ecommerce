@@ -35,6 +35,7 @@ export const Calendar = ({ min, max, value, onChange }: CalendarProps) => {
       </div>
       <div className="calendar__controllers">
         <button
+          suppressHydrationWarning
           className="calendar__arrow calendar__arrow--left"
           onClick={decrementMonth}
           disabled={
@@ -47,6 +48,7 @@ export const Calendar = ({ min, max, value, onChange }: CalendarProps) => {
           {months[monthPage]} {yearPage}
         </div>
         <button
+          suppressHydrationWarning
           className="calendar__arrow calendar__arrow--right"
           onClick={incrementMonth}
           disabled={

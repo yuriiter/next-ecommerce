@@ -16,7 +16,7 @@ export const CarPickedImg = ({
   return (
     <div className="car-detail__gallery-picked">
       {src !== thumbnail?.img?.url ? (
-        <Image src={src} alt={thumbnail?.desc ?? ""} layout="fill" />
+        <Image src={src} alt={thumbnail?.desc ?? ""} fill />
       ) : (
         <Banner
           title={title}

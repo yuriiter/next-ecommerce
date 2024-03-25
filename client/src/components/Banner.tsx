@@ -11,6 +11,7 @@ type BannerProps = {
   variant: "light" | "dark";
   className?: string;
   carPicture: string | ImageData;
+  priority?: boolean;
 } & (
   | { buttonText: string; href?: never; onClick: () => void }
   | { buttonText: string; href: string; onClick?: never }
@@ -24,6 +25,7 @@ export const Banner = ({
   buttonText,
   carPicture,
   className,
+  priority = false,
   ...rest
 }: BannerProps) => {
   const bannerVariantClassName = `banner--${variant}`;
@@ -60,13 +62,14 @@ export const Banner = ({
 
       <div className="banner__car-img">
         <Image
+          priority={priority}
           alt={`Car for rental. ${title}`}
           src={
             typeof carPicture === "string"
               ? carPicture
               : carPicture?.img?.url ?? ""
           }
-          layout="fill"
+          fill
         />
       </div>
     </div>

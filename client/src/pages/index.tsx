@@ -43,6 +43,7 @@ export default function Home() {
 
       <section className="container banner__section">
         <Banner
+          priority
           variant="light"
           title="The Best Platform for Car Rental"
           description="Ease of doing a car rental safely and reliably. Of course at a low price."
@@ -51,6 +52,7 @@ export default function Home() {
           carPicture={bannerCar1.src}
         />
         <Banner
+          priority
           variant="dark"
           title="Easy way to rent a car at a low price"
           description="Providing cheap car rental services and safe and comfortable facilities."

@@ -18,5 +18,5 @@ export const ImageWrapper = ({
         : fallbackImgSrc?.src ?? carFallbackImage.src;
   };
 
-  return <Image layout="fill" alt={alt} {...rest} onError={onError} />;
+  return <Image fill alt={alt} {...rest} onError={onError} />;
 };
