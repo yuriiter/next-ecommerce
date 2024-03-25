@@ -113,9 +113,13 @@
 
   &__thumbnail {
     flex: 2 0 calc(50% - 10px);
-    height: 64px;
-    object-fit: contain;
+    height: 103px;
     align-self: center;
+    position: relative;
+
+    img {
+      object-fit: contain;
+    }
   }
 
   &__info {

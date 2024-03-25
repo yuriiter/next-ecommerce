@@ -1,6 +1,7 @@
 import React from "react";
 import { BannerArrowBg } from "@/components/svg/images";
 import { cn } from "@/utils";
+import Image from "next/image";
 
 type CarGalleryItemProps = {
   isThumbnail: boolean;
@@ -37,11 +38,9 @@ export const CarGalleryItem = ({
             preserveAspectRatio="xMinYMin slice"
           />
         )}
-        <img
-          className="car-detail__item-img"
-          src={src}
-          alt={`Rent car - ${title}`}
-        />
+        <div className="car-detail__item-img">
+          <Image layout="fill" src={src} alt={`Rent car - ${title}`} />
+        </div>
       </div>
     </div>
   );

@@ -3,6 +3,7 @@ import { Button } from "./Button";
 import { BannerArrowBg, BannerEllipseBg } from "./svg/images";
 import { cn } from "@/utils";
 import { ImageData } from "@/types";
+import Image from "next/image";
 
 type BannerProps = {
   title?: string;
@@ -57,15 +58,17 @@ export const Banner = ({
         </Button>
       )}
 
-      <img
-        className="banner__car-img"
-        alt={`Car for rental. ${title}`}
-        src={
-          typeof carPicture === "string"
-            ? carPicture
-            : carPicture?.img?.url ?? ""
-        }
-      />
+      <div className="banner__car-img">
+        <Image
+          alt={`Car for rental. ${title}`}
+          src={
+            typeof carPicture === "string"
+              ? carPicture
+              : carPicture?.img?.url ?? ""
+          }
+          layout="fill"
+        />
+      </div>
     </div>
   );
 };

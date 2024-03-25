@@ -76,8 +76,11 @@
     margin: -15px 19%;
     width: 405px;
     height: 115px;
-    object-fit: contain;
     z-index: 1;
+
+    img {
+      object-fit: contain;
+    }
 
     @include mq(lg, max) {
       margin: 15px auto;

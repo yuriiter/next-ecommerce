@@ -46,11 +46,12 @@ export const Card = ({ carData }: CardProps) => {
           <Like isLiked={isInFavourites} sendRequest={sendLikeRequest} />
         </div>
       </div>
-      <ImageWrapper
-        className="card__thumbnail"
-        alt={thumbnail?.desc ?? ""}
-        src={thumbnail?.img?.url ?? ""}
-      />
+      <div className="card__thumbnail">
+        <ImageWrapper
+          alt={thumbnail?.desc ?? ""}
+          src={thumbnail?.img?.url ?? ""}
+        />
+      </div>
       <div className="card__info">
         <div className="card__info-item">
           <FuelIcon className="card__info-icon" />

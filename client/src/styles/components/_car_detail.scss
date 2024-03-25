@@ -28,7 +28,7 @@
     }
 
     &--thumbnail {
-      .car-detail__item-img {
+      .car-detail__item-img img {
         object-fit: contain;
       }
     }
@@ -44,8 +44,12 @@
     position: relative;
     width: 100%;
     height: 100%;
-    object-fit: cover;
     border-radius: 10px;
+
+    img {
+      object-fit: cover;
+      border-radius: 10px;
+    }
   }
 
   &__gallery-item-bg {
@@ -60,6 +64,7 @@
   &__gallery-picked {
     flex: 1 0 100%;
     height: 360px;
+    position: relative;
 
     & > * {
       width: 100%;

@@ -1,12 +1,16 @@
-import { StaticImageData } from "next/image";
-import { SyntheticEvent, HTMLProps } from "react";
+import Image, { ImageProps, StaticImageData } from "next/image";
+import { SyntheticEvent } from "react";
 import carFallbackImage from "@/assets/img/car-fallback.png";
 
-type NextImageProps = HTMLProps<HTMLImageElement> & {
+type ImageWrapperProps = ImageProps & {
   fallbackImgSrc?: string | StaticImageData;
 };
 
-export const ImageWrapper = ({ fallbackImgSrc, ...rest }: NextImageProps) => {
+export const ImageWrapper = ({
+  fallbackImgSrc,
+  alt,
+  ...rest
+}: ImageWrapperProps) => {
   const onError = (e: SyntheticEvent<HTMLImageElement, Event>) => {
     e.currentTarget.src =
       typeof fallbackImgSrc === "string"
@@ -14,5 +18,5 @@ export const ImageWrapper = ({ fallbackImgSrc, ...rest }: NextImageProps) => {
         : fallbackImgSrc?.src ?? carFallbackImage.src;
   };
 
-  return <img {...rest} onError={onError} />;
+  return <Image layout="fill" alt={alt} {...rest} onError={onError} />;
 };
