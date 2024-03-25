@@ -1,4 +1,4 @@
-import { Permission } from "../../server/src/types/user";
+export type Permission = "user" | "admin";
 
 export type UserSignInResponse = {
   email: string;

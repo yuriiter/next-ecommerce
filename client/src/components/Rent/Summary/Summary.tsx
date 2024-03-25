@@ -51,7 +51,7 @@ export const Summary = ({ car, subtotal, tax, total }: SummaryProps) => {
           />
         </div>
         <SummaryCarInfo
-          thumbnailSrc={car?.thumbnail?.img.url}
+          thumbnailSrc={car?.thumbnail?.img.url ?? ""}
           carTitle={car?.title}
           carRating={car?.rating}
           carNumOfVotes={car?.numOfVotes}

@@ -16,8 +16,8 @@ type UncontrolledAccordionProps = {
 
 type AccordionProps = {
   children:
-    | [ReactElement<AccordionSummaryProps>, ReactElement<AccordionDetailProps>]
-    | [ReactElement<AccordionSummaryProps>];
+    | ReactElement<AccordionSummaryProps>
+    | [ReactElement<AccordionSummaryProps>, ReactElement<AccordionDetailProps>];
 
   className?: string;
 } & (ControlledAccordionProps | UncontrolledAccordionProps);
@@ -38,11 +38,18 @@ export const Accordion = ({
     ? controlledHandleChange
     : () => setLocalExpanded((current) => !current);
 
-  const childrenArray = Children.toArray(children) as typeof children;
-  const accordionSummary = React.cloneElement(childrenArray[0], {
-    expanded,
-    handleChange,
-  });
+  const childrenArray = Array.isArray(children)
+    ? Children.toArray(children)
+    : Children.toArray([children]);
+
+  const accordionSummary = React.cloneElement(
+    childrenArray[0] as ReactElement<AccordionSummaryProps>,
+    {
+      expanded,
+      handleChange,
+    }
+  );
+
   const accordionDetail = childrenArray[1];
 
   return (

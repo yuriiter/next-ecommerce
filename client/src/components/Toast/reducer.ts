@@ -26,15 +26,19 @@ export const reducer = (state: ToastData[], action: ToastAction) => {
       const searchedToast = state.find(({ id }) => id === action.payload.id);
       if (searchedToast === undefined) return state;
       let hasChanged = false;
+
       for (const [toastProperty, propertyValue] of Object.entries(
-        action.payload,
+        action.payload
       )) {
         if (toastProperty === "id") continue;
         if (
           propertyValue !== undefined &&
-          propertyValue !== searchedToast[toastProperty]
+          propertyValue !== searchedToast[toastProperty as keyof ToastData]
         ) {
-          searchedToast[toastProperty] = propertyValue;
+          (searchedToast[
+            toastProperty as keyof typeof searchedToast
+          ] as (typeof searchedToast)[keyof typeof searchedToast]) =
+            propertyValue;
           hasChanged = true;
         }
       }

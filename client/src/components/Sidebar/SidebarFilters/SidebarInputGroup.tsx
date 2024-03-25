@@ -6,7 +6,7 @@ import { SidebarRange } from "./SidebarRange";
 type SidebarInputGroupProps = {
   inputGroupName: string;
   groupInputs: SidebarInput[];
-  onChangeFilters: (key: string, newValue: boolean | number) => void;
+  onChangeFilters: (key: string, newValue: number | boolean) => void;
 };
 
 export const SidebarInputGroup = ({
@@ -35,7 +35,6 @@ export const SidebarInputGroup = ({
             return (
               <SidebarRange
                 key={`${inputGroupName}-${name}`}
-                label={name}
                 value={value}
                 onChange={onChangeInput}
               />

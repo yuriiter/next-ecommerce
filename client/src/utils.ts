@@ -102,10 +102,12 @@ export const dateOrDateStringToDate = (
 export const sidebarInputsToQueryState = (sidebarInputs: SidebarInputGroup[]) =>
   sidebarInputs.reduce((filtersObject, group) => {
     group.inputs.forEach(({ key, value }) => {
-      filtersObject[key] = value;
+      (filtersObject[
+        key as keyof typeof filtersObject
+      ] as (typeof filtersObject)[keyof typeof filtersObject]) = value;
     });
     return filtersObject;
-  }, {});
+  }, {} as Record<string, number | boolean>);
 
 type ConvertPickerDataParams = {
   pickUpData: PickerData | undefined;
@@ -160,7 +162,12 @@ export const deepObjectCompare = (obj1: unknown, obj2: unknown) => {
   }
 
   for (const key of keys1) {
-    if (!deepObjectCompare(obj1[key], obj2[key])) {
+    if (
+      !deepObjectCompare(
+        obj1[key as keyof typeof obj1],
+        obj2[key as keyof typeof obj2]
+      )
+    ) {
       return false;
     }
   }

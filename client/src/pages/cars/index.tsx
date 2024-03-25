@@ -2,6 +2,7 @@ import { CardsContainer } from "@/components/Cards";
 import { ShowMore } from "@/components/Cards/ShowMore";
 import { PickerSection } from "@/components/Picker/PickerSection";
 import { usePickerSectionData } from "@/components/Picker/hooks/usePickerSectionData";
+import { PickerData } from "@/components/Picker/types";
 import { WithSidebarFilters } from "@/components/Sidebar/SidebarFilters/WithSidebarFilters";
 import { useFilters } from "@/hooks/URLQueries/useFilters";
 import useURLQueryState from "@/hooks/URLQueries/useURLQueryState";
@@ -11,7 +12,6 @@ import { convertPickerData, sidebarInputsToQueryState } from "@/utils";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import React from "react";
-import { PickerData } from "../../../server/src/models";
 
 export default function Cars() {
   const router = useRouter();
