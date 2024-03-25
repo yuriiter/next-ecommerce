@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "cross-env NODE_OPTIONS='$NODE_OPTIONS --inspect' next build",
+    "build": "next build",
     "start": "next start"
   },
   "dependencies": {
