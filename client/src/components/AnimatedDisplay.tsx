@@ -1,10 +1,9 @@
 import { cn } from "@/utils";
 import React, {
-  forwardRef,
   HTMLAttributes,
-  ComponentPropsWithRef,
   useEffect,
   useState,
+  ComponentPropsWithoutRef,
 } from "react";
 import { Tags, WithAsProp } from "@/types/utils";
 
@@ -20,53 +19,48 @@ type AnimatedDisplaySpecialProps = {
 
 type AnimatedDisplayProps<T extends Tags> = WithAsProp<T> &
   AnimatedDisplaySpecialProps &
-  (ComponentPropsWithRef<T> & HTMLAttributes<HTMLOrSVGElement>);
+  (ComponentPropsWithoutRef<T> & HTMLAttributes<HTMLOrSVGElement>);
 
-export const AnimatedDisplay = forwardRef(
-  <T extends Tags = typeof DEFAULT_TAG>(
-    {
-      as = DEFAULT_TAG,
-      display,
-      disappearAnimationClassName = "animate-disappear",
-      appearAnimationClassName = "animate-appear",
-      hiddenClassName = "hidden",
-      onHide,
-      className,
-      ...props
-    }: AnimatedDisplayProps<T>,
-    ref: React.ForwardedRef<HTMLElement>,
-  ) => {
-    const Component: Tags = as;
+export const AnimatedDisplay = <T extends Tags = typeof DEFAULT_TAG>(
+  {
+    as = DEFAULT_TAG,
+    display,
+    disappearAnimationClassName = "animate-disappear",
+    appearAnimationClassName = "animate-appear",
+    hiddenClassName = "hidden",
+    onHide,
+    className,
+    ...props
+  }: AnimatedDisplayProps<T>,
+  ref: React.ForwardedRef<HTMLElement>
+) => {
+  const Component: Tags = as;
 
-    const [disappearAnimationFinishedFlag, setDisappearAnimationFinishedFlag] =
-      useState(!display);
+  const [disappearAnimationFinishedFlag, setDisappearAnimationFinishedFlag] =
+    useState(!display);
 
-    useEffect(() => {
-      if (display) setDisappearAnimationFinishedFlag(false);
-    }, [display]);
+  useEffect(() => {
+    if (display) setDisappearAnimationFinishedFlag(false);
+  }, [display]);
 
-    const hideSelf = () => {
-      if (!display) {
-        onHide?.();
-        setDisappearAnimationFinishedFlag(true);
-      }
-    };
+  const hideSelf = () => {
+    if (!display) {
+      onHide?.();
+      setDisappearAnimationFinishedFlag(true);
+    }
+  };
 
-    return (
-      <Component
-        {...props}
-        ref={ref}
-        className={cn([
-          display && appearAnimationClassName,
-          !display && disappearAnimationClassName,
-          disappearAnimationFinishedFlag && hiddenClassName,
-          className,
-        ])}
-        onAnimationEnd={hideSelf}
-        onTransitionEnd={hideSelf}
-      />
-    );
-  },
-);
-
-AnimatedDisplay.displayName = "AnimatedDisplay";
+  return (
+    <Component
+      {...props}
+      className={cn([
+        display && appearAnimationClassName,
+        !display && disappearAnimationClassName,
+        disappearAnimationFinishedFlag && hiddenClassName,
+        className,
+      ])}
+      onAnimationEnd={hideSelf}
+      onTransitionEnd={hideSelf}
+    />
+  );
+};
