@@ -6,7 +6,7 @@ import { SelectOption } from "../Select/types";
 import TimeInput from "../Select/TimeInput";
 import { cn, dateOrDateStringToDate } from "@/utils";
 import { PointMark } from "../PointMark";
-import { locationOptions } from "@/constants/mockupData";
+import { locationOptions } from "@/constants/inputs";
 import { PickerData } from "./types";
 
 type PickerProps = {

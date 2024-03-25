@@ -1,5 +1,5 @@
 import { useCallback, useMemo } from "react";
-import { sidebarInputs } from "@/constants/mockupData";
+import { sidebarInputs } from "@/constants/inputs";
 import { SidebarInputGroup } from "@/components/Sidebar/types";
 import { useURLQueryObjectState } from "./useURLQueryObjectState";
 import { copy, sidebarInputsToQueryState } from "@/utils";

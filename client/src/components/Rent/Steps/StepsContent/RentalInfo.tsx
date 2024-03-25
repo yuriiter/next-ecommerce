@@ -11,7 +11,7 @@ import {
   dateToString,
   stringToDate,
 } from "@/components/Select/DateInput/utils";
-import { locationOptions } from "@/constants/mockupData";
+import { locationOptions } from "@/constants/inputs";
 import { SelectOption } from "@/components/Select/types";
 
 type RentalInfoProps = {
