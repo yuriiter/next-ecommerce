@@ -6,6 +6,6 @@ type StandardHeadProps = {
 
 export const StandardHead = ({ pageName }: StandardHeadProps) => (
   <Head>
-    <title>{pageName} | Morent</title>
+    <title>{`${pageName} | Morent`}</title>
   </Head>
 );
