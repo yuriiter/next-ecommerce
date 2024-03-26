@@ -1,4 +1,4 @@
-# Server base
+#### Server images
 FROM node:20-alpine AS server_base
 
 WORKDIR /app
@@ -22,6 +22,7 @@ RUN npm run build
 CMD ["npm", "run", "pm2:start"]
 
 
+#### Client images
 FROM node:20-alpine AS client_base
 
 WORKDIR /app
@@ -43,9 +44,18 @@ FROM client_base as client_build
 RUN npm run build
 
 
+### NGINX
+# Nginx for client and server together
 FROM nginx:1.25.4-alpine as nginx
 
 RUN rm /etc/nginx/nginx.conf /etc/nginx/conf.d/default.conf
 COPY ./nginx/nginx.conf /etc/nginx
 
 COPY --from=client_build /app/out /usr/share/nginx/html
+
+
+# Nginx for server only
+FROM nginx:1.25.4-alpine as nginx_no-client
+
+RUN rm /etc/nginx/nginx_server-only.conf /etc/nginx/conf.d/default.conf
+COPY ./nginx/nginx.conf /etc/nginx
