@@ -16,6 +16,14 @@ services:
       - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
     command: mongod --quiet --logpath /dev/null
 
+  client:
+    build:
+      context: .
+      target: client_build
+    hostname: client
+    expose:
+      - 3000
+
   server:
     build:
       context: .
@@ -37,6 +45,7 @@ services:
       target: nginx
     links:
       - server
+      - client
     depends_on:
       - db
       - server

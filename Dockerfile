@@ -43,6 +43,8 @@ FROM client_base as client_build
 
 RUN npm run build
 
+CMD ["npm", "run", "start"]
+
 
 ### NGINX
 # Nginx for client and server together
@@ -50,8 +52,9 @@ FROM nginx:1.25.4-alpine as nginx
 
 RUN rm /etc/nginx/nginx.conf /etc/nginx/conf.d/default.conf
 COPY ./nginx/nginx.conf /etc/nginx
+COPY --from=client_build /app/.next /usr/share/nginx/html
 
-COPY --from=client_build /app/out /usr/share/nginx/html
+# COPY --from=client_build /app/out /usr/share/nginx/html
 
 
 # Nginx for server only
