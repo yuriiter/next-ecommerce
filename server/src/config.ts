@@ -14,7 +14,7 @@ dotenv.config()
 })
 
 const {
-    FRONTEND_URL = "http:localhost:3000",
+    FRONTEND_URL = "http://localhost:3000",
     PORT = 5000,
     JWT_SECRET = "1957hbngfwner",
     JWT_EXPIRES = "24h",
@@ -23,7 +23,7 @@ const {
     DB_USER = "myusername",
     DB_NAME = "mydatabase",
     DB_PASSWORD = "mypassword",
-    DB_PORT = 5432,
+    DB_PORT = 27017,
 } = process.env
 
 export {

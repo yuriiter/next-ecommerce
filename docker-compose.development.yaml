@@ -18,10 +18,10 @@ services:
 
   server:
     env_file:
-      - ./server/.env
+      - .env
+      - .env.development
     build:
-      context: ./server
-      target: development
+      target: server_development
     ports:
       - ${PORT}:${PORT}
     depends_on:
@@ -32,11 +32,8 @@ services:
       - db
 
   client:
-    env_file:
-      - ./client/.env
     build:
-      context: ./client
-      target: development
+      target: client_development
     ports:
       - "3000:3000"
     depends_on:
