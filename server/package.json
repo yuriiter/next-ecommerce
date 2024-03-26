@@ -37,7 +37,7 @@
         "start": "NODE_ENV=production node dist/index.js",
         "dev": "nodemon -w src/ -e ts -x 'npm run build && NODE_ENV=development node dist/index.js'",
         "build": "npx tsc -p .",
-        "pm2:start": "NODE_ENV=production pm2 start dist/index.js --name=my-server --no-daemon",
+        "pm2:start": "NODE_ENV=production pm2 start dist/index.js --name=my-server --no-daemon --exp-backoff-resrart-delay=100",
         "pm2:stop": "pm2 stop my-server",
         "pm2:restart": "pm2 restart my-server"
     },
