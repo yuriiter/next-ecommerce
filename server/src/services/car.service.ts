@@ -39,6 +39,7 @@ export const getCars = async (query: CarsQuery, email?: string) => {
                 (sum, review) => sum + (review as any).rating,
                 0
             ) / (car.reviews?.length || 1),
+        isFavouriteForUsers: undefined,
     }))
 
     return { documents: processedCars, count }
