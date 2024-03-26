@@ -1,4 +1,5 @@
 import { Article } from "@/components/Article";
+import { StandardHead } from "@/components/StandardHead";
 
 const privacyPolicyContent = `
 At Morent, we are committed to protecting your privacy and ensuring the security of your personal information. This Privacy Policy outlines how we collect, use, and safeguard your data when you use our website and services.
@@ -41,5 +42,10 @@ If you have any questions, concerns, or complaints about our Privacy Policy or d
 `;
 
 export default function PrivacyPolicyPage() {
-  return <Article title="Privacy & Policy">{privacyPolicyContent}</Article>;
+  return (
+    <>
+      <StandardHead pageName="Privacy & Policy" />
+      <Article title="Privacy & Policy">{privacyPolicyContent}</Article>;
+    </>
+  );
 }

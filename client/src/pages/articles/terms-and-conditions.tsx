@@ -1,4 +1,5 @@
 import { Article } from "@/components/Article";
+import { StandardHead } from "@/components/StandardHead";
 
 const termsAndConditionsContent = `
 Welcome to Morent! These Terms and Conditions outline the rules and regulations for the use of our website and services.
@@ -47,6 +48,11 @@ If you have any questions or concerns about these Terms and Conditions, please c
 
 export default function TermsAndConditionsPage() {
   return (
-    <Article title="Terms and Conditions">{termsAndConditionsContent}</Article>
+    <>
+      <StandardHead pageName="Terms and Conditions" />
+      <Article title="Terms and Conditions">
+        {termsAndConditionsContent}
+      </Article>
+    </>
   );
 }

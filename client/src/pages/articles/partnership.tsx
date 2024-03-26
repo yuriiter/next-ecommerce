@@ -1,4 +1,5 @@
 import { Article } from "@/components/Article";
+import { StandardHead } from "@/components/StandardHead";
 
 const article = `
 At Morent, we believe in the power of collaboration to drive innovation and create mutually beneficial relationships. We welcome partnership opportunities with like-minded businesses, organizations, and individuals who share our commitment to excellence and customer satisfaction.
@@ -29,5 +30,10 @@ Let's embark on a journey of partnership and mutual growth together. Contact us 
 `;
 
 export default function Partnership() {
-  return <Article title="Partnership">{article}</Article>;
+  return (
+    <>
+      <StandardHead pageName="How Morent works" />
+      <Article title="Partnership">{article}</Article>;
+    </>
+  );
 }

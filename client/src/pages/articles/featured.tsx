@@ -1,4 +1,5 @@
 import { Article } from "@/components/Article";
+import { StandardHead } from "@/components/StandardHead";
 
 const article = `
 Welcome to our featured selection at Morent! We take pride in presenting a handpicked assortment of exceptional vehicles, meticulously chosen to elevate your driving experience to new heights. Each car in our featured collection embodies the epitome of style, performance, and comfort, promising an unforgettable journey every time you hit the road.
@@ -27,5 +28,10 @@ Discover the epitome of automotive excellence with Morent's featured selection t
 `;
 
 export default function Featured() {
-  return <Article title="Featured">{article}</Article>;
+  return (
+    <>
+      <StandardHead pageName="Events" />
+      <Article title="Featured">{article}</Article>;
+    </>
+  );
 }

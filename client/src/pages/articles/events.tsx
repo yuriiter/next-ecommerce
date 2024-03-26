@@ -1,4 +1,5 @@
 import { Article } from "@/components/Article";
+import { StandardHead } from "@/components/StandardHead";
 
 const eventsContent = `
 Discover exciting events and gatherings hosted by Morent and join us for unforgettable experiences and opportunities to connect with fellow car enthusiasts.
@@ -20,5 +21,10 @@ Join us for an unforgettable journey filled with excitement, camaraderie, and pa
 `;
 
 export default function EventsPage() {
-  return <Article title="Events">{eventsContent}</Article>;
+  return (
+    <>
+      <StandardHead pageName="Events" />
+      <Article title="Events">{eventsContent}</Article>;
+    </>
+  );
 }

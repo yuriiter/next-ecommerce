@@ -1,4 +1,5 @@
 import { Article } from "@/components/Article";
+import { StandardHead } from "@/components/StandardHead";
 
 const article = `
 At Morent, we strive to provide you with a seamless and reliable car rental experience. Here's a breakdown of how our service operates:
@@ -28,5 +29,10 @@ To enhance your rental experience, each car on our platform is equipped with adv
 At Morent, our streamlined process ensures that you receive a reliable and hassle-free car rental experience. From thorough quality checks to advanced technology integration, we leave no stone unturned in providing you with the best possible service. Trust us for your next adventure on the road!
 `;
 export default function HowItWorksArticle() {
-  return <Article title="How Morent works">{article}</Article>;
+  return (
+    <>
+      <StandardHead pageName="How Morent works" />
+      <Article title="How Morent works">{article}</Article>;
+    </>
+  );
 }

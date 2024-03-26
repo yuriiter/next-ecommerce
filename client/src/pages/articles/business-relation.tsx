@@ -1,4 +1,5 @@
 import { Article } from "@/components/Article";
+import { StandardHead } from "@/components/StandardHead";
 
 const article = `
 At Morent, we understand the importance of fostering strong and enduring business relationships built on trust, integrity, and mutual respect. Our commitment to excellence extends beyond our customer interactions to encompass our business relations with suppliers, vendors, and industry partners.
@@ -27,5 +28,10 @@ Let's build lasting and fruitful business relations that propel us towards a bri
 `;
 
 export default function BusinessRelation() {
-  return <Article title="Business relation">{article}</Article>;
+  return (
+    <>
+      <StandardHead pageName="Business relation" />
+      <Article title="Business relation">{article}</Article>;
+    </>
+  );
 }

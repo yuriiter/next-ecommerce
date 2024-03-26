@@ -1,4 +1,5 @@
 import { Article } from "@/components/Article";
+import { StandardHead } from "@/components/StandardHead";
 
 const blogContent = `
 ## Exploring the Future of Electric Vehicles
@@ -27,8 +28,11 @@ Stay tuned to our blog for more insights and updates on the latest trends in ele
 
 export default function BlogPage() {
   return (
-    <Article title="Exploring the Future of Electric Vehicles">
-      {blogContent}
-    </Article>
+    <>
+      <StandardHead pageName="Blog" />
+      <Article title="Exploring the Future of Electric Vehicles">
+        {blogContent}
+      </Article>
+    </>
   );
 }
