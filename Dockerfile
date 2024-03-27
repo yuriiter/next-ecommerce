@@ -19,7 +19,7 @@ FROM server_base as server_production
 
 RUN npm run build
 
-CMD ["npm", "run", "pm2:start"]
+CMD ["npm", "run", "start"]
 
 
 #### Client images
@@ -53,7 +53,6 @@ FROM nginx:1.25.4-alpine as nginx
 RUN rm /etc/nginx/nginx.conf /etc/nginx/conf.d/default.conf
 COPY ./nginx/nginx.conf /etc/nginx
 COPY --from=client_build /app/.next /usr/share/nginx/html
-
 # COPY --from=client_build /app/out /usr/share/nginx/html
 
 

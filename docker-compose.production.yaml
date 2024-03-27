@@ -17,6 +17,7 @@ services:
     command: mongod --quiet --logpath /dev/null
 
   client:
+    restart: on-failure
     build:
       context: .
       target: client_build
@@ -25,6 +26,7 @@ services:
       - 3000
 
   server:
+    restart: on-failure
     build:
       context: .
       target: server_production
