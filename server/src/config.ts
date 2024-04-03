@@ -2,20 +2,18 @@ import { join } from "path"
 import dotenv from "dotenv"
 import { existsSync } from "fs"
 
-[
+;[
     ".env",
     ".env.local",
     `.env.${process.env.NODE_ENV}`,
     `.env.${process.env.NODE_ENV}.local`,
 ].forEach((envPath) => {
     const fullPath = join(__dirname, "..", envPath)
-    if(existsSync(fullPath)) {
+    if (existsSync(fullPath)) {
         console.log("Env file used: ", fullPath)
         dotenv.config({ path: fullPath, override: true })
     }
 })
-
-console.log(process.env)
 
 const {
     FRONTEND_URL,
