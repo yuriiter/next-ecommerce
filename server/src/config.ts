@@ -1,29 +1,33 @@
 import { join } from "path"
 import dotenv from "dotenv"
+import { existsSync } from "fs"
 
-dotenv.config()
-;[
+[
     ".env",
-    `.env.${process.env.NODE_ENV}`,
     ".env.local",
-    `.env.local.${process.env.NODE_ENV}`,
+    `.env.${process.env.NODE_ENV}`,
+    `.env.${process.env.NODE_ENV}.local`,
 ].forEach((envPath) => {
-    const fullPath = join(__dirname, "../..", envPath)
-    console.log(fullPath)
-    dotenv.config({ path: fullPath, override: true })
+    const fullPath = join(__dirname, "..", envPath)
+    if(existsSync(fullPath)) {
+        console.log("Env file used: ", fullPath)
+        dotenv.config({ path: fullPath, override: true })
+    }
 })
 
+console.log(process.env)
+
 const {
-    FRONTEND_URL = "http://localhost:3000",
-    PORT = 5000,
-    JWT_SECRET = "1957hbngfwner",
-    JWT_EXPIRES = "24h",
-    NODE_ENV = "development",
-    DB_HOST = "localhost",
-    DB_USER = "myusername",
-    DB_NAME = "mydatabase",
-    DB_PASSWORD = "mypassword",
-    DB_PORT = 27017,
+    FRONTEND_URL,
+    PORT,
+    JWT_SECRET,
+    JWT_EXPIRES,
+    NODE_ENV,
+    DB_HOST,
+    DB_USER,
+    DB_NAME,
+    DB_PASSWORD,
+    DB_PORT,
 } = process.env
 
 export {

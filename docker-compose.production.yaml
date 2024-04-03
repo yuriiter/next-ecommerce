@@ -42,19 +42,21 @@ services:
       - db
 
   nginx:
-    build:
-      context: .
-      target: nginx
-    links:
-      - server
-      - client
-    depends_on:
-      - db
-      - server
-      - client
+    image: nginx:1.25.4-alpine
     ports:
-      - "80:80"
-      - "443:443"
+      - 80:80
+      - 443:443
+    restart: always
+    volumes:
+      - ./nginx/:/etc/nginx/conf.d/:ro
+      - ./certbot/www/:/var/www/certbot/:ro
+      - ./certbot/letsencrypt/:/etc/letsencrypt/:rw
+
+  certbot:
+    image: certbot/certbot:v2.9.0
+    volumes:
+      - ./certbot/www/:/var/www/certbot/:rw
+      - ./certbot/letsencrypt/:/etc/letsencrypt/:rw
 
 volumes:
   db_volume:

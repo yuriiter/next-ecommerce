@@ -14,7 +14,7 @@ import sessionRouter from "@routers/session.router"
 
 const app: Express = express()
 
-app.use(cors({ origin: FRONTEND_URL, credentials: true }))
+app.use(cors({ origin: FRONTEND_URL.split(","), credentials: true }))
 app.use(cookieParser())
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))

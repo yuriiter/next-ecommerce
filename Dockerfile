@@ -9,6 +9,8 @@ RUN npm i
 
 COPY server/ .
 
+COPY .env* ./
+
 
 FROM server_base as server_development
 
@@ -44,21 +46,3 @@ FROM client_base as client_build
 RUN npm run build
 
 CMD ["npm", "run", "start"]
-
-
-### NGINX
-# Nginx for client and server together
-FROM nginx:1.25.4-alpine as nginx
-
-RUN rm /etc/nginx/nginx.conf /etc/nginx/conf.d/default.conf
-COPY ./nginx/nginx.conf /etc/nginx
-COPY --from=client_build /app/.next /usr/share/nginx/html
-# COPY ./nginx/server.crt ./nginx/server.key /etc/nginx/ssl/
-# COPY --from=client_build /app/out /usr/share/nginx/html
-
-
-# Nginx for server only
-FROM nginx:1.25.4-alpine as nginx_no-client
-
-RUN rm /etc/nginx/nginx_server-only.conf /etc/nginx/conf.d/default.conf
-COPY ./nginx/nginx.conf /etc/nginx
