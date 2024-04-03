@@ -53,8 +53,13 @@ export const Search = ({ className }: SearchProps) => {
 
   const openFilterSidebar: MouseEventHandler<SVGSVGElement> = (e) => {
     e.stopPropagation();
-    setHidden(false);
-    router.replace({ pathname: "/cars" });
+
+    if (router.pathname === "/cars") {
+      setHidden((prev) => !prev);
+    } else {
+      setHidden(false);
+      router.replace({ pathname: "/cars" });
+    }
   };
 
   return (
