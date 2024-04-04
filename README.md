@@ -4,7 +4,7 @@ Morent is a dockerized full-stack car-rental application built with Next.js, Exp
 
 ## Website
 
-Visit the Morent website [here](https://morent.duckdns.org).
+Visit the Morent website [here](https://morent.yuriiter.com).
 
 ## Development
 
