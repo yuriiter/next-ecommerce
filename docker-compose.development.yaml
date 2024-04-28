@@ -21,6 +21,7 @@ services:
       - .env
       - .env.development
     build:
+      context: .
       target: server_development
     ports:
       - ${PORT}:${PORT}
