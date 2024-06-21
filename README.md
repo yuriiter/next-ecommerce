@@ -2,10 +2,6 @@
 
 Morent is a dockerized full-stack car-rental application built with Next.js, Express.js, MongoDB, and nginx. It is written in TypeScript and features authorization with JWT, client-side rendering, and validation using Zod. The application is designed to be responsive, ensuring usability on both mobile and desktop devices. With Docker-compose, Morent can be easily deployed for development and production environments.
 
-## Website
-
-Visit the Morent website [here](https://morent.yuriiter.com).
-
 ## Development
 
 To run Morent in a development environment, use the following commands:
