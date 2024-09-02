@@ -1,135 +1,149 @@
-import { type Permission } from "@/types/user"
-import mongoose, { Schema, type Document } from "mongoose"
+import { sequelize } from "@/db"
+import { DataTypes, Model } from "sequelize"
 
-export type CarType = "SUV" | "Sport" | "Hatchback" | "Sedan"
+export class User extends Model {}
 
-export type PickerData = {
-    location?: string
-    dateTime?: Date
-}
-
-export type ImageData = {
-    name: string
-    desc: string
-    img: {
-        data?: Buffer
-        contentType?: string
-        url?: string
-    }
-}
-
-export interface RentalData extends Document {
-    car: CarData
-    pickUpData: PickerData | undefined
-    dropOffData: PickerData | undefined
-    total: number
-}
-
-export interface Review extends Document {
-    user: UserData
-    caption: string
-    date: Date
-    rating: number
-    comment: string
-}
-
-export interface CarData extends Document {
-    name: string
-    title: string
-    subtitle: string
-    carType: CarType
-    fuelCapacity: number
-    peopleCapacity: number
-    isManual: boolean
-    price: number
-    previousPrice?: number
-    recommendedFlag: boolean
-    popularFlag: boolean
-    thumbnail: ImageData
-    photos: ImageData[]
-    description: string
-    rating: number
-    numOfVotes: number
-    reviews: Review[]
-    isFavouriteForUsers: string[]
-    isInFavourites: boolean
-}
-
-export interface LinkData extends Document {
-    href: string
-    content: any
-}
-
-export interface UserData extends Document {
-    email: string
-    avatar?: string
-    fullName: string
-    passwordHash: string
-    permission: Permission
-    favouriteCars: string[]
-}
-
-const ReviewSchema = new Schema({
-    user: { type: Schema.Types.ObjectId, ref: "User" },
-    caption: String,
-    date: Date,
-    rating: Number,
-    comment: String,
-})
-
-const DateTimeLocation = {
-    dateTime: Date,
-    location: String,
-}
-
-const Image = {
-    name: String,
-    desc: String,
-    img: {
-        data: Buffer,
-        contentType: String,
-        url: String,
-    },
-}
-
-const CarSchema = new Schema({
-    name: String,
-    title: String,
-    subtitle: String,
-    carType: String,
-    fuelCapacity: Number,
-    peopleCapacity: Number,
-    isManual: Boolean,
-    price: Number,
-    previousPrice: Number,
-    recommendedFlag: Boolean,
-    popularFlag: Boolean,
-    thumbnail: Image,
-    photos: [Image],
-    description: String,
-    reviews: [{ type: Schema.Types.ObjectId, ref: "Review" }],
-    rentalData: [
-        {
-            pickUpData: DateTimeLocation,
-            dropOffData: DateTimeLocation,
+User.init(
+    {
+        email: {
+            type: DataTypes.STRING,
+            unique: true,
+            allowNull: false,
         },
-    ],
-    isFavouriteForUsers: [String],
-})
+        avatar: {
+            type: DataTypes.STRING,
+        },
+        fullName: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+        passwordHash: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+        permission: {
+            type: DataTypes.ENUM("anonymous", "user", "admin"),
+            allowNull: false,
+        },
+    },
+    {
+        sequelize,
+        modelName: "User",
+        tableName: "users",
+    }
+)
 
-CarSchema.virtual("numOfVotes").get(function () {
-    return this.reviews.length
-})
+export class Car extends Model {}
 
-const UserSchema = new Schema({
-    email: { type: String, unique: true },
-    avatar: String,
-    fullName: String,
-    passwordHash: String,
-    permission: { type: String, enum: ["anonymous", "user", "admin"] },
-    favouriteCars: [String],
-})
+Car.init(
+    {
+        name: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+        title: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+        subtitle: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+        carType: {
+            type: DataTypes.ENUM("SUV", "Sport", "Hatchback", "Sedan"),
+            allowNull: false,
+        },
+        fuelCapacity: {
+            type: DataTypes.FLOAT,
+            allowNull: false,
+        },
+        peopleCapacity: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+        },
+        isManual: {
+            type: DataTypes.BOOLEAN,
+            allowNull: false,
+        },
+        price: {
+            type: DataTypes.FLOAT,
+            allowNull: false,
+        },
+        previousPrice: {
+            type: DataTypes.FLOAT,
+        },
+        recommendedFlag: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: false,
+        },
+        popularFlag: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: false,
+        },
+        thumbnail: {
+            type: DataTypes.JSON,
+        },
+        photos: {
+            type: DataTypes.JSON,
+        },
+        description: {
+            type: DataTypes.TEXT,
+            allowNull: false,
+        },
+        isFavouriteForUsers: {
+            type: DataTypes.ARRAY(DataTypes.STRING),
+            defaultValue: [],
+        },
+    },
+    {
+        sequelize,
+        modelName: "Car",
+        tableName: "cars",
+    }
+)
 
-export const ReviewModel = mongoose.model<Review>("Review", ReviewSchema)
-export const CarModel = mongoose.model<CarData>("Car", CarSchema)
-export const UserModel = mongoose.model<UserData>("User", UserSchema)
+export class Review extends Model {}
+
+Review.init(
+    {
+        caption: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+        date: {
+            type: DataTypes.DATE,
+            allowNull: false,
+            defaultValue: DataTypes.NOW,
+        },
+        rating: {
+            type: DataTypes.FLOAT,
+            allowNull: false,
+        },
+        comment: {
+            type: DataTypes.TEXT,
+            allowNull: false,
+        },
+    },
+    {
+        sequelize,
+        modelName: "Review",
+        tableName: "reviews",
+    }
+)
+
+Review.belongsTo(User, { foreignKey: "userId" })
+Review.belongsTo(Car, { foreignKey: "carId" })
+
+export default Review
+Car.hasMany(Review, { foreignKey: "carId" })
+Review.belongsTo(Car, { foreignKey: "carId" })
+
+User.hasMany(Review, { foreignKey: "userId" })
+Review.belongsTo(User, { foreignKey: "userId" })
+
+User.belongsToMany(Car, { through: "UserFavourites", as: "favourites" })
+Car.belongsToMany(User, { through: "UserFavourites", as: "likedBy" })
+
+User.belongsToMany(Car, { through: "FavouriteCars", as: "favouriteCars" })
+
+Car.belongsToMany(User, { through: "FavouriteCars", as: "likedByUsers" })
