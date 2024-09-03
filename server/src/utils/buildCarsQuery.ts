@@ -1,5 +1,6 @@
-import { CarsQuery } from "../types/carsQuery"
-import { setTimeOfDate } from "./time"
+// src/utils/buildCarQuery.ts
+import { type CarsQuery } from "../types/carsQuery"
+import { setTimeOfDate } from "./time" // Assuming this function adjusts date/time
 
 export const buildCarQuery = (query: CarsQuery) => {
     const {
@@ -25,70 +26,58 @@ export const buildCarQuery = (query: CarsQuery) => {
         dropOffTime,
     } = query
 
-    const conditions = []
+    const whereConditions: any = {}
 
-    const carTypeConditions = []
-    if (typeSport) carTypeConditions.push({ carType: "sport" })
-    if (typeSUV) carTypeConditions.push({ carType: "SUV" })
-    if (typeMPV) carTypeConditions.push({ carType: "MPV" })
-    if (typeSedan) carTypeConditions.push({ carType: "sedan" })
-    if (typeCoupe) carTypeConditions.push({ carType: "coupe" })
-    if (typeHatchback) carTypeConditions.push({ carType: "hatchback" })
-
-    if (carTypeConditions.length > 0) {
-        conditions.push({ $or: carTypeConditions })
+    // Car type conditions
+    const carTypes: string[] = []
+    if (typeSport) carTypes.push("sport")
+    if (typeSUV) carTypes.push("SUV")
+    if (typeMPV) carTypes.push("MPV")
+    if (typeSedan) carTypes.push("sedan")
+    if (typeCoupe) carTypes.push("coupe")
+    if (typeHatchback) carTypes.push("hatchback")
+    if (carTypes.length > 0) {
+        whereConditions.carType = { $in: carTypes }
     }
 
-    const capacityConditions = []
-    if (capacity2) capacityConditions.push({ peopleCapacity: 2 })
-    if (capacity4) capacityConditions.push({ peopleCapacity: 4 })
-    if (capacity6) capacityConditions.push({ peopleCapacity: 6 })
-    if (capacity8) capacityConditions.push({ peopleCapacity: 8 })
-
-    if (capacityConditions.length > 0) {
-        conditions.push({ $or: capacityConditions })
+    // Capacity conditions
+    const capacities: number[] = []
+    if (capacity2) capacities.push(2)
+    if (capacity4) capacities.push(4)
+    if (capacity6) capacities.push(6)
+    if (capacity8) capacities.push(8)
+    if (capacities.length > 0) {
+        whereConditions.peopleCapacity = { $in: capacities }
     }
 
+    // Price condition
     if (price !== undefined) {
-        conditions.push({ price: { $lte: price } })
+        whereConditions.price = { $lte: price }
     }
 
+    // Search condition
     if (search) {
-        conditions.push({
-            $or: [
-                { title: { $regex: search, $options: "i" } },
-                { description: { $regex: search, $options: "i" } },
-            ],
-        })
+        whereConditions.$or = [
+            { title: { $ilike: `%${search}%` } },
+            { description: { $ilike: `%${search}%` } },
+        ]
     }
 
-    if (recommendedFlag) conditions.push({ recommendedFlag: true })
-    if (popularFlag) conditions.push({ popularFlag: true })
+    // Flags conditions
+    if (recommendedFlag) whereConditions.recommendedFlag = true
+    if (popularFlag) whereConditions.popularFlag = true
 
+    // Rental data conditions
     if (pickUpLocation && pickUpDate && dropOffLocation && dropOffDate) {
-        conditions.push({
-            $or: [
-                {
-                    "rentalData.pickUpData.dateTime": {
-                        $gte: setTimeOfDate(dropOffDate, dropOffTime),
-                    },
-                },
-                {
-                    "rentalData.dropOffData.dateTime": {
-                        $lte: setTimeOfDate(pickUpDate, pickUpTime),
-                    },
-                },
-                {
-                    rentalData: { $exists: false },
-                },
-            ],
-        })
+        const pickUpDateTime = setTimeOfDate(pickUpDate, pickUpTime)
+        const dropOffDateTime = setTimeOfDate(dropOffDate, dropOffTime)
+
+        whereConditions.$or = [
+            { "rentalData.pickUpDateTime": { $gte: dropOffDateTime } },
+            { "rentalData.dropOffDateTime": { $lte: pickUpDateTime } },
+            { rentalData: { $exists: false } },
+        ]
     }
 
-    const finalQuery =
-        conditions.length > 0
-            ? { $and: conditions }
-            : { $and: [{ _id: { $ne: null } }] }
-
-    return finalQuery
+    return whereConditions
 }

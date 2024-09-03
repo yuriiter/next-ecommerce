@@ -1,28 +1,23 @@
-import { Sequelize } from "sequelize"
+import mongoose from "mongoose"
 import { DB_HOST, DB_PASSWORD, DB_PORT, DB_USER, DB_NAME } from "@/config"
 
-export const sequelize = new Sequelize(DB_NAME, DB_USER, DB_PASSWORD, {
-    host: DB_HOST,
-    port: Number(DB_PORT),
-    dialect: 'mysql',
-    logging: false,
-})
+const mongodbURI = `mongodb://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}?authSource=admin`
 
 export const connectToDB = async (): Promise<void> => {
-    console.log(`Connecting to MySQL...`)
+    console.log(`Connecting to MongoDB...`)
     try {
-        await sequelize.authenticate()
-        console.log("MySQL connected successfully")
+        await mongoose.connect(mongodbURI, {})
+        console.log("MongoDB connected successfully")
     } catch (error) {
-        console.error("Error connecting to MySQL:", error)
+        console.error("Error connecting to MongoDB:", error)
     }
 }
 
 export const closeDBConnection = async (): Promise<void> => {
     try {
-        await sequelize.close()
-        console.log("MySQL connection closed")
+        await mongoose.connection.close()
+        console.log("MongoDB connection closed")
     } catch (error) {
-        console.error("Error closing MySQL connection:", error)
+        console.error("Error closing MongoDB connection:", error)
     }
 }

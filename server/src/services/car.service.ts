@@ -1,90 +1,90 @@
+// src/services/car.service.ts
+import { Car } from "@entities/Car"
+import { User } from "@entities/User"
 import { type CarsQuery } from "@/types/carsQuery"
-import ExpressError from "@errors/ExpressError"
-import Review, { Car, User } from "@models/index"
 import { buildCarQuery } from "@utils/buildCarsQuery"
+import ExpressError from "@errors/ExpressError"
+import { getEntityManager } from "@/mikro-orm.config"
 
 export const getCars = async (query: CarsQuery, email?: string) => {
+    const em = getEntityManager()
+    const finalQuery = buildCarQuery(query)
+
     const { page = 0, pageSize = 8 } = query
-    const where = buildCarQuery(query)
 
     if (query.favourites && !email) throw ExpressError.BAD_CREDENTIALS
     if (email && query.favourites) {
-        const user = await User.findOne({ where: { email } })
+        const user = await em.findOne(User, { email })
         if (!user)
             throw new ExpressError(
                 500,
                 "Authenticated user doesn't have an account"
             )
-
-        const favourites = await user.getFavourites()
-        where.id = favourites.map((car) => car.id)
+        finalQuery.$and.push({ id: { $in: user.favouriteCars } })
     }
 
-    const { rows: cars, count } = await Car.findAndCountAll({
-        where,
-        offset: page * pageSize,
+    const [cars, count] = await em.findAndCount(Car, finalQuery, {
         limit: pageSize,
+        offset: page * pageSize,
     })
 
     const processedCars = cars.map((car) => ({
-        ...car.get({ plain: true }),
-        isInFavourites: email
-            ? car.likedBy.some((user) => user.email === email)
-            : undefined,
+        ...car,
+        isInFavourites: email ? car.isFavouriteForUsers.includes(email) : false,
+        rating: car.reviews.length
+            ? car.reviews.reduce((sum, review) => sum + review.rating, 0) /
+              car.reviews.length
+            : 0,
+        isFavouriteForUsers: undefined,
     }))
 
-    return {
-        cars: processedCars,
-        totalPages: Math.ceil(count / pageSize),
-    }
+    return { documents: processedCars, count }
 }
 
 export const setCarIsInFavourites = async (
     email: string,
-    carId: string,
+    carId: number,
     newValue: boolean
 ) => {
-    const car = await Car.findByPk(carId)
+    const em = getEntityManager()
+    const car = await em.findOne(Car, carId)
     if (!car) throw ExpressError.BAD_REQUEST
-
-    const user = await User.findOne({ where: { email } })
+    const user = await em.findOne(User, { email })
     if (!user) throw ExpressError.BAD_REQUEST
 
-    if (newValue === false) {
-        await user.removeFavouriteCar(car)
+    const carIsFavouriteForUsers = new Set(car.isFavouriteForUsers)
+    const userFavouriteCars = new Set(user.favouriteCars)
+
+    if (!newValue) {
+        carIsFavouriteForUsers.delete(email)
+        userFavouriteCars.delete(carId)
     } else {
-        await user.addFavouriteCar(car)
+        carIsFavouriteForUsers.add(email)
+        userFavouriteCars.add(carId)
     }
+
+    car.isFavouriteForUsers = [...carIsFavouriteForUsers]
+    user.favouriteCars = [...userFavouriteCars]
+
+    await em.persistAndFlush(car)
+    await em.persistAndFlush(user)
 }
 
-export const getCarById = async (carId: string, email: string | undefined) => {
-    const car = await Car.findByPk(carId, {
-        include: [
-            {
-                model: Review,
-                include: [{ model: User, as: "user" }],
-            },
-        ],
-    })
-    if (!car) throw new ExpressError(404, "Car not found")
+export const getCarById = async (carId: number, email: string | undefined) => {
+    const em = getEntityManager()
+    const car = await em.findOne(Car, carId, { populate: ["reviews"] })
+    if (!car) throw ExpressError.NOT_FOUND
 
-    const carAsObject = car.get({ plain: true })
-
-    let isInFavourites = false
-    if (email) {
-        const user = await User.findOne({ where: { email } })
-        if (user) {
-            isInFavourites = await user.hasFavouriteCar(car) // Use the correct alias
-        }
+    const processedCar = {
+        ...car,
+        isInFavourites: email ? car.isFavouriteForUsers.includes(email) : false,
+        rating: car.reviews.length
+            ? car.reviews.reduce((sum, review) => sum + review.rating, 0) /
+              car.reviews.length
+            : 0,
     }
 
-    const rating =
-        car.reviews.reduce((sum, review) => sum + review.rating, 0) /
-        (car.reviews.length || 1)
+    delete processedCar.isFavouriteForUsers
 
-    return {
-        ...carAsObject,
-        isInFavourites,
-        rating,
-    }
+    return processedCar
 }

@@ -1,19 +1,21 @@
-import ExpressError from "@errors/ExpressError"
-import { User } from "@models/index"
-import { type CreateUserSchema } from "@schemas/users.schema"
+// src/services/user.service.ts
 import { hashPassword, validateHash } from "@utils/utils"
+import { User } from "@entities/User"
+import { type CreateUserSchema } from "@schemas/users.schema"
+import ExpressError from "@errors/ExpressError"
+import { getEntityManager } from "@/mikro-orm.config"
 
 export const validateUser = async (email: string, password: string) => {
-    const user = await User.findOne({
-        where: { email },
-        attributes: ["email", "passwordHash"],
-    })
+    const em = getEntityManager()
+    const user = await em.findOne(User, { email }, [
+        "email",
+        "fullName",
+        "passwordHash",
+    ])
     if (!user) return null
-
-    const isPasswordValid = validateHash(password, user.passwordHash)
+    const isPasswordValid = await validateHash(password, user.passwordHash)
     if (!isPasswordValid) return null
-
-    const userAsObject = user.get({ plain: true })
+    const userAsObject = user.toObject()
     delete userAsObject.passwordHash
 
     return userAsObject
@@ -21,33 +23,31 @@ export const validateUser = async (email: string, password: string) => {
 
 export const createUser = async (userData: CreateUserSchema) => {
     try {
+        const em = getEntityManager()
         const { password, ...rest } = userData
         const passwordHash = await hashPassword(password)
-        const newUser = await User.create({ ...rest, passwordHash })
-
-        const newUserAsObject = newUser.get({ plain: true })
+        const newUser = em.create(User, { ...rest, passwordHash })
+        await em.persistAndFlush(newUser)
+        const newUserAsObject = newUser.toObject()
         delete newUserAsObject.passwordHash
+        delete newUserAsObject.favouriteCars
         return newUserAsObject
     } catch (err) {
-        if (err.name === "SequelizeUniqueConstraintError")
+        if (err.code === "ER_DUP_ENTRY")
             throw new ExpressError(409, "User already exists")
         else throw err
     }
 }
 
 export const getUserByEmail = async (email: string) => {
-    const user = await User.findOne({
-        where: { email },
-        attributes: ["email", "fullName"],
-    })
-
+    const em = getEntityManager()
+    const user = await em.findOne(User, { email }, ["email", "fullName"])
     if (!user) return null
-
-    return user.get({ plain: true })
+    return user.toObject()
 }
 
 export const getMe = async (email: string) => {
     const me = await getUserByEmail(email)
-    if (!me) throw new ExpressError(401, "Bad credentials")
+    if (!me) throw ExpressError.BAD_CREDENTIALS
     return me
 }

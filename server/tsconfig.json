@@ -39,6 +39,7 @@
             "@dto/*": ["dto/*"],
             "@interfaces/*": ["interfaces/*"],
             "@models/*": ["models/*"],
+            "@entities/*": ["entities/*"],
             "@schemas/*": ["schemas/*"],
             "@types/*": ["types/*"],
             "@errors/*": ["errors/*"],
