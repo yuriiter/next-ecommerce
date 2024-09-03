@@ -1,5 +1,5 @@
 import { type SortFilter } from "./sortFilter"
-import { AllOrNothing } from "./utils"
+import { type AllOrNothing } from "./utils"
 
 export type CarsQuery = SortFilter & {
     typeSport?: boolean
